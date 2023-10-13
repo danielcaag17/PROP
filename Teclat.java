@@ -1,4 +1,7 @@
 public class Teclat {
-    private String nom;
-    nom = "";
+    private String nom = "";
+    
+    public void test() {
+        System.out.println(nom);
+    }
 }
