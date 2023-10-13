@@ -1,3 +1,4 @@
+package src.domain;
 public class Teclat {
     private String nom = "";
     
