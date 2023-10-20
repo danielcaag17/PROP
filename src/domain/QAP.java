@@ -1,5 +1,6 @@
 package src.domain;
-public class QAP extends Generador{
+
+public class QAP implements Strategy {
     public void generarTeclat() {
         
     }
