@@ -28,7 +28,14 @@ def main():
     with open(FILE_WORDLIST, "r") as f_wordlist:
         aux = f_wordlist.readline()
         while aux:
-            wordlist.append(aux.replace("\n",""))
+            aux = aux.replace("\n","")
+            if (" " in aux):
+                for word in aux.split(" "):
+                    if word != "":
+                        wordlist.append(word)
+            else:
+                wordlist.append(aux)
+            
             aux = f_wordlist.readline()
     # print(wordlist)
 
