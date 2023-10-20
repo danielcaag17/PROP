@@ -3,9 +3,9 @@ import json
 import sys
 
 # Global vars
-FILE_ALPHABET = "./EN-alphabet.txt"
-FILE_WORDLIST = "./EN-wordlist.txt"
-FILE_RESULTS  = "./EN-frequencies.json"
+FILE_ALPHABET = "EN-alphabet.txt"
+FILE_WORDLIST = "EN-wordlist.txt"
+FILE_RESULTS  = "EN-frequencies.json"
 
 def usage():
     print(f"Usage (default files):")
