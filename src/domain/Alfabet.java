@@ -1,4 +1,5 @@
 package src.domain;
+
 public class Alfabet {
     private String nom;
     //vector[]<char> = new vector[mida alfabet]
