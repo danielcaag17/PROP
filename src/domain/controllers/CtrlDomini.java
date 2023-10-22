@@ -1,4 +1,4 @@
-package src.domaincontrollers;
+package src.domain.controllers;
 
 import src.data.*;
 import src.domain.*;

@@ -1,4 +1,5 @@
-package src.domain;
+package src.domain.classes;
+
 public class Teclat {
     private String nom = "";
     
