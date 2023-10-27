@@ -1,6 +1,6 @@
 package src.domain.classes;
 
-import java.util.Map;
+import java.util.Map;       // mirar quin es import que sha de fer servir
 
 public class Alfabet {
     private String nom;                                             // clau primària
@@ -31,7 +31,7 @@ public class Alfabet {
             processCharacters(it);
             it.next();
         }
-        calculateProbabilities();
+        calculateProbabilities();       // falta veure de quina manera es calculen les probabilitats de la propia paraula
     }
 
     private void processCharacters(String text) {
