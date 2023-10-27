@@ -34,7 +34,7 @@ public class Alfabet {
         calculateProbabilities();       // falta veure de quina manera es calculen les probabilitats de la propia paraula
     }
 
-    private void processCharacters(String text) {
+    private void processCharacters(String text) { //return lenght (?) per calculateProbabilities
         int length = text.length();
         for (int i = 0; i < length; i++) {
             char c = text.charAt(i);                    // obtenir la lletra del text
@@ -49,7 +49,7 @@ public class Alfabet {
         }
     }
 
-    private void calculateProbabilities() {
+    private void calculateProbabilities() {     //ull amb totes les divisions, EXC si es entre 0 !!
         Iterator it = characters.entrySet().iterator();
         while (it.hasNext()) {
             float a = characters.get(text.charAt(i));   // obtenir el nombre d'aparicions de la lletra
