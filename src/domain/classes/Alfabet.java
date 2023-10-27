@@ -19,7 +19,22 @@ public class Alfabet {
     }
 
     // Gestionar un text d'entrada
-    public void readText(String text) {
+    public void readText (String text) {
+        processCharacters(text);
+        calculateProbabilities();
+    }
+
+     // Gestionar llistes de paraules
+    public void readWords(Set<string, float> words) { //conjunt de paraules amb la seva probabilitat
+        Iterator it = words.entrySet().iterator();      //veure si aixo esta ben fet
+        while (it.hasNext()) {
+            processCharacters(it);
+            it.next();
+        }
+        calculateProbabilities();
+    }
+
+    private void processCharacters(String text) {
         int length = text.length();
         for (int i = 0; i < length; i++) {
             char c = text.charAt(i);                    // obtenir la lletra del text
@@ -32,7 +47,9 @@ public class Alfabet {
                 x[c][next]++;                      // molt molt pseudocodi
             }
         }
+    }
 
+    private void calculateProbabilities() {
         Iterator it = characters.entrySet().iterator();
         while (it.hasNext()) {
             float a = characters.get(text.charAt(i));   // obtenir el nombre d'aparicions de la lletra
@@ -47,11 +64,6 @@ public class Alfabet {
             //}
             it.next();
         }
-    }
-
-    // Gestionar llistes de paraules
-    public void readWords() { //conjunt de paraules amb la seva probabilitat
-
     }
 
     // aquesta lletra existeix en el vector
