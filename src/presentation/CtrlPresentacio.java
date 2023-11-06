@@ -13,7 +13,9 @@ public class CtrlPresentacio {
         factoriaCtrl.crearControladorDomini();
         controlDomini = factoriaCtrl.getCtrlDomini();
         ioTerminal = new IOterminal(this);
-        // Inicialització de ctrlDomini
         // Inicialització de terminal
+        ioTerminal.inicialitza();
     }
+
+    // Mirar casos d'ús per orientar que hi va aquí
 }
