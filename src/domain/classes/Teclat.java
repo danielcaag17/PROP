@@ -23,8 +23,17 @@ public class Teclat {
         teclat = G.generarTeclat(L, A);
     }
 
-    public void modificarTeclat() {
+    //Entenc que el Layout no es pot modificar i el que es modifica es la pos. de les lletres
+    //Veure si es vol void o que retorni teclat
+    public void modificarTeclat(int i, int j, int ii, int jj) {     // Posicions a intercanviar
+        swap(i, j, ii, jj);
+    }
 
+    //Veure una millor manera
+    private void swap(int i, int j, int ii, int jj) {
+        char aux = teclat[i][j];
+        teclat[i][j] = teclat[ii][jj];
+        teclat[ii][jj] = aux;
     }
 
     public void guardarTeclat() {
@@ -52,5 +61,9 @@ public class Teclat {
 
     public String getNom() {
         return nom;
+    }
+
+    public char[][] getTeclat() {
+        return teclat;
     }
  }
