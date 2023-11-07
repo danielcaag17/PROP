@@ -1,10 +1,9 @@
 package src.domain.classes;
 
 public class Generador { // segons el patró estrategia, la classe no ha de ser abstracta
-    public void generarTeclat() {
-        /*
-        Strategy s = new Strategy();
-        s.generarTeclat();
-        */
+    private Strategy S;
+
+    public char[][] generarTeclat(Layout L, Alfabet A) {
+        return S.generarTeclat(L, A);   // a definir quina estructura retorna
     }
 }
