@@ -26,10 +26,11 @@ public class Teclat {
     //Entenc que el Layout no es pot modificar i el que es modifica es la pos. de les lletres
     //Veure si es vol void o que retorni teclat
     public void modificarTeclat(int i, int j, int ii, int jj) {     // Posicions a intercanviar
+        // if les posicions a intercanviar es troben dins del teclat --> excepcio
         swap(i, j, ii, jj);
     }
 
-    //Veure una millor manera
+    //Veure una millor manera, malament perque swap pot fer swap amb altres elements i no nomes teclat
     private void swap(int i, int j, int ii, int jj) {
         char aux = teclat[i][j];
         teclat[i][j] = teclat[ii][jj];
