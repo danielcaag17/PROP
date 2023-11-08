@@ -163,6 +163,17 @@ public class CtrlDomini {
         Alfabets.put(na, a);
     }
 
+    /**
+     * Pre: l'alfabet amb nom na existeix
+     * 
+     * @param na nom del alfabet
+     * @return Retorna l'alfabet amb nom na
+     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na
+     */
+    public Alfabet visualitzarAlfabet(String na) throws AlfabetNoExisteix {
+        if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
+        return getAlfabet(na);
+    }
     
     /*
      * - getters
