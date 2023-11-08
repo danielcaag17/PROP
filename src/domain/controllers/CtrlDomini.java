@@ -175,6 +175,18 @@ public class CtrlDomini {
         return getAlfabet(na);
     }
     
+    /**
+     * Pre: l'alfabet amb nom na existeix
+     * Post: l'alfabet amb nom na s'ha esborrat
+     * 
+     * @param na nom del alfabet
+     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na
+     */
+    public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
+        if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
+        Alfabets.remove(na);
+    }
+
     /*
      * - getters
      * - inicialitzarLayoutsBase()
