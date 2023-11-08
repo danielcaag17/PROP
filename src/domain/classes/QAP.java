@@ -36,8 +36,28 @@ public class QAP implements Strategy {
         //          Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
         //          C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
         //                     ja emplaçades en la solució parcial.
+        //
+        // Matriu C2:
+        //      Files    [i] -> Caràcters no emplaçats
+        //      Columnes [j] -> Tecles (posicions) no emplaçades
+        //
+        //      Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
+        //                cada posició (i,j) de la matriu conté el valor corresponent al producte
+        //                escalar de dos vectors T i D.
+        //
+        //      Vector T: Vector de freqüències entre caràcter [i] i la resta de caràcters no
+        //                emplaçats. Ordre CREIXENT.
+        //      Vector D: Vector de distàncies entre tecla [j] i la resta de tecles no emplaçades.
+        //                Ordre DECREIXENT.
+        //
+        //      Exemple: Tenim 5 caràcters i 5 posicions en total = (c1...c5) i (p1...p5)
+        //               Solució parcial = [c1, c2, ...] -> (c1 en p1, c2 en p2)
+        //               Suposem Punt[i][j] = (c3,p5)
+        //               - Vector T = [freq(c3-c4), freq(c3-c5)] -> (Ordre creixent)
+        //               - Vector D = [dist(p5-p3), dist(p5,p4)] -> (Ordre decreixent)
+        //
     }
     public void generarTeclat() {
-        // asd    
+        // Ignorar de moment 
     }
 }
