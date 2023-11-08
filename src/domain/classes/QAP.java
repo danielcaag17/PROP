@@ -2,12 +2,16 @@ package src.domain.classes;
 
 public class QAP implements Strategy {
 
-    private float cost() {
+    private static final double[][] Frequencies;
+    private static final double[][] Distances;
+    
+    private double cost() {
         // Cost(a,b) = [(freq(a,b) + freq(a,b))/2] * dist(a,b)
         // On a i b són parelles <id_caracter, id_tecla>
+        return 0.0;
     }
 
-    private float cotaGilmore() {
+    private double cotaGilmore() {
         // 1r terme => Calculable
         //
         // F1 = Suma del cost de les arestes entre tots els caràcters ja emplaçats en una tecla.
@@ -91,6 +95,7 @@ public class QAP implements Strategy {
         //
         // Finalment, Cota Gilmore => F1 + F2 + F3
         //
+        return 0.0;
     }
 
     public void generarTeclat() {
