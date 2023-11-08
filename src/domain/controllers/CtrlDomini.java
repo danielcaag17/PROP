@@ -84,10 +84,10 @@ public class CtrlDomini {
      * @throws TeclatJaExisteix si existeix una instància Teclat amb nom nt.
      * @throws MidesDiferents si la mida del Alfabet amb nom na i el Layout amb id idL són diferents. 
      */
-    public void crearNouTeclat(String nt, String na, String idL) throws TeclatJaExisteix, MidesDiferents {
+    public void crearNouTeclat(String nt, String na, String idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
         if (Teclats.get(nt) != null) throw new TeclatJaExisteix(nt);
-        // excepció per a existència de na ?
-        // excepció per a existència de idL ?
+        if (Alfabets.get(na) == null) throw new AlfabetNoExisteix(na);
+        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL);
         Alfabet a = Alfabets.get(na);
         Layout l = Layouts.get(idL);
         if (a.getMida() != l.getMida()) throw new MidesDiferents(a.getMida(), l.getMida());
@@ -151,6 +151,7 @@ public class CtrlDomini {
      * - esborrarTeclat(nt)
      * - afegirAlfabet(na, ta, pf)
      * - visualitzarAlfabet(na)
+     * - esborraAlfabet(na)
      * - visualitzarLayout(idL)
      */
 
