@@ -8,9 +8,15 @@ public class QAP implements Strategy {
         // Cost(i,j) = [(freq(i,j) + freq(j,i))/2] * dist(i,j)
         // 
         // Exemple:
-        //      Solució parcial = [c1, c2, c3, c4]
+        //      Solució parcial = [c1, c2, c3, c4] **
         //      F1 = Cost(c1,c2) + Cost(c1,c3) + Cost(c1,c4) + Cost(c2,c3)
         //           + Cost(c2,c4) + Cost(c3,c4)
+        //
+        // ** Apunt: En el vector solució, l'index del vector indica la tecla/posició, i el
+        //           contingut de cada índex és el caràcter que correspon a aquella posició.
+        //           ex: Solució parcial = [c5, c2, ...]
+        //               El caràcter 5 està assignat a la tecla 0
+        //               El caràcter 2 està assignat a la tecla 1
        
         
         // 2n + 3r terme => Aproximació => Hungarian Algorithm
@@ -19,12 +25,17 @@ public class QAP implements Strategy {
         // Matriu C1:
         //      Files    [i] -> Caràcters no emplaçats
         //      Columnes [j] -> Tecles (posicions) no emplaçades
+        //
         //      Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
         //                cada posició (i,j) de la matriu conté el valor corresponent al cost
         //                de posar el caràcter [i] a la posició [j] en relació amb tots els
         //                caràcters ja emplaçats en la solució parcial.
+        //      
         //      Exemple:
-        //
+        //          Solució parcial = [c1, c2, c3, ...]
+        //          Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
+        //          C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
+        //                     ja emplaçades en la solució parcial.
     }
     public void generarTeclat() {
         // asd    
