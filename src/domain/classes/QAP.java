@@ -17,8 +17,8 @@ public class QAP implements Strategy {
         //           ex: Solució parcial = [c5, c2, ...]
         //               El caràcter 5 està assignat a la tecla 0
         //               El caràcter 2 està assignat a la tecla 1
-       
-        
+        //
+        //
         // 2n + 3r terme => Aproximació => Hungarian Algorithm
         // Hem de crear dues matrius: C1 i C2 => (C1+C2) és el punt de partida del Hungarian
         //
@@ -55,6 +55,35 @@ public class QAP implements Strategy {
         //               Suposem Punt[i][j] = (c3,p5)
         //               - Vector T = [freq(c3-c4), freq(c3-c5)] -> (Ordre creixent)
         //               - Vector D = [dist(p5-p3), dist(p5,p4)] -> (Ordre decreixent)
+        //
+        //
+        // Fem Hungarian Algorithm amb (C1+C2), i ens retorna una matriu quadrada (N-m)*(N-m)
+        // amb una solució "òptima" per a els caràcters i tecles que encara no són emplaçats
+        // en la solució parcial. La matriu la podem representar com un vector, tal com en la
+        // solució parcial.
+        //      # Explicació pas per pas de Hungarian Algorithm i Línies Mínimes en el PDF.
+        //
+        //
+        // Càlcul 2n terme cota Gilmore:
+        //      F2 = Sumatori del cost de cada node en la solució Hungarian en relació amb cada
+        //           node de la solució parcial.
+        //      
+        //      Exemple F2:
+        //          - Solució parcial   : [c1, c2, c3, .., ..]
+        //          - Solució Hungarian : [.., .., .., c4, c5]
+        //          F2 = [Cost(c4-c1) + Cost(c4-c2) + Cost(c4-c3)]
+        //               + [Cost(c5-c1) + Cost(c5-c2) + Cost(c5-c3)]
+        //
+        //
+        // Càlcul 3r terme cota Gilmore:
+        //      F3 = Aplicar F1 sobre la solució proporcionada per Hungarian.
+        //      
+        //      Exemple F3:
+        //          - Solució Hungarian: [.., .., c3, c4, c5]
+        //          F3 = Cost(c3-c4) + Cost(c3-c5) + Cost(c4-c5)
+        //
+        //
+        // Finalment, Cota Gilmore => F1 + F2 + F3
         //
     }
     public void generarTeclat() {
