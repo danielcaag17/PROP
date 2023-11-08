@@ -142,6 +142,28 @@ public class CtrlDomini {
         Teclats.remove(nt);
     }
 
+    /**
+     * Pre: l'alfabet amb nom na no existeix
+     * Post: s'ha creat un alfabet amb nom na i dades extretes de pf
+     * 
+     * @param na nom del alfabet
+     * @param ta tipus (vàlid*) de les dades per crear l'alfabet
+     * @param pf path (vàlid*) al fitxer on hi ha guardades les dades
+     * @see (*)que s'ha comprovat previàment
+     * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na
+     */
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
+        if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
+        Alfabet a = new Alfabet(na);
+        // POT MODIFICAR-SE PER FER-HO MÉS REUSABLE
+        a.readPath(pf); // IMPORTANT QUE ES PASSA UN PATH
+        if (ta == "text") { a.readText(); }
+        else if (ta == "llista-paraules") { a.readWords(); }
+
+        Alfabets.put(na, a);
+    }
+
+    
     /*
      * - getters
      * - inicialitzarLayoutsBase()
