@@ -155,11 +155,11 @@ public class CtrlDomini {
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a = new Alfabet(na);
-        // POT MODIFICAR-SE PER FER-HO MÉS REUSABLE
+        ////////// POT MODIFICAR-SE PER FER-HO MÉS REUSABLE //////////
         a.readPath(pf); // IMPORTANT QUE ES PASSA UN PATH
         if (ta == "text") { a.readText(); }
         else if (ta == "llista-paraules") { a.readWords(); }
-
+        //////////////////////////////////////////////////////////////
         Alfabets.put(na, a);
     }
 
