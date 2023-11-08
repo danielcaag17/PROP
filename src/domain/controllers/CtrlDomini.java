@@ -60,26 +60,26 @@ public class CtrlDomini {
     }
 
     /** 
-     * @return Retorna l'alfabet amb nom na
+     * @return Retorna l'alfabet amb nom na.
      */
     public Alfabet getAlfabet(String na) {
         return Alfabets.get(na);
     }
 
     /**
-     * @return Retorna el Layout amb id=idL
+     * @return Retorna el Layout amb id=idL.
      */
     public Layout getLayout(String idL) {
         return Layouts.get(idL);
     }
 
     /**
-     * Pre: el teclat amb nom nt no existeix.
-     * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i el Layout amb id idL
+     * Pre: el teclat amb nom nt no existeix. -
+     * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i el Layout amb id idL.
      * 
-     * @param nt: nom del teclat 
-     * @param na: nom del alfabet del teclat
-     * @param idL: id del Layout del teclat
+     * @param nt: nom del teclat.
+     * @param na: nom del alfabet del teclat.
+     * @param idL: id del Layout del teclat.
      * 
      * @throws TeclatJaExisteix si existeix una instància Teclat amb nom nt.
      * @throws MidesDiferents si la mida del Alfabet amb nom na i el Layout amb id idL són diferents. 
@@ -97,7 +97,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix, els canvis són vàlids.
+     * Pre: el teclat amb nom nt existeix, els canvis són vàlids. -
      * Post: el teclat amb nom nt s'ha modificat amb els canvis aplicats.
      * 
      * @param nt: nom del teclat 
@@ -117,9 +117,9 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix
+     * Pre: el teclat amb nom nt existeix.
      * 
-     * @param nt: nom del teclat
+     * @param nt: nom del teclat.
      * @return Teclat amb nom nt.
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
@@ -130,10 +130,10 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix
-     * Post: el teclat amb nom nt s'ha esborrat
+     * Pre: el teclat amb nom nt existeix. -
+     * Post: el teclat amb nom nt s'ha esborrat.
      * 
-     * @param nt: nom del teclat
+     * @param nt: nom del teclat.
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
@@ -143,14 +143,14 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: l'alfabet amb nom na no existeix
-     * Post: s'ha creat un alfabet amb nom na i dades extretes de pf
+     * Pre: l'alfabet amb nom na no existeix. -
+     * Post: s'ha creat un alfabet amb nom na i dades extretes de pf.
      * 
-     * @param na nom del alfabet
-     * @param ta tipus (vàlid*) de les dades per crear l'alfabet
-     * @param pf path (vàlid*) al fitxer on hi ha guardades les dades
-     * @see (*)que s'ha comprovat previàment
-     * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na
+     * @param na nom del alfabet.
+     * @param ta tipus (vàlid*) de les dades per crear l'alfabet.
+     * @param pf path (vàlid*) al fitxer on hi ha guardades les dades.
+     * @see (*)que s'ha comprovat previàment.
+     * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
      */
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
@@ -164,11 +164,11 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: l'alfabet amb nom na existeix
+     * Pre: l'alfabet amb nom na existeix.
      * 
-     * @param na nom del alfabet
-     * @return Retorna l'alfabet amb nom na
-     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na
+     * @param na nom del alfabet.
+     * @return Retorna l'alfabet amb nom na.
+     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na.
      */
     public Alfabet visualitzarAlfabet(String na) throws AlfabetNoExisteix {
         if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
@@ -176,11 +176,11 @@ public class CtrlDomini {
     }
     
     /**
-     * Pre: l'alfabet amb nom na existeix
-     * Post: l'alfabet amb nom na s'ha esborrat
+     * Pre: l'alfabet amb nom na existeix. -
+     * Post: l'alfabet amb nom na s'ha esborrat.
      * 
-     * @param na nom del alfabet
-     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na
+     * @param na nom del alfabet.
+     * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na.
      */
     public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
         if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
