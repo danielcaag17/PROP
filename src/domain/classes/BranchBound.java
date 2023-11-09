@@ -7,8 +7,10 @@ public class BranchBound implements Strategy {
     private int n_size;
 
     public BranchBound(double[][] freq_matrix, double[][] dist_matrix) {
+        // Totes les matrius són quadrades, de mida n_size
         this.Frequencies = freq_matrix;
         this.Distances = dist_matrix;
+        this.n_size = freq_matrix.length
     }
 
     public void generarTeclat() {
@@ -18,8 +20,10 @@ public class BranchBound implements Strategy {
     private double cost(Pair<int,int> a, Pair<int,int> b) {
         // Cost(a,b) = [(freq(a,b) + freq(a,b))/2] * dist(a,b)
         // On a i b són parelles <id_caracter, id_tecla>
-        double freq_avg = (this.Frequencies[a.first][b.first] + this.Frequencies[b.first][a.first])/2;
-        return freq_avg*this.Distances[a.second][b.second];
+        double freq_ab = this.Frequencies[a.first][b.first];
+        double freq_ba = this.Frequencies[b.first][a.first];
+        double dist_ab = this.Distances[a.second][b.second];
+        return ((freq_ab+freq_ba)/2)*dist_ab;
     }
 
     private int[] lazyBranch() {
