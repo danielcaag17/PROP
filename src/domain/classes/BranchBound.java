@@ -2,16 +2,38 @@ package src.domain.classes;
 
 public class BranchBound implements Strategy {
 
-    private static final double[][] Frequencies;
-    private static final double[][] Distances;
-    private static final int n_size;
+    private double[][] Frequencies;
+    private double[][] Distances;
+    private int n_size;
 
+    public BranchBound(double[][] freq_matrix, double[][] dist_matrix) {
+        this.Frequencies = freq_matrix;
+        this.Distances = dist_matrix;
+    }
 
+    public void generarTeclat() {
+        // Ignorar de moment 
+    }
 
-    private double cost() {
+    private double cost(Pair<int,int> a, Pair<int,int> b) {
         // Cost(a,b) = [(freq(a,b) + freq(a,b))/2] * dist(a,b)
         // On a i b són parelles <id_caracter, id_tecla>
-        return 0.0;
+        double freq_avg = (this.Frequencies[a.first][b.first] + this.Frequencies[b.first][a.first])/2;
+        return freq_avg*this.Distances[a.second][b.second];
+    }
+
+    private int[] lazyBranch() {
+        // Lazy Branching algorithm => Similar a DFS
+        int[] partial_sol = new int[n_size];
+        return partial_sol;
+    }
+
+    private double[][] matrixC1() {
+        return;
+    }
+
+    private double[][] matrixC2() {
+        return;
     }
 
     private double cotaGilmore() {
@@ -99,9 +121,5 @@ public class BranchBound implements Strategy {
         // Finalment, Cota Gilmore => F1 + F2 + F3
         //
         return 0.0;
-    }
-
-    public void generarTeclat() {
-        // Ignorar de moment 
     }
 }
