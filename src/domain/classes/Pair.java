@@ -1,8 +1,8 @@
 package src.domain.classes;
 
 public class Pair <T, U> {
-    private T first;
-    private U second;
+    public T first;
+    public U second;
 
     public Pair(T first, U second) {
         this.first = first;
