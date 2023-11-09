@@ -4,14 +4,17 @@ import java.util.Map;       // mirar quin es import que sha de fer servir
 
 public class Alfabet {
     private String nom;                                             // clau primària
-    private Map<char, float> characters = new Map<char, float>();   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
+    private Map<Character, Float> characters = new Map<Character, Float>();   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
     private float[][] x = new float[][];                    // a veure quina Estructura de Dades utilitzar + quin nom
-    int midaAlfabet;       // potser estaria be saber quants caracters diferents té labecedari per aixi poder inicialitzar les dades amb l'espai que necessiten
+    int size;       // potser estaria be saber quants caracters diferents té labecedari per aixi poder inicialitzar les dades amb l'espai que necessiten
 
     //vector[]<char> = new vector[mida alfabet]
     //vector[]<float> = new vector[mida alfabet]
     //matrix[][]<float> = new matrix[mida alfabet] ----> probabilitat dondada una lletra sigui la seguent
 
+    public Alfabet (String nom) {
+        this.nom = nom;
+    }
 
     // Gestionar alfabet
     public void readAlfabet() { //a definir quin tipus de dades es vol rebre com a parametre
@@ -69,5 +72,9 @@ public class Alfabet {
     // aquesta lletra existeix en el vector
     private boolean included(char c) {
         return characters.containsKey(c);               // comprovar si el map te la clau c
+    }
+
+    public int getSize() {
+        return size;
     }
 }
