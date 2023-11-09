@@ -1,11 +1,13 @@
 package src.domain.classes;
 
+import java.util.Map;
+
 public class Teclat {
     private String nom;     // Clau primaria
     private Layout L;
     private Alfabet A;
     private Generador G;
-    private char[][] teclat;    // Estructura per guardar el teclat, no definitiu
+    private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
 
 
     Teclat(String nom) {    // Creadora
@@ -19,25 +21,25 @@ public class Teclat {
         this.G = G;
     }
     
-    public void crearTeclat() {
+    public void crearTeclat () {
         teclat = G.generarTeclat(L, A);
     }
 
     //Entenc que el Layout no es pot modificar i el que es modifica es la pos. de les lletres
     //Veure si es vol void o que retorni teclat
-    public void modificarTeclat(int i, int j, int ii, int jj) {     // Posicions a intercanviar
+    public void modificarTeclat(Character a, Character b) {     // Posicions a intercanviar
         // if les posicions a intercanviar es troben dins del teclat --> excepcio
-        swap(i, j, ii, jj);
+        swapLetters(a, b);
     }
 
     //Veure una millor manera, malament perque swap pot fer swap amb altres elements i no nomes teclat
-    private void swap(int i, int j, int ii, int jj) {
-        char aux = teclat[i][j];
-        teclat[i][j] = teclat[ii][jj];
-        teclat[ii][jj] = aux;
+    private void swapLetters(Character a, Character b) {
+        Integer aux = teclat.get(a);
+        teclat.put(a, teclat.get(b));
+        teclat.put(b, aux);
     }
 
-    public void guardarTeclat() {
+    public void guardarTeclat () {
 
     }
 
@@ -48,23 +50,28 @@ public class Teclat {
     }
     */
 
-    public void visualitzarTeclat() {
+    public void visualitzarTeclat () {
 
     }
 
-    public void provarTeclat() {
+    public void provarTeclat () {
 
     }
 
-    public void esborrarTeclat() {
+    public void esborrarTeclat () {
 
     }
 
-    public String getNom() {
+    public String getNom () {
         return nom;
     }
 
-    public char[][] getTeclat() {
+    public Map<Character, Integer> getTeclat () {
         return teclat;
+    }
+
+    // Retorna la posició de la lletra en el teclat
+    public Integer getPosLletra (Character a) {
+        return teclat.get(a);
     }
  }
