@@ -12,11 +12,11 @@ public class CtrlDomini {
      */
     // private CtrlAlfabetFile ctrlAlfabetFile;
     private Generador Generador;
-    private int[] midesInicials = new int[] {24, 25, 26, 27};
+    private int[] midesInicials = new int[] {24, 25, 26, 27}; // mides inicials dels Layouts disponibles
     // private String strategy;
     private HashMap<String, Teclat> Teclats; // Cjt de Teclats, on String és el nom del Teclat
     private HashMap<String, Alfabet> Alfabets; // Cjt d'Alfabets, on String és el nom de l'Alfabet
-    private HashMap<String, Layout> Layouts; // Cjt de Layouts, on String és l'id del Layout
+    private HashMap<Integer, Layout> Layouts; // Cjt de Layouts, on String és l'id del Layout
     private static CtrlDomini singletonDomini;
 
     // Pre:
@@ -36,7 +36,7 @@ public class CtrlDomini {
 //      ctrlAlfabetFile = CtrlAlfabetFile.getInstance();
         Teclats = new HashMap<String, Teclat>();
         Alfabets = new HashMap<String, Alfabet>();
-        Layouts = new HashMap<String, Layout>();
+        Layouts = new HashMap<Integer, Layout>();
         inicialitzarLayoutsBase();
 //      strategy = "QuadraticAssignmentProblem"
     }
@@ -46,9 +46,8 @@ public class CtrlDomini {
     // Crea les instàncies de Layout de les mides predefinides.
     private void inicialitzarLayoutsBase() {
         for (int i = 0; i<midesInicials.length; i++) {
-            Layout l = new Layout(i+1, midesInicials[i]);
-            String key = String.valueOf(midesInicials[i]);
-            Layouts.put(key, l);
+            Layout l = new Layout(midesInicials[i]);
+            Layouts.put(midesInicials[i], l); // la clau de Layout és la seva mida
         }
     }
     
@@ -69,7 +68,7 @@ public class CtrlDomini {
     /**
      * @return Retorna el Layout amb id=idL.
      */
-    public Layout getLayout(String idL) {
+    public Layout getLayout(Integer idL) {
         return Layouts.get(idL);
     }
 
@@ -191,8 +190,8 @@ public class CtrlDomini {
      * @return Retorna el layout amb id idL.
      * @throws LayoutNoExisteix si no existeix una instància de layout amb id idL.
      */
-    public Layout visualitzarLayout(String idL) throws LayoutNoExisteix {
-        if(Layouts.get(idL)==null) throw new LayoutNoExisteix(idL);
+    public Layout visualitzarLayout(Integer idL) throws LayoutNoExisteix {
+        if(Layouts.get(idL)==null) throw new LayoutNoExisteix(idL.toString());
         return getLayout(idL);
     }
 
