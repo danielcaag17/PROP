@@ -17,7 +17,7 @@ public class Layout {
     Volem les coordenades per id=3 --> (coordenades[id].first, coordenades[id].second)
     Si volem accedir a la tecla amb id=3 --> distribucio[coordenades[id].first][coordenades[id].second]
     Si volem saber la distància entre dues tecles amb id=3 i id=5 --> distancies[3][5]
-    RECOMANACIÓ: treballar amb ids menys quan s'han d'omplir tecles.
+    --- RECOMANACIÓ: treballar amb ids menys quan s'han d'omplir tecles.
     */
 
     /** Constructora */
