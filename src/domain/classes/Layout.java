@@ -11,7 +11,7 @@ public class Layout {
     /** Indica per cada id les seves coordenades al layout */
     private Pair<Integer, Integer>[] coordenades;
     /** Indica la distribució de les tecles, a cada parell de coordenades (i,j) se li assigna un id */
-    private int[][] distribucio;
+    private int[][] distribucio; // he pensat a cada posició guardar quina és la id que li pertoca per poder trobar-la a partir de les pos
 
     /* Exemple d'ús: 
     Volem les coordenades per id=3 --> (coordenades[id].first, coordenades[id].second)
