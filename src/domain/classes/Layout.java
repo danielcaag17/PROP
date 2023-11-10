@@ -1,17 +1,21 @@
 package src.domain.classes;
 
+import java.util.*;
+
 public class Layout {
-    /** Atributs */ 
-    /** id de la instància */
-    private int id;
-    /** Indica la mida del layout, número de posicions disponibles */
-    private int size; 
+    /** Atributs */
+    /** Indica la mida del layout, número de posicions disponibles. Aquest paràmetre és la clau primària. */
+    private int mida; 
     /** Indica la distància entre les "mida" posicions */
     private double[][] distancies;
     /** Indica per cada id les seves coordenades al layout */
-    private Pair<Integer, Integer>[] coordenades;
+    private List<Pair<Integer, Integer>> coordenades;
     /** Indica la distribució de les tecles, a cada parell de coordenades (i,j) se li assigna un id */
     private int[][] distribucio; // he pensat a cada posició guardar quina és la id que li pertoca per poder trobar-la a partir de les pos
+
+    private int ncol;
+    private int nfil = 3; // 3 files a la matriu distribució ens dóna una relació 3:1 per a totes les mides entre 12 i 48.
+
 
     /* Exemple d'ús: 
     Volem les coordenades per id=3 --> (coordenades[id].first, coordenades[id].second)
@@ -21,9 +25,10 @@ public class Layout {
     */
 
     /** Constructora */
-    public Layout(int i, int m) {
-        id = i;
-        size = m;
+    public Layout(int m) {
+        mida = m;
+        distancies = new double[mida][mida];
+        coordenades = new ArrayList<>(mida);
         inicialitzarDistribucio();
         omplirCoordenades();
         calcularDistancies();
@@ -31,27 +36,90 @@ public class Layout {
 
     /** Metòdes */
 
+    /** Calcula la part entera inferior quan b és cert i la part entera superior quan és fals */
+    private int round(double d, boolean b) {
+        if (b) {
+            return (int)d;
+        }
+        else {
+            return 1+(int)d;
+        }
+    }
+
     /** Inicialitzar el nombre de columnes i files de l'atribut distribucio */
     private void inicialitzarDistribucio() {
+        double x = (double)mida/3;
+        if (mida%3 != 0) { ncol = round(x, false); }
+        else { ncol = round(x, true); }
 
+        distribucio = new int[nfil][ncol]; // creem una distribució de les mesures buscades
     }
 
     /** Relacionar id de tecla (a menor id més prioritat al QAP) amb les seves coordenades */
     private void omplirCoordenades() {
+        int[] mov_x = new int[] {1, 1, 0,-1,-1,-1, 0, 1};
+        int[] mov_y = new int[] {0, 1, 1, 1, 0,-1,-1,-1};
+        Pair<Integer, Integer> mig = new Pair<Integer,Integer>(nfil/2, ncol/2);
+        if (ncol % 2 == 0) mig.second -= 1;
+        int dir = 1;
+        int offset = -1;
+        int id = 1;
+        distribucio[mig.first][mig.second] = 0;
+        coordenades.add(0, mig);
+        for (int k = 1; k<ncol*nfil; k++) {
+            Pair<Integer, Integer> tecla = new Pair<Integer,Integer>();
+            if (k<8) {
+                tecla.first = mig.first+mov_x[k-1];
+                tecla.second = mig.second+mov_y[k-1];
+            }
+            else {
+                int p = k % nfil; // canviar nom a variable p
+                if (p == 0) {
+                    offset -= 2*offset; // intercanvia el signe del valor del offset
+                    if (offset>0) offset++; // si offset és positiu, increm.
+                    dir *= -1; // intercanviem la direcció de la coordenada first
+                }
+                // Sembla que es repeteixi codi però així s'evita que el codi s'executi més vegades de les que hauria en certs casos.
+                if (p == 1 && mida%nfil == 1 && k > (nfil*ncol - 6)) {
+                    if (offset > 0) tecla.first = mig.first-1;
+                    else tecla.first = mig.first+1;
+                    k++;
+                }
+                else if (p == 1 && mida%nfil == 2 && k > (nfil*ncol - 3)) {
+                    if (offset > 0) tecla.first = mig.first-1;
+                    else tecla.first = mig.first+1;
+                    k++;
+                }
+                else {
+                    tecla.first = mig.first+dir*(p-1);  
+                    // Estem recorrent columnes posteriors al cercle que envolta el centre
+                    // ho volem fer equitativament per ambdues bandes i en sentits contraris
+                    // dir ens ajuda al sentit contrari, 
+                    // p-1 corregeix p per a que faci d'offset per al eix first
+                }
+                tecla.second = mig.second+offset;
+            }
 
+            coordenades.add(id, tecla);
+            distribucio[tecla.first][tecla.second] = id;
+            id++;
+        }
     }
 
-    /** Càlcul de distàncies Manhattan */
+    /** Càlcul de la distància Manhattan entre dos punts */
+    private int distanciaManhattan(Pair<Integer,Integer> c1, Pair<Integer, Integer> c2) {
+        return Math.abs(c1.first-c2.first) + Math.abs(c1.second - c2.second);
+    }
+
+    /** Càlcul de la matriu distàncies, mitjançant la distància Manhattan */
     private void calcularDistancies() {
-
-    }
-
-    /**
-     * Get instance id
-     * @return Retorna el id de la instància Layout
-     */
-    public int getId() {
-        return id;
+        for (int i = 0; i < mida; i++) {
+            for (int j = i+1; j < mida; j++) {
+                double dist = (double)distanciaManhattan(coordenades.get(i), coordenades.get(j));
+                distancies[i][j] = dist;
+                distancies[j][i] = dist;
+            }
+        }
     }
 
     /**
@@ -59,7 +127,33 @@ public class Layout {
      * @return Retorna el nombre de tecles que té la instància Layout
      */
     public int getSize() {
-        return size;
+        return mida;
+    }
+
+    /**
+     * Get Id of a Pair of coordinates
+     * @param coordenada Indica les coordenades de les que es volen la id
+     * @return Retorna la id de les coordenades coordenada
+     */
+    public int getIdCoordenades(Pair<Integer,Integer> coordenada) {
+        return distribucio[coordenada.first][coordenada.second];
+    }
+
+    /**
+     * Get Pair of coordinates from Id
+     * @param id Indica la id de la qual es volen saber les coordenades
+     * @return Retorna el Pair de coordenades assignades a la id
+     */
+    public Pair<Integer,Integer> getCoordenadaFromId(int id) {
+        return coordenades.get(id);
+    }
+
+    /**
+     * Get instance coordenades
+     * @return Retorna les coordenades de cada id de tecla/posició
+     */
+    public List<Pair<Integer, Integer>> getCoordenades() {
+        return coordenades;
     }
 
     /**
@@ -68,14 +162,6 @@ public class Layout {
      */
     public double[][] getDistancies() {
         return distancies;
-    }
-
-    /**
-     * Get instance coordenades
-     * @return Retorna les coordenades de cada id de tecla/posició
-     */
-    public Pair<Integer, Integer>[] getCoordenades() {
-        return coordenades;
     }
 
     /**
