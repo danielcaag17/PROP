@@ -184,6 +184,18 @@ public class CtrlDomini {
         Alfabets.remove(na);
     }
 
+    /**
+     * Pre: el layout amb id idL existeix.
+     * 
+     * @param idL id del Layout.
+     * @return Retorna el layout amb id idL.
+     * @throws LayoutNoExisteix si no existeix una instància de layout amb id idL.
+     */
+    public Layout visualitzarLayout(String idL) throws LayoutNoExisteix {
+        if(Layouts.get(idL)==null) throw new LayoutNoExisteix(idL);
+        return getLayout(idL);
+    }
+
     /*
      * - getters
      * - inicialitzarLayoutsBase()
