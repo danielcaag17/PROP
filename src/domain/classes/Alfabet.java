@@ -26,8 +26,9 @@ public class Alfabet {
     // Gestionar un text d'entrada
     public void readText (String path) {
         String text = getText(path);
-        processCharacters(text);
-        calculateProbabilities();
+        int lenght = text.length();
+        processCharacters(text, lenght);
+        calculateProbabilities(lenght);
     }
 
      // Gestionar llistes de paraules
@@ -40,8 +41,7 @@ public class Alfabet {
         calculateProbabilities();       // falta veure de quina manera es calculen les probabilitats de la propia paraula
     }
 
-    private void processCharacters(String text) { //return lenght (?) per calculateProbabilities
-        int length = text.length();
+    private void processCharacters(String text, int length) { //return lenght (?) per calculateProbabilities
         for (int i = 0; i < length; i++) {
             Character c = text.charAt(i);                    // obtenir la lletra del text
             if (! included(c))                          // comprovar que la lletra no s'ha vist encara
@@ -57,20 +57,17 @@ public class Alfabet {
         }
     }
 
-    private void calculateProbabilities () {     //ull amb totes les divisions, EXC si es entre 0 !!
-        Iterator it = characters.entrySet().iterator();
-        while (it.hasNext()) {
-            float a = characters.get(text.charAt(i));   // obtenir el nombre d'aparicions de la lletra
+    private void calculateProbabilities (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
+        for (Character c : characters.keySet()) {
+            float a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
             float probabilitat = a / length;            // obtenir la probabilitat
-            characters.replace(text.charAt(i), a);      // associar la lletra amb la seva probabilitat
+            float nAparicions = characters.get(c);
+            characters.replace(c, a);      // associar la lletra amb la seva probabilitat
 
-            //for (i = 0; i < mida de alfabet; i++) {
-                //x[it.key][i] /= a;
-
-                //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
-                //de vegades que apareix la lletra 
-            //}
-            it.next();
+            for (int i = 0; i < size; i++) {
+                x[c][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
+                                            //de vegades que apareix la lletra 
+            }
         }
     }
 
