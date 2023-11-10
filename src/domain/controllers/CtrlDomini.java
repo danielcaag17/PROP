@@ -90,7 +90,7 @@ public class CtrlDomini {
         if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL);
         Alfabet a = Alfabets.get(na);
         Layout l = Layouts.get(idL);
-        if (a.getMida() != l.getMida()) throw new MidesDiferents(a.getMida(), l.getMida());
+        if (a.getSize() != l.getSize()) throw new MidesDiferents(a.getSize(), l.getSize());
         Teclat t = new Teclat(nt, l, a, Generador); // IMPORTANT QUE CREADORA TECLAT SIGUI PUBLIC
         t.crearTeclat(); // potser passar strategy?
         Teclats.put(nt, t);
@@ -155,11 +155,8 @@ public class CtrlDomini {
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a = new Alfabet(na);
-        ////////// POT MODIFICAR-SE PER FER-HO MÉS REUSABLE //////////
-        a.readPath(pf); // IMPORTANT QUE ES PASSA UN PATH
-        if (ta == "text") { a.readText(); }
-        else if (ta == "llista-paraules") { a.readWords(); }
-        //////////////////////////////////////////////////////////////
+        if (ta == "text") { a.readText(pf); }
+        else if (ta == "llista-paraules") { a.readWords(pf); }
         Alfabets.put(na, a);
     }
 
