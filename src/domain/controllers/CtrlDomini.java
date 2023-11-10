@@ -10,7 +10,7 @@ public class CtrlDomini {
     /*
      * Instàncies de les classes del model
      */
-    private CtrlAlfabetFile ctrlAlfabetFile;
+    // private CtrlAlfabetFile ctrlAlfabetFile;
     private Generador Generador;
     private int[] midesInicials = new int[] {24, 25, 26, 27};
     // private String strategy;
