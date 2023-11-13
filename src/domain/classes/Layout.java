@@ -123,6 +123,14 @@ public class Layout {
     }
 
     /**
+     * Get instance id. The Layout id is the same value as its size.
+     * @return Retorna la id del Layout
+     */
+    public int getId() {
+        return mida;
+    }
+
+    /**
      * Get instance size
      * @return Retorna el nombre de tecles que té la instància Layout
      */
@@ -136,6 +144,7 @@ public class Layout {
      * @return Retorna la id de les coordenades coordenada
      */
     public int getIdCoordenades(Pair<Integer,Integer> coordenada) {
+        // afegir possible excepció
         return distribucio[coordenada.first][coordenada.second];
     }
 

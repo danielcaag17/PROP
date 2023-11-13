@@ -82,7 +82,7 @@ public class CtrlDomini {
             Teclat t = Teclats.get(key);
             s[i] = "Nom: " + t.getNom() + 
                    " - Nom alfabet: " + t.getAlfabet().getNom() +
-                   " - Nom Layout: " + t.getLayout().getNom();
+                   " - Nom Layout: " + t.getLayout().getId();
             i++;
         }
         return s;
