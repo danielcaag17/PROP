@@ -165,10 +165,18 @@ public class Layout {
     }
 
     /**
-     * Get instance distribucio
-     * @return Retorna la distribució de les tecles/posicions
+     * Get instance distribucio filled with the id of each position
+     * @return Retorna la distribució de les ids en les tecles/posicions
      */
-    public int[][] getDistribucio() {
+    public int[][] getDistribucioFilled() {
         return distribucio;
+    }
+
+    /**
+     * Get a matrix with number of rows = nfil and number of columns = ncol
+     * @return Retorna la distribució de les tecles/posicions.
+     */
+    public char[][] getDistribucio() {
+        return new char[nfil][ncol];
     }
 }
