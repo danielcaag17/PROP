@@ -81,4 +81,14 @@ public class Teclat {
     public Integer getPosLletra (Character a) {
         return teclat.get(a);
     }
+
+    // Retorna Alfabet
+    public Alfabet getAlfabet () {
+        return A;
+    }
+
+    // Retorna Layout
+    public Layout geLayout () {
+        return L;
+    }
  }
