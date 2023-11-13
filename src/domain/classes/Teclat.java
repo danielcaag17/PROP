@@ -10,11 +10,11 @@ public class Teclat {
     private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
 
 
-    Teclat(String nom) {    // Creadora
+    public Teclat(String nom) {    // Creadora
         this.nom = nom;
     }
 
-    Teclat(String nom, Layout L, Alfabet A, Generador G) {  // Creadora amb tots els parámetres
+    public Teclat(String nom, Layout L, Alfabet A, Generador G) {  // Creadora amb tots els parámetres
         this.nom = nom;
         this.L = L;
         this.A = A;
@@ -22,6 +22,8 @@ public class Teclat {
     }
     
     public void crearTeclat () {
+        // layout --> distancies
+        // alfabet --> freq
         teclat = G.generarTeclat(L, A);
     }
 
@@ -50,10 +52,15 @@ public class Teclat {
     }
     */
 
+    // Printar d'una manera més visual
+    // Aquesta fucnió implementa una altre
     public void visualitzarTeclat () {
-
+        for (Character c : teclat.keySet()) {
+            System.out.println(c.toString());
+        }
     }
 
+    // UI
     public void provarTeclat () {
 
     }
