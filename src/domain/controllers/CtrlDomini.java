@@ -73,6 +73,53 @@ public class CtrlDomini {
     }
 
     /**
+     * @return Retorna un array de Strings amb el nom, el nom del alfabet i el nom del layout de cada teclat del sistema.
+     */
+    public String[] getListTeclats() {
+        String[] s = new String[Teclats.size()];
+        int i=0;
+        for (String key : Teclats.keySet()) {
+            Teclat t = Teclats.get(key);
+            s[i] = "Nom: " + t.getNom() + 
+                   " - Nom alfabet: " + t.getAlfabet().getNom() +
+                   " - Nom Layout: " + t.getLayout().getNom();
+            i++;
+        }
+        return s;
+    }
+
+    /**
+     * @return Retorna un array de Strings amb el nom, la mida i l'abecedari de cada alfabet del sistema.
+     */
+    public String[] getListAlfabets() {
+        String[] s = new String[Alfabets.size()];
+        int i=0;
+        for (String key : Alfabets.keySet()) {
+            Alfabet a = Alfabets.get(key);
+            s[i] = "Nom: " + a.getNom() + 
+                   " - Mida: " + a.getSize() +
+                   " - Abecedari: " + a.getAbecedari();
+            i++;
+        }
+        return s;
+    }
+    
+    /**
+     * @return Retorna un array de String amb la mida i la matriu de distribució d'ids de cada layout del sistema
+     */
+    public String[] getListLayouts() {
+        String[] s = new String[Layouts.size()];
+        int i=0;
+        for (Integer key : Layouts.keySet()) {
+            Layout l = Layouts.get(key);
+            s[i] = "Mida: " + l.getSize() + 
+                   " - Matriu distribució d'ids: \n" + l.getDistribucio().toString(); // Aquest toString() s'hauria de veure que fa.
+            i++;
+        }
+        return s;
+    }
+
+    /**
      * Pre: el teclat amb nom nt no existeix. -
      * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i el Layout amb id idL.
      * 
@@ -83,10 +130,10 @@ public class CtrlDomini {
      * @throws TeclatJaExisteix si existeix una instància Teclat amb nom nt.
      * @throws MidesDiferents si la mida del Alfabet amb nom na i el Layout amb id idL són diferents. 
      */
-    public void crearNouTeclat(String nt, String na, String idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
+    public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
         if (Teclats.get(nt) != null) throw new TeclatJaExisteix(nt);
         if (Alfabets.get(na) == null) throw new AlfabetNoExisteix(na);
-        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL);
+        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(Integer.toString(idL));
         Alfabet a = Alfabets.get(na);
         Layout l = Layouts.get(idL);
         if (a.getSize() != l.getSize()) throw new MidesDiferents(a.getSize(), l.getSize());
@@ -105,27 +152,27 @@ public class CtrlDomini {
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public Teclat modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         Teclat t = getTeclat(nt);
         for (Character c : canvis.keySet()) {
             t.modificarTeclat(c, canvis.get(c)); 
         }
         Teclats.replace(nt, t);
-        return t;
+        return t.toString(); // Potser no fa falta
     }
 
     /**
      * Pre: el teclat amb nom nt existeix.
      * 
      * @param nt: nom del teclat.
-     * @return Teclat amb nom nt.
+     * @return Retorna el string que representa el teclat amb nom nt.
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public Teclat visualitzarTeclat(String nt) throws TeclatNoExisteix {
+    public String visualitzarTeclat(String nt) throws TeclatNoExisteix {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
-        return getTeclat(nt);
+        return getTeclat(nt).toString();
     }
 
     /**
@@ -163,12 +210,12 @@ public class CtrlDomini {
      * Pre: l'alfabet amb nom na existeix.
      * 
      * @param na nom del alfabet.
-     * @return Retorna l'alfabet amb nom na.
+     * @return Retorna el string que representa l'alfabet amb nom na.
      * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na.
      */
-    public Alfabet visualitzarAlfabet(String na) throws AlfabetNoExisteix {
+    public String visualitzarAlfabet(String na) throws AlfabetNoExisteix {
         if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
-        return getAlfabet(na);
+        return getAlfabet(na).toString();
     }
     
     /**
@@ -187,12 +234,12 @@ public class CtrlDomini {
      * Pre: el layout amb id idL existeix.
      * 
      * @param idL id del Layout.
-     * @return Retorna el layout amb id idL.
+     * @return Retorna el string que representa el layout amb id idL.
      * @throws LayoutNoExisteix si no existeix una instància de layout amb id idL.
      */
-    public Layout visualitzarLayout(Integer idL) throws LayoutNoExisteix {
+    public String visualitzarLayout(Integer idL) throws LayoutNoExisteix {
         if(Layouts.get(idL)==null) throw new LayoutNoExisteix(idL.toString());
-        return getLayout(idL);
+        return getLayout(idL).toString();
     }
 
     /*
