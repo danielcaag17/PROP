@@ -7,8 +7,8 @@ public class Teclat {
     private Layout L;
     private Alfabet A;
     private Generador G;
-    private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
-    private char[][] distribucio;               //Matriu de les lletres
+    private Map<Character, Integer> teclat;     // Estructura per guardar el teclat, no definitiu
+    private char[][] distribucioCharacters;     //Matriu de les lletres
 
 
     public Teclat(String nom) {    // Creadora
@@ -33,7 +33,7 @@ public class Teclat {
         for (Character c : teclat.keySet()) {
             int id = teclat.get(c);
             Pair<Integer, Integer> p = L.getCoordenadaFromId(id);
-            distribucio[p.getFirst()][p.getSecond()] = c;
+            distribucioCharacters[p.getFirst()][p.getSecond()] = c;
         }
     }
 
@@ -85,6 +85,10 @@ public class Teclat {
 
     public Map<Character, Integer> getTeclat () {
         return teclat;
+    }
+
+    public char[][] getDistribucioCharacters () {
+        return distribucioCharacters;
     }
 
     // Retorna la posició de la lletra en el teclat
