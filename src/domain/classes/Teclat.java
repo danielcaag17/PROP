@@ -8,6 +8,7 @@ public class Teclat {
     private Alfabet A;
     private Generador G;
     private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
+    private char[][] distribucio;               //Matriu de les lletres
 
 
     public Teclat(String nom) {    // Creadora
@@ -88,7 +89,15 @@ public class Teclat {
     }
 
     // Retorna Layout
-    public Layout geLayout () {
+    public Layout getLayout () {
         return L;
+    }
+
+    @Override
+    public String toString() {
+        private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
+        String result = nom + 
+                        teclat
+        return "("+first+", "+second+")";
     }
  }
