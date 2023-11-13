@@ -113,7 +113,7 @@ public class CtrlDomini {
         for (Integer key : Layouts.keySet()) {
             Layout l = Layouts.get(key);
             s[i] = "Mida: " + l.getSize() + 
-                   " - Matriu distribució d'ids: \n" + l.getDistribucio().toString(); // Aquest toString() s'hauria de veure que fa.
+                   " - Matriu distribució d'ids: \n" + l.getDistribucioFilled().toString(); // Aquest toString() s'hauria de veure que fa.
             i++;
         }
         return s;
