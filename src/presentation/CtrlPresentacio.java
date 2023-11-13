@@ -1,21 +1,49 @@
 package src.presentation;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 import src.domain.controllers.*;
+import src.exceptions.AlfabetNoExisteix;
+import src.exceptions.LayoutNoExisteix;
+import src.exceptions.MidesDiferents;
+import src.exceptions.TeclatJaExisteix;
+import src.exceptions.TeclatNoExisteix;
 
 public class CtrlPresentacio {
-    private IOterminal ioTerminal;
-    private CtrlDomini controlDomini;
+    private IOterminal iot;
+    private CtrlDomini cd;
 
     public CtrlPresentacio() throws FileNotFoundException {
         // Aquí s'ha d'iniciar Factoria, Controlador domini, la visualització (per a la primera entrega potser per terminal)
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
-        controlDomini = factoriaCtrl.getCtrlDomini();
-        ioTerminal = new IOterminal(this);
+        cd = factoriaCtrl.getCtrlDomini();
+        iot = new IOterminal(this);
         // Inicialització de terminal
-        ioTerminal.inicialitza();
+        iot.inicialitzaTerminal();
     }
 
-    // Mirar casos d'ús per orientar que hi va aquí
+    public String[] getListTeclats() {
+        return cd.getListLayouts();
+    }
+
+    public String[] getListAlfabets() {
+        return cd.getListAlfabets();
+    }
+
+    public String[] getListLayouts() {
+        return cd.getListLayouts();
+    }
+
+    public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
+        cd.crearNouTeclat(nt, na, idL);
+    }
+
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
+        return cd.modificarTeclat(nt, canvis);
+    }
+
+    public String visualitzarTeclat(String nt) throws TeclatNoExisteix {
+        return cd.visualitzarTeclat(nt);
+    }
 }
