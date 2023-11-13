@@ -1,0 +1,71 @@
+DESCRIPCIÓ CASOS D'ÚS
+
+Nom: Crear Teclat
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Modificar Teclat
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Visualitzar Teclat
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Esborrar Teclat
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Afegir Alfabet
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Esborrar Alfabet
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Visualitzar Alfabet
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Visualitzar Layout
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Afegir Layout
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
+
+Nom: Esborrar Layout
+Actor: Usuari
+Comportament:
+ - 
+Errors possibles i cursos alternatius:
+ - 
