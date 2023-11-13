@@ -3,11 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 
 import src.domain.controllers.*;
-import src.exceptions.AlfabetNoExisteix;
-import src.exceptions.LayoutNoExisteix;
-import src.exceptions.MidesDiferents;
-import src.exceptions.TeclatJaExisteix;
-import src.exceptions.TeclatNoExisteix;
+import src.exceptions.*;
 
 public class CtrlPresentacio {
     private IOterminal iot;
@@ -46,4 +42,33 @@ public class CtrlPresentacio {
     public String visualitzarTeclat(String nt) throws TeclatNoExisteix {
         return cd.visualitzarTeclat(nt);
     }
+
+    public void esborrarTeclat(String nt) throws TeclatNoExisteix {
+        cd.esborrarTeclat(nt);
+    }
+
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
+        cd.afegirAlfabet(na, ta, pf);
+    }
+
+    public String visualitzarAlfabet(String na) throws AlfabetNoExisteix {
+        return cd.visualitzarAlfabet(na);
+    }
+
+    public void esborraAlfabet(String na) throws AlfabetNoExisteix {
+        cd.esborrarAlfabet(na);
+    }
+
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix {
+        cd.afegirLayout(idL);
+    }
+    
+    public String visualitzarLayout(Integer idL) throws LayoutNoExisteix {
+        return cd.visualitzarLayout(idL);
+    }
+
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
+        cd.esborrarLayout(idL);
+    }
+
 }
