@@ -183,9 +183,13 @@ public class Layout {
 
     /**
      * Get a matrix with number of rows = nfil and number of columns = ncol
-     * @return Retorna la distribució de les tecles/posicions.
+     * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
      */
     public char[][] getDistribucio() {
-        return new char[nfil][ncol];
+        char[][] c = new char[nfil][ncol];
+        for (int i = 0; i < nfil; i++) {
+            Arrays.fill(c[i], '-');
+        }
+        return c;
     }
 }
