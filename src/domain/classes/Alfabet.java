@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;       // mirar quin es import que sha de fer servir
 import java.util.Scanner;
+import java.util.Set;
 
 public class Alfabet {
-    private String nom;                                             // clau primària
+private String nom;                             // clau primària
     private Map<Character, Float> characters;   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
-    private float[][] x;                    // a veure quina Estructura de Dades utilitzar + quin nom
-    int size;       // potser estaria be saber quants caracters diferents té labecedari per aixi poder inicialitzar les dades amb l'espai que necessiten
+    private float[][] x;                        // a veure quina Estructura de Dades utilitzar + quin nom
+    int size;
 
     public Alfabet (String nom) {
         this.nom = nom;
@@ -120,5 +121,11 @@ public class Alfabet {
 
     public String getNom () {
         return nom;
+    }
+
+    // Retorna les lletres de l'alfabet
+    public String getAbecedari () {
+        Set<Character> keys = characters.keySet();
+        return keys.toString();
     }
 }
