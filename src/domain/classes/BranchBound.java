@@ -94,9 +94,9 @@ public class BranchBound implements Strategy {
                 // ex: i=0 pot correspondre al charID 3, o j=2 pot correspondre a teclaID 4
                 int t_char = missingChars.get(i);
                 int t_index = j + partialSol.size();
-                double[] vectorT = vectorT(t_char, missingChars);
-                double[] vectorD = vectorD(t_index, missingChars);
-                C2[i][j] = scalarProduct(vectorT, vectorD);
+                double[] vecT = vectorT(t_char, missingChars);
+                double[] vecD = vectorD(t_index, missingChars);
+                C2[i][j] = scalarProduct(vecT, vecD);
             }
         }
         return C2;
