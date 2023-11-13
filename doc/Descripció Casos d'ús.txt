@@ -3,30 +3,42 @@ DESCRIPCIÓ CASOS D'ÚS
 Nom: Crear Teclat
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el valor que identifica l'alfabet i el valor que identifica el layout
+ - El sistema valida els valors que identifiquen l'alfabet i el layout i genera el teclat
+ - El sistema mostra com el resultat de la generació del teclat
+ - L'usuari indica si vol descartar el teclat o si el vol guardar
 Errors possibles i cursos alternatius:
+ - Si l'alfabet que indica l'usuari no existeix, el sistema informa de l'error
+ - Si el layout que indica l'usuari no existeix, el sistema informa de l'error
  - 
 
 Nom: Modificar Teclat
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el valor que identifica el teclat i totes les parelles de lletres
+    que vulgui intercanviar
+ - El sistema valida el valor que identifica el teclat i valida que les lletres pertanyen
+    a l'alfabet del teclat
+ - El sistema intercanvia els parells de lletres
 Errors possibles i cursos alternatius:
- - 
+ - Si el teclat que indica l'usuari no existeix, el sistema informa de l'error
+ - Si alguna de les lletres no pertanyen a l'abecedari del teclat, el sistema informa de l'error
 
 Nom: Visualitzar Teclat
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el teclat que vol visualitzar
+ - El sistema valida el valor que identifica el teclat i el visualitza
 Errors possibles i cursos alternatius:
- - 
+ - Si el teclat que indica l'usuari no exiteix, el sistema informa de l'error
 
 Nom: Esborrar Teclat
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el teclat que vol esborrar
+ - El sistema valida el valor que identifica el teclat i l'esborra
 Errors possibles i cursos alternatius:
- - 
+ - Si el teclat que indica l'usuari no existeix, el sistema informa de l'error
 
 Nom: Afegir Alfabet
 Actor: Usuari
