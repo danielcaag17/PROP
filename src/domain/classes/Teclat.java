@@ -108,9 +108,14 @@ public class Teclat {
 
     @Override
     public String toString() {
-        private Map<Character, Integer> teclat;    // Estructura per guardar el teclat, no definitiu
-        String result = nom + 
-                        teclat
-        return "("+first+", "+second+")";
+        String result = nom + "\n";
+        result += A.getNom() + "\n";
+        for (int i = 0; i < distribucioCharacters.length; i++) {
+            for (int j = 0; j < distribucioCharacters[i].length; j++) {
+                result += distribucioCharacters[i][j] + " ";
+            }
+            result += "\n";   
+        }
+        return result;
     }
  }
