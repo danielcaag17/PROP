@@ -26,6 +26,15 @@ public class Teclat {
         // layout --> distancies
         // alfabet --> freq
         teclat = G.generarTeclat(L, A);
+        omplirDistribució();
+    }
+
+    private void omplirDistribució () {
+        for (Character c : teclat.keySet()) {
+            int id = teclat.get(c);
+            Pair<Integer, Integer> p = L.getCoordenadaFromId(id);
+            distribucio[p.getFirst()][p.getSecond()] = c;
+        }
     }
 
     //Entenc que el Layout no es pot modificar i el que es modifica es la pos. de les lletres
