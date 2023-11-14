@@ -7,6 +7,8 @@ import java.util.Map;       // mirar quin es import que sha de fer servir
 import java.util.Scanner;
 import java.util.Set;
 
+import src.exceptions.AlfabetJaExisteix;
+
 public class Alfabet {
 private String nom;                             // clau primària
     private Map<Character, Float> characters;   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
@@ -19,11 +21,11 @@ private String nom;                             // clau primària
     }
 
 
-    public void readInput (String ta, String path) {
+    public void readInput (String ta, String path) throws TipusDadesAlfabetIncorrecte, FileNotFoundException{
         if (ta == "text") readText(path);
         else if (ta == "llista-paraules") readWords(path);
         else {
-            // Error;
+            throw new TipusDadesAlfabetIncorrecte();
         }
     }
 
@@ -79,20 +81,14 @@ private String nom;                             // clau primària
         }
     }
 
-    private String getText (String path) {
+    private String getText (String path) throws FileNotFoundException {
         String text = "";
-        try {
-            File file = new File(path);
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                text += myReader.nextLine();
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            // No passarà mai perque el path ja es comprova a ctrlDomini
-            System.err.println("PathIncorrecte");
-            e.printStackTrace();
+        File file = new File(path);
+        Scanner myReader = new Scanner(file);
+        while (myReader.hasNextLine()) {
+            text += myReader.nextLine();
         }
+        myReader.close();
         return text;
     }
 
