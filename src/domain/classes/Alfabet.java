@@ -21,7 +21,7 @@ private String nom;                             // clau primària
     }
 
 
-    public void readInput (String ta, String path) throws TipusDadesAlfabetIncorrecte, FileNotFoundException{
+    public void readInput (String ta, String path) throws TipusDadesAlfabetIncorrecte, FileNotFoundException {
         if (ta == "text") readText(path);
         else if (ta == "llista-paraules") readWords(path);
         else {
@@ -30,7 +30,7 @@ private String nom;                             // clau primària
     }
 
     // Gestionar un text d'entrada
-    private void readText (String path) {
+    private void readText (String path) throws FileNotFoundException {
         String text = getText(path);
         int lenght = text.length();
         processCharacters(text, lenght);
@@ -38,7 +38,7 @@ private String nom;                             // clau primària
     }
 
      // Gestionar llistes de paraules
-    private void readWords(String path) { //conjunt de paraules amb la seva probabilitat
+    private void readWords(String path) throws FileNotFoundException { //conjunt de paraules amb la seva probabilitat
         HashMap<String, Float> words = getWords(path);
         int totalLenght = 0;
         for (String s : words.keySet()) {
@@ -92,26 +92,20 @@ private String nom;                             // clau primària
         return text;
     }
 
-    private HashMap<String, Float> getWords (String path) {
+    private HashMap<String, Float> getWords (String path) throws FileNotFoundException {
         HashMap<String, Float> words = new HashMap<>();
-        try {
-            File file = new File(path);
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                String input = myReader.nextLine();
-                String[] dividit = input.split(" ");
-                String word = dividit[0];
-                Float probabilitat = Float.parseFloat(dividit[1]);
-                if (! words.containsKey(word)) {             // comprovar que la lletra no s'ha vist encara
-                    words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
-                }
+        File file = new File(path);
+        Scanner myReader = new Scanner(file);
+        while (myReader.hasNextLine()) {
+            String input = myReader.nextLine();
+            String[] dividit = input.split(" ");
+            String word = dividit[0];
+            Float probabilitat = Float.parseFloat(dividit[1]);
+            if (! words.containsKey(word)) {             // comprovar que la lletra no s'ha vist encara
+                words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            // No passarà mai perque el path ja es comprova a ctrlDomini
-            System.err.println("PathIncorrecte");
-            e.printStackTrace();
-        }        
+        }
+        myReader.close();     
         return words;
     }
 
