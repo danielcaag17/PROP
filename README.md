@@ -1,5 +1,5 @@
 # Projecte de Programació - Primera Entrega
-**Fet per: Dani, Jordi i Pau**
+**Fet per: [Dani, Jordi i Pau](Equip.txt)**
 
 ## Descripció
 Primera entrega de l'assignatura [PROP](https://www.cs.upc.edu/~prop/) de la Facultat d'Informàtica de Barcelona ([FIB](https://www.fib.upc.edu/ca)). 
