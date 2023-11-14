@@ -9,6 +9,15 @@ public class IOterminal {
     private CtrlPresentacio ctrlPresentacio;
     private Scanner s;
 
+    /** Missatge previ al output del sistema */
+    private String output = "> ";
+    /** Missatge previ als input introduïts per l'usuari */
+    private String inputFromUser = "> "; 
+    /** Missatge previ als inputs de comandes posades per l'usuari */
+    private String inputCommand = "# ";
+    /** Missatge previ al output d'errors */
+    private String errorOutput = "[!]> ";
+
     public IOterminal(CtrlPresentacio cp) {
         ctrlPresentacio = cp;
         s = new Scanner(System.in);
@@ -45,7 +54,7 @@ public class IOterminal {
     public void mostraMenu() {
         System.out.print(
             "\n" +
-            "> Les comandes necessàries per a fer ús del programa són les següent: \n" +
+            output + "Les comandes necessàries per a fer ús del programa són les següent: \n" +
             "Format --> comanda : abreviatura \n" +
             "   nou_teclat : nt \n" +
             "   modifica_teclat : modt \n" +
@@ -69,7 +78,7 @@ public class IOterminal {
     }
 
     public void escollir() {
-        System.out.print("> ");
+        System.out.print(inputCommand);
         String command = s.nextLine();
         if (     command.equals("nou_teclat")      || command.equals("nt")) nouTeclat();
         else if (command.equals("modifica_teclat") || command.equals("modt")) modificaTeclat();
@@ -87,8 +96,8 @@ public class IOterminal {
         else if (command.equals("more_info")       || command.equals("mi")) moreInfo();
         else if (command.equals("finalitzar")      || command.equals("f")) finalitzar();
         else {
-            System.out.println("(!)> ERROR: '" + command + "' no és una comanda vàlida."); 
-            System.out.println("> Si us plau, introdueix una comanda vàlida.");
+            System.out.println(errorOutput + "ERROR: '" + command + "' no és una comanda vàlida."); 
+            System.out.println(output + "Si us plau, introdueix una comanda vàlida.");
             escollir();
         }
     }
@@ -102,111 +111,111 @@ public class IOterminal {
     }
 
     public void llistaLayouts() {
-        System.out.println("> Llista de Layouts:");
+        System.out.println(output + "Llista de Layouts:");
         writeList(ctrlPresentacio.getListLayouts());
         escollir();
     }
 
     public void llistaAlfabets() {
-        System.out.println("> Llista d'Alfabets:");
+        System.out.println(output + "Llista d'Alfabets:");
         writeList(ctrlPresentacio.getListAlfabets());
         escollir();
     }
 
     public void llistaTeclats() {
-        System.out.println("> Llista de Teclats:");
+        System.out.println(output + "Llista de Teclats:");
         writeList(ctrlPresentacio.getListTeclats());
         escollir();
     }
 
     private Integer answerInteger() {
-        System.out.print("> ");
+        System.out.print(inputFromUser);
         return s.nextInt();
     }
 
     private Character answerCharacter() {
-        System.out.print("> ");
+        System.out.print(inputFromUser);
         String input = s.next();
         if (input.length() == 1) {
             return input.charAt(0);
         }
         else {
-            System.out.println("(!)> Aquest valor no és un sol caràcter. Introdueix un caràcter:");
+            System.out.println(errorOutput + "Aquest valor no és un sol caràcter. Introdueix un caràcter:");
             return answerCharacter();
         }
     }
 
     private String answerString() {
-        System.out.print("> ");
+        System.out.print(inputFromUser);
         return s.nextLine();
     }
 
     public void esborraLayout() {
-        System.out.println("> Quin layout, dels no creats inicialment, vols que s'esborri? Indica'n la mida:");
+        System.out.println(output + "Quin layout, dels no creats inicialment, vols que s'esborri? Indica'n la mida:");
         Integer idL = answerInteger();
         try {
             ctrlPresentacio.esborrarLayout(idL);
-            System.out.println("> Layout de mida "+ idL +" esborrat");
+            System.out.println(output + "Layout de mida "+ idL +" esborrat");
         } 
         catch(LayoutNoExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Layout no existeix.");
+            System.out.println(errorOutput + "ERROR: Aquest Layout no existeix.");
         }
         catch(LayoutNoBorrable e) {
-            System.out.println("(!)> ERROR: Aquest Layout no es pot esborrar.");
+            System.out.println(errorOutput + "ERROR: Aquest Layout no es pot esborrar.");
         }
         escollir();
     }
 
     public void mostraLayout() {
-        System.out.println("> Quin Layout vols que es mostri? Indica'n la mida:");
+        System.out.println(output + "Quin Layout vols que es mostri? Indica'n la mida:");
         Integer idL = answerInteger();
         try {
             String out = ctrlPresentacio.visualitzarLayout(idL);
-            System.out.println("> Layout:");
+            System.out.println(output + "Layout:");
             System.out.println(out);
         } 
         catch(LayoutNoExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Layout no existeix.");
+            System.out.println(errorOutput + "ERROR: Aquest Layout no existeix.");
         }
         escollir();
     }
 
     public void nouLayout() {
-        System.out.println("> Per a afegir un nou layout indica'n la mida:");
+        System.out.println(output + "Per a afegir un nou layout indica'n la mida:");
         Integer idL = answerInteger();
         try {
             ctrlPresentacio.afegirLayout(idL);
-            System.out.println("> Layout de mida "+ idL +" creat");
+            System.out.println(output + "Layout de mida "+ idL +" creat");
         } 
         catch(LayoutJaExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Layout ja existeix. Prova amb una mida diferent.");
+            System.out.println(errorOutput + "ERROR: Aquest Layout ja existeix. Prova amb una mida diferent.");
         }
         escollir();
     }
 
     public void mostraAlfabet() {
-        System.out.println("> Quin alfabet vols mostrar? Indica'n el seu nom:");
+        System.out.println(output + "Quin alfabet vols mostrar? Indica'n el seu nom:");
         String nom = answerString();
         try {
             String out = ctrlPresentacio.visualitzarAlfabet(nom);
-            System.out.println("> Alfabet:");
+            System.out.println(output + "Alfabet:");
             System.out.println(out);
         }
         catch(AlfabetNoExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Alfabet no existeix.");
+            System.out.println(errorOutput + "ERROR: Aquest Alfabet no existeix.");
         }
         escollir();
     }
 
     public void esborraAlfabet() {
-        System.out.println("> Quin alfabet vols esborrar? Indica'n el seu nom:");
+        System.out.println(output + "Quin alfabet vols esborrar? Indica'n el seu nom:");
         String nom = answerString();
         try {
             ctrlPresentacio.esborrarAlfabet(nom);
-            System.out.println("> Alfabet anomenat "+nom+" esborrat.");
+            System.out.println(output + "Alfabet "+nom+" esborrat.");
         }
         catch(AlfabetNoExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Alfabet no existeix.");
+            System.out.println(errorOutput + "ERROR: Aquest Alfabet no existeix.");
         }
         escollir();
     }
@@ -221,64 +230,132 @@ public class IOterminal {
             System.out.println("El fitxer no existeix.");
         }
         */
-        System.out.println("> Per a afegir un nou alfabet indica'n el seu nom:");
+        System.out.println(output + "Per a afegir un nou alfabet indica com vols anomenar-lo:");
         String nom = answerString();
-        System.out.println("> Indica el tipus de dades que s'entraran per a crear l'alfabet, {'text', 'llista-paraules'}:");
+        System.out.println(output + "Indica el tipus de dades que s'entraran per a crear l'alfabet, {'text', 'llista-paraules'}:");
         String tipus = answerString();
-        System.out.println("> Finalment, indica el path al fitxer on es troben aquestes dades (veure 'more_info' per a exemples):");
+        System.out.println(output + "Finalment, indica el path al fitxer on es troben aquestes dades (veure 'more_info' per a exemples):");
         String path = answerString();
         try {
             ctrlPresentacio.afegirAlfabet(nom, tipus, path);
-            System.out.println("> Alfabet creat amb nom:"+nom+" i tipus:"+tipus);
+            System.out.println(output + "Alfabet creat amb nom:"+nom+" i tipus:"+tipus);
         }
         catch(AlfabetJaExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Alfabet ja existeix. Prova amb un altre nom.");
+            System.out.println(errorOutput + "ERROR: Aquest Alfabet ja existeix. Prova amb un altre nom.");
         }
         // FALTARÀ INCORPORRAR ELS CATCH DE LES EXCEPCIONS QUE COMPROVEN EL TIPUS I EL PATH DINS D'alfabet.java
         escollir();
     }
 
     public void mostraTeclat() {
-        System.out.println("> Quin teclat vols mostrar? Indica'n el seu nom:");
+        System.out.println(output + "Quin teclat vols mostrar? Indica'n el seu nom:");
         String nom = answerString();
         try {
             String out = ctrlPresentacio.visualitzarTeclat(nom);
-            System.out.println("> Teclat:");
+            System.out.println(output + "Teclat:");
             System.out.println(out);
         }
         catch(TeclatNoExisteix e) {
-            System.out.println("(!)> ERROR: Aquest Teclat no existeix.");
+            System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
         }
         escollir();
     }
 
     public void esborraTeclat() {
-        // Pregunta nom del teclat a esborrar
-        System.out.println("> Teclat esborrat");
-
+        System.out.println(output + "Quin teclat vols esborrar? Indica'n el seu nom:");
+        String nom = answerString();
+        try {
+            ctrlPresentacio.esborrarTeclat(nom);
+            System.out.println(output + "Teclat "+nom+" esborrat.");
+        }
+        catch(TeclatNoExisteix e) {
+            System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
+        }
         escollir();
     }
 
     public void modificaTeclat() {
-        // Pregunta nom del teclat a modificar i canvis a fer.
-        System.out.println("> Teclat modificat");
-
+        System.out.println(output + "Quin teclat vols modificar? Indica'n el seu nom:");
+        String nom = answerString();
+        Map<Character, Character> canvis = new HashMap<>();
+        System.out.println(output + "Quants canvis vols efectuar? Per cada canvi hauràs d'incloure dues lletres a intercanviar.");
+        Integer n = answerInteger();
+        if (n >= 1) {
+            for (int i = 0; i < n; i++) {
+                // lletra1 es canvia per lletra 2.
+                System.out.println(output + "Introdueix la primera lletra del canvi número " + (i+1) + "." );
+                Character lletra1 = answerCharacter();
+                System.out.println(output + "Introdueix la segona lletra del canvi número " + (i+1) + "." );
+                Character lletra2 = answerCharacter();
+                System.out.println(output + "Canvi "+ i+1 + ": " + lletra1 + " -> " + lletra2);
+                canvis.put(lletra1, lletra2); // S'introdueix el canvi
+            }
+            try {
+                String out = ctrlPresentacio.modificarTeclat(nom, canvis);
+                System.out.println(output + "Teclat "+nom+" esborrat.");
+                System.out.println(out);
+            }
+            catch(TeclatNoExisteix e) {
+                System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
+            }
+        }
+        else {
+            System.out.println(errorOutput + "ERROR: El nombre de canvis ha de ser positiu.");
+        }
         escollir();
     }
 
     public void nouTeclat() {
-        // Pregunta dades del teclat a crear {nom teclat, nom alfabet, id layout}
-        System.out.println("> Teclat creat");
-
+        System.out.println(output + "Per a afegir un nou teclat indica com vols anomenar-lo:");
+        String nom = answerString();
+        System.out.println(output + "Indica el nom del Alfabet amb que es generarà el Teclat:");
+        String nomAlfabet = answerString();
+        System.out.println(output + "Finalment, indica el Layout que vols fer servir, amb la seva mida (veure 'more_info'):");
+        Integer idLayout = answerInteger();
+        try {
+            ctrlPresentacio.crearNouTeclat(nom, nomAlfabet, idLayout);
+            System.out.println(output + "Teclat "+nom+" creat.");
+        }
+        catch (Excepcions e) {
+            switch (e.getTipus()) {
+                case "TeclatJaExisteix": 
+                    System.out.println(errorOutput + "Ja existeix un Teclat amb el nom:" + nom + ". Prova amb un altre nom.");
+                    break;
+                case "AlfabetNoExisteix":
+                    System.out.println(errorOutput + "No existeix un Alfabet amb el nom:" + nomAlfabet + ".");
+                    break;
+                case "LayoutNoExisteix":
+                    System.out.println(errorOutput + "No existeix un Layout amb la mida:" + idLayout + ".");
+                    break;
+                case "MidesDiferents":
+                    System.out.println(errorOutput + "Les mides de l'Alfabet seleccionat i del Layout han de ser iguals.");
+                    break;
+            }
+        }
         escollir();
     }
 
     public void moreInfo() {
-        /* 
-         * Més informació sobre cada comanda.
-         * 
-         * - per a alfabet posar exemple de path per a diferents tipus de dades.
-         */
+        System.out.print(
+            "   nou_teclat      : Comanda per a crear un nou teclat, a partir d'un alfabet i un layout existent. [!] Important que les mides del layout i alfabet siguin igual. \n" +
+            "   modifica_teclat : Comanda per modificar un teclat existent, s'introdueixen parelles de lletres de les que es vol que s'intercanviin les posicions. Al acabar es mostra la distribució del teclat posterior als canvis. \n" +
+            "   esborra_teclat  : Comanda per a esborrar un teclat existent. El teclat deixarà d'existir al esborrar-se. \n" +
+            "   mostra_teclat   : Comanda per a visualitzar tota la informació rellevant d'un teclat existent. \n" +
+            "   nou_alfabet     : Comanda per a crear un nou alfabet, a partir d'un tipus de dades {'text', 'llista-paraules'} i un fitxer (es passa a través del path) que contingui les dades. \n" +
+            "                     Al directori altres/exemples_input_alfabet/ es poden trobar exemples de fitxers amb dades per a crear alfabets." +
+            "   esborra_alfabet : Comanda per a esborrar un alfabet existent. L'alfabet esborrat deixarà d'existir. \n" +
+            "   mostra_alfabet  : Comanda per a visualitzar tota la informació rellevant d'un alfabet existent. \n" +
+            "   nou_layout      : Comanda per a crear un nou layout, a partir d'una mida. Es creen diferents paràmetres automàticament que generen un layout. El sistema està optimitzat per a mides entre 16 i 48. A més el sistema genera, inicialment, 4 layouts de mides entre 24 i 27. \n" +
+            "   mostra_layout   : Comanda per a visualitzar tota la informació rellevant d'un layout existent. \n" +
+            "   esborra_layout  : Comanda per a esborrar un layout existent i no generat inicialment. Per mides entre 24 i 27 no es podrà esborrar. \n" +
+            "\n" +
+            "   llista_teclats  : Comanda per a llistar informació reduïda de tots els teclats creats. \n" +
+            "   llista_alfabets : Comanda per a llistar informació reduïda de tots els alfabets creats. \n" +
+            "   llista_layouts  : Comanda per a llistar informació reduïda de tots els layouts existens. \n" +
+            "\n" +
+            "   finalitzar : Comanda per a finalitzar l'execució del programa. \n"
+        );
+        
         escollir();
     }
 
@@ -286,31 +363,4 @@ public class IOterminal {
         System.out.println("Que vagi bé! Et trobarem a faltar!");
         System.exit(0);
     }
-
-    /* 
-     * IMPORTANT PENSAR COMANDES D'INPUT
-     * - tipus: nou_alfabet nou_teclat borrar_teclat etc.
-     * 
-     * Interacció pensada per a la creació de nou alfabet
-     * - Preguntar pel nom que es vol donar al alfabet
-     * - Preguntar pel tipus de dades que s'introdueixen (llista de freqüències o text)
-     * - Demanar el path al fitxer on estan guardades
-     * - L'IOterminal comprova que el fitxer existeix i si no torna a demanar el path.
-     */
-
-    /*
-    nou_teclat
-    modifica_teclat
-    esborra_teclat
-    mostra_teclat
-    // llista teclats - per cada teclat (nom teclat, nom alfabet, mida layout)
-    // llista alfabets - per cada alfabet (nom alfabet, abecedari)
-    // llista layouts - per cada layout (mida layout, matriu distribucio?)
-    nou_alfabet
-    esborra_alfabet
-    mostra_alfabet
-    // nou_layout
-    // esborra_layout
-    mostra_layout
-    */
 }
