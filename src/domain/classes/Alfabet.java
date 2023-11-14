@@ -21,11 +21,12 @@ private String nom;                             // clau primària
     }
 
 
-    public void readInput (String ta, String path) throws TipusDadesAlfabetIncorrecte, FileNotFoundException {
+    public void readInput (String ta, String path) throws TipusDadesAlfabetFormatIncorrecte, FileNotFoundException {
         if (ta == "text") readText(path);
         else if (ta == "llista-paraules") readWords(path);
         else {
-            throw new TipusDadesAlfabetIncorrecte();
+            // String ta no conicideix amb cap de les opcions
+            throw new TipusDadesAlfabetFormatIncorrecte();
         }
     }
 
@@ -65,6 +66,7 @@ private String nom;                             // clau primària
                 x[j][k]++;
             }
         }
+        setSize(characters.size());
     }
 
     private void calculateProbabilities (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
@@ -107,6 +109,10 @@ private String nom;                             // clau primària
         }
         myReader.close();     
         return words;
+    }
+
+    private void setSize (int size) {
+        this.size = size;
     }
 
     // aquesta lletra existeix en el vector
