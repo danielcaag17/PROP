@@ -55,7 +55,7 @@ public class CtrlPresentacio {
         return cd.visualitzarAlfabet(na);
     }
 
-    public void esborraAlfabet(String na) throws AlfabetNoExisteix {
+    public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
         cd.esborrarAlfabet(na);
     }
 
