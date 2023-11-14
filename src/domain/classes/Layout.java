@@ -192,4 +192,57 @@ public class Layout {
         }
         return c;
     }
+
+    private String distribucioFilledToString() {
+        String s = "";
+        for(int i = 0; i < nfil; i++) {
+            for(int j = 0; j < ncol; j++) {
+                if (distribucio[i][j] < 10) s+='0';
+                s += distribucio[i][j] + " ";
+            }
+            s+="\n";
+        }
+        return s;
+    }
+
+    private String distanciesToString() {
+        String s = "";
+        for (int i = -1; i < distancies[0].length; i++) {
+            if(i < 0) s+="id   ";
+            else {
+                if (i<10) s+="0";
+                s+=i + " ";
+            }
+        }
+        s+="\n";
+        for (int i = -1; i < distancies[0].length; i++) {
+            if(i < 0) s+="     ";
+            else {
+                s+="-- ";
+            }
+        }
+        s+="\n";
+        for(int i = 0; i < distancies.length; i++) {
+            for(int j = -1; j < distancies[i].length; j++) {
+                if (j < 0) {
+                    if (i<10) s+="0";
+                    s+=i + " | ";
+                }
+                else {
+                    if (distancies[i][j] < 10) s+='0';
+                    s += distancies[i][j] + " ";
+                }
+            }
+            s+="\n";
+        }
+        return s;
+    }
+
+    @Override
+    public String toString() {
+        String result = "Layout de mida: " + mida + "\n";
+        result += "- Distribució de Ids: \n" + distribucioFilledToString();
+        result += "- Distàncies entre Ids: \n" + distanciesToString();
+        return result;
+    }
 }
