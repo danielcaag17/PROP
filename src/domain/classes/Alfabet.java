@@ -21,7 +21,7 @@ private String nom;                             // clau primària
     }
 
 
-    public void readInput (String ta, String path) throws TipusDadesAlfabetFormatIncorrecte, FileNotFoundException {
+    public void readInput (String ta, String path) throws TipusDadesAlfabetFormatIncorrecte, TipusDadesAlfabetNoValid, FileNotFoundException {
         if (ta == "text") readText(path);
         else if (ta == "llista-paraules") readWords(path);
         else {
@@ -31,7 +31,7 @@ private String nom;                             // clau primària
     }
 
     // Gestionar un text d'entrada
-    private void readText (String path) throws FileNotFoundException {
+    private void readText (String path) throws TipusDadesAlfabetNoValid, FileNotFoundException {
         String text = getText(path);
         int lenght = text.length();
         processCharacters(text, lenght);
@@ -39,7 +39,7 @@ private String nom;                             // clau primària
     }
 
      // Gestionar llistes de paraules
-    private void readWords(String path) throws FileNotFoundException { //conjunt de paraules amb la seva probabilitat
+    private void readWords(String path) throws TipusDadesAlfabetNoValid, FileNotFoundException { //conjunt de paraules amb la seva probabilitat
         HashMap<String, Float> words = getWords(path);
         int totalLenght = 0;
         for (String s : words.keySet()) {
@@ -83,27 +83,36 @@ private String nom;                             // clau primària
         }
     }
 
-    private String getText (String path) throws FileNotFoundException {
+    private String getText (String path) throws TipusDadesAlfabetNoValid, FileNotFoundException {
         String text = "";
         File file = new File(path);
         Scanner myReader = new Scanner(file);
         while (myReader.hasNextLine()) {
-            text += myReader.nextLine();
+            String input = myReader.nextLine();
+            if () {
+                // El tipus de dades no és l'esperat
+                throw new TipusDadesAlfabetNoValid;
+            }
+            text += input;
         }
         myReader.close();
         return text;
     }
 
-    private HashMap<String, Float> getWords (String path) throws FileNotFoundException {
+    private HashMap<String, Float> getWords (String path) throws TipusDadesAlfabetNoValid, FileNotFoundException {
         HashMap<String, Float> words = new HashMap<>();
-        File file = new File(path);
-        Scanner myReader = new Scanner(file);
-        while (myReader.hasNextLine()) {
-            String input = myReader.nextLine();
-            String[] dividit = input.split(" ");
+        File file = new File(path); // Tractar excepció que pugui donar File() !!!
+        Scanner myReader = new Scanner(file); // Excepció tractada
+        while (myReader.hasNextLine()) { // Tractar excepció que pugui donar hasNextLine !!!
+            String input = myReader.nextLine(); // Tractar excepció que pugui donar nextLine !!!
+            if () {
+                // El tipus de dades no és l'esperat
+                throw new TipusDadesAlfabetNoValid;
+            }
+            String[] dividit = input.split(" "); // Tractar excepció que pugui donar split !!!
             String word = dividit[0];
-            Float probabilitat = Float.parseFloat(dividit[1]);
-            if (! words.containsKey(word)) {             // comprovar que la lletra no s'ha vist encara
+            Float probabilitat = Float.parseFloat(dividit[1]); // Tractar excepció que pugui donar parseFloat !!!
+            if (! words.containsKey(word)) {                       // comprovar que la lletra no s'ha vist encara
                 words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
             }
         }
