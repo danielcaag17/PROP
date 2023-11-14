@@ -18,8 +18,17 @@ private String nom;                             // clau primària
         size = 0;
     }
 
+
+    public void readInput (String ta, String path) {
+        if (ta == "text") readText(path);
+        else if (ta == "llista-paraules") readWords(path);
+        else {
+            // Error;
+        }
+    }
+
     // Gestionar un text d'entrada
-    public void readText (String path) {
+    private void readText (String path) {
         String text = getText(path);
         int lenght = text.length();
         processCharacters(text, lenght);
@@ -27,7 +36,7 @@ private String nom;                             // clau primària
     }
 
      // Gestionar llistes de paraules
-    public void readWords(String path) { //conjunt de paraules amb la seva probabilitat
+    private void readWords(String path) { //conjunt de paraules amb la seva probabilitat
         HashMap<String, Float> words = getWords(path);
         int totalLenght = 0;
         for (String s : words.keySet()) {
