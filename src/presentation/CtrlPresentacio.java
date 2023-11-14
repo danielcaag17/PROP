@@ -1,21 +1,74 @@
 package src.presentation;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 import src.domain.controllers.*;
+import src.exceptions.*;
 
 public class CtrlPresentacio {
-    private IOterminal ioTerminal;
-    private CtrlDomini controlDomini;
+    private IOterminal iot;
+    private CtrlDomini cd;
 
     public CtrlPresentacio() throws FileNotFoundException {
         // Aquí s'ha d'iniciar Factoria, Controlador domini, la visualització (per a la primera entrega potser per terminal)
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
-        controlDomini = factoriaCtrl.getCtrlDomini();
-        ioTerminal = new IOterminal(this);
+        cd = factoriaCtrl.getCtrlDomini();
+        iot = new IOterminal(this);
         // Inicialització de terminal
-        ioTerminal.inicialitza();
+        iot.inicialitzaTerminal();
     }
 
-    // Mirar casos d'ús per orientar que hi va aquí
+    public String[] getListTeclats() {
+        return cd.getListLayouts();
+    }
+
+    public String[] getListAlfabets() {
+        return cd.getListAlfabets();
+    }
+
+    public String[] getListLayouts() {
+        return cd.getListLayouts();
+    }
+
+    public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
+        cd.crearNouTeclat(nt, na, idL);
+    }
+
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
+        return cd.modificarTeclat(nt, canvis);
+    }
+
+    public String visualitzarTeclat(String nt) throws TeclatNoExisteix {
+        return cd.visualitzarTeclat(nt);
+    }
+
+    public void esborrarTeclat(String nt) throws TeclatNoExisteix {
+        cd.esborrarTeclat(nt);
+    }
+
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
+        cd.afegirAlfabet(na, ta, pf);
+    }
+
+    public String visualitzarAlfabet(String na) throws AlfabetNoExisteix {
+        return cd.visualitzarAlfabet(na);
+    }
+
+    public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
+        cd.esborrarAlfabet(na);
+    }
+
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix {
+        cd.afegirLayout(idL);
+    }
+    
+    public String visualitzarLayout(Integer idL) throws LayoutNoExisteix {
+        return cd.visualitzarLayout(idL);
+    }
+
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
+        cd.esborrarLayout(idL);
+    }
+
 }

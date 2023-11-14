@@ -2,7 +2,7 @@ package src.domain.controllers;
 
 import java.util.*;
 
-import src.data.*;
+//import src.data.*;
 import src.domain.classes.*;
 import src.exceptions.*;
 
@@ -50,7 +50,7 @@ public class CtrlDomini {
             Layouts.put(midesInicials[i], l); // la clau de Layout és la seva mida
         }
     }
-    
+
     /**
      *  @return Retorna el teclat amb nom nt.
      */ 
@@ -104,6 +104,17 @@ public class CtrlDomini {
         return s;
     }
     
+    private String getString(int[][] mat) {
+        String s = "";
+        for(int i = 0; i < mat.length; i++) {
+            s+="\n";
+            for(int j = 0; j < mat[i].length; j++) {
+                s += mat[i][j] + " ";
+            }
+        }
+        return s;
+    }
+
     /**
      * @return Retorna un array de String amb la mida i la matriu de distribució d'ids de cada layout del sistema
      */
@@ -113,7 +124,7 @@ public class CtrlDomini {
         for (Integer key : Layouts.keySet()) {
             Layout l = Layouts.get(key);
             s[i] = "Mida: " + l.getSize() + 
-                   " - Matriu distribució d'ids: \n" + l.getDistribucioFilled().toString(); // Aquest toString() s'hauria de veure que fa.
+                   "\n - Matriu distribució d'ids: " + getString(l.getDistribucioFilled()); // Aquest toString() s'hauria de veure que fa.
             i++;
         }
         return s;
@@ -133,7 +144,7 @@ public class CtrlDomini {
     public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
         if (Teclats.get(nt) != null) throw new TeclatJaExisteix(nt);
         if (Alfabets.get(na) == null) throw new AlfabetNoExisteix(na);
-        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(Integer.toString(idL));
+        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
         Alfabet a = Alfabets.get(na);
         Layout l = Layouts.get(idL);
         if (a.getSize() != l.getSize()) throw new MidesDiferents(a.getSize(), l.getSize());
@@ -193,7 +204,7 @@ public class CtrlDomini {
      * Post: s'ha creat un alfabet amb nom na i dades extretes de pf.
      * 
      * @param na nom del alfabet.
-     * @param ta tipus (vàlid*) de les dades per crear l'alfabet.
+     * @param ta tipus de les dades per crear l'alfabet.
      * @param pf path (vàlid*) al fitxer on hi ha guardades les dades.
      * @see (*)que s'ha comprovat previàment.
      * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
@@ -201,8 +212,11 @@ public class CtrlDomini {
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a = new Alfabet(na);
+        a.readInput(ta, pf);
+        /*
         if (ta == "text") { a.readText(pf); }
         else if (ta == "llista-paraules") { a.readWords(pf); }
+        */
         Alfabets.put(na, a);
     }
 
@@ -231,6 +245,19 @@ public class CtrlDomini {
     }
 
     /**
+     * Pre: l'alfabet amb id idL no existeix. -
+     * Post: s'ha creat un Layout amb mida idL.
+     * 
+     * @param idL mida del Layout a crear. Funciona com a id.
+     * @throws LayoutJaExisteix si existeix una instància Layout amb id idl.
+     */
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix {
+        if (Layouts.get(idL) != null) throw new LayoutJaExisteix(idL.toString());
+        Layout l = new Layout(idL);
+        Layouts.put(idL, l);
+    }
+
+    /**
      * Pre: el layout amb id idL existeix.
      * 
      * @param idL id del Layout.
@@ -242,17 +269,19 @@ public class CtrlDomini {
         return getLayout(idL).toString();
     }
 
-    /*
-     * - getters
-     * - inicialitzarLayoutsBase()
-     * - crearNouTeclat(nt, na, idL)
-     * - modificarTeclat(nt)
-     * - visualitzarTeclat(nt)
-     * - esborrarTeclat(nt)
-     * - afegirAlfabet(na, ta, pf)
-     * - visualitzarAlfabet(na)
-     * - esborraAlfabet(na)
-     * - visualitzarLayout(idL)
+    /**
+     * Pre: el layout amb id idL existeix. - 
+     * Post: el layout amb id idL s'ha esborrat.
+     * 
+     * @param idL id del Layout
+     * @throws LayoutNoExisteix si no existeix una instància de layout amb id idl.
+     * @throws LayoutNoBorrable si id del layout que es vol esborrar pertany als layouts generats per defecte.
      */
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
+        // no es poden borrar els 4 layouts inicials
+        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
+        if (Arrays.binarySearch(midesInicials, idL) >= 0) throw new LayoutNoBorrable(idL.toString());
+        Layouts.remove(idL);
+    }
 
 }
