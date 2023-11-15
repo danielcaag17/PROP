@@ -3,14 +3,16 @@ DESCRIPCIÓ CASOS D'ÚS
 Nom: Crear Teclat
 Actor: Usuari
 Comportament:
+ - L'usuari indica un valor per identificar el teclat
  - L'usuari indica el valor que identifica l'alfabet i el valor que identifica el layout
+ - El sistema valida el valor per identificar el teclat
  - El sistema valida els valors que identifiquen l'alfabet i el layout i genera el teclat
  - El sistema mostra com el resultat de la generació del teclat
  - L'usuari indica si vol descartar el teclat o si el vol guardar
 Errors possibles i cursos alternatius:
+ - Si el valor que identifica el teclat ja existeix, el sistema informa de l'error
  - Si l'alfabet que indica l'usuari no existeix, el sistema informa de l'error
  - Si el layout que indica l'usuari no existeix, el sistema informa de l'error
- - 
 
 Nom: Modificar Teclat
 Actor: Usuari
@@ -22,7 +24,7 @@ Comportament:
  - El sistema intercanvia els parells de lletres
 Errors possibles i cursos alternatius:
  - Si el teclat que indica l'usuari no existeix, el sistema informa de l'error
- - Si alguna de les lletres no pertanyen a l'abecedari del teclat, el sistema informa de l'error
+ - Si alguna de les lletres no pertanyen a l'alfabet del teclat, el sistema informa de l'error
 
 Nom: Visualitzar Teclat
 Actor: Usuari
@@ -43,41 +45,49 @@ Errors possibles i cursos alternatius:
 Nom: Afegir Alfabet
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica un valor que identifica l'alfabet
+ - L'usuari indica les dades necessàries per a afegir un alfabet
+ - El sistema valida el nom i les dades i crea un nou alfabet
 Errors possibles i cursos alternatius:
- - 
+ - Si el valor que identifica l'alfabet ja existeix, el sistema informa de l'error
+ - Si les dades per afegir un alfabet són incorrectes, el sistema informa de l'error
 
 Nom: Esborrar Alfabet
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica l'alfabet que vol esborrar
+ - EL sistema valida el valor que identifica l'alfabet i l'esborra
 Errors possibles i cursos alternatius:
- - 
+ - Si l'alfabet que indica l'usuari no exiteix, el sistema informa de l'error
 
 Nom: Visualitzar Alfabet
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica l'alfabet que vol visualitzar
+ - El sistema valida el valor que identifica l'alfabet i el visualitza
 Errors possibles i cursos alternatius:
- - 
+ - Si l'alfabet que indica l'usuari no exiteix, el sistema informa de l'error
 
 Nom: Visualitzar Layout
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el layout que vol visualitzar
+ - El sistema valida el valor que identifica el layout i el visualitza
 Errors possibles i cursos alternatius:
- - 
+ - Si el layout que indica l'usuari no exiteix, el sistema informa de l'error
 
 Nom: Afegir Layout
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica la mida del layout
+ - El sistema valida la mida i crea un nou layout
 Errors possibles i cursos alternatius:
- - 
+ - Si la mida del layout ja existeix, el sistema informa de l'error
 
 Nom: Esborrar Layout
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica el layout que vol esborrar
+ - El sistema valida el valor que identifica el layout i l'esborra
 Errors possibles i cursos alternatius:
- - 
+ - Si el layout que indica l'usuari no existeix, el sistema informa de l'error
