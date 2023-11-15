@@ -79,6 +79,7 @@ private String nom;                             // clau primària
             for (int i = 0; i < size; i++) { //size ha de ser de la  mateixa mida que la matriu
                 x[c][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
                                             //de vegades que apareix la lletra 
+                                            // Ull divisions entre 0 --> tractar EXC
             }
         }
     }
@@ -89,10 +90,11 @@ private String nom;                             // clau primària
         Scanner myReader = new Scanner(file);
         while (myReader.hasNextLine()) {
             String input = myReader.nextLine();
-            if () {
+            // No hi ha excepció donat que si l'usuari vol introduir un text amb números serà considerat com a tal
+            // if () {
                 // El tipus de dades no és l'esperat
-                throw new TipusDadesAlfabetNoValid;
-            }
+                // throw new TipusDadesAlfabetNoValid;
+            // }
             text += input;
         }
         myReader.close();
