@@ -79,9 +79,10 @@ Errors possibles i cursos alternatius:
 Nom: Afegir Layout
 Actor: Usuari
 Comportament:
- - 
+ - L'usuari indica la mida del layout
+ - El sistema valida la mida i crea un nou layout
 Errors possibles i cursos alternatius:
- - 
+ - Si la mida del layout ja existeix, el sistema informa de l'error
 
 Nom: Esborrar Layout
 Actor: Usuari
