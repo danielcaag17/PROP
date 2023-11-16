@@ -1,5 +1,6 @@
 package src.domain.controllers;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 //import src.data.*;
@@ -209,14 +210,10 @@ public class CtrlDomini {
      * @see (*)que s'ha comprovat previàment.
      * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
      */
-    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix {
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a = new Alfabet(na);
         a.readInput(ta, pf);
-        /*
-        if (ta == "text") { a.readText(pf); }
-        else if (ta == "llista-paraules") { a.readWords(pf); }
-        */
         Alfabets.put(na, a);
     }
 
