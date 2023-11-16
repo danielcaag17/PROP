@@ -8,10 +8,17 @@ L'[enunciat](altres/Enunciat.pdf) del Quadrimestre de tardor de 2023, consisteix
 
 ## Compilació
 
-La compilació del Projecte es fa ...
+Al directori [src/](src/) trobem dos fitxers [make.sh](src/make.sh) i [make.bat](src/make.bat). Aquests fitxers compilen tot el codi del Projecte i el guarden a [bin/class/](bin/class/). Allá hi ha més informació sobre com executar el codi i els drivers.
 
+Per a terminals Windows:
 ```
-$ comandes_per_a_compilar
+$ cd src/
+$ ./make.bat
+```
+Per a terminals Linux:
+```
+$ cd src/
+$ ./make.sh
 ```
 
 ## Estructura de directoris
