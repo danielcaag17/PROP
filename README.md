@@ -4,7 +4,7 @@
 ## Descripció
 Primera entrega de l'assignatura [PROP](https://www.cs.upc.edu/~prop/) de la Facultat d'Informàtica de Barcelona ([FIB](https://www.fib.upc.edu/ca)). 
 
-L'[enunciat](altres/Enunciat.pdf) del Quadrimestre de tardor de 2023, consisteix en fer un programa capaç de dissenyar un Teclat, a partir d'un alfabet, optimitzant la posició de cada caràcter en el que nosaltres definim com a layout.
+L'[enunciat](doc/Enunciat.pdf) del Quadrimestre de tardor de 2023, consisteix en fer un programa capaç de dissenyar un Teclat, a partir d'un alfabet, optimitzant la posició de cada caràcter en el que nosaltres definim com a layout.
 
 ## Compilació
 
