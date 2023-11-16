@@ -89,33 +89,16 @@ class Hungarian {
     }
 
     private static ArrayList<Integer> mostCompleteAssig(double[][] mat) {
-        // Mala implementacio => S'ha de millorar si dona temps
         int n = mat.length;
         // selected_zeros => Index = Fila de la matriu
         //                   Value = Columna on hi ha 0 (-1 si no existeix)
         ArrayList<Integer> selected_zeros = new ArrayList<Integer>(n);
-        for (int i = 0; i < n; i++) selected_zeros.add(-1);
+        
+        MostComplete mc = new MostComplete(mat);
+        int[] arr_assig = mc.mostCompleteAssig();
 
-        // printMatrix(mat);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (mat[i][j] == 0) {
-                    if (!selected_zeros.contains(j)) {
-                        selected_zeros.set(i, j);
-                        break;
-                    }
-                }
-            }
-        }
+        for (int i = 0; i < n; i++) selected_zeros.add(arr_assig[i]);
 
-        // ============================        
-        for (int i = 0; i < n; i++) selected_zeros.set(i, -1);
-        selected_zeros.set(0, 1);
-        selected_zeros.set(1, 0);
-        selected_zeros.set(3, 2);
-        // ============================        
-
-        // System.out.println(selected_zeros);
         return selected_zeros;
     }
 
@@ -150,7 +133,6 @@ class Hungarian {
             if (assig.get(i) == -1) markedRows.set(i, true);
         }
         // Pas 3: Bucle:
-        int iter = 0;
         int changes = 1;
         while (changes > 0) {
             // Es una chapuza aquesta forma de controlar iteracions pero no tinc cap idea millor lol
@@ -175,7 +157,6 @@ class Hungarian {
                         changes++;
                         break;
             }   }   }
-            iter++;
             // System.out.println(changes);
         }
         // Pas 4: Recobrir columnes marcades i files no marcades
@@ -188,12 +169,6 @@ class Hungarian {
             if (markedCols.get(i)) result[1][i] = true;
             else result[1][i] = false;
         }
-
-        for (int i = 0; i < n; i++) System.out.print(result[0][i] + " ");
-        System.out.println("");
-        for (int i = 0; i < n; i++) System.out.print(result[1][i] + " ");
-        System.out.println("");
-        
         return result;
     }
 
@@ -241,6 +216,9 @@ class Hungarian {
         // 
         // A l'acabar tenim un 0 per cada fila i columna de la matriu. El conjunt de n zeros
         // que ens dona una assignació factible ens dóna l'assignació òptima que buscàvem.
+        
+        printMatrix(mat); // DEBUG
+        
         int n = mat.length;
         double[][] auxMat = new double[n][n];
         // Hem de copiar les matrius així ...
@@ -263,11 +241,19 @@ class Hungarian {
                 auxMat[i][j] -= min_col;
             }
         }
-        printMatrix(auxMat);
+
+        printMatrix(auxMat); // DEBUG
+
         // Obtenir línies mínimes
         boolean[][] minLines = calcMinimumLines(auxMat);
         int nMinLines = numberOfLines(minLines);
-        System.out.println(nMinLines);
+        
+        System.out.println(nMinLines); // DEBUG
+        for (int i = 0; i < n; i++) System.out.print(minLines[0][i] + " "); // DEBUG
+        System.out.println(""); // DEBUG
+        for (int i = 0; i < n; i++) System.out.print(minLines[1][i] + " "); // DEBUG
+        System.out.println(""); // DEBUG
+        
         while (nMinLines != n) {
             // Afegir a cada nombre cobert el mínim nombre no cobert. Si un nombre està cobert
             // per dues línies, afegim el mínim dues vegades.
