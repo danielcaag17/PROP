@@ -7,6 +7,12 @@ class Main {
                              {20, 34, 33, 45},
                              {21, 34, 31, 43}};
         Hungarian.hungarianAlgorithm(matrix);
+        
+        double[][] matrix2 = {{76, 19, 81, 83},
+                             {56, 36, 32, 14},
+                             {23, 42, 39, 25},
+                             {29, 74, 71, 63}};
+        Hungarian.hungarianAlgorithm(matrix2);
     }
 }
 
@@ -47,6 +53,7 @@ class MostComplete {
             }
             return;
         }
+        // else if (currentLines + filesQueFalten < bestLines) return;
         else {
             for (int col = 0; col < n; col++) {
                 if (matrix[row][col] == 0 && !columnLabel[col]) {
@@ -201,6 +208,30 @@ class Hungarian {
         return min;
     }
 
+    private static double minNonCovered(double[][] mat, boolean[][] covLines) {
+        double target = 999999;
+        for (int i = 0; i < mat.length; i++) {
+            if (!covLines[0][i]) { // fila no està coberta
+                for (int j = 0; j < mat.length; j++) {
+                    if (!covLines[1][j]) { // columna no està coberta
+                        if (mat[i][j] < target) target = mat[i][j];
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
+    private static double minMatrix(double[][] mat) {
+        double target = 999999;
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat.length; j++) {
+                if (mat[i][j] < target) target = mat[i][j];
+            }
+        }
+        return target;
+    }
+
     public static void hungarianAlgorithm(double[][] mat) {
         // Partim d'una matriu, en el nostre cas sempre quadrada.
         // Es resta de cada fila el valor mínim d'aquella fila
@@ -253,13 +284,33 @@ class Hungarian {
         System.out.println(""); // DEBUG
         for (int i = 0; i < n; i++) System.out.print(minLines[1][i] + " "); // DEBUG
         System.out.println(""); // DEBUG
-        
+
+        double valMinNonCovered;
+        double valMinMatrix;
+
         while (nMinLines != n) {
             // Afegir a cada nombre cobert el mínim nombre no cobert. Si un nombre està cobert
             // per dues línies, afegim el mínim dues vegades.
-            //
+            valMinNonCovered = minNonCovered(auxMat, minLines);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (minLines[0][i]) auxMat[i][j] += valMinNonCovered;
+                    if (minLines[1][j]) auxMat[i][j] += valMinNonCovered;
+                }
+            }
             // Restar el mínim element de la matriu a cada element de la matriu, tornar al primer pas.
-            break;
+            valMinMatrix = minMatrix(auxMat);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    auxMat[i][j] -= valMinMatrix;
+                }
+            }
+            // Recalcular
+            minLines = calcMinimumLines(auxMat);
+            nMinLines = numberOfLines(minLines);
         }
+
+        printMatrix(auxMat); // DEBUG
+
     }
 }
