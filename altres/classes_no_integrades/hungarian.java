@@ -54,6 +54,7 @@ class MostComplete {
             return;
         }
         // else if (currentLines + filesQueFalten < bestLines) return;
+        else if (currentLines + (n - row) < bestLines) return;
         else {
             for (int col = 0; col < n; col++) {
                 if (matrix[row][col] == 0 && !columnLabel[col]) {
@@ -311,6 +312,10 @@ class Hungarian {
         }
 
         printMatrix(auxMat); // DEBUG
+
+        ArrayList<Integer> solutionHungarian = mostCompleteAssig(auxMat);
+
+        System.out.println("Hungarian Solution: " + solutionHungarian);
 
     }
 }
