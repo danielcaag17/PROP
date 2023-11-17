@@ -1,15 +1,14 @@
-package src.domain.classes;
+import java.util.*;
 
-public class BranchBound implements Strategy {
-
+class BranchBound extends Strategy {
     private double[][] Frequencies;
-    private double[][] Distances;
+    private double[][] Distancies;
     private int n_size;
 
     public BranchBound(double[][] freq_matrix, double[][] dist_matrix) {
         // Totes les matrius són quadrades, de mida n_size
         this.Frequencies = freq_matrix;
-        this.Distances = dist_matrix;
+        this.Distancies = dist_matrix;
         this.n_size = freq_matrix.length;
     }
 
@@ -24,6 +23,21 @@ public class BranchBound implements Strategy {
     }
     
     private double[][] matrixC1(ArrayList<Integer> partialSol, ArrayList<Integer> missingChars) {
+        // Matriu C1:
+        //      Files    [i] -> Caràcters no emplaçats
+        //      Columnes [j] -> Tecles (posicions) no emplaçades
+        //
+        //      Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
+        //                cada posició (i,j) de la matriu conté el valor corresponent al cost
+        //                de posar el caràcter [i] a la posició [j] en relació amb tots els
+        //                caràcters ja emplaçats en la solució parcial.
+        //      
+        //      Exemple:
+        //          Solució parcial = [c1, c2, c3, ...]
+        //          Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
+        //          C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
+        //                     ja emplaçades en la solució parcial.
+
         // Tots els index des de partialSol.size() fins a n_size-1 són les tecles buides
         int c1_size = missingChars.size();
         double[][] C1 = new double[c1_size][c1_size];
@@ -69,11 +83,13 @@ public class BranchBound implements Strategy {
         // Les tecles no omplertes (emplaçades) són les que van des de:
         //      -> missingChars.size() fins n_size
         for (int i = 0; i < d_size; i++) {
-            vecD[i] = Distancies[tecla_id][d_size+i];
+            vecD[i] = Distancies[tecla_id][Distancies.length - d_size + i];
         }
         Arrays.sort(vecD);
         double[] reversed_vecD = new double[d_size];
-        for (int i = 0; i < d_size; i++) reversed_vecD[i] = vecD[d_size-i];
+        for (int i = 0; i < d_size; i++) {
+            reversed_vecD[i] = vecD[d_size - 1 - i];
+        }
         return reversed_vecD;
     }
 
@@ -84,60 +100,6 @@ public class BranchBound implements Strategy {
     }
 
     private double[][] matrixC2(ArrayList<Integer> partialSol, ArrayList<Integer> missingChars) {
-        // Tots els index des de partialSol.size() fins a n_size-1 són les tecles buides
-        int c2_size = missingChars.size();
-        double[][] C2 = new double[c2_size][c2_size];
-        
-        for (int i = 0; i < c2_size; i++) {
-            for (int j = 0; j < c2_size; j++) {
-                // i,j són 0...c1_size-1 => Els hem de retornar al seu valor corresponent
-                // ex: i=0 pot correspondre al charID 3, o j=2 pot correspondre a teclaID 4
-                int t_char = missingChars.get(i);
-                int t_index = j + partialSol.size();
-                double[] vecT = vectorT(t_char, missingChars);
-                double[] vecD = vectorD(t_index, missingChars);
-                C2[i][j] = scalarProduct(vecT, vecD);
-            }
-        }
-        return C2;
-    }
-
-    private double cotaGilmore(ArrayList<Integer> partial_sol) {
-        // 1r terme => Calculable
-        //
-        // F1 = Suma del cost de les arestes entre tots els caràcters ja emplaçats en una tecla.
-        // Cost(a,b) = [(freq(a,b) + freq(a,b))/2] * dist(a,b)
-        // 
-        // Exemple:
-        //      Solució parcial = [c1, c2, c3, c4] **
-        //      F1 = Cost(c1,c2) + Cost(c1,c3) + Cost(c1,c4) + Cost(c2,c3)
-        //           + Cost(c2,c4) + Cost(c3,c4)
-        //
-        // ** Apunt: En el vector solució, l'index del vector indica la tecla/posició, i el
-        //           contingut de cada índex és el caràcter que correspon a aquella posició.
-        //           ex: Solució parcial = [c5, c2, ...]
-        //               El caràcter 5 està assignat a la tecla 0
-        //               El caràcter 2 està assignat a la tecla 1
-        //
-        //
-        // 2n + 3r terme => Aproximació => Hungarian Algorithm
-        // Hem de crear dues matrius: C1 i C2 => (C1+C2) és el punt de partida del Hungarian
-        //
-        // Matriu C1:
-        //      Files    [i] -> Caràcters no emplaçats
-        //      Columnes [j] -> Tecles (posicions) no emplaçades
-        //
-        //      Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
-        //                cada posició (i,j) de la matriu conté el valor corresponent al cost
-        //                de posar el caràcter [i] a la posició [j] en relació amb tots els
-        //                caràcters ja emplaçats en la solució parcial.
-        //      
-        //      Exemple:
-        //          Solució parcial = [c1, c2, c3, ...]
-        //          Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
-        //          C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
-        //                     ja emplaçades en la solució parcial.
-        //
         // Matriu C2:
         //      Files    [i] -> Caràcters no emplaçats
         //      Columnes [j] -> Tecles (posicions) no emplaçades
@@ -156,52 +118,201 @@ public class BranchBound implements Strategy {
         //               Suposem Punt[i][j] = (c3,p5)
         //               - Vector T = [freq(c3-c4), freq(c3-c5)] -> (Ordre creixent)
         //               - Vector D = [dist(p5-p3), dist(p5,p4)] -> (Ordre decreixent)
-        //
-        //
-        // Fem Hungarian Algorithm amb (C1+C2), i ens retorna una matriu quadrada (N-m)*(N-m)
-        // amb una solució "òptima" per a els caràcters i tecles que encara no són emplaçats
-        // en la solució parcial. La matriu la podem representar com un vector, tal com en la
-        // solució parcial.
-        //      # Explicació pas per pas de Hungarian Algorithm i Línies Mínimes en el PDF.
-        //
-        //
-        // Càlcul 2n terme cota Gilmore:
-        //      F2 = Sumatori del cost de cada node en la solució Hungarian en relació amb cada
-        //           node de la solució parcial.
-        //      
+
+        // Tots els index des de partialSol.size() fins a n_size-1 són les tecles buides
+        int c2_size = missingChars.size();
+        double[][] C2 = new double[c2_size][c2_size];
+        
+        for (int i = 0; i < c2_size; i++) {
+            for (int j = 0; j < c2_size; j++) {
+                // i,j són 0...c1_size-1 => Els hem de retornar al seu valor corresponent
+                // ex: i=0 pot correspondre al charID 3, o j=2 pot correspondre a teclaID 4
+                int t_char = missingChars.get(i);
+                int t_index = j + partialSol.size();
+                double[] vecT = vectorT(t_char, missingChars);
+                double[] vecD = vectorD(t_index, missingChars);
+                C2[i][j] = scalarProduct(vecT, vecD);
+            }
+        }
+        return C2;
+    }
+
+    private double[][] matrixSum(double[][] A, double[][] B) {
+        int n = A.length;
+        double[][] res = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
+                res[i][j] = A[i][j] + B[i][j];
+        }
+        return res;
+    }
+
+    private double calcF1(ArrayList<Integer> solParcial) {
+        // F1 = Suma del cost de les arestes entre tots els caràcters ja emplaçats en una tecla.
+        // Cost(a,b) = [(freq(a,b) + freq(a,b))/2] * dist(a,b)
+        // 
+        // Exemple:
+        //      Solució parcial = [c1, c2, c3, c4]
+        //      F1 = Cost(c1,c2) + Cost(c1,c3) + Cost(c1,c4) + Cost(c2,c3)
+        //           + Cost(c2,c4) + Cost(c3,c4)
+        
+        int n = solParcial.size();
+        double res = 0;
+        // Per cada element (fins al penúltim) de la solució parcial, obtenir el cost d'aquell
+        // element en funció de tots els següents.
+        for (int i = 0; i < (n-1); i++) {
+            int charID_1 = solParcial.get(i);
+            for (int k = i+1; k < n; k++) {
+                int charID_2 = solParcial.get(k);
+                res += cost(charID_1, i, charID_2, k);
+            }
+        }
+        return res;
+    }
+
+    private double calcF2(ArrayList<Integer> solParcial, ArrayList<Integer> solHungarian, ArrayList<Integer> charsMissing) {
+        // F2 = Sumatori del cost de cada node en la solució Hungarian en relació amb
+        // cada node de la solució parcial.
         //      Exemple F2:
         //          - Solució parcial   : [c1, c2, c3, .., ..]
         //          - Solució Hungarian : [.., .., .., c4, c5]
         //          F2 = [Cost(c4-c1) + Cost(c4-c2) + Cost(c4-c3)]
         //               + [Cost(c5-c1) + Cost(c5-c2) + Cost(c5-c3)]
-        //
-        //
-        // Càlcul 3r terme cota Gilmore:
-        //      F3 = Aplicar F1 sobre la solució proporcionada per Hungarian.
-        //      
+        
+        double cost_f2 = 0;
+        for (int i = 0; i < solParcial.size(); i++) {
+            int tecla_id = i;
+            int char_id  = solParcial.get(i);
+            for (int j = 0; j < solHungarian.size(); j++) {
+                int tecla_idH = solParcial.size() + j;
+                int char_idH  = charsMissing.get(j);
+                cost_f2 += cost(char_id, tecla_id, char_idH, tecla_idH);
+            }
+        }
+        return cost_f2;
+    }
+
+    private double calcF3(ArrayList<Integer> solParcial, ArrayList<Integer> solHungarian, ArrayList<Integer> charsMissing) {
+        // F3 = Aplicar F1 sobre la solució proporcionada per Hungarian.
         //      Exemple F3:
         //          - Solució Hungarian: [.., .., c3, c4, c5]
         //          F3 = Cost(c3-c4) + Cost(c3-c5) + Cost(c4-c5)
-        //
-        //
-        // Finalment, Cota Gilmore => F1 + F2 + F3
-        //
-        return 0.0;
+        
+        double res = 0;
+        int n = solHungarian.size();
+        for (int i = 0; i < (n-1); i++) {
+            int char_id1  = charsMissing.get( solHungarian.get(i) );
+            int tecla_id1 = solParcial.size() + i;
+            for (int k = i+1; k < n; k++) {
+                int char_id2  = charsMissing.get( solHungarian.get(k) );
+                int tecla_id2 = solParcial.size() + k;
+                res += cost(char_id1, tecla_id1, char_id2, tecla_id2);
+            }
+        }
+        return res;
     }
 
-    private ArrayList<Integer> branchAlgorithm() {
+    private double cotaGilmore(ArrayList<Integer> solParcial, ArrayList<Integer> charsMissing) {
+        double cotaGil = 0;
+
+        cotaGil += calcF1(solParcial);
+
+        double[][] matC1 = matrixC1(solParcial, charsMissing);
+        double[][] matC2 = matrixC2(solParcial, charsMissing);
+        double[][] matHung = matrixSum(matC1, matC2);
+
+        // ##### System.out.println("~> Partial Solution: " + solParcial); // DEBUG
+
+        // El ArrayList de la solució hungarian està al revés dels altres !!!
+        //  - Index = Fila de la matriu (=> index fila indica CARACTER)
+        //  - Value = Columna on hi ha el 0 de la solució (=> index columna indica TECLA)
+        // S'ha de transformar els indexs i valors a IDs reals de caràcters i tecles !!!
+        ArrayList<Integer> hungarianSolution = Hungarian.hungarianAlgorithm(matHung);
+
+        // Transformar els valors per a que index sigui la tecla i value el caracter
+        // Exemple: {3, 1, 0, 2} := (char 0, tecla 3) + (c1, t1) + (c2, t0) + (c3, t2)...
+        //          Passa a ser => {2, 1, 3, 0}
+        ArrayList<Integer> stdHungarianSol = new ArrayList<Integer>(hungarianSolution.size());
+        for (int i = 0; i < hungarianSolution.size(); i++) stdHungarianSol.add(-1); // Relleno perquè sinó no puc fer el .set(i, x)
+            for (int i = 0; i < hungarianSolution.size(); i++) {
+            stdHungarianSol.set(hungarianSolution.get(i), i);
+        }
+
+        cotaGil += calcF2(solParcial, stdHungarianSol, charsMissing);
+        
+        cotaGil += calcF3(solParcial, stdHungarianSol, charsMissing);
+
+        // ##### System.out.println("Cota Gilmore: " + cotaGil); // DEBUG
+        
+        return cotaGil;
+    }
+
+    private int[] randomIndexes(ArrayList<Integer> alMiss) {
+        Random rand = new Random();
+        int[] indexes = new int[2];
+        int rand1 = rand.nextInt(alMiss.size());
+        int rand2 = rand.nextInt(alMiss.size()-1);
+        while (rand1 == rand2) rand2 = rand.nextInt(alMiss.size()-1);
+        indexes[0] = rand1;
+        indexes[1] = rand2;
+        return indexes;
+    }
+
+    private ArrayList<Integer> greedyStart(int greedy_index, ArrayList<Integer> alMiss) {
+        ArrayList<Integer> greedySol = new ArrayList<>(2);
+        ArrayList<Integer> auxSol = new ArrayList<>();
+        ArrayList<Integer> auxMiss = new ArrayList<>();
+        double auxCota;
+        double bestCota = 9999999;
+
+        for (int xd = 0; xd < greedy_index; xd++) {
+            int[] idx = randomIndexes(alMiss);
+            int val1 = alMiss.get(idx[0]);
+            int val2 = alMiss.get(idx[1]);
+
+            auxSol.clear();
+            auxSol.add(val1);
+            auxSol.add(val2);
+
+            auxMiss.clear();
+            auxMiss.addAll(alMiss);
+            auxMiss.remove((Integer)val1);
+            auxMiss.remove((Integer)val2);
+
+            auxCota = cotaGilmore(auxSol, auxMiss);
+
+            if (xd == 0 || auxCota < bestCota) {
+                greedySol.clear();
+                greedySol.addAll(auxSol);
+                bestCota = auxCota;
+            }
+        }
+        return greedySol;
+    }
+
+    public ArrayList<Integer> algorithm() {
         ArrayList<Integer> bestSolution = new ArrayList<Integer>();
         ArrayList<Integer> charsMissing = new ArrayList<Integer>(); 
         double bestCota = 0;
 
         for (int i = 0; i < this.n_size; i++) charsMissing.add(i); // Omplir charMissing
 
+        ArrayList<Integer> bestIterMissing = new ArrayList<Integer>();
+        ArrayList<Integer> iterMissing = new ArrayList<Integer>();
+        
         ArrayList<Integer> bestIterSolution = new ArrayList<Integer>();
         ArrayList<Integer> iterSolution = new ArrayList<Integer>();
+        
         double bestIterCota = 0;
         double iterCota = 0;
-        int addedCharID = 0;
-        
+
+        // Greedy Start to improve efficiency
+        ArrayList<Integer> greedySol = greedyStart(25, charsMissing);
+        bestSolution.add(greedySol.get(0));
+        bestSolution.add(greedySol.get(1));
+        charsMissing.remove((Integer)greedySol.get(0));
+        charsMissing.remove((Integer)greedySol.get(1));
+
         while (charsMissing.size() > 0) {
             bestIterSolution.clear();
             bestIterCota = 0;
@@ -210,23 +321,32 @@ public class BranchBound implements Strategy {
                 iterSolution.clear();
                 iterSolution.addAll(bestSolution);
                 iterSolution.add(char_id);
-                iterCota = cotaGilmore(iterSolution);
+       
+                iterMissing.clear();
+                iterMissing.addAll(charsMissing);
+                iterMissing.remove((Integer)char_id);
+                
+                iterCota = cotaGilmore(iterSolution, iterMissing);
                 
                 if (bestIterSolution.size() == 0 || iterCota < bestIterCota) {
-                    bestIterCota = iterCota;
+                    bestIterSolution.clear();
                     bestIterSolution.addAll(iterSolution);
-                    addedCharID = char_id;
+
+                    bestIterMissing.clear();
+                    bestIterMissing.addAll(iterMissing);
+                    
+                    bestIterCota = iterCota;
                 }
             }
             bestSolution.clear();
             bestSolution.addAll(bestIterSolution);
+        
+            charsMissing.clear();
+            charsMissing.addAll(bestIterMissing);
+
             bestCota = bestIterCota;
-            charsMissing.remove((Integer)addedCharID);
         }
+        System.out.println("Cota Gilmore: " + bestCota); // DEBUG
         return bestSolution;
-    }
-    
-    public void generarTeclat() {
-        // Ignorar de moment 
     }
 }
