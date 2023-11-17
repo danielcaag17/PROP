@@ -57,8 +57,8 @@ public class Layout {
 
     /** Relacionar id de tecla (a menor id més prioritat al QAP) amb les seves coordenades */
     private void omplirCoordenades() {
-        int[] mov_x = new int[] {1, 1, 0,-1,-1,-1, 0, 1};
-        int[] mov_y = new int[] {0, 1, 1, 1, 0,-1,-1,-1};
+        int[] mov_x = new int[] {0, 1, 1, 1, 0,-1,-1,-1};
+        int[] mov_y = new int[] {1, 1, 0,-1,-1,-1, 0, 1};
         Pair<Integer, Integer> mig = new Pair<Integer,Integer>(nfil/2, ncol/2);
         if (ncol % 2 == 0) mig.second -= 1;
         int dir = 1;
@@ -68,7 +68,7 @@ public class Layout {
         coordenades.add(0, mig);
         for (int k = 1; k<ncol*nfil; k++) {
             Pair<Integer, Integer> tecla = new Pair<Integer,Integer>();
-            if (k<8) {
+            if (k<=8) {
                 tecla.first = mig.first+mov_x[k-1];
                 tecla.second = mig.second+mov_y[k-1];
             }
@@ -230,7 +230,7 @@ public class Layout {
                 }
                 else {
                     if (distancies[i][j] < 10) s+='0';
-                    s += distancies[i][j] + " ";
+                    s += (int)distancies[i][j] + " ";
                 }
             }
             s+="\n";
