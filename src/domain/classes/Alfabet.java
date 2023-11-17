@@ -139,6 +139,10 @@ private String nom;                             // clau primària
         return nom;
     }
 
+    public void setNom (String nom) {
+        this.nom = nom;
+    }
+
     // Retorna les lletres de l'alfabet
     public String getAbecedari () {
         Set<Character> keys = characters.keySet();
