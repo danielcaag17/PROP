@@ -95,9 +95,12 @@ private String nom;                             // clau primària
                 String input = myReader.next();
                 try {
                     Float.parseFloat(input); // Tractar excepció que pugui donar parseFloat !!!
+                    throw new FormatDadesNoValid();
                 }
                 catch(NumberFormatException e) {    // String no es un Float
-                    throw new FormatDadesNoValid();
+                    // do nothing, significa que el format és correcte
+                    // fer un contador perque no sempre entri a fer la conversió
+                    // si han passat 20 strings i no hi ha error deixar de convertir a Float
                 }
                 text += input;
             }
