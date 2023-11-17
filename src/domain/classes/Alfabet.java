@@ -1,17 +1,8 @@
 package src.domain.classes;
+import src.exceptions.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;       // mirar quin es import que sha de fer servir
-import java.util.Scanner;
-import java.util.Set;
-
-import src.exceptions.AlfabetJaExisteix;
-import src.exceptions.FormatDadesNoValid;
-import src.exceptions.TeclatNoExisteix;
-import src.exceptions.TipusDadesNoValid;
+import java.io.*;
+import java.util.*;
 
 public class Alfabet {
 private String nom;                             // clau primària
