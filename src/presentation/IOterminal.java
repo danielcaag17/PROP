@@ -357,7 +357,7 @@ public class IOterminal {
             "   esborra_teclat  : Comanda per a esborrar un teclat existent. El teclat deixarà d'existir al esborrar-se. \n" +
             "   mostra_teclat   : Comanda per a visualitzar tota la informació rellevant d'un teclat existent. \n" +
             "   nou_alfabet     : Comanda per a crear un nou alfabet, a partir d'un tipus de dades {'text', 'llista-paraules'} i un fitxer (es passa a través del path) que contingui les dades. \n" +
-            "                     Al directori altres/exemples_input_alfabet/ es poden trobar exemples de fitxers amb dades per a crear alfabets. \n" +
+            "                     Al directori test/exemples_input_alfabet/ es poden trobar exemples de fitxers amb dades per a crear alfabets. \n" +
             "                     El format de les dades que es poden introduïr és el següent: \n" +
             "                       - Per 'text': un text amb diverses paraules que siguin representatives de l'ús del Alfabet." +
             "                       - Per 'llista-paraules': una llista de paraules i les seves freqüències. Un bon exemple: https://corpus.rae.es/lfrecuencias.html \n" +
