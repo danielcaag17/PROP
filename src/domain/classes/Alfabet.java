@@ -3,12 +3,14 @@ package src.domain.classes;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;       // mirar quin es import que sha de fer servir
 import java.util.Scanner;
 import java.util.Set;
 
 import src.exceptions.AlfabetJaExisteix;
 import src.exceptions.FormatDadesNoValid;
+import src.exceptions.TeclatNoExisteix;
 import src.exceptions.TipusDadesNoValid;
 
 public class Alfabet {
@@ -26,8 +28,7 @@ private String nom;                             // clau primària
     public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException {
         if (ta == "text") readText(path);
         else if (ta == "llista-paraules") readWords(path);
-        else {
-            // String ta no conicideix amb cap de les opcions
+        else {  // String ta no conicideix amb cap de les opcions
             throw new TipusDadesNoValid();
         }
     }
@@ -89,38 +90,41 @@ private String nom;                             // clau primària
     private String getText (String path) throws FormatDadesNoValid, FileNotFoundException {
         String text = "";
         File file = new File(path);
-        Scanner myReader = new Scanner(file);
-        while (myReader.hasNextLine()) {
-            String input = myReader.nextLine();
-            // No hi ha excepció donat que si l'usuari vol introduir un text amb números serà considerat com a tal
-            // if () {
-                // El tipus de dades no és l'esperat
-                // throw new TipusDadesAlfabetNoValid;
-            // }
-            text += input;
+        try (Scanner myReader = new Scanner(file)) {
+            while (myReader.hasNext()) {
+                String input = myReader.next();
+                try {
+                    Float.parseFloat(input); // Tractar excepció que pugui donar parseFloat !!!
+                }
+                catch(NumberFormatException e) {    // String no es un Float
+                    throw new FormatDadesNoValid();
+                }
+                text += input;
+            }
+            myReader.close();
         }
-        myReader.close();
         return text;
     }
 
     private HashMap<String, Float> getWords (String path) throws FormatDadesNoValid, FileNotFoundException {
         HashMap<String, Float> words = new HashMap<>();
         File file = new File(path); // Tractar excepció que pugui donar File() !!!
-        Scanner myReader = new Scanner(file); // Excepció tractada
-        while (myReader.hasNextLine()) { // Tractar excepció que pugui donar hasNextLine !!!
-            String input = myReader.nextLine(); // Tractar excepció que pugui donar nextLine !!!
-            if () {
-                // El tipus de dades no és l'esperat
-                throw new FormatDadesNoValid();
+        try (Scanner myReader = new Scanner(file)) {
+            while (myReader.hasNextLine()) { // Tractar excepció que pugui donar hasNextLine !!!
+                String word = myReader.next(); // Tractar excepció que pugui donar nextLine !!!
+                Float probabilitat = 0.0f;
+                try {
+                    probabilitat = myReader.nextFloat(); // Tractar excepció que pugui donar parseFloat !!!
+                }
+                catch(InputMismatchException e) {    // String no es un Float
+                    throw new FormatDadesNoValid();
+                }
+                if (! words.containsKey(word)) {                       // comprovar que la lletra no s'ha vist encara
+                    words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
+                }
             }
-            String[] dividit = input.split(" "); // Tractar excepció que pugui donar split !!!
-            String word = dividit[0];
-            Float probabilitat = Float.parseFloat(dividit[1]); // Tractar excepció que pugui donar parseFloat !!!
-            if (! words.containsKey(word)) {                       // comprovar que la lletra no s'ha vist encara
-                words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
-            }
+            myReader.close();
         }
-        myReader.close();     
         return words;
     }
 
