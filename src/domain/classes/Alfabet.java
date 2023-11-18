@@ -45,22 +45,34 @@ private String nom;                             // clau primària
     }
 
     private void processCharacters(String text, int length) { //return lenght (?) per calculateProbabilities
+        setCharacters(text, length);
+        setX(text, length);
+    }
+
+    private void setCharacters (String text, int length) {
         for (int i = 0; i < length; i++) {
-            Character c = text.charAt(i);                    // obtenir la lletra del text
-            if (! included(c)) {                         // comprovar que la lletra no s'ha vist encara
-                size++;
-                characters.put(c, 0.f);;                  // crear una nova entrada amb la lletra c i 0 aparicions
+            Character c = text.charAt(i);
+            if (c != ' ') {
+                if (! characters.containsKey(c)) {                         // comprovar que la lletra no s'ha vist encara
+                    characters.put(c, 0.f);;                  // crear una nova entrada amb la lletra c i 0 aparicions
+                }
+                float a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
+                characters.replace(c, a+1);    // sumar un a les aparicions de la lletra c
             }
-            float a = characters.get(text.charAt(i));   // obtenir el nombre d'aparicions de la lletra
-            characters.replace(text.charAt(i), a+1);    // sumar un a les aparicions de la lletra c
-            if (i < length - 1) {                       // veure la lletra seguent
+        }
+        x = new float[characters.size()][characters.size()];
+        setSize(characters.size());
+    }
+
+    private void setX (String text, int length) {
+        for (int i = 0; i < length - 1; i++) {
+                if (text.charAt(i) != ' ') {                       // veure la lletra seguent
                 char next = text.charAt(i+1);
-                int j = c - 'a';
+                int j = text.charAt(i) - 'a';
                 int k = next - 'a';
                 x[j][k]++;
             }
         }
-        setSize(characters.size());
     }
 
     private void calculateProbabilities (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
@@ -124,11 +136,6 @@ private String nom;                             // clau primària
 
     private void setSize (int size) {
         this.size = size;
-    }
-
-    // aquesta lletra existeix en el vector
-    private boolean included (char c) {
-        return characters.containsKey(c);               // comprovar si el map te la clau c
     }
 
     public int getSize () {
