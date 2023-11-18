@@ -6,8 +6,8 @@ import java.util.*;
 
 public class Alfabet {
 private String nom;                             // clau primària
-    private Map<Character, Float> characters;   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
-    private float[][] x;                        // a veure quina Estructura de Dades utilitzar + quin nom
+    private Map<Character, Double> characters;   // cada caràcter de l'alfabet amb la seva corresponent probabilitat
+    private double[][] frequencies;                        // a veure quina Estructura de Dades utilitzar + quin nom
     int size;
 
     public Alfabet (String nom) {
@@ -34,7 +34,7 @@ private String nom;                             // clau primària
 
      // Gestionar llistes de paraules
     private void readWords(String path) throws FormatDadesNoValid, FileNotFoundException { //conjunt de paraules amb la seva probabilitat
-        HashMap<String, Float> words = getWords(path);
+        HashMap<String, Double> words = getWords(path);
         int totalLenght = 0;
         for (String s : words.keySet()) {
             int lenght = s.length();
@@ -54,36 +54,36 @@ private String nom;                             // clau primària
             Character c = text.charAt(i);
             if (c != ' ') {
                 if (! characters.containsKey(c)) {                         // comprovar que la lletra no s'ha vist encara
-                    characters.put(c, 0.f);;                  // crear una nova entrada amb la lletra c i 0 aparicions
+                    characters.put(c, 0.0);;                  // crear una nova entrada amb la lletra c i 0 aparicions
                 }
-                float a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
+                double a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
                 characters.replace(c, a+1);    // sumar un a les aparicions de la lletra c
             }
         }
-        x = new float[characters.size()][characters.size()];
+        frequencies = new double[characters.size()][characters.size()];
         setSize(characters.size());
     }
 
     private void setX (String text, int length) {
         for (int i = 0; i < length - 1; i++) {
                 if (text.charAt(i) != ' ') {                       // veure la lletra seguent
-                char next = text.charAt(i+1);
-                int j = text.charAt(i) - 'a';
+                char next = Character.toLowerCase(text.charAt(i+1));
+                int j = Character.toLowerCase(text.charAt(i)) - 'a';
                 int k = next - 'a';
-                x[j][k]++;
+                frequencies[j][k]++;
             }
         }
     }
 
     private void calculateProbabilities (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
         for (Character c : characters.keySet()) {
-            float a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
-            float probabilitat = a / length;            // obtenir la probabilitat
-            float nAparicions = characters.get(c);
+            double a = characters.get(c);   // obtenir el nombre d'aparicions de la lletra
+            double probabilitat = a / length;            // obtenir la probabilitat
+            double nAparicions = characters.get(c);
             characters.replace(c, probabilitat);      // associar la lletra amb la seva probabilitat
 
             for (int i = 0; i < size; i++) { //size ha de ser de la  mateixa mida que la matriu
-                x[c][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
+                frequencies[c][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
                                             //de vegades que apareix la lletra 
                                             // Ull divisions entre 0 --> tractar EXC
             }
@@ -112,15 +112,15 @@ private String nom;                             // clau primària
         return text;
     }
 
-    private HashMap<String, Float> getWords (String path) throws FormatDadesNoValid, FileNotFoundException {
-        HashMap<String, Float> words = new HashMap<>();
+    private HashMap<String, Double> getWords (String path) throws FormatDadesNoValid, FileNotFoundException {
+        HashMap<String, Double> words = new HashMap<>();
         File file = new File(path); // Tractar excepció que pugui donar File() !!!
         try (Scanner myReader = new Scanner(file)) {
             while (myReader.hasNextLine()) { // Tractar excepció que pugui donar hasNextLine !!!
                 String word = myReader.next(); // Tractar excepció que pugui donar nextLine !!!
-                Float probabilitat = 0.0f;
+                double probabilitat = 0.0;
                 try {
-                    probabilitat = myReader.nextFloat(); // Tractar excepció que pugui donar parseFloat !!!
+                    probabilitat = myReader.nextDouble(); // Tractar excepció que pugui donar parseFloat !!!
                 }
                 catch(InputMismatchException e) {    // String no es un Float
                     throw new FormatDadesNoValid();
@@ -151,8 +151,21 @@ private String nom;                             // clau primària
     }
 
     // Retorna les lletres de l'alfabet
-    public String getAbecedari () {
-        Set<Character> keys = characters.keySet();
-        return keys.toString();
+    public char[] getAbecedari () {
+        char[] abecedari = new char[this.size];
+        int i = 0;
+        for (Character c : characters.keySet()) {
+            abecedari[i] = c;
+            i++;
+        }
+        return abecedari;
+    }
+
+    public double[][] getFrequencies () {
+        return frequencies;
+    }
+
+    public Map<Character, Double> getCharacter () {
+        return characters;
     }
 }
