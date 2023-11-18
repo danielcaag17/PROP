@@ -1,16 +1,12 @@
+package src.domain.classes;
 import java.util.*;
 
-class BranchBound extends Strategy {
+
+class BranchBound implements Strategy {
+    private double[] AbsoluteFreqs;
     private double[][] Frequencies;
     private double[][] Distancies;
     private int n_size;
-
-    public BranchBound(double[][] freq_matrix, double[][] dist_matrix) {
-        // Totes les matrius són quadrades, de mida n_size
-        this.Frequencies = freq_matrix;
-        this.Distancies = dist_matrix;
-        this.n_size = freq_matrix.length;
-    }
 
     private double cost(int c1, int p1, int c2, int p2) {
         // c1 i c2 són els IDs de caracter
@@ -348,5 +344,14 @@ class BranchBound extends Strategy {
         }
         System.out.println("Cota Gilmore: " + bestCota); // DEBUG
         return bestSolution;
+    }
+
+    public ArrayList<Integer> generarTeclat(double[][] freq_matrix, double[] abs_frequencies, double[][] dist_matrix) {
+        // Totes les matrius són quadrades, de mida n_size
+        this.AbsoluteFreqs = abs_frequencies;
+        this.Frequencies = freq_matrix;
+        this.Distancies = dist_matrix;
+        this.n_size = freq_matrix.length;
+        return algorithm();
     }
 }
