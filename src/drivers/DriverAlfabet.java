@@ -4,12 +4,12 @@ import src.domain.classes.Alfabet;
 
 public class DriverAlfabet {
     private static Alfabet a1, a2, a3;
-    private String pathText1 = "../../test/Text1.txt";      // Text en anglès
-    private String pathText2 = "../../test/Text2.txt";      // Text en català
-    private String pathText3 = "../../test/Text3.txt";      // Text en castellà
-    private String pathWords1 = "../../test/Words1.txt";    // Frecuencies en anglès
-    private String pathWords2 = "../../test/Words2.txt";    // Frecuencies en català
-    private String pathWords3 = "../../test/Words3.txt";    // Frecuencies en castellà
+    private String pathText1 = "../../test/exemples_input_alfabet/Text1.txt";      // Text en anglès
+    private String pathText2 = "../../test/exemples_input_alfabet/Text2.txt";      // Text en català
+    private String pathText3 = "../../test/exemples_input_alfabet/Text3.txt";      // Text en castellà
+    private String pathWords1 = "../../test/exemples_input_alfabet/Words1.txt";    // Frecuencies en anglès
+    private String pathWords2 = "../../test/exemples_input_alfabet/Words2.txt";    // Frecuencies en català
+    private String pathWords3 = "../../test/exemples_input_alfabet/Words3.txt";    // Frecuencies en castellà
 
 
     public static void main (String[] args) {
