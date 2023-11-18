@@ -25,7 +25,7 @@ public class Teclat {
     public void crearTeclat () {
         // layout --> distancies
         // alfabet --> freq
-        teclat = G.generarTeclat(L, A);
+        teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getAbecedari(), A.getCharacter());
         omplirDistribució();
     }
 
