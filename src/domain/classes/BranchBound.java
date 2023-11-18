@@ -243,47 +243,17 @@ class BranchBound implements Strategy {
         return cotaGil;
     }
 
-    private int[] randomIndexes(ArrayList<Integer> alMiss) {
-        Random rand = new Random();
-        int[] indexes = new int[2];
-        int rand1 = rand.nextInt(alMiss.size());
-        int rand2 = rand.nextInt(alMiss.size()-1);
-        while (rand1 == rand2) rand2 = rand.nextInt(alMiss.size()-1);
-        indexes[0] = rand1;
-        indexes[1] = rand2;
-        return indexes;
-    }
-
-    private ArrayList<Integer> greedyStart(int greedy_index, ArrayList<Integer> alMiss) {
-        ArrayList<Integer> greedySol = new ArrayList<>(2);
-        ArrayList<Integer> auxSol = new ArrayList<>();
-        ArrayList<Integer> auxMiss = new ArrayList<>();
-        double auxCota;
-        double bestCota = 9999999;
-
-        for (int xd = 0; xd < greedy_index; xd++) {
-            int[] idx = randomIndexes(alMiss);
-            int val1 = alMiss.get(idx[0]);
-            int val2 = alMiss.get(idx[1]);
-
-            auxSol.clear();
-            auxSol.add(val1);
-            auxSol.add(val2);
-
-            auxMiss.clear();
-            auxMiss.addAll(alMiss);
-            auxMiss.remove((Integer)val1);
-            auxMiss.remove((Integer)val2);
-
-            auxCota = cotaGilmore(auxSol, auxMiss);
-
-            if (xd == 0 || auxCota < bestCota) {
-                greedySol.clear();
-                greedySol.addAll(auxSol);
-                bestCota = auxCota;
+    private int greedyStart() {
+        // Emplaça el caràcter més freqüent de tots en primera posició de la solució parcial
+        double max = 0; // Frequencia més alta
+        int index = 0; // CharID del caràcter més frequent
+        for (int i = 0; i < AbsoluteFreqs.length; i++) {
+            if (AbsoluteFreqs[i] > max) {
+                max = AbsoluteFreqs[i];
+                index = i;
             }
         }
-        return greedySol;
+        return index;
     }
 
     public ArrayList<Integer> algorithm() {
@@ -303,11 +273,9 @@ class BranchBound implements Strategy {
         double iterCota = 0;
 
         // Greedy Start to improve efficiency
-        ArrayList<Integer> greedySol = greedyStart(25, charsMissing);
-        bestSolution.add(greedySol.get(0));
-        bestSolution.add(greedySol.get(1));
-        charsMissing.remove((Integer)greedySol.get(0));
-        charsMissing.remove((Integer)greedySol.get(1));
+        int most_frequent = greedyStart();
+        bestSolution.add(most_frequent);
+        charsMissing.remove((Integer)most_frequent);
 
         while (charsMissing.size() > 0) {
             bestIterSolution.clear();
