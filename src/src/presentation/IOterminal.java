@@ -313,6 +313,9 @@ public class IOterminal {
             catch(TeclatNoExisteix e) {
                 System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
             }
+            catch(LletraNoTeclat e) {
+                System.out.println(errorOutput + "ERROR: " + e.getMessage());
+            }
         }
         else {
             System.out.println(errorOutput + "ERROR: El nombre de canvis ha de ser positiu.");

@@ -35,7 +35,7 @@ public class CtrlPresentacio {
         cd.crearNouTeclat(nt, na, idL);
     }
 
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat {
         return cd.modificarTeclat(nt, canvis);
     }
 

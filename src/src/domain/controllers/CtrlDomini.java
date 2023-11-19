@@ -164,7 +164,7 @@ public class CtrlDomini {
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix {
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         Teclat t = getTeclat(nt);
         for (Character c : canvis.keySet()) {
