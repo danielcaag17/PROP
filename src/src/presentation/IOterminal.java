@@ -12,11 +12,11 @@ public class IOterminal {
     /** Missatge previ al output del sistema */
     private String output = "> ";
     /** Missatge previ als input introduïts per l'usuari */
-    private String inputFromUser = "> "; 
+    private String inputFromUser = "? > "; 
     /** Missatge previ als inputs de comandes posades per l'usuari */
     private String inputCommand = "# ";
     /** Missatge previ al output d'errors */
-    private String errorOutput = "[!]> ";
+    private String errorOutput = "[!] > ";
 
     public IOterminal(CtrlPresentacio cp) {
         ctrlPresentacio = cp;
@@ -47,8 +47,7 @@ public class IOterminal {
         System.out.println("Jordi   Otal       Salvans");
         System.out.println("Pau     Rambla     Albet");
 
-        mostraMenu();
-        escollir();
+        mostraMenu(); // crida a escollir també
     }
 
     public void mostraMenu() {
@@ -72,14 +71,16 @@ public class IOterminal {
             "   llista_layouts : ll \n" +
             "\n" +
             "   more_info : mi \n" +
+            "   print_commands : pc \n" +
             "   finalitzar : f \n" +
             ""
         );
+        escollir();
     }
 
     public void escollir() {
         System.out.print(inputCommand);
-        String command = s.nextLine();
+        String command = s.next();
         if (     command.equals("nou_teclat")      || command.equals("nt")) nouTeclat();
         else if (command.equals("modifica_teclat") || command.equals("modt")) modificaTeclat();
         else if (command.equals("esborra_teclat")  || command.equals("et")) esborraTeclat();
@@ -94,6 +95,7 @@ public class IOterminal {
         else if (command.equals("llista_alfabets") || command.equals("la")) llistaAlfabets();
         else if (command.equals("llista_layouts")  || command.equals("ll")) llistaLayouts();
         else if (command.equals("more_info")       || command.equals("mi")) moreInfo();
+        else if (command.equals("print_commands")  || command.equals("pc")) mostraMenu();
         else if (command.equals("finalitzar")      || command.equals("f")) finalitzar();
         else {
             System.out.println(errorOutput + "ERROR: '" + command + "' no és una comanda vàlida."); 
@@ -147,7 +149,7 @@ public class IOterminal {
 
     private String answerString() {
         System.out.print(inputFromUser);
-        return s.nextLine();
+        return s.next();
     }
 
     public void esborraLayout() {
@@ -337,13 +339,13 @@ public class IOterminal {
         catch (Excepcions e) {
             switch (e.getTipus()) {
                 case "TeclatJaExisteix": 
-                    System.out.println(errorOutput + "Ja existeix un Teclat amb el nom:" + nom + ". Prova amb un altre nom.");
+                    System.out.println(errorOutput + "Ja existeix un Teclat amb el nom: " + nom + ". Prova amb un altre nom.");
                     break;
                 case "AlfabetNoExisteix":
-                    System.out.println(errorOutput + "No existeix un Alfabet amb el nom:" + nomAlfabet + ".");
+                    System.out.println(errorOutput + "No existeix un Alfabet amb el nom: " + nomAlfabet + ".");
                     break;
                 case "LayoutNoExisteix":
-                    System.out.println(errorOutput + "No existeix un Layout amb la mida:" + idLayout + ".");
+                    System.out.println(errorOutput + "No existeix un Layout amb la mida: " + idLayout + ".");
                     break;
                 case "MidesDiferents":
                     System.out.println(errorOutput + "Les mides de l'Alfabet seleccionat i del Layout han de ser iguals.");
@@ -355,24 +357,32 @@ public class IOterminal {
 
     public void moreInfo() {
         System.out.print(
-            "   nou_teclat      : Comanda per a crear un nou teclat, a partir d'un alfabet i un layout existent. [!] Important que les mides del layout i alfabet siguin igual. \n" +
-            "   modifica_teclat : Comanda per modificar un teclat existent, s'introdueixen parelles de lletres de les que es vol que s'intercanviin les posicions. Al acabar es mostra la distribució del teclat posterior als canvis. \n" +
-            "   esborra_teclat  : Comanda per a esborrar un teclat existent. El teclat deixarà d'existir al esborrar-se. \n" +
-            "   mostra_teclat   : Comanda per a visualitzar tota la informació rellevant d'un teclat existent. \n" +
-            "   nou_alfabet     : Comanda per a crear un nou alfabet, a partir d'un tipus de dades {'text', 'llista-paraules'} i un fitxer (es passa a través del path) que contingui les dades. \n" +
+            " - nou_teclat      : Comanda per a crear un nou teclat, a partir d'un alfabet i un layout existent. \n" +
+            "                     [!] Important que les mides del layout i alfabet siguin igual. \n" +
+            " - modifica_teclat : Comanda per modificar un teclat existent, s'introdueixen parelles de lletres de les que es vol que \n" + 
+            "                     s'intercanviin les posicions. Al acabar es mostra la distribució del teclat posterior als canvis. \n" +
+            " - esborra_teclat  : Comanda per a esborrar un teclat existent. El teclat deixarà d'existir al esborrar-se. \n" +
+            " - mostra_teclat   : Comanda per a visualitzar tota la informació rellevant d'un teclat existent. \n" +
+            " - nou_alfabet     : Comanda per a crear un nou alfabet, a partir d'un tipus de dades {'text', 'llista-paraules'} \n" + 
+            "                     i un fitxer (es passa a través del path) que contingui les dades. \n" +
             "                     Al directori test/exemples_input_alfabet/ es poden trobar exemples de fitxers amb dades per a crear alfabets. \n" +
             "                     El format de les dades que es poden introduïr és el següent: \n" +
-            "                       - Per 'text': un text amb diverses paraules que siguin representatives de l'ús del Alfabet." +
-            "                       - Per 'llista-paraules': una llista de paraules i les seves freqüències. Un bon exemple: https://corpus.rae.es/lfrecuencias.html \n" +
-            "   esborra_alfabet : Comanda per a esborrar un alfabet existent. L'alfabet esborrat deixarà d'existir. \n" +
-            "   mostra_alfabet  : Comanda per a visualitzar tota la informació rellevant d'un alfabet existent. \n" +
-            "   nou_layout      : Comanda per a crear un nou layout, a partir d'una mida. Es creen diferents paràmetres automàticament que generen un layout. El sistema està optimitzat per a mides entre 16 i 48. A més el sistema genera, inicialment, 4 layouts de mides entre 24 i 27. \n" +
-            "   mostra_layout   : Comanda per a visualitzar tota la informació rellevant d'un layout existent. \n" +
-            "   esborra_layout  : Comanda per a esborrar un layout existent i no generat inicialment. Per mides entre 24 i 27 no es podrà esborrar. \n" +
+            "                       - Per 'text': un text amb diverses paraules que siguin representatives de l'ús del Alfabet. \n" +
+            "                       - Per 'llista-paraules': una llista de paraules i les seves freqüències. \n" + 
+            "                         Un bon exemple: https://corpus.rae.es/lfrecuencias.html \n" +
+            " - esborra_alfabet : Comanda per a esborrar un alfabet existent. L'alfabet esborrat deixarà d'existir. \n" +
+            " - mostra_alfabet  : Comanda per a visualitzar tota la informació rellevant d'un alfabet existent. \n" +
+            " - nou_layout      : Comanda per a crear un nou layout, a partir d'una mida. \n"+
+            "                     Es creen diferents paràmetres automàticament que generen un layout.\n" +
+            "                     El sistema està optimitzat per a mides entre 16 i 48. A més el sistema genera, inicialment, \n" +
+            "                     4 layouts de mides entre 24 i 27. \n" +
+            " - mostra_layout   : Comanda per a visualitzar tota la informació rellevant d'un layout existent. \n" +
+            " - esborra_layout  : Comanda per a esborrar un layout existent i no generat inicialment. \n" + 
+            "                     Per mides entre 24 i 27 no es podrà esborrar. \n" +
             "\n" +
-            "   llista_teclats  : Comanda per a llistar informació reduïda de tots els teclats creats. \n" +
-            "   llista_alfabets : Comanda per a llistar informació reduïda de tots els alfabets creats. \n" +
-            "   llista_layouts  : Comanda per a llistar informació reduïda de tots els layouts existens. \n" +
+            " - llista_teclats  : Comanda per a llistar informació reduïda de tots els teclats creats. \n" +
+            " - llista_alfabets : Comanda per a llistar informació reduïda de tots els alfabets creats. \n" +
+            " - llista_layouts  : Comanda per a llistar informació reduïda de tots els layouts existens. \n" +
             "\n" +
             "   finalitzar : Comanda per a finalitzar l'execució del programa. \n"
         );
