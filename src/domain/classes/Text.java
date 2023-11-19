@@ -19,6 +19,7 @@ public class Text implements StrategyAlfabet {
         map = a.processCharacters(text, lenght, map);
         a.setSize(map.size());
         double[][] matrix = new double[map.size()][map.size()];
+        // tota la matriu ha desta a 0
         matrix = a.processFrequencies(text, lenght, matrix);
         matrix = a.calculateFrecuencies(map, matrix);
         map = a.calculateCharacters(lenght, map);
@@ -43,7 +44,7 @@ public class Text implements StrategyAlfabet {
                     // fer un contador perque no sempre entri a fer la conversió
                     // si han passat 20 strings i no hi ha error deixar de convertir a Float
                 }
-                text += input;
+                text += input.toLowerCase();
             }
             myReader.close();
         }
