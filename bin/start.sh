@@ -1,1 +1,2 @@
-java class/Main.class
+cd class
+java Main
