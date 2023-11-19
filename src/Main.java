@@ -1,5 +1,3 @@
-package src;
-
 import java.io.FileNotFoundException;
 
 import src.presentation.CtrlPresentacio;
