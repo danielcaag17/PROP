@@ -2,6 +2,7 @@ package src.domain.classes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Scanner;
 
 import src.exceptions.FormatDadesNoValid;
@@ -9,11 +10,19 @@ import src.exceptions.FormatDadesNoValid;
 public class Text implements StrategyAlfabet {
 
     @Override
-    public Alfabet read(String path) {
+    public Alfabet read (String path) throws FormatDadesNoValid, FileNotFoundException {
         String text = getText(path);
         int lenght = text.length();
-        processCharacters(text, lenght);
-        calculateProbabilities(lenght);
+        Alfabet a = new Alfabet();
+        Map<Character, Double> map = a.processCharacters(text, lenght);
+        a.setSize(map.size());
+        double[][] matrix = a.processFrequencies(text, lenght, map.size());
+        matrix = a.calculateFrecuencies(map, matrix);
+        map = a.calculateCharacters(lenght, map);
+
+        a.setCharacters(map);
+        a.setFrequencies(matrix);
+        return a;
     }
 
     private String getText (String path) throws FormatDadesNoValid, FileNotFoundException {
