@@ -20,7 +20,7 @@ public class CtrlPresentacio {
     }
 
     public String[] getListTeclats() {
-        return cd.getListLayouts();
+        return cd.getListTeclats();
     }
 
     public String[] getListAlfabets() {
