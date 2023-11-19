@@ -21,7 +21,8 @@ public class AlfabetTest {
         Alfabet a = new Alfabet("Alfabet1");
 
         // if (ta == text)
-        a.readInput("text", "./Alfabet.java");
+        String path = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        a.readInput("text", path);
         System.out.println(a.getAbecedari());
 
         // else if (ta == "llista-paraules")
