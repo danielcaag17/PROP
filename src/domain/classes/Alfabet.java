@@ -110,7 +110,7 @@ public class Alfabet {
         return matrix;
     }
 
-        /**
+    /**
      * Pre: map té la mida de l'Alfabet,
      *      la suma de totes les aparicions de cada lletra és igual a length
      * Post: s'ha calculat la freqüència de cada lletra en l'Alfabet
@@ -129,6 +129,14 @@ public class Alfabet {
         return map;
     }
 
+    /**
+     * Pre: 
+     * Post: s'ha instanciat la classe StrategyAlfabet pertinent
+     * 
+     * @param strategy string per identificar quina estrategia utilitzar.
+     * 
+     * @throws TipusDadesNoValid si no hi ha un tipus d'estrategia demanat per strategy.
+     */
     private void setStrategy (String strategy) throws TipusDadesNoValid {
         switch (strategy) {
             case "text":
@@ -142,45 +150,88 @@ public class Alfabet {
         }
     }
 
+    /**
+     * Pre: 
+     * Post: associa l'estructura de dades per guardar la freqüencia de cada lletra amb map
+     */
     public void setCharacters (Map<Character, Double> map) {
         this.characters = map;
     }
 
+    /**
+     * Pre: 
+     * Post: associa l'estructura de dades per guardar la probabilitat que donada una lletra
+     *       aparegui la següent amb matrix
+     */
     public void setFrequencies (double[][] matrix) {
         this.frequencies = matrix;
     }
 
+    /**
+     * Pre: 
+     * Post: associa la mida de l'Alfabet amb size
+     */
     public void setSize (int size) {
         this.size = size;
     }
 
+    /**
+     * Pre: 
+     * Post: associa el nom que identifica l'Alfabet amb nom
+     */
     public void setNom (String nom) {
         this.nom = nom;
     }
 
+    /**
+     * Pre: 
+     * Post: es retorna la mida de l'Alfabet
+     * 
+     * @return la mida de l'Alfabet
+     */
     public int getSize () {
         return size;
     }
 
+    /**
+     * Pre: 
+     * Post: es retorna el nom que identifica l'Alfabet
+     * 
+     * @return el nom que identifica l'Alfabet
+     */
     public String getNom () {
         return nom;
     }
 
+    /**
+     * Pre: 
+     * Post: es retorna les lletres que pertanyen a l'alfabet
+     * 
+     * @return les lletres de l'alfabet
+     */
     // Retorna les lletres de l'alfabet
     public char[] getAbecedari () {
-        char[] abecedari = new char[this.size];
+        char[] abecedari = new char[this.size];         // Crea un array de char que representa cada lletra de l'Alfabet
         int i = 0;
-        for (Character c : characters.keySet()) {
+        for (Character c : characters.keySet()) {       // Recorre tot  
             abecedari[i] = c;
             i++;
         }
         return abecedari;
     }
 
+        /**
+     * Get a matrix with number of rows = nfil and number of columns = ncol
+     * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
+     */
     public double[][] getFrequencies () {
         return frequencies;
     }
 
+        /**
+     * Get a matrix with number of rows = nfil and number of columns = ncol
+     * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
+     */
     public Map<Character, Double> getCharacter () {
         return characters;
     }
