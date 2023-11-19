@@ -13,6 +13,7 @@ private String nom;                             // clau primària
     public Alfabet (String nom) {
         this.nom = nom;
         size = 0;
+        characters = new HashMap<>();
     }
 
 
@@ -66,7 +67,7 @@ private String nom;                             // clau primària
 
     private void setX (String text, int length) {
         for (int i = 0; i < length - 1; i++) {
-                if (text.charAt(i) != ' ') {                       // veure la lletra seguent
+            if (text.charAt(i) != ' ') {                       // veure la lletra seguent
                 char next = Character.toLowerCase(text.charAt(i+1));
                 int j = Character.toLowerCase(text.charAt(i)) - 'a';
                 int k = next - 'a';
@@ -83,7 +84,8 @@ private String nom;                             // clau primària
             characters.replace(c, probabilitat);      // associar la lletra amb la seva probabilitat
 
             for (int i = 0; i < size; i++) { //size ha de ser de la  mateixa mida que la matriu
-                frequencies[c][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
+                int j = c - 'a';
+                frequencies[j][i] /= nAparicions;     //dividir la matrix duna fila pel valor que conte el vector que conta el nombre
                                             //de vegades que apareix la lletra 
                                             // Ull divisions entre 0 --> tractar EXC
             }
