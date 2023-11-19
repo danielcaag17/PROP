@@ -5,20 +5,32 @@ import java.util.*;
 public class Generador { // segons el patró estrategia, la classe no ha de ser abstracta
     private Strategy S;
 
+    // Veure si sha de fer un new Strategy
     public Generador () {
         // res
     }
 
-    public Map<Character, Integer> generarTeclat(double[][] freqMatrix, double[][] distMatrix, char[] abcdari, Map<Character, Double> freqAbs) {
-        double[] freqAbsArray = getFreqAbsolute(abcdari, freqAbs);
+    public Map<Character, Integer> generarTeclat(double[][] freqMatrix, double[][] distMatrix, Map<Character, Double> freqAbs) {
+        double[] freqAbsArray = getFreqAbsolute(freqAbs);
         ArrayList<Integer> resultAlgorithm = S.generarTeclat(freqMatrix, freqAbsArray, distMatrix);   // a definir quina estructura retorna
+        char[] abcdari = getAbcdari(freqAbs);
         return beautifyResult(resultAlgorithm, abcdari);
     }
 
-    private double[] getFreqAbsolute(char[] abcdari, Map<Character, Double> freqAbs) {
-        double[] res = new double[abcdari.length];
-        for (int i = 0; i<abcdari.length; i++) {
-            res[i] = freqAbs.get(abcdari[i]);
+    private double[] getFreqAbsolute(Map<Character, Double> freqAbs) {
+        double[] res = new double[freqAbs.size()];
+        int i = 0;
+        for (Character c : freqAbs.keySet()) {
+            res[i] = freqAbs.get(c);
+        }
+        return res;
+    }
+
+    private char[] getAbcdari (Map<Character, Double> freqAbs) {
+        char[] res = new char[freqAbs.size()];
+        int i = 0;
+        for (Character c : freqAbs.keySet()) {
+            res[i] = c;
         }
         return res;
     }
