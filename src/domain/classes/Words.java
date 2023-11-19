@@ -3,6 +3,7 @@ package src.domain.classes;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import src.exceptions.FormatDadesNoValid;
@@ -10,15 +11,28 @@ import src.exceptions.FormatDadesNoValid;
 public class Words implements StrategyAlfabet {
 
     @Override
-    public Alfabet read(String path) {
+    public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException {
         HashMap<String, Double> words = getWords(path);
+        Alfabet a = new Alfabet();
         int totalLenght = 0;
+        Map<Character, Double> map = new HashMap<>();
         for (String s : words.keySet()) {
             int lenght = s.length();
-            processCharacters(s, lenght);
+            map = a.processCharacters(s, lenght, map);
             totalLenght += lenght;
         }
-        calculateProbabilities(totalLenght);
+        double[][] matrix = new double[map.size()][map.size()];
+        for (String s : words.keySet()) {
+            int lenght = s.length();
+            matrix = a.processFrequencies(s, lenght, matrix);
+        }
+        matrix = a.calculateFrecuencies(map, matrix);
+        map = a.calculateCharacters(totalLenght, map);
+
+        a.setSize(map.size());
+        a.setCharacters(map);
+        a.setFrequencies(matrix);
+        return a;
     }
 
     
