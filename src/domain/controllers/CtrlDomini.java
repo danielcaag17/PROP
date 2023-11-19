@@ -99,7 +99,7 @@ public class CtrlDomini {
             Alfabet a = Alfabets.get(key);
             s[i] = "Nom: " + a.getNom() + 
                    " - Mida: " + a.getSize() +
-                   " - Abecedari: " + a.getAbecedari();
+                   " - Abecedari: " + a.getAbecedari().toString();
             i++;
         }
         return s;
