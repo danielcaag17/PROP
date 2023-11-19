@@ -209,28 +209,31 @@ public class Alfabet {
      * 
      * @return les lletres de l'alfabet
      */
-    // Retorna les lletres de l'alfabet
     public char[] getAbecedari () {
         char[] abecedari = new char[this.size];         // Crea un array de char que representa cada lletra de l'Alfabet
         int i = 0;
-        for (Character c : characters.keySet()) {       // Recorre tot  
+        for (Character c : characters.keySet()) {       // Recorre l'estructura on es guarda l'abecedari
             abecedari[i] = c;
             i++;
         }
         return abecedari;
     }
 
-        /**
-     * Get a matrix with number of rows = nfil and number of columns = ncol
-     * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
+    /**
+     * Pre: 
+     * Post: es retorna la matriu amb les probabilitats que donada una lletra aparegui la següent amb matrix 
+     * 
+     * @return la matriu amb les probabilitats que donada una lletra aparegui la següent amb matrix
      */
     public double[][] getFrequencies () {
         return frequencies;
     }
 
-        /**
-     * Get a matrix with number of rows = nfil and number of columns = ncol
-     * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
+    /**
+     * Pre: 
+     * Post: es retorna la freqüència de cada lletra de l'Alfabet
+     * 
+     * @return la freqüència de cada lletra de l'Alfabet
      */
     public Map<Character, Double> getCharacter () {
         return characters;
