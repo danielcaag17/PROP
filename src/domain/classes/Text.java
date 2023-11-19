@@ -2,6 +2,7 @@ package src.domain.classes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,9 +15,11 @@ public class Text implements StrategyAlfabet {
         String text = getText(path);
         int lenght = text.length();
         Alfabet a = new Alfabet();
-        Map<Character, Double> map = a.processCharacters(text, lenght);
+        Map<Character, Double> map = new HashMap<>();
+        map = a.processCharacters(text, lenght, map);
         a.setSize(map.size());
-        double[][] matrix = a.processFrequencies(text, lenght, map.size());
+        double[][] matrix = new double[map.size()][map.size()];
+        matrix = a.processFrequencies(text, lenght, matrix);
         matrix = a.calculateFrecuencies(map, matrix);
         map = a.calculateCharacters(lenght, map);
 
