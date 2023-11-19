@@ -30,8 +30,7 @@ public class Alfabet {
         setSize(a.size);
     }
 
-    public Map<Character, Double> processCharacters (String text, int length) {
-        Map<Character, Double> chars = new HashMap<>();
+    public Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> chars) {
         for (int i = 0; i < length; i++) {
             Character c = text.charAt(i);
             if (c != ' ') {
@@ -45,8 +44,7 @@ public class Alfabet {
         return chars;
     }
 
-    public double[][] processFrequencies (String text, int length, int size) {
-        double[][] freqs = new double[size][size];
+    public double[][] processFrequencies (String text, int length, double[][] freqs) {
         for (int i = 0; i < length - 1; i++) {
             if (text.charAt(i) != ' ') {                       // veure la lletra seguent
                 char next = Character.toLowerCase(text.charAt(i+1));
