@@ -77,25 +77,16 @@ public class Alfabet {
      * @param abecedari array que contè les lletres de l'Alfabet.
      * 
      * @return la matriu de probabilitats.
+     * 
+     * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari
      */
-    public double[][] processFrequencies (String text, int length, double[][] matrix, char[] abecedari) {
+    public double[][] processFrequencies (String text, int length, double[][] matrix, char[] abecedari) throws EntradaLlegidaMalament {
         for (int i = 0; i < length - 1; i++) {          // Recorregut del text fins la lletra anterior a la última
             char c = text.charAt(i);                    // Agafar la lletra actual
             char next = text.charAt(i+1);               // Agafar la següent lletra
 
-            int j = 0, k = 0;
-            try {                                       //Trobar els índexs de la matriu per la cada lletra
-                j = findIndex(c, abecedari);
-            }
-            catch (EntradaLlegidaMalament e){
-                System.out.println("[!] > ERROR: Aquest Layout no existeix.");
-            }
-            try {
-                k = findIndex(next, abecedari);
-            }
-            catch (EntradaLlegidaMalament e){
-                System.out.println("[!] > ERROR: Aquest Layout no existeix.");
-            }
+            int j = findIndex(c, abecedari);            //Trobar els índexs de la matriu per la cada lletra
+            int k = findIndex(next, abecedari);
             
             matrix[j][k]++;                             // Sumar 1 aparició a que després de la lletra j apareix la lletra k
         
