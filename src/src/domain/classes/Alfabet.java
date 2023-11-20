@@ -124,13 +124,15 @@ public class Alfabet {
      * @param matrix matriu on es guarda la probabilitat que donada una lletra aparegui la següent.
      * 
      * @return la matriu de probabilitats.
+     * 
+     * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari 
      */
-    public double[][] calculateFrecuencies (Map<Character, Double> map, double[][] matrix) {
+    public double[][] calculateFrecuencies (Map<Character, Double> map, double[][] matrix) throws EntradaLlegidaMalament {
         for (Character c : map.keySet()) {
             double nAparicions = map.get(c);                            // Obtenir el nombre d'aparicions de la lletra c
             if (nAparicions != 0) {                                     // No hauria de passar, però vigilar les divisions entre 0
                 for (int i = 0; i < map.size(); i++) {                  // Pre: size és de la mateixa mida que la matriu
-                    int j = c - 'a';                                    // Passar la lletra a int per tenir quin és el seu índex a la matriu
+                    int j = findIndex(c, getAbecedari());                                    // Passar la lletra a int per tenir quin és el seu índex a la matriu
                     matrix[j][i] /= nAparicions;          // Dividir tota la fila de matrix pel nombre de vegades que apareix
                 }
             }
