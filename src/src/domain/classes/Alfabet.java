@@ -55,7 +55,7 @@ public class Alfabet {
      */
     public Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> map) {
         for (int i = 0; i < length; i++) {
-            Character c = text.charAt(i);               // Agafar la lletra que es troba en la posició i del text
+            Character c = text.charAt(i);             // Agafar la lletra que es troba en la posició i del text
             if (! map.containsKey(c)) {               // Comprovar que la lletra c no s'ha vist encara
                 map.put(c, 0.0);;                     // Crear una nova entrada per aquesta lletra c amb 0 aparicions
             }
