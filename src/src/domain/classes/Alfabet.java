@@ -127,7 +127,7 @@ public class Alfabet {
      * 
      * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari 
      */
-    public double[][] calculateFrecuencies (Map<Character, Double> map, double[][] matrix) throws EntradaLlegidaMalament {
+    public double[][] calculateFrequencies (Map<Character, Double> map, double[][] matrix) throws EntradaLlegidaMalament {
         for (Character c : map.keySet()) {
             double nAparicions = map.get(c);                            // Obtenir el nombre d'aparicions de la lletra c
             if (nAparicions != 0) {                                     // No hauria de passar, però vigilar les divisions entre 0

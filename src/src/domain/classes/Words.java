@@ -28,7 +28,7 @@ public class Words implements StrategyAlfabet {
             int lenght = s.length();
             matrix = a.processFrequencies(s, lenght, matrix, abecedari);
         }
-        matrix = a.calculateFrecuencies(map, matrix);
+        matrix = a.calculateFrequencies(map, matrix);
         map = a.calculateCharacters(totalLenght, map);
 
         a.setSize(map.size());

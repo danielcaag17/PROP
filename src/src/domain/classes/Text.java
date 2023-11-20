@@ -24,7 +24,7 @@ public class Text implements StrategyAlfabet {
         double[][] matrix = new double[map.size()][map.size()];
         // tota la matriu ha desta a 0
         matrix = a.processFrequencies(text, lenght, matrix, abecedari);
-        matrix = a.calculateFrecuencies(map, matrix);
+        matrix = a.calculateFrequencies(map, matrix);
         map = a.calculateCharacters(lenght, map);
 
         a.setCharacters(map);
