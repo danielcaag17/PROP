@@ -240,7 +240,7 @@ public class IOterminal {
         String path = answerString();
         try {
             ctrlPresentacio.afegirAlfabet(nom, tipus, path);
-            System.out.println(output + "Alfabet creat amb nom: '"+nom+"'' i tipus: '"+tipus+"'.");
+            System.out.println(output + "Alfabet creat amb nom: '"+nom+"' i tipus: '"+tipus+"'.");
         }
         catch(Excepcions e) {
             switch (e.getTipus()) {
