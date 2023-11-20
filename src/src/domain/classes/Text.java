@@ -18,9 +18,12 @@ public class Text implements StrategyAlfabet {
         Map<Character, Double> map = new HashMap<>();
         map = a.processCharacters(text, lenght, map);
         a.setSize(map.size());
+        a.setCharacters(map);
+        char[] abecedari = a.getAbecedari();
         double[][] matrix = new double[map.size()][map.size()];
         // tota la matriu ha desta a 0
-        matrix = a.processFrequencies(text, lenght, matrix);
+        for (int i = 0; i < abecedari.length; i++) System.out.print(abecedari[i]);
+        matrix = a.processFrequencies(text, lenght, matrix, abecedari);
         matrix = a.calculateFrecuencies(map, matrix);
         map = a.calculateCharacters(lenght, map);
 
