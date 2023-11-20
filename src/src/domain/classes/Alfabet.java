@@ -31,7 +31,6 @@ public class Alfabet {
      * 
      * @param ta tipus de les dades per crear l'Alfabet i l'estrategia a utilitzar.
      * @param pf path al fitxer on hi ha guardades les dades.
-     * @throws EntradaLlegidaMalament
      */
     public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
@@ -76,8 +75,6 @@ public class Alfabet {
      * @param matrix matriu on es guarda la probabilitat que donada una lletra aparegui la següent.
      * 
      * @return la matriu de probabilitats.
-     * 
-     * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari
      */
     public double[][] processFrequencies (String text, int length, double[][] matrix) throws EntradaLlegidaMalament {
         for (int i = 0; i < length - 1; i++) {          // Recorregut del text fins la lletra anterior a la última
@@ -119,8 +116,6 @@ public class Alfabet {
      * @param matrix matriu on es guarda la probabilitat que donada una lletra aparegui la següent.
      * 
      * @return la matriu de probabilitats.
-     * 
-     * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari 
      */
     public double[][] calculateFrequencies (double[][] matrix) throws EntradaLlegidaMalament {
         for (Character c : characters.keySet()) {

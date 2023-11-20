@@ -129,7 +129,7 @@ public class Teclat {
      */
     public Integer getPosLletra (Character a) throws LletraNoTeclat {
         if (! teclat.containsKey(a))
-            throw new LletraNoTeclat();
+            throw new LletraNoTeclat(Character.toString(a));
         return teclat.get(a);
     }
 
