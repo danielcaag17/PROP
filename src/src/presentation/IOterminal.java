@@ -259,7 +259,6 @@ public class IOterminal {
                 default:
                     System.out.println(errorOutput + "ERROR: " + e.getMessage());
             }
-            System.out.println(errorOutput + "ERROR: Aquest Alfabet ja existeix. Prova amb un altre nom.");
         }
         catch(FileNotFoundException e) {
             System.out.println(errorOutput + "ERROR: El fitxer "+path+" no s'ha trobat.");
