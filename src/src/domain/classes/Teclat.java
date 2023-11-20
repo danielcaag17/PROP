@@ -2,7 +2,6 @@ package src.domain.classes;
 
 import java.util.Map;
 
-import src.exceptions.TeclatNoExisteix;
 import src.exceptions.LletraNoTeclat;
 
 public class Teclat {
@@ -184,8 +183,9 @@ public class Teclat {
      */
     @Override
     public String toString() {
-        String result = nom + "\n";                                         // Guarda el nom del Teclat a result
-        result += A.getNom() + "\n";                                        // Guardar el nom de l'Alfabet a result
+        String result = "Nom:" + nom + "\n";                                // Guarda el nom del Teclat a result
+        result += "Nom Alfabet: " + A.getNom() + "\n";                      // Guardar el nom de l'Alfabet a result
+        result += "Teclat: \n";
         for (int i = 0; i < distribucioCharacters.length; i++) {
             for (int j = 0; j < distribucioCharacters[i].length; j++) {
                 result += distribucioCharacters[i][j] + " ";                // Guardar tota la matriu que representa el Teclat
