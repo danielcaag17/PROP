@@ -240,7 +240,7 @@ public class IOterminal {
         String path = answerString();
         try {
             ctrlPresentacio.afegirAlfabet(nom, tipus, path);
-            System.out.println(output + "Alfabet creat amb nom:"+nom+" i tipus:"+tipus);
+            System.out.println(output + "Alfabet creat amb nom: '"+nom+"'' i tipus: '"+tipus+"'.");
         }
         catch(Excepcions e) {
             switch (e.getTipus()) {
@@ -333,6 +333,7 @@ public class IOterminal {
         System.out.println(output + "Finalment, indica el Layout que vols fer servir, amb la seva mida (veure 'more_info'):");
         Integer idLayout = answerInteger();
         try {
+            System.out.println("Generant teclat...");
             ctrlPresentacio.crearNouTeclat(nom, nomAlfabet, idLayout);
             System.out.println(output + "Teclat "+nom+" creat.");
         }
