@@ -84,9 +84,8 @@ public class Alfabet {
             char c = text.charAt(i);                    // Agafar la lletra actual
             char next = text.charAt(i+1);               // Agafar la següent lletra
 
-            int j = findIndex(c);            //Trobar els índexs de la matriu per la cada lletra
+            int j = findIndex(c);                       //Trobar els índexs de la matriu per la cada lletra
             int k = findIndex(next);
-            
             matrix[j][k]++;                             // Sumar 1 aparició a que després de la lletra j apareix la lletra k
         
         }
@@ -199,7 +198,7 @@ public class Alfabet {
      * Post: associa l'estructura de dades per guarda l'abecedari de l'Alfabet
      */
     private void setAbecedari () {
-        char[] abecedari = new char[this.characters.size()];        // Crea un array de char que representa cada lletra de l'Alfabet
+        abecedari = new char[this.characters.size()];        // Crea un array de char que representa cada lletra de l'Alfabet
         int i = 0;
         for (Character c : characters.keySet()) {                   // Recorre l'estructura on es guarda l'abecedari
             abecedari[i] = c;
