@@ -106,18 +106,6 @@ public class CtrlDomini {
         }
         return s;
     }
-    
-    private String getString(int[][] mat) {
-        String s = "";
-        for(int i = 0; i < mat.length; i++) {
-            s+="\n";
-            for(int j = 0; j < mat[i].length; j++) {
-                if (mat[i][j] < 10) s += "0";
-                s += mat[i][j] + " ";
-            }
-        }
-        return s;
-    }
 
     /**
      * @return Retorna un array de String amb la mida i la matriu de distribució d'ids de cada layout del sistema
@@ -128,7 +116,7 @@ public class CtrlDomini {
         for (Integer key : Layouts.keySet()) {
             Layout l = Layouts.get(key);
             s[i] = "Mida: " + l.getSize() + 
-                   "\n - Matriu distribució d'ids: " + getString(l.getDistribucioFilled()); // Aquest toString() s'hauria de veure que fa.
+                   "\n - Matriu distribució d'ids: " + l.getDistribucioFilledString(); // Aquest toString() s'hauria de veure que fa.
             i++;
         }
         return s;
