@@ -14,15 +14,17 @@ public class Text implements StrategyAlfabet {
     public Alfabet read (String path) throws FormatDadesNoValid, FileNotFoundException {
         String text = getText(path);
         int lenght = text.length();
+
         Alfabet a = new Alfabet();
         Map<Character, Double> map = new HashMap<>();
         map = a.processCharacters(text, lenght, map);
+
         a.setSize(map.size());
         a.setCharacters(map);
+        System.out.println(map.get('a'));
         char[] abecedari = a.getAbecedari();
         double[][] matrix = new double[map.size()][map.size()];
         // tota la matriu ha desta a 0
-        for (int i = 0; i < abecedari.length; i++) System.out.print(abecedari[i]);
         matrix = a.processFrequencies(text, lenght, matrix, abecedari);
         matrix = a.calculateFrecuencies(map, matrix);
         map = a.calculateCharacters(lenght, map);
