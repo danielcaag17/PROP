@@ -8,6 +8,18 @@ class BranchBound implements Strategy {
     private double[][] Distancies;
     private int n_size;
 
+    private void printProgressBar(int percentage) {
+        int size = 30;
+        int nbars = (int) ((double)percentage/100*size);
+        int nspaces = size - nbars - 1;
+        if (percentage == 100) System.out.println("\rProgress: [" + "=".repeat(size) + "] 100%");
+        else {
+            System.out.print("\rProgress: [" + "=".repeat(nbars) + ">" + " ".repeat(nspaces)
+                             + "] " + percentage + "%");
+        }
+    }
+
+
     private double cost(int c1, int p1, int c2, int p2) {
         // c1 i c2 són els IDs de caracter
         // p1 i p2 són les posicions (tecles) dels respectius caràcters
@@ -243,17 +255,32 @@ class BranchBound implements Strategy {
         return cotaGil;
     }
 
-    private int greedyStart() {
-        // Emplaça el caràcter més freqüent de tots en primera posició de la solució parcial
-        double max = 0; // Frequencia més alta
-        int index = 0; // CharID del caràcter més frequent
-        for (int i = 0; i < AbsoluteFreqs.length; i++) {
-            if (AbsoluteFreqs[i] > max) {
-                max = AbsoluteFreqs[i];
-                index = i;
-            }
+    private int[] mostFrequentChars(int n_chars) {
+        // Retorna una array que conté els indexos dels n_chars caràcters més frequents.
+        ArrayList<Double> auxFreqsList = new ArrayList<>(n_size);
+        for (int i = 0; i < n_size; i++) auxFreqsList.add(AbsoluteFreqs[i]);
+
+        double[] sortedFreqs = AbsoluteFreqs.clone();
+        Arrays.sort(sortedFreqs);
+
+        double[] top_freqs = new double[n_chars];
+        for (int i = 1; i <= n_chars; i++) top_freqs[i-1] = sortedFreqs[n_size-i];
+
+        int[] res = new int[n_chars];
+        for (int i = 0; i < n_chars; i++) {
+            double auxFreq = top_freqs[i];
+            int target_index = auxFreqsList.indexOf(auxFreq);
+            // Un cop sabem l'index de la frequencia que busquem, sobreescrivim el valor de la
+            // frequencia en la llista auxiliar de frequencies, d'aquesta forma si tenim més
+            // d'un index amb la mateixa frequencia no estem afegint dos cops el mateix character ID
+            // al resultat.
+            auxFreqsList.set(target_index, 0.0);
+            res[i] = target_index;
         }
-        return index;
+        // System.out.println(Arrays.toString(AbsoluteFreqs));
+        // System.out.println(Arrays.toString(top_freqs));
+        // System.out.println(Arrays.toString(res));
+        return res;
     }
 
     public ArrayList<Integer> algorithm() {
@@ -273,15 +300,28 @@ class BranchBound implements Strategy {
         double iterCota = 0;
 
         // Greedy Start to improve efficiency
-        int most_frequent = greedyStart();
-        bestSolution.add(most_frequent);
-        charsMissing.remove((Integer)most_frequent);
+        int greedy_lvl = 4;
+        int[] greedyStart = mostFrequentChars(greedy_lvl);
+        for (int i = 0; i < greedy_lvl; i++) {
+            bestSolution.add(greedyStart[i]);
+            charsMissing.remove((Integer)greedyStart[i]);
+        }
+        
+        // Progress Bar
+        int n_iterations = 0;
+        int max_iterations = 1;
+        for (int i = n_size; i > 1; i--) max_iterations += i;
+        int percent = 0;
 
+        // Branching algorithm
         while (charsMissing.size() > 0) {
             bestIterSolution.clear();
             bestIterCota = 0;
 
             for (int char_id : charsMissing) {
+                percent = (int)((double) n_iterations / max_iterations * 100);
+                printProgressBar(percent);
+
                 iterSolution.clear();
                 iterSolution.addAll(bestSolution);
                 iterSolution.add(char_id);
@@ -301,6 +341,7 @@ class BranchBound implements Strategy {
                     
                     bestIterCota = iterCota;
                 }
+                n_iterations++;
             }
             bestSolution.clear();
             bestSolution.addAll(bestIterSolution);
@@ -310,6 +351,7 @@ class BranchBound implements Strategy {
 
             bestCota = bestIterCota;
         }
+        printProgressBar(100);
         System.out.println("Cota Gilmore: " + bestCota); // DEBUG
         return bestSolution;
     }
