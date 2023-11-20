@@ -1,43 +1,74 @@
 package src.drivers;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import src.domain.classes.Alfabet;
+import src.exceptions.EntradaLlegidaMalament;
+import src.exceptions.FormatDadesNoValid;
+import src.exceptions.TipusDadesNoValid;
 
 public class DriverAlfabet {
-    private static Alfabet a1, a2, a3;
-    private String pathText1 = "../../test/exemples_input_alfabet/Text1.txt";      // Text en anglès
-    private String pathText2 = "../../test/exemples_input_alfabet/Text2.txt";      // Text en català
-    private String pathText3 = "../../test/exemples_input_alfabet/Text3.txt";      // Text en castellà
-    private String pathWords1 = "../../test/exemples_input_alfabet/Words1.txt";    // Frecuencies en anglès
-    private String pathWords2 = "../../test/exemples_input_alfabet/Words2.txt";    // Frecuencies en català
-    private String pathWords3 = "../../test/exemples_input_alfabet/Words3.txt";    // Frecuencies en castellà
 
-
-    public static void main (String[] args) {
-        a1 = new Alfabet(null);
-        a2 = new Alfabet("Alfabet A2");
-        a3 = new Alfabet("Alfabet A3")
-
-        //-------------------------------------------------------------
-        // getNom();
-        System.out.println("El nom de l'Alfabet es "+ a1.getNom()+"\n");
-        System.out.println("El nom de l'Alfabet es "+ a2.getNom()+"\n");
-        System.out.println("El nom de l'Alfabet es "+ a3.getNom()+"\n");
-
-
-        //-------------------------------------------------------------
-        // setNom();
-        System.out.println("Assignar nom a a1 --> A1");
-        a1.setNom("A1");
-        System.out.println("El nom de l'Alfabet es "+ a1.getNom()+"\n");
-
-
-        //-------------------------------------------------------------
-        // readInput();
-        System.out.println("El nom de l'Alfabet es "+ a1.getNom()+"\n");
-        System.out.println("El nom de l'Alfabet es "+ a2.getNom()+"\n");
-
-
-
-
+    public static void main (String[] args) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+        Alfabet A = new Alfabet("Alfabet de prova");
+        Scanner sc = new Scanner(System.in);
+        int func = 0;
+        while (func != 6){
+            System.out.println("Selecciona una de les funcionalitats:");
+            System.out.println("\t1. ReadInput");
+            System.out.println("\t2. GetAbecedari");
+            System.out.println("\t3. GetFrequencies");
+            System.out.println("\t4. GetCharacter");
+            System.out.println("\t5. obteInfo (toString method)");
+            System.out.println("\t6. Sortir");
+            func = sc.nextInt();
+            switch(func){
+                case 1: 
+                    System.out.println("Indica el format d'entrada:");
+                    System.out.println("1 --> text");
+                    System.out.println("2 --> llista-paraules");
+                    int opc = sc.nextInt();
+                    sc.nextLine();
+                    if (opc == 1) {
+                        System.out.println("Indica el path:");
+                        String path = sc.nextLine();
+                        A.readInput("text", path);
+                        System.out.println("Input llegit");
+                    }
+                    else if (opc == 2) {
+                        System.out.println("Indica el path:");
+                        String path = sc.nextLine();
+                        A.readInput("llista-paraules", path);
+                    }
+                    else System.out.println("Opció incorrecte");
+                    break;
+                case 2: 
+                    System.out.println(A.getAbecedari());
+                    break;
+                case 3: 
+                    double[][] x = A.getFrequencies();
+                    for (int i = 0; i < A.getSize(); i++) {
+                        for (int j = 0; j < A.getSize(); j++) 
+                            System.out.print(Double.toString(x[i][j]) + " ");
+                        System.out.print("\n");
+                    }
+                    break;
+                case 4: 
+                    System.out.println(A.getCharacter().toString());
+                    break;
+                case 5: 
+                    System.out.println(A.toString());
+                    break;
+                case 6:
+                    System.out.println("Sortint del driver");
+                    sc.close();
+                    break;
+                default:
+                    System.out.println("Funcionalitat equivocada");
+                    break;
+            }
+            System.out.println("\n");
+        }
     }
 }
