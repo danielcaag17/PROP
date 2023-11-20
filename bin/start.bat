@@ -1,2 +1,2 @@
 cd class
-java Main
+java src.Main
