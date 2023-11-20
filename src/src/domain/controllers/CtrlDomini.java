@@ -101,7 +101,7 @@ public class CtrlDomini {
             Alfabet a = Alfabets.get(key);
             s[i] = "Nom: " + a.getNom() + 
                    " - Mida: " + a.getSize() +
-                   " - Abecedari: " + a.getAbecedari().toString();
+                   " - Abecedari: " + Arrays.toString(a.getAbecedari());
             i++;
         }
         return s;
@@ -213,7 +213,7 @@ public class CtrlDomini {
      * @see (*)que s'ha comprovat previàment.
      * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
      */
-    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid {
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a = new Alfabet(na);
         a.readInput(ta, pf);

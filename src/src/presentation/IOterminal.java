@@ -253,7 +253,11 @@ public class IOterminal {
                 case "FormatDadesNoValid":
                     System.out.println(errorOutput + "ERROR: El format de les dades del fitxer "+path+" no és vàlid. (Veure more_info)");
                     break;
-            
+                case "EntradaLlegidaMalament":
+                    System.out.println(errorOutput + "ERROR: Hi ha hagut un error en el processament de les dades.");
+                    break;
+                default:
+                    System.out.println(errorOutput + "ERROR: " + e.getMessage());
             }
             System.out.println(errorOutput + "ERROR: Aquest Alfabet ja existeix. Prova amb un altre nom.");
         }

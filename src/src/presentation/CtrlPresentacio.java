@@ -47,7 +47,7 @@ public class CtrlPresentacio {
         cd.esborrarTeclat(nt);
     }
 
-    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid {
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
         cd.afegirAlfabet(na, ta, pf);
     }
 
