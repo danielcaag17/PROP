@@ -89,16 +89,6 @@ public class Teclat {
         teclat.put(b, aux);
     }
 
-    // ????
-    public void guardarTeclat () {
-
-    }
-
-    // UI
-    public void provarTeclat () {
-
-    }
-
     /**
      * Pre: 
      * Post: es retorna el nom que identifica el Teclat
