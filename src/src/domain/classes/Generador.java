@@ -27,6 +27,7 @@ public class Generador { // segons el patró estrategia, la classe no ha de ser 
         int i = 0;
         for (Character c : freqAbs.keySet()) {
             res[i] = freqAbs.get(c);
+            i++;
         }
         return res;
     }
@@ -36,6 +37,7 @@ public class Generador { // segons el patró estrategia, la classe no ha de ser 
         int i = 0;
         for (Character c : freqAbs.keySet()) {
             res[i] = c;
+            i++;
         }
         return res;
     }
