@@ -193,6 +193,16 @@ public class Layout {
         return c;
     }
 
+    // Documentar
+    public int getRows() {
+        return nfil;
+    }
+
+    // Documentar
+    public int getColumns() {
+        return ncol;
+    }
+
     private String distribucioFilledToString() {
         String s = "";
         for(int i = 0; i < nfil; i++) {

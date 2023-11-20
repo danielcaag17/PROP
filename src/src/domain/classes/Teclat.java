@@ -40,7 +40,7 @@ public class Teclat {
     public void crearTeclat () {                // si es vol fer Genetica s'haura de passar algun paràmetre mes !!!
         // teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getAbecedari(), A.getCharacter());
 
-        // Passar el paràmetres necessaris per a que el Generador pugui generar el teclat
+        // Passar el paràmetres necessaris per a que el Generador pugui generar el teclat   
         teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getCharacter());
         omplirDistribució();                        // Omplir la matriu del Teclat amb la lletra que toca a cada id
     }
@@ -50,6 +50,7 @@ public class Teclat {
      * Post: s'ha omplert la matriu segons la relació entre les lletres i les seves posicions
      */
     private void omplirDistribució () {
+        distribucioCharacters = new char[L.getRows()][L.getColumns()];
         for (Character c : teclat.keySet()) {
             int id = teclat.get(c);                                     // Obtenir la id de cada lletra
             Pair<Integer, Integer> p = L.getCoordenadaFromId(id);       // Traduir la id a la posició de la matriu
