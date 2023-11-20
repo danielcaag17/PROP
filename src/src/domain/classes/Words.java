@@ -1,17 +1,15 @@
 package src.domain.classes;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
+import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 
 public class Words implements StrategyAlfabet {
 
     @Override
-    public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException {
+    public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         HashMap<String, Double> words = getWords(path);
         Alfabet a = new Alfabet();
         int totalLenght = 0;

@@ -31,8 +31,9 @@ public class Alfabet {
      * 
      * @param ta tipus de les dades per crear l'Alfabet i l'estrategia a utilitzar.
      * @param pf path al fitxer on hi ha guardades les dades.
+     * @throws EntradaLlegidaMalament
      */
-    public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException {
+    public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
         setPath(path);
         Alfabet a = strategy.read(path);            // Llegir i processar les dades del fitxer que es troba a path
