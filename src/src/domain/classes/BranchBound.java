@@ -274,7 +274,7 @@ class BranchBound implements Strategy {
             // frequencia en la llista auxiliar de frequencies, d'aquesta forma si tenim més
             // d'un index amb la mateixa frequencia no estem afegint dos cops el mateix character ID
             // al resultat.
-            auxFreqsList.set(target_index, 0.0);
+            auxFreqsList.set(target_index, -1.0);
             res[i] = target_index;
         }
         // System.out.println(Arrays.toString(AbsoluteFreqs));
