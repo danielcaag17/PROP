@@ -42,14 +42,14 @@ public class Teclat {
 
         // Passar el paràmetres necessaris per a que el Generador pugui generar el teclat   
         teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getCharacter());
-        omplirDistribució();                        // Omplir la matriu del Teclat amb la lletra que toca a cada id
+        omplirDistribucio();                        // Omplir la matriu del Teclat amb la lletra que toca a cada id
     }
 
     /**
      * Pre:
      * Post: s'ha omplert la matriu segons la relació entre les lletres i les seves posicions
      */
-    private void omplirDistribució () {
+    private void omplirDistribucio() {
         distribucioCharacters = new char[L.getRows()][L.getColumns()];
         for (Character c : teclat.keySet()) {
             int id = teclat.get(c);                                     // Obtenir la id de cada lletra
