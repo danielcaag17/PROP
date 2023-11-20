@@ -4,7 +4,6 @@ import src.exceptions.FormatDadesNoValid;
 import src.exceptions.TipusDadesNoValid;
 
 import java.io.*;
-import java.util.Vector;
 
 //import static org.junit.Assert.*;
 //import org.junit.Test;
@@ -21,39 +20,46 @@ public class AlfabetTest {
         
         // if (ta == text)
         Alfabet a = new Alfabet("Alfabet1");
-        String path = "./test/exemples_input_alfabet/Text1.txt";
-        System.out.println(path);
+        String path = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         a.readInput("text", path);
-        System.out.println(a.getAbecedari());
+        System.out.println(a.toString());
 
         Alfabet a2 = new Alfabet("Alfabet2");
-        String path2 = "./test/exemples_input_alfabet/Text2.txt";
-        System.out.println(path2);
+        String path2 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt";
         a2.readInput("text", path2);
-        System.out.println(a2.getAbecedari());
+        System.out.println(a2.toString());
         
         Alfabet a3 = new Alfabet("Alfabet3");
-        String path3 = "./test/exemples_input_alfabet/Text3.txt";
-        System.out.println(path3);
+        String path3 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt";
         a3.readInput("text", path3);
-        System.out.println(a3.getAbecedari());
+        System.out.println(a3.toString());
+
 
         // else if (ta == "llista-paraules")
         Alfabet a4 = new Alfabet("Alfabet4");
-        String path4 = "./test/exemples_input_alfabet/Words1.txt";
-        System.out.println(path4);
-        a4.readInput("text", path4);
-        System.out.println(a4.getAbecedari());
+        String path4 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
+        a4.readInput("llista-paraules", path4);
+        System.out.println(a4.toString());
+
+        Alfabet a5 = new Alfabet("Alfabet5");
+        String path5 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt";
+        a5.readInput("llista-paraules", path5);
+        System.out.println(a5.toString());
+
+        Alfabet a6 = new Alfabet("Alfabet6");
+        String path6 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt";
+        a6.readInput("llista-paraules", path6);
+        System.out.println(a6.toString());
 
         // else
         Alfabet a7 = new Alfabet("Alfabet7");
-        a7.readInput("llista-paraules", "string-qualsevol");
-        System.out.println(a7.getAbecedari());
+        a7.readInput("string-qualsevol", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        System.out.println(a7.toString());
         // Valor esperat EXC --> tipus de dades no valid
 
-        Alfabet b = new Alfabet("Alfabet1");
-        b.readInput("llista-paraules", "12345");
-        System.out.println(b.getAbecedari());
+        Alfabet a8 = new Alfabet("Alfabet1");
+        a8.readInput("12345", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        System.out.println(a8.toString());
         // Valor esperat EXC --> tipus de dades no valid
     }
 }
