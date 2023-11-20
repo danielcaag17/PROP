@@ -1,5 +1,6 @@
 package src.JUnit;
 import src.domain.classes.*;
+import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 import src.exceptions.TipusDadesNoValid;
 
@@ -11,14 +12,14 @@ import java.io.*;
 
 public class AlfabetTest {
 
-    public static void main(String[] args) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException {
+    public static void main(String[] args) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         readInput();
     }
 
     //@Test
-    public static void readInput() throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException {
+    public static void readInput() throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         
-        // if (ta == text)
+        // if (ta == text) ---------------------------------------------------------
         Alfabet a = new Alfabet("Alfabet1");
         String path = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         a.readInput("text", path);
@@ -35,7 +36,7 @@ public class AlfabetTest {
         System.out.println(a3.toString());
 
 
-        // else if (ta == "llista-paraules")
+        // else if (ta == "llista-paraules") -----------------------------------------
         Alfabet a4 = new Alfabet("Alfabet4");
         String path4 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
         a4.readInput("llista-paraules", path4);
@@ -51,15 +52,39 @@ public class AlfabetTest {
         a6.readInput("llista-paraules", path6);
         System.out.println(a6.toString());
 
-        // else
+
+        // else -----------------------------------------------------------------------
         Alfabet a7 = new Alfabet("Alfabet7");
         a7.readInput("string-qualsevol", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
         System.out.println(a7.toString());
-        // Valor esperat EXC --> tipus de dades no valid
+        // Valor esperat EXC --> TipusDadesNoValid
 
         Alfabet a8 = new Alfabet("Alfabet1");
         a8.readInput("12345", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
         System.out.println(a8.toString());
-        // Valor esperat EXC --> tipus de dades no valid
+        // Valor esperat EXC --> TipusDadesNoValid
+
+
+        // Altres casos ----------------------------------------------------------------
+        Alfabet a9 = new Alfabet("Alfabet9");
+        a9.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt");
+        System.out.println(a9.toString());
+        // Valor esperat EXC --> FormatDadesNoValid
+
+        Alfabet a10 = new Alfabet("Alfabet10");
+        a10.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt");
+        System.out.println(a10.toString());
+        // Valor esperat EXC --> FileNotFoundException
+
+        Alfabet a11 = new Alfabet("Alfabet11");
+        a11.readInput("llista-paraules", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        System.out.println(a11.toString());
+        // Valor esperat EXC --> FormatDadesNoValid
+
+        Alfabet a12 = new Alfabet("Alfabet12");
+        a12.readInput("llista-paraules", "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt");
+        System.out.println(a12.toString());
+        // Valor esperat EXC --> FileNotFoundException
+        
     }
 }
