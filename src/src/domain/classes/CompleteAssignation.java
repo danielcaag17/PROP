@@ -57,8 +57,8 @@ class CompleteAssignation {
                 columnLabel[col] = false;
                 currLines--;
             }
-            else backtrackingAssig(row+1, currLines);
         }
+        backtrackingAssig(row+1, currLines);
     }
 
     public int[] mostCompleteAssig() {
