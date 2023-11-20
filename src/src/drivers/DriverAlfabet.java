@@ -10,8 +10,8 @@ import src.exceptions.TipusDadesNoValid;
 
 public class DriverAlfabet {
     // Paths d'exemple per l'opció 1
-    private String text = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
-    private String words = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
+    // ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text
+    // ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules
 
     public static void main (String[] args) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         Alfabet A = new Alfabet("Alfabet de prova");
