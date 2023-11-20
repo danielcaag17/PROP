@@ -21,10 +21,14 @@ public class Words implements StrategyAlfabet {
             map = a.processCharacters(s, lenght, map);
             totalLenght += lenght;
         }
+        a.setSize(map.size());
+        a.setCharacters(map);
+        char[] abecedari = a.getAbecedari();
+
         double[][] matrix = new double[map.size()][map.size()];
         for (String s : words.keySet()) {
             int lenght = s.length();
-            matrix = a.processFrequencies(s, lenght, matrix);
+            matrix = a.processFrequencies(s, lenght, matrix, abecedari);
         }
         matrix = a.calculateFrecuencies(map, matrix);
         map = a.calculateCharacters(totalLenght, map);
