@@ -6,8 +6,13 @@ public class Generador { // segons el patró estrategia, la classe no ha de ser 
     private Strategy S;
 
     // Veure si sha de fer un new Strategy
-    public Generador () {
-        // res
+    public Generador (String strategy) {
+        switch(strategy) {
+            case "Branch&bound":
+                S = new BranchBound();
+                break;
+            default:
+        }
     }
 
     public Map<Character, Integer> generarTeclat(double[][] freqMatrix, double[][] distMatrix, Map<Character, Double> freqAbs) {

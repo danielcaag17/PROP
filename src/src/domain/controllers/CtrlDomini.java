@@ -14,7 +14,7 @@ public class CtrlDomini {
     // private CtrlAlfabetFile ctrlAlfabetFile;
     private Generador Generador;
     private int[] midesInicials = new int[] {24, 25, 26, 27}; // mides inicials dels Layouts disponibles
-    // private String strategy;
+    private String strategy;
     private HashMap<String, Teclat> Teclats; // Cjt de Teclats, on String és el nom del Teclat
     private HashMap<String, Alfabet> Alfabets; // Cjt d'Alfabets, on String és el nom de l'Alfabet
     private HashMap<Integer, Layout> Layouts; // Cjt de Layouts, on String és l'id del Layout
@@ -38,6 +38,8 @@ public class CtrlDomini {
         Teclats = new HashMap<String, Teclat>();
         Alfabets = new HashMap<String, Alfabet>();
         Layouts = new HashMap<Integer, Layout>();
+        strategy = "Branch&bound";
+        Generador = new Generador(strategy);
         inicialitzarLayoutsBase();
 //      strategy = "QuadraticAssignmentProblem"
     }
