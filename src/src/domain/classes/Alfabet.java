@@ -9,6 +9,7 @@ public class Alfabet {
     private Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
     private double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
     int size;                                       // Mida de l'Alfabet, els caràcters que té
+    String path;                                    // Path amb el qual s'ha llegit l'entrada de l'Alfabet
     private StrategyAlfabet strategy;               // Interfície StrategyAlfabet per llegir diferents tipus d'entrada
 
     // Pre:
@@ -33,6 +34,7 @@ public class Alfabet {
      */
     public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException {
         setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
+        setPath(path);
         Alfabet a = strategy.read(path);            // Llegir i processar les dades del fitxer que es troba a path
         
         this.characters = a.characters;             // Guardar al propi Alfabet les dades calculades
@@ -92,7 +94,7 @@ public class Alfabet {
                 k = findIndex(next, abecedari);
             }
             catch (EntradaLlegidaMalament e){
-
+                System.out.println("[!] > ERROR: Aquest Layout no existeix.");
             }
             
             matrix[j][k]++;                             // Sumar 1 aparició a que després de la lletra j apareix la lletra k
@@ -186,6 +188,14 @@ public class Alfabet {
 
     /**
      * Pre: 
+     * Post: associa el path amb el que s'ha llegit l'entrada de l'Alfabet
+     */
+    private void setPath (String path) {
+        this.path = path;
+    }
+
+    /**
+     * Pre: 
      * Post: associa l'estructura de dades per guardar la freqüencia de cada lletra amb map
      */
     public void setCharacters (Map<Character, Double> map) {
@@ -271,5 +281,20 @@ public class Alfabet {
      */
     public Map<Character, Double> getCharacter () {
         return characters;
+    }
+
+    /**
+     * Pre: 
+     * Post: es transforma l'Alfabet en un String
+     * 
+     * @return l'Alfabet en format de String
+     */
+    @Override
+    public String toString() {
+        String result = "Nom: " + nom + "\n";                               // Guarda el nom de l'Alfabet a result
+        result += "Mida: " + Integer.toString(size) + "\n";                 // Guardar la mida de l'Alfabet a result
+        result += "Path: " + path + "\n";                                   // Guardar el path d'on s'ha tret l'Alfabet a result
+        result += "Lletres " + characters.toString();                       // Guardar el map amb les freqüències de cada lletra a result
+        return result;
     }
 }
