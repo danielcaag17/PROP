@@ -94,21 +94,8 @@ public class Teclat {
 
     }
 
-    // Printar d'una manera més visual
-    // Aquesta fucnió implementa una altre
-    /*public void visualitzarTeclat () {
-        for (Character c : teclat.keySet()) {
-            System.out.println(c.toString());
-        }
-    }*/
-
     // UI
     public void provarTeclat () {
-
-    }
-
-    // destructora
-    public void esborrarTeclat () {
 
     }
 
