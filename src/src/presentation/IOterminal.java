@@ -46,7 +46,7 @@ public class IOterminal {
         System.out.println("Daniel  Cañizares  Aguilar");
         System.out.println("Jordi   Otal       Salvans");
         System.out.println("Pau     Rambla     Albet");
-
+        System.out.print("\n".repeat(2));
         mostraMenu(); // crida a escollir també
     }
 
@@ -75,6 +75,7 @@ public class IOterminal {
             "   finalitzar : f \n" +
             ""
         );
+        System.out.print("\n".repeat(2));
         escollir();
     }
 
