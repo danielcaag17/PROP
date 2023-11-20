@@ -1,8 +1,8 @@
 package src.domain.classes;
+
 import java.util.*;
 
-
-class BranchBound implements Strategy {
+public class BranchBound implements Strategy {
     private double[] AbsoluteFreqs;
     private double[][] Frequencies;
     private double[][] Distancies;

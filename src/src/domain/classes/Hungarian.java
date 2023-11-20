@@ -1,8 +1,8 @@
 package src.domain.classes;
+
 import java.util.*;
 
-
-class Hungarian {
+public class Hungarian {
     
     private static void printMatrix(double[][] mat) {
         for (int i = 0; i < mat.length; i++) {
