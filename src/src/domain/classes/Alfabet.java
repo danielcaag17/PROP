@@ -42,7 +42,7 @@ public class Alfabet {
     }
 
     /**
-     * Pre: el text només contè lletres sense espai i en minúscula,
+     * Pre: el text només conté lletres sense espai i en minúscula,
      *      la longitud del text és igual a length
      * Post: s'ha processat el text passat i s'ha guardat el nombre d'aparicions de cada caràcter
      * 
@@ -65,7 +65,7 @@ public class Alfabet {
     }
 
     /**
-     * Pre: el text només contè lletres sense espais i en minúscula,
+     * Pre: el text només conté lletres sense espais i en minúscula,
      *      la longitud del text és igual a length,
      *      matrix és una matriu de la mida de l'Alfabet
      * Post: s'han contat les vegades que donada una lletra aparegui la següent
