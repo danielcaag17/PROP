@@ -59,7 +59,7 @@ public class CtrlPresentacio {
         cd.esborrarAlfabet(na);
     }
 
-    public void afegirLayout(Integer idL) throws LayoutJaExisteix {
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
         cd.afegirLayout(idL);
     }
     

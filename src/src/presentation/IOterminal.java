@@ -193,6 +193,9 @@ public class IOterminal {
         catch(LayoutJaExisteix e) {
             System.out.println(errorOutput + "ERROR: Aquest Layout ja existeix. Prova amb una mida diferent.");
         }
+        catch(MidaMassaPetita e) {
+            System.out.println(errorOutput + "ERROR: Aquest mida és massa petia. Prova amb una mida major a 4.");
+        }
         escollir();
     }
 
@@ -378,7 +381,7 @@ public class IOterminal {
             " - esborra_alfabet : Comanda per a esborrar un alfabet existent. L'alfabet esborrat deixarà d'existir. \n" +
             " - mostra_alfabet  : Comanda per a visualitzar tota la informació rellevant d'un alfabet existent. \n" +
             " - nou_layout      : Comanda per a crear un nou layout, a partir d'una mida. \n"+
-            "                     Es creen diferents paràmetres automàticament que generen un layout.\n" +
+            "                     Es creen diferents paràmetres automàticament que generen un layout. La mida no pot ser inferior a 4.\n" +
             "                     El sistema està optimitzat per a mides entre 16 i 48. A més el sistema genera, inicialment, \n" +
             "                     4 layouts de mides entre 24 i 27. \n" +
             " - mostra_layout   : Comanda per a visualitzar tota la informació rellevant d'un layout existent. \n" +

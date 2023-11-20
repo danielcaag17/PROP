@@ -239,8 +239,9 @@ public class CtrlDomini {
      * @param idL mida del Layout a crear. Funciona com a id.
      * @throws LayoutJaExisteix si existeix una instància Layout amb id idl.
      */
-    public void afegirLayout(Integer idL) throws LayoutJaExisteix {
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
         if (Layouts.get(idL) != null) throw new LayoutJaExisteix(idL.toString());
+        if (idL < 4) throw new MidaMassaPetita(idL.toString());
         Layout l = new Layout(idL);
         Layouts.put(idL, l);
     }
