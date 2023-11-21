@@ -1,90 +1,112 @@
 package src.JUnit;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+
 import src.domain.classes.*;
 import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 import src.exceptions.TipusDadesNoValid;
 
-import java.io.*;
-
-//import static org.junit.Assert.*;
-//import org.junit.Test;
-//import org.junit.runners.*;
 
 public class AlfabetTest {
 
-    public static void main(String[] args) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+    public static void main(String[] args) {
         readInput();
     }
 
+    private static Alfabet iniAlfabet (String nom, String tipus, String path) {
+        Alfabet a = new Alfabet(nom);
+        try {
+            a.readInput(tipus, path);
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("ERROR: El fitxer " + path + " no s'ha trobat");
+        }
+        catch (FormatDadesNoValid e) {
+            System.out.println("El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus.");
+        }
+        catch (TipusDadesNoValid e) {
+            System.out.println("El tipus de dades (" + tipus + ") no és vàlid.");
+        }
+        catch (EntradaLlegidaMalament e) {
+            System.out.println("L'entrada no s'ha llegit correctament");
+        }
+        return a;
+    }
+
     //@Test
-    public static void readInput() throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+    public static void readInput() {
         
         // if (ta == text) ---------------------------------------------------------
-        Alfabet a = new Alfabet("Alfabet1");
-        String path = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
-        a.readInput("text", path);
-        System.out.println(a.toString());
+        String path1 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        Alfabet a1 = iniAlfabet("Alfabet1", "text", path1);
+        System.out.println(a1.toString());
 
-        Alfabet a2 = new Alfabet("Alfabet2");
         String path2 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt";
-        a2.readInput("text", path2);
+        Alfabet a2 = iniAlfabet("Alfabet2", "text", path2);
         System.out.println(a2.toString());
-        
-        Alfabet a3 = new Alfabet("Alfabet3");
+
         String path3 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt";
-        a3.readInput("text", path3);
+        Alfabet a3 = iniAlfabet("Alfabet3", "text", path3);
         System.out.println(a3.toString());
 
 
         // else if (ta == "llista-paraules") -----------------------------------------
-        Alfabet a4 = new Alfabet("Alfabet4");
         String path4 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
-        a4.readInput("llista-paraules", path4);
+        Alfabet a4 = iniAlfabet("Alfabet4", "llista-paraules", path4);
         System.out.println(a4.toString());
 
-        Alfabet a5 = new Alfabet("Alfabet5");
         String path5 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt";
-        a5.readInput("llista-paraules", path5);
+        Alfabet a5 = iniAlfabet("Alfabet5", "llista-paraules", path5);
         System.out.println(a5.toString());
 
-        Alfabet a6 = new Alfabet("Alfabet6");
         String path6 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt";
-        a6.readInput("llista-paraules", path6);
+        Alfabet a6 = iniAlfabet("Alfabet6", "llista-paraules", path6);
         System.out.println(a6.toString());
 
 
         // else -----------------------------------------------------------------------
-        Alfabet a7 = new Alfabet("Alfabet7");
-        a7.readInput("string-qualsevol", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        String path7 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        Alfabet a7 = iniAlfabet("Alfabet7", "string-qualsevol", path7);
         System.out.println(a7.toString());
         // Valor esperat EXC --> TipusDadesNoValid
+        // "El tipus de dades (" + tipus + ") no és vàlid."
 
-        Alfabet a8 = new Alfabet("Alfabet1");
-        a8.readInput("12345", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        String path8 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        Alfabet a8 = iniAlfabet("Alfabet8", "12345", path8);
         System.out.println(a8.toString());
         // Valor esperat EXC --> TipusDadesNoValid
-
+        // "El tipus de dades (" + tipus + ") no és vàlid."
+       
 
         // Altres casos ----------------------------------------------------------------
-        Alfabet a9 = new Alfabet("Alfabet9");
-        a9.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt");
+        String path9 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
+        Alfabet a9 = iniAlfabet("Alfabet9", "text", path9);
         System.out.println(a9.toString());
         // Valor esperat EXC --> FormatDadesNoValid
-
-        Alfabet a10 = new Alfabet("Alfabet10");
-        a10.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt");
+        // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
+        
+        String path10 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
+        Alfabet a10 = iniAlfabet("Alfabet10", "text", path10);
         System.out.println(a10.toString());
         // Valor esperat EXC --> FileNotFoundException
+        // "ERROR: El fitxer " + path + " no s'ha trobat"
 
-        Alfabet a11 = new Alfabet("Alfabet11");
-        a11.readInput("llista-paraules", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        String path11 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        Alfabet a11 = iniAlfabet("Alfabet11", "llista-paraules", path11);
         System.out.println(a11.toString());
         // Valor esperat EXC --> FormatDadesNoValid
-
-        Alfabet a12 = new Alfabet("Alfabet12");
-        a12.readInput("llista-paraules", "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt");
+        // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
+        
+        String path12 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
+        Alfabet a12 = iniAlfabet("llista-paraules", "text", path12);
         System.out.println(a12.toString());
         // Valor esperat EXC --> FileNotFoundException
+        // "ERROR: El fitxer " + path + " no s'ha trobat"
+        
         
     }
 }
