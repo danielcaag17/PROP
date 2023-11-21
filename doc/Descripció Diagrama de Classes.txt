@@ -1,12 +1,27 @@
 DESCRIPCIÓ DIAGRAMA DE CLASSES
 
 Classe Alfabet
+    Aquesta classe guarda tota la informació sobre un Alfabet, principalment d'atributs simples hi ha un nom: String per identificar l'Alfabet,
+    una mida: int per poder comprobar rapidament amb Layout si la mida es la mateixa i strategy: StrategyAlfabet per saber quin tipus d'estrategia
+    s'utilizara per l'entrada. D'atributs amb estructures de dades mes complexes hi ha:
+     - characters: Map<Character, Double> Guarda la relació entre una lletra de l'Alfabet i la seva frequencia
+     - frequencies: double[][] La informacio relacionada amb la probabilitat que donada una lletra aparegui la seguent
+     - abecedari: Character[] Un array amb les lletres de l'abecedari
+
+    Les operacions mes rellevants de la classe Alfabet son:
+     - readInput(String ta, String path) que crida a l'estrategia d'Alfabet que toqui per a llegir l'entrada i es guarada la informacio
+     - processCharacters(String text, int length, Map<Character, Double> map): Map<Character, Double> calcula les aparicions de cada lletra en el text i les
+        posa en el map que retorna
+     - processFrequencies(String text, int length) calcula el nombre de vegades que donada una lletra aparegui la seguent
+     - calculateFrequencies() calcula les frequencies que donada una lletra aparegui la seguent
+     - calculateCharacters() calcula les probabilitats de cada lletra en el Map characters
 
 Classe BranchBound
 
 Classe CompleteAssignations
 
 Classe Generador
+    
 
 Classe Hungarian
 
@@ -15,11 +30,25 @@ Classe Layout
 Classe Pair
 
 Classe Strategy
+    Classe Interface per aplicar el patró Strategy. La classe que l'implementa es BranchBound.
 
 Classe StrategyAlfabet
+    Classe Interface per aplicar el patró Strategy. Les classes que l'implementen son Text i Words.
 
 Classe Teclat
+    Aquesta classe guarda tota la informació sobre un Teclat, principalment d'atributs simples hi ha un nom: String per identificar al Teclat,
+    un L: Layout, un A: Alfabet i un G: Generador que serveixen per a generar el Teclat.
+    D'atributs amb estructures de dades mes complexes hi ha:
+     - teclat: Map<Character, Integer> Guarda la relació entre una lletra de l'Alfabet i la id d'una posicio del Layout
+     - distribucio: char[][] La matriu on es guarda el teclat (es guarden les lletres de l'Alfabet)
+    Les operacions mes rellevants de la classe Teclat son:
+     - crearTeclat() que crida a generador per a que generi un teclat a partir de les dades del Layout i de l'Alfabet
+     - modificarTeclat(Character a, Character b) intercanvia les poscions de les lletres de l'Alfabet donades
 
 Classe Text
+    La classe Text implementa StrategyAlfabet i gestiona una entrada de text per a afegir un Alfabet.
+    L'operacio read(String path): Alfabet llegeix el text del path i fa els calculs necessaris per tenir les dades necessaries d'un Alfabet.
 
 Classe Words
+    La classe Words implementa StrategyAlfabet i gestiona una entrada de paraules amb frequencia per a afegir un Alfabet.
+    L'operacio read(String path): Alfabet llegeix les paraules amb frequencia del path i fa els calculs necessaris per tenir les dades necessaries d'un Alfabet.
