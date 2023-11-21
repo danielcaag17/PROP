@@ -13,7 +13,7 @@ public interface StrategyAlfabet {
      * 
      * @param path string que indica on està l'entrada que defineix l'Alfabet
      * 
-     * @return l'Alfabet resultat de l'entrada llegida
+     * @return l'Alfabet resultat de l'entrada donada
      */
     public Alfabet read (String path)  throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament;
 }

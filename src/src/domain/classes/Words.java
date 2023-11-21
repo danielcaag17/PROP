@@ -7,7 +7,15 @@ import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 
 public class Words implements StrategyAlfabet {
-
+    
+    /**
+     * Pre:
+     * Post: es retorna l'Alfabet caculat amb l'entrada doanada
+     * 
+     * @param path string que indica on està l'entrada que defineix l'Alfabet
+     * 
+     * @return l'Alfabet resultat de l'entrada donada
+     */
     @Override
     public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         HashMap<String, Double> words = getWords(path);
@@ -36,7 +44,16 @@ public class Words implements StrategyAlfabet {
         return a;
     }
 
-    
+    /**
+     * Pre: 
+     * Post: es retorna les paraules amb la seva probabilitats
+     * 
+     * @param path string que indica on està l'entrada que defineix l'Alfabet
+     * 
+     * @return un map amb les paraules i les seves freqüències
+     * 
+     * @throws FormatDadesNoValid si l'entrada no té el format esperat
+     */
     private HashMap<String, Double> getWords (String path) throws FormatDadesNoValid, FileNotFoundException {
         HashMap<String, Double> words = new HashMap<>();
         File file = new File(path); // Tractar excepció que pugui donar File() !!!
