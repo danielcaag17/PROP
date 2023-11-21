@@ -266,8 +266,7 @@ public class Alfabet {
         String result = "Nom: " + nom + "\n";                               // Guarda el nom de l'Alfabet a result
         result += "Mida: " + Integer.toString(size) + "\n";                 // Guardar la mida de l'Alfabet a result
         result += "Abecedari: \n";                                          // Guardar l'abecedari de l'Alfabet a result
-        for (int i = 0; i < this.size; i++)
-            result += abecedari[i] + " ";
+        result += Arrays.toString(abecedari);
         result += "\n";
         result += "Lletres: \n" + characters.toString();                    // Guardar el map amb les freqüències de cada lletra a result
         return result;

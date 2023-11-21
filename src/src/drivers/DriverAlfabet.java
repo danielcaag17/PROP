@@ -1,6 +1,7 @@
 package src.drivers;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import src.domain.classes.Alfabet;
@@ -49,7 +50,7 @@ public class DriverAlfabet {
                     break;
                 case 2: 
                     if (! primeraOpt) System.out.println("Primer has de fer un ReadInput");
-                    else System.out.println(A.getAbecedari());
+                    else System.out.println(Arrays.toString(A.getAbecedari()));
                     break;
                 case 3: 
                     if (! primeraOpt) System.out.println("Primer has de fer un ReadInput");
