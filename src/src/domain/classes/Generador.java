@@ -15,13 +15,15 @@ public class Generador {
      * 
      * @throws GeneradorNoValid si no hi ha un tipus d'estrategia demanat per strategy.
      */
-    public Generador (String strategy) throws GeneradorNoValid {
+    public Generador (String strategy) /* throws GeneradorNoValid */ {
         switch(strategy) {
             case "Branch&bound":
                 S = new BranchBound();
                 break;
-            default:
+            /*
+                default:
                 throw new GeneradorNoValid();
+            */
         }
     }
 
