@@ -8,6 +8,7 @@ import src.domain.classes.Generador;
 import src.domain.classes.Layout;
 import src.domain.classes.Teclat;
 import src.exceptions.EntradaLlegidaMalament;
+import src.exceptions.Excepcions;
 import src.exceptions.FormatDadesNoValid;
 import src.exceptions.GeneradorNoValid;
 import src.exceptions.LletraNoTeclat;
@@ -18,12 +19,34 @@ public class DriverTeclat {
     // ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text (mida = 26)
     // ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules (mida = 26)
 
-    public static void main (String[] args) throws LletraNoTeclat, GeneradorNoValid, FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+    public static void main (String[] args)  {
         Alfabet A = new Alfabet("Alfabet de prova");
-        A.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        try {
+            A.readInput("text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("ERROR: El fitxer ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt no s'ha trobat");
+        }
+        catch (FormatDadesNoValid e) {
+            System.out.println("El format de les dades del fitxer ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt no s'ha trobat introduït no es correspon amb el seu tipus.");
+        }
+        catch (TipusDadesNoValid e) {
+            System.out.println("El tipus de dades (text) no és vàlid.");
+        }
+        catch (EntradaLlegidaMalament e) {
+            System.out.println("L'entrada no s'ha llegit correctament");
+        }
+
         Layout L = new Layout(26);
-        Generador G = new Generador("Branch&bound");
-        Teclat T = new Teclat("Teclat de prova", L, A, G);
+        Generador G;
+        Teclat T = new Teclat("Teclat de prova");
+        try {
+            G = new Generador("Branch&bound");
+            T = new Teclat("Teclat de prova", L, A, G);
+        }
+        catch (GeneradorNoValid e) {
+            System.out.println("El generador no és vàlid");
+        }
         Scanner sc = new Scanner(System.in);
         int func = 0;
         Boolean primeraOpt = false;
@@ -55,7 +78,12 @@ public class DriverTeclat {
                         System.out.println("Indica dues lletres a intercanviar: ");    
                         String a = sc.next();
                         String b = sc.next();
-                        T.modificarTeclat(a.charAt(0), b.charAt(0));
+                        try {
+                            T.modificarTeclat(a.charAt(0), b.charAt(0));
+                        }
+                        catch (LletraNoTeclat e) {
+                            System.out.println("Alguna lletra no pertany al Teclat");
+                        }
                         System.out.println("Teclat modificat");
                     }
                     break;
