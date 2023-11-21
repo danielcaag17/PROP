@@ -13,12 +13,12 @@ import src.exceptions.LletraNoTeclat;
 import src.exceptions.TipusDadesNoValid;
 
 public class DriverTeclat {
-    // Paths d'exemple per l'opció 6
-    // ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text (mida = 26)
-    // ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules (mida = 26)
+    // Paths d'exemple per l'opció 6 executat des de terminal Windows
+    // ../../test/exemples_input_alfabet/Text1.txt     --> text (mida = 26)
+    // ../../test/exemples_input_alfabet/Words1.txt    --> llista-paraules (mida = 26)
 
     public static void main (String[] args)  {
-        Alfabet A = iniAlfabet("Alfabet de prova", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        Alfabet A = iniAlfabet("Alfabet de prova", "text", "../../test/exemples_input_alfabet/Text1.txt");
 
         Layout L = new Layout(26);
         Generador G = new Generador("Branch&bound");
