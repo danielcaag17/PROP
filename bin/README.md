@@ -17,11 +17,24 @@ $ ./start<nom-driver>.sh
 
 - DriverAlfabet
 
-info driver alfabet
+Per a probar amb diferents Alfabets, hi ha uns textos de prova:
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text en angles
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt     --> text en catala
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt     --> text en castella
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules en angles
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt    --> llista-paraules en catala
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt    --> llista-paraules en castella
 
 - DriverTeclat
 
-info driver teclat
+Per a probar a crear diferents Teclats amb diferents Alfabets, hi ha uns textos de prova:
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text, mida 26
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt     --> text, mida 24
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt     --> text, mida 24
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules, mida 26
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt    --> llista-paraules, mida 24
+    ./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt    --> llista-paraules, mida 24
+Es important que la mida de l'Alfabet sigui la mateixa que la del Layout
 
 - DriverHungarian
 
