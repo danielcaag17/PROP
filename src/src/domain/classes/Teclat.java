@@ -166,7 +166,7 @@ public class Teclat {
      */
     @Override
     public String toString() {
-        String result = "Nom:" + nom + "\n";                                // Guarda el nom del Teclat a result
+        String result = "Nom: " + nom + "\n";                                // Guarda el nom del Teclat a result
         result += "Nom Alfabet: " + A.getNom() + "\n";                      // Guardar el nom de l'Alfabet a result
         result += "Teclat: \n";
         for (int i = 0; i < distribucioCharacters.length; i++) {
