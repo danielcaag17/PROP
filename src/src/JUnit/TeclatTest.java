@@ -21,7 +21,7 @@ public class TeclatTest {
     char[][] teclat;
 
 
-    @test
+    @Test
     public void test1 () {
         A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
         Teclat T = new Teclat("Teclat test", L, A, G);
@@ -30,7 +30,7 @@ public class TeclatTest {
         assertEquals("Test 1: Correcte\n", Arrays.toString(teclat), result1);
     }
     
-    @test
+    @Test
     public void test2 () {
         A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
         Teclat T = new Teclat("Teclat test", L, A, G);
@@ -40,7 +40,7 @@ public class TeclatTest {
         assertEquals("Test 2: Correcte\n", Arrays.toString(teclat), result2);
     }
 
-    @test
+    @Test
     public void test3 () {
         A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
         Teclat T = new Teclat("Teclat test", L, A, G);
