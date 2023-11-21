@@ -9,12 +9,12 @@ public class CompleteAssignation {
     private boolean[] columnLabel;
     private int[] currentAssig;
     private int[] bestAssig;
-    // private int currentLines;
     private int bestLines;
 
     public CompleteAssignation(double[][] mat) {
+        // Creadora de la classe, per a inicialitzar tots els atributs necessaris per al
+        // càlcul de la millor assignació.
         this.n = mat.length;
-        // this.currentLines = 0;
         this.bestLines = 0;
         
         this.matrix = new double[n][n];
@@ -30,23 +30,24 @@ public class CompleteAssignation {
         for (int i = 0; i < n; i++) bestAssig[i] = -1;
     }
 
-    private void printArray(int[] arr) {
-        for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
-        System.out.println("");
-    }
-
     private void backtrackingAssig(int row, int currLines) {
-        // System.out.println(n);
-        // System.out.println(row);
-        // printArray(currentAssig);
+        // Algorisme de backtracking que calcula la millor assignació possible => És el coll
+        // d'ampolla de totes les classes que l'implementen.
         if (row == n) {
+            // En cas que arriba al final de l'algorisme, comprova si la solució és millor que 
+            // la que tenim guardada fins al moment, i l'actualitza si és necessari.
             if (currLines > bestLines) {
                 bestLines = currLines;
                 for (int i = 0; i < n; i++) bestAssig[i] = currentAssig[i];
             }
             return;
         }
+        // Optimització per a acabar abans una execució si es dona el cas que la millor solució
+        // que puguéssim obtenir fos inferior a la millor assignació que ja tenim guardada.
         if (currLines + (n - row) < bestLines) return;
+        // Donada una fila row, per a cada columna col comprovem si el valor que estem tractant
+        // és un zero, si no n'existeix cap en la mateixa columna, i si és així executem la crida
+        // recursiva tot indicant el valor aquest com a part de la assignació actual.
         for (int col = 0; col < n; col++) {
             if (matrix[row][col] == 0 && !columnLabel[col]) {
                 currentAssig[row] = col;
@@ -62,9 +63,9 @@ public class CompleteAssignation {
     }
 
     public int[] mostCompleteAssig() {
+        // Retorna la millor assignació possible, és a dir, la millor combinació de zeros en
+        // files i columnes diferents, utilitzant un algorisme de backtracking.
         backtrackingAssig(0, 0);
-        // System.out.println("Final Best Assig: " + Arrays.toString(bestAssig));
-        // System.out.println("Final Best Lines: " + bestLines);
         return this.bestAssig;
     }
 }
