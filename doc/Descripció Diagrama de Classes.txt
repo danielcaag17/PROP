@@ -20,14 +20,27 @@ Classe BranchBound
 
 Classe CompleteAssignations
 
-Classe Generador
-    
-
 Classe Hungarian
 
-Classe Layout
+Classe Generador
+    La classe Generador "comunica" el Teclat i el Strategy que genera el teclat. Adapta les estructures de dades que demanen,
+    i retorna el teclat generat.
 
-Classe Pair
+Classe Layout
+    Aquesta classe representa els layouts d'un teclat, les tecles, quina id tenen, a on van en la distribucio i a quina distancia estan 
+    les unes de les altres. Per a representar aquestes dades es fa servir:
+    - distancies: una matriu de double que guarda les distàncies entre dues ids 
+        (distancies[id1][id2] --> distancia entre id1 i id2).
+    - coordenades: un llista de Pair<Integer, Integer> indica per cada id les coordenades a la distribucio del layout,
+        (coordenades.get(id1) --> dona el Pair<Integer, Integer> que representen les dues coordenades de id1)
+    - distribucio: una matriu d'enters que guarda la id que hi ha a cada parell de coordenades.
+
+    Les principals operacions a part dels getters dels diferents atributs son:
+    - omplirCoordenades: relaciona una id amb unes coordenades, aixo es fa de forma que les ids mes petites
+        estiguin mes al centre de la distribucio i a mesura que creixen es van allunyant.
+    - distanciaManhattan: calcula la distancia Manhattan entre dos punts.
+    - calculaDistancies: calcula les distancies entre totes les ids una vegada posicionades.
+
 
 Classe Strategy
     Classe Interface per aplicar el patró Strategy. La classe que l'implementa es BranchBound.
