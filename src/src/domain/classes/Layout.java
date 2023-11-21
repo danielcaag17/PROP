@@ -182,6 +182,14 @@ public class Layout {
     }
 
     /**
+     * Get instance distribucio filled with the id of each position
+     * @return Retorna la distribució de les ids en les tecles/posicions en format String
+     */
+    public String getDistribucioFilledString() {
+        return distribucioFilledToString();
+    }
+
+    /**
      * Get a matrix with number of rows = nfil and number of columns = ncol
      * @return Retorna la distribució de les tecles/posicions inicialitzada amb '-'
      */
@@ -207,8 +215,12 @@ public class Layout {
         String s = "";
         for(int i = 0; i < nfil; i++) {
             for(int j = 0; j < ncol; j++) {
-                if (distribucio[i][j] < 10) s+='0';
-                s += distribucio[i][j] + " ";
+                if (distribucio[i][j] == 0 && (j==0 || j>=ncol-2)) s+="--"; 
+                else {
+                    if (distribucio[i][j] < 10) s+='0';
+                    s += distribucio[i][j];
+                }
+                s += " ";
             }
             s+="\n";
         }

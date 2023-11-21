@@ -1,8 +1,8 @@
 package src.domain.classes;
+
 import java.util.*;
 
-
-class CompleteAssignation {
+public class CompleteAssignation {
     private double [][] matrix;
     private int n;
 
