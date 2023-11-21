@@ -85,13 +85,11 @@ public class DriverTeclat {
                         System.out.println("Indica el path:");
                         String path = sc.nextLine();
                         A = iniAlfabet(nomA, "text", path);
-                        System.out.println("Input llegit");
                     }
                     else if (opc == 2) {
                         System.out.println("Indica el path:");
                         String path = sc.nextLine();
                         A = iniAlfabet(nomA, "llista-paraules", path);
-                        System.out.println("Input llegit");
                     }
                     else System.out.println("Opció incorrecte");
 
@@ -119,15 +117,16 @@ public class DriverTeclat {
         Alfabet a = new Alfabet(nom);
         try {
             a.readInput(tipus, path);
+            System.out.println("Input llegit");
         }
         catch(FileNotFoundException e) {
-            System.out.println("ERROR: El fitxer ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt no s'ha trobat");
+            System.out.println("ERROR: El fitxer " + path + " no s'ha trobat");
         }
         catch (FormatDadesNoValid e) {
-            System.out.println("El format de les dades del fitxer ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt no s'ha trobat introduït no es correspon amb el seu tipus.");
+            System.out.println("El format de les dades del fitxer " + path + " no s'ha trobat introduït no es correspon amb el seu tipus.");
         }
         catch (TipusDadesNoValid e) {
-            System.out.println("El tipus de dades (text) no és vàlid.");
+            System.out.println("El tipus de dades (" + tipus + ") no és vàlid.");
         }
         catch (EntradaLlegidaMalament e) {
             System.out.println("L'entrada no s'ha llegit correctament");
