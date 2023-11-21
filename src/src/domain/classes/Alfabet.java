@@ -36,9 +36,8 @@ public class Alfabet {
         setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
         Alfabet a = strategy.read(path);            // Llegir i processar les dades del fitxer que es troba a path
         
-        this.characters = a.characters;             // Guardar al propi Alfabet les dades calculades
-        this.frequencies = a.frequencies;
-        setSize(a.size);
+        setCharacters(a.characters);                // Guardar al propi Alfabet les dades calculades
+        setFrequencies(a.frequencies);
     }
 
     /**
@@ -66,27 +65,22 @@ public class Alfabet {
 
     /**
      * Pre: el text només conté lletres sense espais i en minúscula,
-     *      la longitud del text és igual a length,
-     *      matrix és una matriu de la mida de l'Alfabet
+     *      la longitud del text és igual a length
      * Post: s'han contat les vegades que donada una lletra aparegui la següent
      * 
      * @param text cadena de caràcters a processar.
      * @param length longitud del text.
-     * @param matrix matriu on es guarda la probabilitat que donada una lletra aparegui la següent.
-     * 
-     * @return la matriu de probabilitats.
      */
-    public double[][] processFrequencies (String text, int length, double[][] matrix) throws EntradaLlegidaMalament {
+    public void processFrequencies (String text, int length) throws EntradaLlegidaMalament {
         for (int i = 0; i < length - 1; i++) {          // Recorregut del text fins la lletra anterior a la última
             char c = text.charAt(i);                    // Agafar la lletra actual
             char next = text.charAt(i+1);               // Agafar la següent lletra
 
             int j = findIndex(c);                       //Trobar els índexs de la matriu per la cada lletra
             int k = findIndex(next);
-            matrix[j][k]++;                             // Sumar 1 aparició a que després de la lletra j apareix la lletra k
+            frequencies[j][k]++;                        // Sumar 1 aparició a que després de la lletra j apareix la lletra k
         
         }
-        return matrix;
     }
 
     /**
@@ -109,44 +103,33 @@ public class Alfabet {
     }
 
     /**
-     * Pre: matrix és una matriu de la mida de l'Alfabet,
-     *      map té la mida de l'Alfabet
+     * Pre: 
      * Post: s'ha calculat la probabilitat que donada una lletra aparegui la següent
-     * 
-     * @param matrix matriu on es guarda la probabilitat que donada una lletra aparegui la següent.
-     * 
-     * @return la matriu de probabilitats.
      */
-    public double[][] calculateFrequencies (double[][] matrix) throws EntradaLlegidaMalament {
+    public void calculateFrequencies () throws EntradaLlegidaMalament {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                            // Obtenir el nombre d'aparicions de la lletra c
             if (nAparicions != 0) {                                     // No hauria de passar, però vigilar les divisions entre 0
                 for (int i = 0; i < characters.size(); i++) {                  // Pre: size és de la mateixa mida que la matriu
                     int j = findIndex(c);                                    // Passar la lletra a int per tenir quin és el seu índex a la matriu
-                    matrix[j][i] /= nAparicions;          // Dividir tota la fila de matrix pel nombre de vegades que apareix
+                    frequencies[j][i] /= nAparicions;          // Dividir tota la fila de matrix pel nombre de vegades que apareix
                 }
             }
         }
-        return matrix;
     }
 
     /**
-     * Pre: map té la mida de l'Alfabet,
-     *      la suma de totes les aparicions de cada lletra és igual a length
+     * Pre: la suma de totes les aparicions de cada lletra és igual a length
      * Post: s'ha calculat la freqüència de cada lletra en l'Alfabet
      * 
      * @param length longitud de les dades amb les que s'ha creat l'Alfabet
-     * @param map estructura de dades on es guarda la freqüència d'una lletra.
-     * 
-     * @return la relació entre caràcter i les vegades que apareix.
      */
-    public Map<Character, Double> calculateCharacters (int length, Map<Character, Double> map) {     //ull amb totes les divisions, EXC si es entre 0 !!
-        for (Character c : map.keySet()) {
-            double nAparicions = map.get(c);                // Obtenir les aparicions de la lletra c
-            double probabilitat = nAparicions / length;     // Calcular la probabilitat de la lletra c
-            map.replace(c, probabilitat);                   // Associar la lletra amb la seva probabilitat
+    public void calculateCharacters (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
+        for (Character c : characters.keySet()) {
+            double nAparicions = characters.get(c);                 // Obtenir les aparicions de la lletra c
+            double probabilitat = nAparicions / length;             // Calcular la probabilitat de la lletra c
+            characters.replace(c, probabilitat);                    // Associar la lletra amb la seva probabilitat
         }
-        return map;
     }
 
     /**
@@ -172,11 +155,14 @@ public class Alfabet {
 
     /**
      * Pre: 
-     * Post: associa l'estructura de dades per guardar la freqüencia de cada lletra amb map
+     * Post: associa l'estructura de dades per guardar la freqüencia de cada lletra amb map,
+     *       instancia l'abecedari de l'Alfabet,
+     *       instancia la mida de l'Alfabet
      */
     public void setCharacters (Map<Character, Double> map) {
         this.characters = map;
         setAbecedari();
+        setSize(map.size());
     }
 
     /**
@@ -205,7 +191,7 @@ public class Alfabet {
      * Pre: 
      * Post: associa la mida de l'Alfabet amb size
      */
-    public void setSize (int size) {
+    private void setSize (int size) {
         this.size = size;
     }
 
@@ -277,7 +263,10 @@ public class Alfabet {
     public String toString() {
         String result = "Nom: " + nom + "\n";                               // Guarda el nom de l'Alfabet a result
         result += "Mida: " + Integer.toString(size) + "\n";                 // Guardar la mida de l'Alfabet a result
-        result += "Abecedari: " + abecedari.toString() + "\n";              // Guardar el path d'on s'ha tret l'Alfabet a result
+        result += "Abecedari: \n";                                          // Guardar l'abecedari de l'Alfabet a result
+        for (int i = 0; i < this.size; i++)
+            result += abecedari[i] + " ";
+        result += "\n";
         result += "Lletres: \n" + characters.toString();                    // Guardar el map amb les freqüències de cada lletra a result
         return result;
     }

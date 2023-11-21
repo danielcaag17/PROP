@@ -18,24 +18,20 @@ public class Text implements StrategyAlfabet {
      */
     @Override
     public Alfabet read (String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
-        String text = getText(path);
+        String text = getText(path);                                            // Llegir l'entrada
         int lenght = text.length();
 
-        Alfabet a = new Alfabet();
+        Alfabet a = new Alfabet();                                              // Crear el nou Alfabet a retornar
         Map<Character, Double> map = new HashMap<>();
-        map = a.processCharacters(text, lenght, map);
-
-        a.setSize(map.size());
-        a.setCharacters(map);
-
+        map = a.processCharacters(text, lenght, map);                           // Contar el nombre d'aparicions de totes les lletres de l'Alfabet
+        a.setCharacters(map);                                                   // Inicialitzar characters, abecedari i size
+        
         double[][] matrix = new double[map.size()][map.size()];                 // Matrix NxN inicialitzada amb 0.0
-
-        matrix = a.processFrequencies(text, lenght, matrix);
-        matrix = a.calculateFrequencies(matrix);
-        map = a.calculateCharacters(lenght, map);
-
-        a.setCharacters(map);
         a.setFrequencies(matrix);
+        a.processFrequencies(text, lenght);                                     // Contar el nombre d'aparicions que donada una lletre es doni la següent
+
+        a.calculateFrequencies();                                               // Passar el nombre d'aparicions a probabilitat per 1
+        a.calculateCharacters(lenght);
         return a;
     }
 

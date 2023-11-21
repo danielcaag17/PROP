@@ -18,29 +18,26 @@ public class Words implements StrategyAlfabet {
      */
     @Override
     public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
-        HashMap<String, Double> words = getWords(path);
+        HashMap<String, Double> words = getWords(path);                             // Llegir l'entrada
         Alfabet a = new Alfabet();
         int totalLenght = 0;
         Map<Character, Double> map = new HashMap<>();
         for (String s : words.keySet()) {
             int lenght = s.length();
-            map = a.processCharacters(s, lenght, map);
-            totalLenght += lenght;
+            map = a.processCharacters(s, lenght, map);                              // Contar el nombre d'aparicions de totes les lletres de l'Alfabet
+            totalLenght += lenght;                                                  // Saber quina és la mida total
         }
-        a.setSize(map.size());
-        a.setCharacters(map);
+        a.setCharacters(map);                                                       // Inicialitzar characters, abecedari i size
 
-        double[][] matrix = new double[map.size()][map.size()];
+        double[][] matrix = new double[map.size()][map.size()];                     // Matrix NxN inicialitzada amb 0.0
+        a.setFrequencies(matrix);
         for (String s : words.keySet()) {
             int lenght = s.length();
-            matrix = a.processFrequencies(s, lenght, matrix);
+            a.processFrequencies(s, lenght);                                        // Contar el nombre d'aparicions que donada una lletre es doni la següent
         }
-        matrix = a.calculateFrequencies(matrix);
-        map = a.calculateCharacters(totalLenght, map);
 
-        a.setSize(map.size());
-        a.setCharacters(map);
-        a.setFrequencies(matrix);
+        a.calculateFrequencies();                                                   // Passar el nombre d'aparicions a probabilitat per 1
+        a.calculateCharacters(totalLenght);
         return a;
     }
 
