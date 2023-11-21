@@ -10,9 +10,9 @@ import src.exceptions.FormatDadesNoValid;
 import src.exceptions.TipusDadesNoValid;
 
 public class DriverAlfabet {
-    // Paths d'exemple per l'opció 1
-    // ./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt     --> text
-    // ./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules
+    // Paths d'exemple per l'opció 1 executat des de terminal Windows
+    // ../../test/exemples_input_alfabet/Text1.txt     --> text
+    // ../../subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules
 
     public static void main (String[] args) {
         Alfabet A = new Alfabet("Alfabet de prova");
