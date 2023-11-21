@@ -6,6 +6,8 @@ Primera entrega de l'assignatura [PROP](https://www.cs.upc.edu/~prop/) de la Fac
 
 L'[enunciat](doc/Enunciat.pdf) del Quadrimestre de tardor de 2023, consisteix en fer un programa capaç de dissenyar un Teclat, a partir d'un alfabet, optimitzant la posició de cada caràcter en el que nosaltres definim com a layout.
 
+La feina feta per cada membre del equip es pot trobar al fitxer [FeinaMembres.txt](FeinaMembres.txt). S'hi ha posat les diferents classes del domini, els drivers i les excepcions implementades per cada membre. És possible que alguna classe estigui repetida, vol dir que dues persones han col·laborat en fer aquesta classe.
+
 ## Compilació
 
 Al directori [src/](src/) trobem dos fitxers [make.sh](src/make.sh) i [make.bat](src/make.bat). Aquests fitxers compilen tot el codi del Projecte i el guarden a [bin/class/](bin/class/). Allá hi ha més informació sobre com executar el codi i els drivers.
