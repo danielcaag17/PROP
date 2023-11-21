@@ -69,9 +69,9 @@ public class Teclat {
      */
     public void modificarTeclat(Character a, Character b) throws LletraNoTeclat {     // Posicions a intercanviar
         if (! teclat.containsKey(a))                                    // Comprobar si alguna de les dues lletres no són del Teclat
-            throw new LletraNoTeclat();                                 // Llençar excepció
+            throw new LletraNoTeclat(Character.toString(a));                                 // Llençar excepció
         if (! teclat.containsKey(b))
-            throw new LletraNoTeclat();
+            throw new LletraNoTeclat(Character.toString(b));
         
         swapLetters(a, b);                                              // Intercanviar la posició de les lletres
     }
