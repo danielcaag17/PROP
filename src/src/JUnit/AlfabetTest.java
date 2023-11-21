@@ -24,7 +24,7 @@ public class AlfabetTest {
 
     @Test
     public void test1() {
-        String path1 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        String path1 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a1 = iniAlfabet("Alfabet1", "text", path1);
         Map<Character, Double> result = a1.getCharacter();
         assertEquals("Test 1: Correcte\n", result.toString(), result1);
@@ -32,7 +32,7 @@ public class AlfabetTest {
 
     @Test
     public void test2() {
-        String path2 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt";
+        String path2 = "test/exemples_input_alfabet/Text2.txt";
         Alfabet a2 = iniAlfabet("Alfabet2", "text", path2);
         Map<Character, Double> result = a2.getCharacter();
         assertEquals("Test 2: Correcte\n", result.toString(), result2);        
@@ -40,7 +40,7 @@ public class AlfabetTest {
 
     @Test
     public void test3() {
-        String path3 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt";
+        String path3 = "test/exemples_input_alfabet/Text3.txt";
         Alfabet a3 = iniAlfabet("Alfabet3", "text", path3);
         Map<Character, Double> result = a3.getCharacter();
         assertEquals("Test 3: Correcte\n", result.toString(), result3);
@@ -48,7 +48,7 @@ public class AlfabetTest {
 
     @Test
     public void test4() {
-        String path4 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
+        String path4 = "test/exemples_input_alfabet/Words1.txt";
         Alfabet a4 = iniAlfabet("Alfabet4", "llista-paraules", path4);
         Map<Character, Double> result = a4.getCharacter();
         assertEquals("Test 4: Correcte\n", result.toString(), result4);
@@ -56,7 +56,7 @@ public class AlfabetTest {
 
     @Test
     public void test5() {
-        String path5 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt";
+        String path5 = "test/exemples_input_alfabet/Words2.txt";
         Alfabet a5 = iniAlfabet("Alfabet5", "llista-paraules", path5);
         Map<Character, Double> result = a5.getCharacter();
         assertEquals("Test 5: Correcte\n", result.toString(), result5);
@@ -64,7 +64,7 @@ public class AlfabetTest {
 
     @Test
     public void test6() {
-        String path6 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt";
+        String path6 = "test/exemples_input_alfabet/Words3.txt";
         Alfabet a6 = iniAlfabet("Alfabet6", "llista-paraules", path6);
         Map<Character, Double> result = a6.getCharacter();
         assertEquals("Test 6: Correcte\n", result.toString(), result6);
@@ -72,54 +72,54 @@ public class AlfabetTest {
 
     @Test
     public void test7() {
-        String path7 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        String path7 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a7 = iniAlfabet("Alfabet7", "string-qualsevol", path7);
-        System.out.println(a7.toString());
+        assertEquals("Test 7: Correcte\n", null, a7.getAbecedari());
         // Valor esperat EXC --> TipusDadesNoValid
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
 
     @Test
     public void test8() {
-        String path8 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        String path8 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a8 = iniAlfabet("Alfabet8", "12345", path8);
-        System.out.println(a8.toString());
+        assertEquals("Test 8: Correcte\n", null, a8.getAbecedari());
         // Valor esperat EXC --> TipusDadesNoValid
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
 
     @Test
     public void test9() {
-        String path9 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
+        String path9 = "test/exemples_input_alfabet/Words1.txt";
         Alfabet a9 = iniAlfabet("Alfabet9", "text", path9);
-        System.out.println(a9.toString());
+        assertEquals("Test 9: Correcte\n", null, a9.getAbecedari());
         // Valor esperat EXC --> FormatDadesNoValid
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
 
     @Test
     public void test10() {
-        String path10 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
+        String path10 = "test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a10 = iniAlfabet("Alfabet10", "text", path10);
-        System.out.println(a10.toString());
+        assertEquals("Test 10: Correcte\n", null, a10.getAbecedari());
         // Valor esperat EXC --> FileNotFoundException
         // "ERROR: El fitxer " + path + " no s'ha trobat"
     }
 
     @Test
     public void test11() {
-        String path11 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
+        String path11 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a11 = iniAlfabet("Alfabet11", "llista-paraules", path11);
-        System.out.println(a11.toString());
+        assertEquals("Test 11: Correcte\n", null, a11.getAbecedari());
         // Valor esperat EXC --> FormatDadesNoValid
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
 
     @Test
     public void test12() {
-        String path12 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
+        String path12 = "test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a12 = iniAlfabet("llista-paraules", "text", path12);
-        System.out.println(a12.toString());
+        assertEquals("Test 12: Correcte\n", null, a12.getAbecedari());
         // Valor esperat EXC --> FileNotFoundException
         // "ERROR: El fitxer " + path + " no s'ha trobat"
     }
