@@ -2,7 +2,7 @@ package src.domain.classes;
 
 import java.util.*;
 
-import src.exceptions.GeneradorNoValid;
+//import src.exceptions.GeneradorNoValid;
 
 public class Generador {
     private Strategy S;
@@ -13,7 +13,7 @@ public class Generador {
      * 
      * @param strategy string per identificar quina estrategia utilitzar.
      * 
-     * @throws GeneradorNoValid si no hi ha un tipus d'estrategia demanat per strategy.
+     * throws GeneradorNoValid si no hi ha un tipus d'estrategia demanat per strategy.
      */
     public Generador (String strategy) /* throws GeneradorNoValid */ {
         switch(strategy) {
