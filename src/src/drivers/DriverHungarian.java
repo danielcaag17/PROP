@@ -43,27 +43,25 @@ public class DriverHungarian {
     private ArrayList<Integer> result3 = new ArrayList<>(Arrays.asList(5, 3, 2, 0, 1, 4)); 
     private ArrayList<Integer> result4 = new ArrayList<>(Arrays.asList(3, 8, 2, 7, 1, 0, 5, 9, 6, 4)); 
 
-    @Test
-    public void test1() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test1);
-        assertEquals("Test 1: Correcte\n", result1, result);
-    }
+    public static void main(String[] args) {
+        // TEST 1
+        ArrayList<Integer> res_test1 = Hungarian.hungarianAlgorithm(test1);
+        if (result1.equals(res_test1)) System.out.println("[+] test1 -> PASSED!");
+        else System.out.println("[!] test1 -> FAILED!");
 
-    @Test
-    public void test2() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test2);
-        assertEquals("Test 1: Correcte\n", result2, result);
-    }
+        // TEST 2
+        ArrayList<Integer> res_test2 = Hungarian.hungarianAlgorithm(test2);
+        if (result2.equals(res_test2)) System.print.out("[+] test2 -> PASSED!");
+        else System.out.println("[!] test2 -> FAILED!");
 
-    @Test
-    public void test3() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test3);
-        assertEquals("Test 1: Correcte\n", result3, result);
-    }
+        // TEST 3
+        ArrayList<Integer> res_test3 = Hungarian.hungarianAlgorithm(test3);
+        if (result3.equals(res_test3)) System.print.out("[+] test3 -> PASSED!");
+        else System.out.println("[!] test3 -> FAILED!");
 
-    @Test
-    public void test4() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test4);
-        assertEquals("Test 1: Correcte\n", result4, result);
+        // TEST 4
+        ArrayList<Integer> res_test4 = Hungarian.hungarianAlgorithm(test4);
+        if (result4.equals(res_test4)) System.print.out("[+] test4 -> PASSED!");
+        else System.out.println("[!] test4 -> FAILED!");
     }
 }
