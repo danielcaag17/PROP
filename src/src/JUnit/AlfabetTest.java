@@ -22,7 +22,7 @@ public class AlfabetTest {
 
 
 
-    @test
+    @Test
     public void test1() {
         String path1 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         Alfabet a1 = iniAlfabet("Alfabet1", "text", path1);
@@ -30,7 +30,7 @@ public class AlfabetTest {
         assertEquals("Test 1: Correcte\n", result.toString(), result1);
     }
 
-    @test
+    @Test
     public void test2() {
         String path2 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text2.txt";
         Alfabet a2 = iniAlfabet("Alfabet2", "text", path2);
@@ -38,7 +38,7 @@ public class AlfabetTest {
         assertEquals("Test 2: Correcte\n", result.toString(), result2);        
     }
 
-    @test
+    @Test
     public void test3() {
         String path3 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text3.txt";
         Alfabet a3 = iniAlfabet("Alfabet3", "text", path3);
@@ -46,7 +46,7 @@ public class AlfabetTest {
         assertEquals("Test 3: Correcte\n", result.toString(), result3);
     }
 
-    @test
+    @Test
     public void test4() {
         String path4 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
         Alfabet a4 = iniAlfabet("Alfabet4", "llista-paraules", path4);
@@ -54,7 +54,7 @@ public class AlfabetTest {
         assertEquals("Test 4: Correcte\n", result.toString(), result4);
     }
 
-    @test
+    @Test
     public void test5() {
         String path5 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words2.txt";
         Alfabet a5 = iniAlfabet("Alfabet5", "llista-paraules", path5);
@@ -62,7 +62,7 @@ public class AlfabetTest {
         assertEquals("Test 5: Correcte\n", result.toString(), result5);
     }
 
-    @test
+    @Test
     public void test6() {
         String path6 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words3.txt";
         Alfabet a6 = iniAlfabet("Alfabet6", "llista-paraules", path6);
@@ -70,7 +70,7 @@ public class AlfabetTest {
         assertEquals("Test 6: Correcte\n", result.toString(), result6);
     }
 
-    @test
+    @Test
     public void test7() {
         String path7 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         Alfabet a7 = iniAlfabet("Alfabet7", "string-qualsevol", path7);
@@ -79,7 +79,7 @@ public class AlfabetTest {
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
 
-    @test
+    @Test
     public void test8() {
         String path8 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         Alfabet a8 = iniAlfabet("Alfabet8", "12345", path8);
@@ -88,7 +88,7 @@ public class AlfabetTest {
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
 
-    @test
+    @Test
     public void test9() {
         String path9 = "./subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt";
         Alfabet a9 = iniAlfabet("Alfabet9", "text", path9);
@@ -97,7 +97,7 @@ public class AlfabetTest {
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
 
-    @test
+    @Test
     public void test10() {
         String path10 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a10 = iniAlfabet("Alfabet10", "text", path10);
@@ -106,7 +106,7 @@ public class AlfabetTest {
         // "ERROR: El fitxer " + path + " no s'ha trobat"
     }
 
-    @test
+    @Test
     public void test11() {
         String path11 = "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt";
         Alfabet a11 = iniAlfabet("Alfabet11", "llista-paraules", path11);
@@ -115,7 +115,7 @@ public class AlfabetTest {
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
 
-    @test
+    @Test
     public void test12() {
         String path12 = "./subgrup-prop32.2/test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a12 = iniAlfabet("llista-paraules", "text", path12);
