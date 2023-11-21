@@ -37,21 +37,11 @@ public class DriverHungarian {
                                 {64,  79,  65,	32,	 98, 45,  19, 73,  48,	 67},
                                 {30,  90,  76,	52,	 15, 32,  78, 65,  12,   77}};                                                    
                                 
-/*
-    private double[][] test2;
-    private double[][] test3;
-    private double[][] test4;
-*/
     // Els 4 resultats dels tests previs
     private ArrayList<Integer> result1 = new ArrayList<>(Arrays.asList(2, 0, 1, 3));
     private ArrayList<Integer> result2 = new ArrayList<>(Arrays.asList(2, 1, 0, 3)); 
     private ArrayList<Integer> result3 = new ArrayList<>(Arrays.asList(5, 3, 2, 0, 1, 4)); 
     private ArrayList<Integer> result4 = new ArrayList<>(Arrays.asList(3, 8, 2, 7, 1, 0, 5, 9, 6, 4)); 
-/*
-    private ArrayList<Integer> result2;
-    private ArrayList<Integer> result3;
-    private ArrayList<Integer> result4;
-*/
 
     @Test
     public void test1() {
@@ -76,24 +66,4 @@ public class DriverHungarian {
         ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test4);
         assertEquals("Test 1: Correcte\n", result4, result);
     }
-
-/*
-    @Test
-    public void test2() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test2);
-        assertEquals("Test 2: Correcte\n", result, result2);
-    }
-
-    @Test
-    public void test3() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test3);
-        assertEquals("Test 3: Correcte\n", result, result3);
-    }
-
-    @Test
-    public void test4() {
-        ArrayList<Integer> result = Hungarian.hungarianAlgorithm(test4);
-        assertEquals("Test 4: Correcte\n", result, result4);
-    }
-*/
 }
