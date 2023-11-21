@@ -10,5 +10,23 @@ $ ./start.sh
 ```
 Per als drivers: 
 ```
-$ ./start_<nom-driver>.sh
+$ ./start<nom-driver>.sh
 ```
+
+## Informació dels jocs de prova per als drivers i l'execució del Main
+
+- DriverAlfabet
+
+info driver alfabet
+
+- DriverTeclat
+
+info driver teclat
+
+- DriverHungarian
+
+info driver hungarian
+
+- DriverDomini (o Main)
+
+info main
