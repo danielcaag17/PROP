@@ -9,7 +9,7 @@ public class Alfabet {
     private Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
     private double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
     private int size;                               // Mida de l'Alfabet, els caràcters que té
-    private char[] abecedari;                       // Array de caràcters per guardar les lletres de l'Alfabet
+    private Character[] abecedari;                       // Array de caràcters per guardar les lletres de l'Alfabet
     private StrategyAlfabet strategy;               // Interfície StrategyAlfabet per llegir diferents tipus d'entrada
 
     // Pre:
@@ -93,13 +93,15 @@ public class Alfabet {
      * 
      * @throws EntradaLlegidaMalament si la lletra c no es troba dins de l'abecedari
      */
-    private int findIndex (char c) throws EntradaLlegidaMalament {
+    private int findIndex (Character c) throws EntradaLlegidaMalament {
         for (int i = c - 'a'; i >= 0; i--) {
-            if (i < abecedari.length && abecedari[i] == c) {
-                return i;
+            if (i < abecedari.length) {
+                char a = abecedari[i];
+                if (a == c)
+                    return i;
             }
         }
-        throw new EntradaLlegidaMalament();
+        throw new EntradaLlegidaMalament(Character.toString(c));
     }
 
     /**
@@ -179,7 +181,7 @@ public class Alfabet {
      * Post: associa l'estructura de dades per guarda l'abecedari de l'Alfabet
      */
     private void setAbecedari () {
-        abecedari = new char[this.characters.size()];        // Crea un array de char que representa cada lletra de l'Alfabet
+        abecedari = new Character[this.characters.size()];        // Crea un array de char que representa cada lletra de l'Alfabet
         int i = 0;
         for (Character c : characters.keySet()) {                   // Recorre l'estructura on es guarda l'abecedari
             abecedari[i] = c;
@@ -229,7 +231,7 @@ public class Alfabet {
      * 
      * @return les lletres de l'alfabet
      */
-    public char[] getAbecedari () {
+    public Character[] getAbecedari () {
         return this.abecedari;
     }
 
