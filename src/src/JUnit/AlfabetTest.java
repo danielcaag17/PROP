@@ -74,7 +74,7 @@ public class AlfabetTest {
     public void test7() {
         String path7 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a7 = iniAlfabet("Alfabet7", "string-qualsevol", path7);
-        assertEquals("Test 7: Correcte\n", null, a7.getAbecedari());
+        assertNull("Test 7: Correcte\n", a7.getAbecedari());
         // Valor esperat EXC --> TipusDadesNoValid
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
@@ -83,7 +83,7 @@ public class AlfabetTest {
     public void test8() {
         String path8 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a8 = iniAlfabet("Alfabet8", "12345", path8);
-        assertEquals("Test 8: Correcte\n", null, a8.getAbecedari());
+        assertNull("Test 8: Correcte\n", a8.getAbecedari());
         // Valor esperat EXC --> TipusDadesNoValid
         // "El tipus de dades (" + tipus + ") no és vàlid."
     }
@@ -92,7 +92,7 @@ public class AlfabetTest {
     public void test9() {
         String path9 = "test/exemples_input_alfabet/Words1.txt";
         Alfabet a9 = iniAlfabet("Alfabet9", "text", path9);
-        assertEquals("Test 9: Correcte\n", null, a9.getAbecedari());
+        assertNull("Test 9: Correcte\n", a9.getAbecedari());
         // Valor esperat EXC --> FormatDadesNoValid
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
@@ -101,7 +101,7 @@ public class AlfabetTest {
     public void test10() {
         String path10 = "test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a10 = iniAlfabet("Alfabet10", "text", path10);
-        assertEquals("Test 10: Correcte\n", null, a10.getAbecedari());
+        assertNull("Test 10: Correcte\n", a10.getAbecedari());
         // Valor esperat EXC --> FileNotFoundException
         // "ERROR: El fitxer " + path + " no s'ha trobat"
     }
@@ -110,7 +110,7 @@ public class AlfabetTest {
     public void test11() {
         String path11 = "test/exemples_input_alfabet/Text1.txt";
         Alfabet a11 = iniAlfabet("Alfabet11", "llista-paraules", path11);
-        assertEquals("Test 11: Correcte\n", null, a11.getAbecedari());
+        assertNull("Test 11: Correcte\n", a11.getAbecedari());
         // Valor esperat EXC --> FormatDadesNoValid
         // "El format de les dades del fitxer "+ path +" introduït no es correspon amb el seu tipus."
     }
@@ -119,7 +119,7 @@ public class AlfabetTest {
     public void test12() {
         String path12 = "test/exemples_input_alfabet/path-incorrecte.txt";
         Alfabet a12 = iniAlfabet("llista-paraules", "text", path12);
-        assertEquals("Test 12: Correcte\n", null, a12.getAbecedari());
+        assertNull("Test 12: Correcte\n", a12.getAbecedari());
         // Valor esperat EXC --> FileNotFoundException
         // "ERROR: El fitxer " + path + " no s'ha trobat"
     }
