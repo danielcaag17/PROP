@@ -4,32 +4,25 @@ import java.util.*;
 
 public class Hungarian {
     
-    private static void printMatrix(double[][] mat) {
-        for (int i = 0; i < mat.length; i++) {
-            System.out.print("[  ");
-            for (int j = 0; j < mat.length; j++) {
-                System.out.print(mat[i][j] + "  ");
-            }
-            System.out.print("]\n");
-        }
-        System.out.print("\n");
-    }
-
     private static ArrayList<Integer> mostCompleteAssig(double[][] mat) {
-        int n = mat.length;
-        // selected_zeros => Index = Fila de la matriu
-        //                   Value = Columna on hi ha 0 (-1 si no existeix)
-        ArrayList<Integer> selected_zeros = new ArrayList<Integer>(n);
-        
+        // Retorna l'assignació més completa possible, és a dir, el nombre màxim de 0 que es
+        // poden seleccionar de forma que sigui l'únic en fila i columna.
         CompleteAssignation ca = new CompleteAssignation(mat);
         int[] arr_assig = ca.mostCompleteAssig();
 
+        // selected_zeros => Index = Fila de la matriu
+        //                   Value = Columna on hi ha 0 (-1 si no existeix)
+        int n = mat.length;
+        ArrayList<Integer> selected_zeros = new ArrayList<Integer>(n);
         for (int i = 0; i < n; i++) selected_zeros.add(arr_assig[i]);
 
         return selected_zeros;
     }
 
     private static boolean[][] calcMinimumLines(double[][] mat) {
+        // Retorna un array que conté dos arrays, una que indica les files cobertes i una altra
+        // que indica les columnes cobertes.
+        //
         // 1. Obtenir assignació més completa possible, amb el número més gran possible de files
         //    amb un zero assignat. => backtracking (ho diu al pdf)
         // 2. Marcar les files sense assignació
@@ -39,7 +32,6 @@ public class Hungarian {
         //    no marcades
         int n = mat.length;
         double[][] auxMat = new double[n][n];
-        // Hem de copiar les matrius així ...
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 auxMat[i][j] = mat[i][j];
@@ -62,7 +54,6 @@ public class Hungarian {
         // Pas 3: Bucle:
         int changes = 1;
         while (changes > 0) {
-            // Es una chapuza aquesta forma de controlar iteracions pero no tinc cap idea millor lol
             changes = 0;
             // -> Marcar totes les columnes amb algun zero en una fila marcada.
             for (int i = 0; i < n; i++) {
@@ -70,7 +61,6 @@ public class Hungarian {
                     for (int j = 0; j < n; j++) {
                         if (auxMat[i][j] == 0 && !markedCols.get(j)) {
                             markedCols.set(j, true);
-                            // System.out.println("markedCols " + i + " set to true");
                             changes++;
                             break;
             }   }   }   }    
@@ -80,11 +70,9 @@ public class Hungarian {
                     int col_idx = assig.get(i);
                     if (markedCols.get(col_idx) && !markedRows.get(i)) { // Columna assignació marcada
                         markedRows.set(i, true);
-                        // System.out.println("markedRows " + i + " set to true");
                         changes++;
                         break;
             }   }   }
-            // System.out.println(changes);
         }
         // Pas 4: Recobrir columnes marcades i files no marcades
         boolean[][] result = new boolean[2][n];
@@ -100,6 +88,7 @@ public class Hungarian {
     }
 
     private static int numberOfLines(boolean[][] mat) {
+        // Retorna el nombre de línies necessàries per a cobrir tots els zeros de la matriu.
         // La matriu d'entrada ha de ser la que ens retorna calcMinimumLines !!!
         int nlines = 0;
         // nlines ha de ser igual al nombre de true's en els dos vector que conté la matriu
@@ -111,6 +100,7 @@ public class Hungarian {
     }
 
     private static double minValRow(double[][] mat, int row) {
+        // Retorna el valor mínim de la fila row en la matriu mat.
         int n = mat[row].length;
         double min = mat[row][0];
         for (int i = 1; i < n; i++) {
@@ -120,6 +110,7 @@ public class Hungarian {
     }
 
     private static double minValColumn(double[][] mat, int col) {
+        // Retorna el valor mínim de la columna col en la matriu mat.
         int n = mat.length;
         double min = mat[0][col];
         for (int i = 1; i < n; i++) {
@@ -129,6 +120,7 @@ public class Hungarian {
     }
 
     private static double minNonCovered(double[][] mat, boolean[][] covLines) {
+        // Retorna el valor mínim no cobert en la matriu mat.
         double target = 999999;
         for (int i = 0; i < mat.length; i++) {
             if (!covLines[0][i]) { // fila no està coberta
@@ -143,6 +135,7 @@ public class Hungarian {
     }
 
     private static double minMatrix(double[][] mat) {
+        // Retorna el valor mínim de la matriu mat.
         double target = 999999;
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat.length; j++) {
@@ -153,6 +146,10 @@ public class Hungarian {
     }
 
     public static ArrayList<Integer> hungarianAlgorithm(double[][] mat) {
+        // Retorna l'assignació òptima calculada per l'Hungarian Algorithm. En l'ArrayList de
+        // sortida, l'índex representa la fila de la matriu on es troba, i el valor representa
+        // la columna de la matriu on es troba el zero seleccionat.
+        // 
         // Partim d'una matriu, en el nostre cas sempre quadrada.
         // Es resta de cada fila el valor mínim d'aquella fila
         // Es resta de cada columna el valor mínim d'aquella columna
@@ -167,8 +164,6 @@ public class Hungarian {
         // 
         // A l'acabar tenim un 0 per cada fila i columna de la matriu. El conjunt de n zeros
         // que ens dona una assignació factible ens dóna l'assignació òptima que buscàvem.
-        
-        // printMatrix(mat); // DEBUG
         
         int n = mat.length;
         double[][] auxMat = new double[n][n];
@@ -192,20 +187,10 @@ public class Hungarian {
                 auxMat[i][j] -= min_col;
             }
         }
-
-        // printMatrix(auxMat); // DEBUG
-
-        // ##### System.out.println("calcMinimumLines in process...");
         // Obtenir línies mínimes
         boolean[][] minLines = calcMinimumLines(auxMat);
         int nMinLines = numberOfLines(minLines);
-        /*
-        System.out.println(nMinLines); // DEBUG
-        for (int i = 0; i < n; i++) System.out.print(minLines[0][i] + " "); // DEBUG
-        System.out.println(""); // DEBUG
-        for (int i = 0; i < n; i++) System.out.print(minLines[1][i] + " "); // DEBUG
-        System.out.println(""); // DEBUG
-        */
+        
         double valMinNonCovered;
         double valMinMatrix;
 
@@ -230,15 +215,10 @@ public class Hungarian {
             minLines = calcMinimumLines(auxMat);
             nMinLines = numberOfLines(minLines);
         }
-
-        // printMatrix(auxMat); // DEBUG
-
         // Index = Fila de la matriu (=> index fila indica CARACTER)
         // Value = Columna on hi ha el 0 de la solució (=> index columna indica TECLA)
         ArrayList<Integer> solutionHungarian = mostCompleteAssig(auxMat);
 
-        // ##### System.out.println("Hungarian Solution: " + solutionHungarian); // DEBUG
-        
         return solutionHungarian;
     }
 }
