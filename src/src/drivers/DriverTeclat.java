@@ -8,9 +8,7 @@ import src.domain.classes.Generador;
 import src.domain.classes.Layout;
 import src.domain.classes.Teclat;
 import src.exceptions.EntradaLlegidaMalament;
-import src.exceptions.Excepcions;
 import src.exceptions.FormatDadesNoValid;
-import src.exceptions.GeneradorNoValid;
 import src.exceptions.LletraNoTeclat;
 import src.exceptions.TipusDadesNoValid;
 
