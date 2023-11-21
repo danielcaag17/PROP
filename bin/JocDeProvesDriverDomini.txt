@@ -1,0 +1,75 @@
+Joc de proves del programa principal (./start.sh)
+
+--- Informació del joc de prova ---
+Aquest joc de proves conte exemples que es poden introduir al programa principal per tenir una guia de les comandes
+per a exemples concrets. 
+
+Recordar que quan s'executa el programa principal:
+- si el prompt mostra #   : vol una comanda
+- si el prompt mostre ? > : vol entrada de dades
+- per veure totes les comandes es pot posar 'pc' o 'print_commands'
+- per veure mes informacio de les comandes del programa es pot introduir 'mi' o 'more_info'
+
+Al joc de proves introduim un seguit de comandes per crear alfabets, teclats, layouts, esborrar-los, llistar-los i modificar-los (cas de Teclat).
+Es poden provar totes les comandes, sempre i quan es mantingui els requisits del programa, com per exemple que per crear un teclat hi ha d'haver un 
+alfabet abans, per esborrar un layout no ha de ser dels generats inicialment, etc. A 'more_info' s'indiquen aquestes condicions i salten errors si 
+no es compleixen.
+
+Fitxers necessaris:
+    test/exemples_input_alfabet/*
+
+--- Joc de prova: ---
+
+# nl
+? > 10
+# nl
+? > 6
+# nl
+? > 47
+# ll
+# na
+? > AlfabetText1
+? > text
+? > ../../test/exemples_input_alfabet/Text1.txt
+# na
+? > AlfabetText2
+? > text
+? > ../../test/exemples_input_alfabet/Text2.txt
+# na
+? > AlfabetWords1
+? > llista-paraules
+? > ../../test/exemples_input_alfabet/Words1.txt
+# na
+? > AlfabetWords3
+? > llista-paraules
+? > ../../test/exemples_input_alfabet/Words3.txt
+# nt
+? > Teclat1
+? > AlfabetText1
+? > 26
+# nt
+? > Teclat2
+? > AlfabetText2
+? > 24
+# nt
+? > Teclat3
+? > AlfabetWords1
+? > 26
+# nt
+? > Teclat4
+? > AlfabetWords3
+? > 24
+# lt
+# la
+# mt
+? > Teclat1
+# mt
+? > Teclat2
+# mt
+? > Teclat3
+# mt
+? > Teclat4
+
+--------
+
+Sentiu-vos lliures d'experimentar amb les comandes disponibles.
