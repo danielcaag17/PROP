@@ -1,0 +1,25 @@
+DESCRIPCIÓ DIAGRAMA DE CLASSES
+
+Classe Alfabet
+
+Classe BranchBound
+
+Classe CompleteAssignations
+
+Classe Generador
+
+Classe Hungarian
+
+Classe Layout
+
+Classe Pair
+
+Classe Strategy
+
+Classe StrategyAlfabet
+
+Classe Teclat
+
+Classe Text
+
+Classe Words
