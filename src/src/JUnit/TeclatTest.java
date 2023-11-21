@@ -9,6 +9,7 @@ import java.util.Arrays;
 import src.domain.classes.*;
 import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
+import src.exceptions.LletraNoTeclat;
 import src.exceptions.TipusDadesNoValid;
 
 public class TeclatTest {
@@ -23,7 +24,7 @@ public class TeclatTest {
 
     @Test
     public void test1 () {
-        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
+        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
         Teclat T = new Teclat("Teclat test", L, A, G);
         teclat = T.getDistribucioCharacters();
 
@@ -32,9 +33,15 @@ public class TeclatTest {
     
     @Test
     public void test2 () {
-        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
+        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
         Teclat T = new Teclat("Teclat test", L, A, G);
-        T.modificarTeclat('q', 'g');
+        try {
+            T.modificarTeclat('q', 'g');
+        }
+        catch (LletraNoTeclat e) {
+            System.out.println("Alguna lletra no pertany al Teclat");
+        }
+        
         teclat = T.getDistribucioCharacters();
 
         assertEquals("Test 2: Correcte\n", Arrays.toString(teclat), result2);
@@ -42,10 +49,21 @@ public class TeclatTest {
 
     @Test
     public void test3 () {
-        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt")
+        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
         Teclat T = new Teclat("Teclat test", L, A, G);
-        T.modificarTeclat('x', 'j');
-        T.modificarTeclat('x', 'j');
+        try {
+            T.modificarTeclat('x', 'j');
+        }
+        catch (LletraNoTeclat e) {
+            System.out.println("Alguna lletra no pertany al Teclat");
+        }
+        try {
+            T.modificarTeclat('x', 'j');
+        }
+        catch (LletraNoTeclat e) {
+            System.out.println("Alguna lletra no pertany al Teclat");
+        }
+        
         teclat = T.getDistribucioCharacters();
 
         assertEquals("Test 2: Correcte\n", Arrays.toString(teclat), result3);
