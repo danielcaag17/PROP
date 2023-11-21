@@ -1,6 +1,5 @@
 package src.domain.classes;
 
-import java.util.*;
 
 public class CompleteAssignation {
     private double [][] matrix;
