@@ -241,7 +241,7 @@ public class CtrlDomini {
      */
     public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
         if (Layouts.get(idL) != null) throw new LayoutJaExisteix(idL.toString());
-        if (idL < 4) throw new MidaMassaPetita(idL.toString());
+        if (idL < 7) throw new MidaMassaPetita(idL.toString());
         Layout l = new Layout(idL);
         Layouts.put(idL, l);
     }
