@@ -52,17 +52,17 @@ public class DriverHungarian {
 
         // TEST 2
         ArrayList<Integer> res_test2 = Hungarian.hungarianAlgorithm(test2);
-        if (result2.equals(res_test2)) System.print.out("[+] test2 -> PASSED!");
+        if (result2.equals(res_test2)) System.out.println("[+] test2 -> PASSED!");
         else System.out.println("[!] test2 -> FAILED!");
 
         // TEST 3
         ArrayList<Integer> res_test3 = Hungarian.hungarianAlgorithm(test3);
-        if (result3.equals(res_test3)) System.print.out("[+] test3 -> PASSED!");
+        if (result3.equals(res_test3)) System.out.println("[+] test3 -> PASSED!");
         else System.out.println("[!] test3 -> FAILED!");
 
         // TEST 4
         ArrayList<Integer> res_test4 = Hungarian.hungarianAlgorithm(test4);
-        if (result4.equals(res_test4)) System.print.out("[+] test4 -> PASSED!");
+        if (result4.equals(res_test4)) System.out.println("[+] test4 -> PASSED!");
         else System.out.println("[!] test4 -> FAILED!");
     }
 }
