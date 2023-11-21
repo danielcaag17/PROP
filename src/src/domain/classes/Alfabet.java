@@ -126,7 +126,7 @@ public class Alfabet {
      * 
      * @param length longitud de les dades amb les que s'ha creat l'Alfabet
      */
-    public void calculateCharacters (int length) {     //ull amb totes les divisions, EXC si es entre 0 !!
+    public void calculateCharacters (int length) {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                 // Obtenir les aparicions de la lletra c
             double probabilitat = nAparicions / length;             // Calcular la probabilitat de la lletra c
