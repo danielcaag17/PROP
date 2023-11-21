@@ -53,20 +53,20 @@ public class Words implements StrategyAlfabet {
      */
     private HashMap<String, Double> getWords (String path) throws FormatDadesNoValid, FileNotFoundException {
         HashMap<String, Double> words = new HashMap<>();
-        File file = new File(path); // Tractar excepció que pugui donar File() !!!
-        try (Scanner myReader = new Scanner(file)) {
-            while (myReader.hasNextLine()) { // Tractar excepció que pugui donar hasNextLine !!!
-                String word = myReader.next(); // Tractar excepció que pugui donar nextLine !!!
+        File file = new File(path);
+        try (Scanner myReader = new Scanner(file, "utf-8")) {
+            while (myReader.hasNextLine()) {
+                String word = myReader.next();
                 String probabilitatString = myReader.next();
                 double probabilitat = 0.0;
                 try {
-                    probabilitat = Float.parseFloat(probabilitatString); // Tractar excepció que pugui donar parseFloat !!!
+                    probabilitat = Float.parseFloat(probabilitatString);
                 }
-                catch(NumberFormatException e) {    // String no es un Float
+                catch(NumberFormatException e) {                            // String no es un Float
                     throw new FormatDadesNoValid();
                 }
-                if (! words.containsKey(word)) {                       // comprovar que la lletra no s'ha vist encara
-                    words.put(word, probabilitat);;                  // crear una nova entrada amb la lletra c i 0 aparicions
+                if (! words.containsKey(word)) {                            // Comprovar que la lletra no s'ha vist encara
+                    words.put(word, probabilitat);;                         // Crear una nova entrada amb la paraula i la seva probabilitat
                 }
             }
             myReader.close();

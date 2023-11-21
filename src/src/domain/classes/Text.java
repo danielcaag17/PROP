@@ -49,7 +49,7 @@ public class Text implements StrategyAlfabet {
         String text = "";
         File file = new File(path);
         int criteriAcceptació = 0;                              // Variable que indica fins a quin punt es comproba que el format és vàlid
-        try (Scanner myReader = new Scanner(file)) {
+        try (Scanner myReader = new Scanner(file, "utf-8")) {
             while (myReader.hasNext()) {
                 String input = myReader.next();
                 if (criteriAcceptació < 100) {
