@@ -17,10 +17,21 @@ Classe Alfabet
      - calculateCharacters() calcula les probabilitats de cada lletra en el Map characters
 
 Classe BranchBound
-
-Classe CompleteAssignations
+    Classe encarregada d’executar l’algorisme de branching, i retornar una solucio a partir de
+    la qual es genera el teclat.
+    -> Veure fitxer "Documentacio_Algorisme.pdf"
 
 Classe Hungarian
+    Classe encarregada d’executar l’Hungarian Algorithm, algorisme el qual a partir d’una
+    matriu ens ofereix una assignació òptima, a partir de la qual obtenim una aproximació del càlcul dels
+    termes 2 i 3 de la cota de Gilmore. Requereix de la classe CompleteAssignation.
+    -> Veure fitxer "Documentacio_Algorisme.pdf"
+
+Classe CompleteAssignation
+    Classe encarregada de trobar la millor assignació possible donada una matriu, s’utilitza
+    tant en passos intermitjos de l’Hungarian com per a trobar l’assignació completa final. La seva
+    implementació és crítica per a l’eficiència de l’algorisme.
+    -> Veure fitxer "Documentacio_Algorisme.pdf"
 
 Classe Generador
     La classe Generador "comunica" el Teclat i el Strategy que genera el teclat. Adapta les estructures de dades que demanen,
@@ -47,6 +58,8 @@ Classe Strategy
 
 Classe StrategyAlfabet
     Classe Interface per aplicar el patró Strategy. Les classes que l'implementen son Text i Words.
+    S'utilitza aquest patro perque a part de gestionar els dos tipus d'entrada per separat i evitar duplicitat del codi, es pot aconseguir
+    que en un futur es pot ampliar facilment a altres tipus d'entrades.
 
 Classe Teclat
     Aquesta classe guarda tota la informació sobre un Teclat, principalment d'atributs simples hi ha un nom: String per identificar al Teclat,
