@@ -123,7 +123,7 @@ public class DriverTeclat {
             System.out.println("ERROR: El fitxer " + path + " no s'ha trobat");
         }
         catch (FormatDadesNoValid e) {
-            System.out.println("El format de les dades del fitxer " + path + " no s'ha trobat introduït no es correspon amb el seu tipus.");
+            System.out.println("El format de les dades del fitxer " + path + " introduït no es correspon amb el seu tipus.");
         }
         catch (TipusDadesNoValid e) {
             System.out.println("El tipus de dades (" + tipus + ") no és vàlid.");
