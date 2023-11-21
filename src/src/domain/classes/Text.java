@@ -48,11 +48,11 @@ public class Text implements StrategyAlfabet {
     private String getText (String path) throws FormatDadesNoValid, FileNotFoundException {
         String text = "";
         File file = new File(path);
-        int criteriAcceptació = 0;                              // Variable que indica fins a quin punt es comproba que el format és vàlid
+        int criteriAcceptacio = 0;                              // Variable que indica fins a quin punt es comproba que el format és vàlid
         try (Scanner myReader = new Scanner(file, "utf-8")) {
             while (myReader.hasNext()) {
                 String input = myReader.next();
-                if (criteriAcceptació < 100) {
+                if (criteriAcceptacio < 100) {
                     try {
                         Float.parseFloat(input);
                         throw new FormatDadesNoValid();
@@ -62,7 +62,7 @@ public class Text implements StrategyAlfabet {
                         // fer un contador perque no sempre entri a fer la conversió
                         // si han passat 20 strings i no hi ha error deixar de convertir a Float
                     }
-                    criteriAcceptació++;
+                    criteriAcceptacio++;
                 }
                 text += input.toLowerCase();                    // Passar a lower case tota l'entrada
             }
