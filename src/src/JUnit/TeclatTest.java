@@ -69,6 +69,21 @@ public class TeclatTest {
         assertEquals("Test 2: Correcte\n", Arrays.toString(teclat), result3);
     }
 
+    @Test
+    public void test4 () {
+        A = iniAlfabet("Alfabet test", "text", "./subgrup-prop32.2/test/exemples_input_alfabet/Text1.txt");
+        Teclat T = new Teclat("Teclat test", L, A, G);
+        try {
+            T.modificarTeclat('1', 'g');
+        }
+        catch (LletraNoTeclat e) {
+            System.out.println("Alguna lletra no pertany al Teclat");
+        }
+        
+        teclat = T.getDistribucioCharacters();
+
+        assertEquals("Test 4: Correcte\n", Arrays.toString(teclat), result2);
+    }
     
     private Alfabet iniAlfabet (String nom, String tipus, String path) {
         Alfabet a = new Alfabet(nom);
