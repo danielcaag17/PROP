@@ -87,6 +87,11 @@ public class Teclat {
         Integer aux = teclat.get(a);
         teclat.put(a, teclat.get(b));
         teclat.put(b, aux);
+
+        Pair<Integer, Integer> aPos = L.getCoordenadaFromId(teclat.get(a));
+        Pair<Integer, Integer> bPos = L.getCoordenadaFromId(teclat.get(b));
+        distribucioCharacters[aPos.first][aPos.second] = a;
+        distribucioCharacters[bPos.first][bPos.second] = b;
     }
 
     /**
