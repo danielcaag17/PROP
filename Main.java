@@ -1,12 +1,14 @@
 import java.awt.Color;
+import java.awt.Menu;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument.BlockElement;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Main implements ActionListener{
     static JLabel label1, label2, label3, label4;
     static JButton button;
+    static JMenu menu;
     public static void main(String[] args) {
         label1 = new JLabel();
         label1.setVisible(false);
@@ -60,6 +62,27 @@ public class Main implements ActionListener{
         button2.setIcon(imageIcon);
         */
 
+        JButton buttonA = new JButton();
+        JButton buttonB = new JButton();
+        buttonA.setText("A");
+        buttonA.setBounds(100,100,100,100);
+        buttonA.setSelected(true);
+        buttonB.setText("B");
+        buttonB.setBounds(200,100,100,100);
+
+        // JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem();
+        // checkBox.setBounds(0,0,20,20);
+        // checkBox.setBounds(0,0,100,100);
+
+        /*
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(parent);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
+        }*/
+
         JFrame frame = new JFrame();
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +94,12 @@ public class Main implements ActionListener{
         frame.add(label3);
         frame.add(label4);
         frame.add(button);
+        // frame.add(checkBox);
+        // frame.add(colorChooser);
+        frame.add(buttonA);
+        frame.add(buttonB);
         // frame.add(button2);
+        frame.add(menu);
         // frame.pack();
     }
 
@@ -91,5 +119,7 @@ public class Main implements ActionListener{
         label2.setVisible(b);
         label3.setVisible(b);
         label4.setVisible(b);
+        menu = new JMenu();
+        menu.setBounds(0,0,500,500);
     }
 }
