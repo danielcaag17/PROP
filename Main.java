@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument.BlockElement;
 
 public class Main implements ActionListener{
     static JLabel label1, label2, label3, label4;
@@ -35,7 +36,7 @@ public class Main implements ActionListener{
         label4.setVerticalAlignment(JLabel.TOP);
         label4.setBounds(600,100,300,200);
 
-        ImageIcon imageIcon = new ImageIcon("OK.png");
+        // ImageIcon imageIcon = new ImageIcon("OK.png");
 
 
         button = new JButton();
@@ -43,6 +44,7 @@ public class Main implements ActionListener{
         // posar que es canvii la vista per exemple
         // button.addActionListener(e -> System.out.println("CLICK"));
         // button.addActionListener(e -> button.setEnabled(false));
+        button.addActionListener(e -> setVisible(true));
 
         // No funciona perque el main es una classe estatica
         // button.addActionListener(this);
@@ -82,6 +84,12 @@ public class Main implements ActionListener{
             label3.setVisible(true);
             label4.setVisible(true);
         }
+    }
 
+    private static void setVisible (Boolean b) {
+        label1.setVisible(b);
+        label2.setVisible(b);
+        label3.setVisible(b);
+        label4.setVisible(b);
     }
 }
