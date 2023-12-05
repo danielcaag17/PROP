@@ -38,7 +38,7 @@ public class CtrlDomini {
         Teclats = new HashMap<String, Teclat>();
         Alfabets = new HashMap<String, Alfabet>();
         Layouts = new HashMap<Integer, Layout>();
-        strategy = "Branch&bound";
+        strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
         inicialitzarLayoutsBase();
 //      strategy = "QuadraticAssignmentProblem"
@@ -73,6 +73,22 @@ public class CtrlDomini {
      */
     public Layout getLayout(Integer idL) {
         return Layouts.get(idL);
+    }
+
+    /**
+     * Pre: -
+     * Post: la estratègia de generador ha sigut canviada.
+     */
+    public String toggleStrategy() {
+        if (this.strategy == "BranchBound") {
+            this.strategy = "Genetic";
+            Generador.setStrategy(this.strategy);
+        }
+        else {
+            this.strategy = "BranchBound";
+            Generador.setStrategy(this.strategy);
+        }
+        return strategy;
     }
 
     /**
@@ -241,7 +257,7 @@ public class CtrlDomini {
      */
     public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
         if (Layouts.get(idL) != null) throw new LayoutJaExisteix(idL.toString());
-        if (idL < 7) throw new MidaMassaPetita(idL.toString());
+        if (idL < 1) throw new MidaMassaPetita(idL.toString());
         Layout l = new Layout(idL);
         Layouts.put(idL, l);
     }

@@ -31,6 +31,10 @@ public class CtrlPresentacio {
         return cd.getListLayouts();
     }
 
+    public String toggleStrategy() {
+        return cd.toggleStrategy();
+    }
+
     public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
         cd.crearNouTeclat(nt, na, idL);
     }

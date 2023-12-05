@@ -8,22 +8,29 @@ public class Generador {
     private Strategy S;
 
     /**
-     * Pre: 
+     * Pre: -
      * Post: s'ha instanciat la classe Strategy pertinent
      * 
      * @param strategy string per identificar quina estrategia utilitzar.
-     * 
-     * throws GeneradorNoValid si no hi ha un tipus d'estrategia demanat per strategy.
      */
-    public Generador (String strategy) /* throws GeneradorNoValid */ {
+    public Generador (String strategy) {
+        setStrategy(strategy);
+    }
+
+    /**
+     * Pre: strategu és una strategy existent
+     * Post: s'ha instanciat una nova Strategy S amb la strategy introduïda
+     *
+     * @param strategy string que identifica la nova estratègia
+     */
+    public void setStrategy(String strategy) {
         switch(strategy) {
-            case "Branch&bound":
+            case "BranchBound":
                 S = new BranchBound();
                 break;
-            /*
-                default:
-                throw new GeneradorNoValid();
-            */
+            case "Genetic":
+                S = new Genetic();
+                break;
         }
     }
 

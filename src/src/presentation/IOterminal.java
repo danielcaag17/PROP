@@ -70,6 +70,8 @@ public class IOterminal {
             "   llista_alfabets : la \n" +
             "   llista_layouts : ll \n" +
             "\n" +
+            "   toggle_generator : tg \n" +
+            "\n" +
             "   more_info : mi \n" +
             "   print_commands : pc \n" +
             "   finalitzar : f \n" +
@@ -82,22 +84,23 @@ public class IOterminal {
     public void escollir() {
         System.out.print(inputCommand);
         String command = s.next();
-        if (     command.equals("nou_teclat")      || command.equals("nt")) nouTeclat();
-        else if (command.equals("modifica_teclat") || command.equals("modt")) modificaTeclat();
-        else if (command.equals("esborra_teclat")  || command.equals("et")) esborraTeclat();
-        else if (command.equals("mostra_teclat")   || command.equals("mt")) mostraTeclat();
-        else if (command.equals("nou_alfabet")     || command.equals("na")) nouAlfabet();
-        else if (command.equals("esborra_alfabet") || command.equals("ea")) esborraAlfabet();
-        else if (command.equals("mostra_alfabet")  || command.equals("ma")) mostraAlfabet();
-        else if (command.equals("nou_layout")      || command.equals("nl")) nouLayout();
-        else if (command.equals("mostra_layout")   || command.equals("ml")) mostraLayout();
-        else if (command.equals("esborra_layout")  || command.equals("el")) esborraLayout();
-        else if (command.equals("llista_teclats")  || command.equals("lt")) llistaTeclats();
-        else if (command.equals("llista_alfabets") || command.equals("la")) llistaAlfabets();
-        else if (command.equals("llista_layouts")  || command.equals("ll")) llistaLayouts();
-        else if (command.equals("more_info")       || command.equals("mi")) moreInfo();
-        else if (command.equals("print_commands")  || command.equals("pc")) mostraMenu();
-        else if (command.equals("finalitzar")      || command.equals("f")) finalitzar();
+        if (     command.equals("nou_teclat")       || command.equals("nt")) nouTeclat();
+        else if (command.equals("modifica_teclat")  || command.equals("modt")) modificaTeclat();
+        else if (command.equals("esborra_teclat")   || command.equals("et")) esborraTeclat();
+        else if (command.equals("mostra_teclat")    || command.equals("mt")) mostraTeclat();
+        else if (command.equals("nou_alfabet")      || command.equals("na")) nouAlfabet();
+        else if (command.equals("esborra_alfabet")  || command.equals("ea")) esborraAlfabet();
+        else if (command.equals("mostra_alfabet")   || command.equals("ma")) mostraAlfabet();
+        else if (command.equals("nou_layout")       || command.equals("nl")) nouLayout();
+        else if (command.equals("mostra_layout")    || command.equals("ml")) mostraLayout();
+        else if (command.equals("esborra_layout")   || command.equals("el")) esborraLayout();
+        else if (command.equals("llista_teclats")   || command.equals("lt")) llistaTeclats();
+        else if (command.equals("llista_alfabets")  || command.equals("la")) llistaAlfabets();
+        else if (command.equals("llista_layouts")   || command.equals("ll")) llistaLayouts();
+        else if (command.equals("toggle_generator") || command.equals("tg")) toggleStrategy();
+        else if (command.equals("more_info")        || command.equals("mi")) moreInfo();
+        else if (command.equals("print_commands")   || command.equals("pc")) mostraMenu();
+        else if (command.equals("finalitzar")       || command.equals("f")) finalitzar();
         else {
             System.out.println(errorOutput + "ERROR: '" + command + "' no és una comanda vàlida."); 
             System.out.println(output + "Si us plau, introdueix una comanda vàlida.");
@@ -128,6 +131,12 @@ public class IOterminal {
     public void llistaTeclats() {
         System.out.println(output + "Llista de Teclats:");
         writeList(ctrlPresentacio.getListTeclats());
+        escollir();
+    }
+
+    public void toggleStrategy() {
+        String str = ctrlPresentacio.toggleStrategy();
+        System.out.println(output + "Estratègia canviada a " + str + ".");
         escollir();
     }
 
@@ -387,6 +396,8 @@ public class IOterminal {
             " - mostra_layout   : Comanda per a visualitzar tota la informació rellevant d'un layout existent. \n" +
             " - esborra_layout  : Comanda per a esborrar un layout existent i no generat inicialment. \n" + 
             "                     Per mides entre 24 i 27 no es podrà esborrar. \n" +
+            "\n" +
+            " - toggle_generator: Serveix per a canviar la estratègia amb la que es generen els teclats. \n" +
             "\n" +
             " - llista_teclats  : Comanda per a llistar informació reduïda de tots els teclats creats. \n" +
             " - llista_alfabets : Comanda per a llistar informació reduïda de tots els alfabets creats. \n" +

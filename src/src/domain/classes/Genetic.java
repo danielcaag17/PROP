@@ -237,7 +237,9 @@ public class Genetic implements Strategy {
         return this.Fitness[obtainSelection(-1)[0]];
     }
 
-    public ArrayList<Integer> generarTeclat(double[][] freq_matrix, double[][] dist_matrix) {
+    public ArrayList<Integer> generarTeclat(double[][] freq_matrix, double[] abs_frequencies, double[][] dist_matrix) {
+        // No es fa ús de abs_frequencies per aquest algorisme
+
         // Totes les matrius són quadrades, de mida problem_size
         this.Frequencies = freq_matrix;
         this.Distancies = dist_matrix;
