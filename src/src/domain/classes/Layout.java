@@ -1,11 +1,14 @@
 package src.domain.classes;
 
 import java.util.*;
+import src.exceptions.CoordenadaIncorrecta;
 
 public class Layout {
     /** Atributs */
     /** Indica la mida del layout, número de posicions disponibles. Aquest paràmetre és la clau primària. */
     private int mida; 
+    private int[] mov_x = new int[] {0, 1, 1, 1, 0,-1,-1,-1};
+    private int[] mov_y = new int[] {1, 1, 0,-1,-1,-1, 0, 1};
     /** Indica la distància entre les "mida" posicions */
     private double[][] distancies;
     /** Indica per cada id les seves coordenades al layout */
@@ -51,14 +54,16 @@ public class Layout {
         double x = (double)mida/3;
         if (mida%3 != 0) { ncol = round(x, false); }
         else { ncol = round(x, true); }
+        if (ncol < 3) ncol = 3; // Per evitar segmentation fault al omplir el cercle inicial
 
         distribucio = new int[nfil][ncol]; // creem una distribució de les mesures buscades
+        for (int i = 0; i<nfil; i++) {
+            Arrays.fill(distribucio[i], -1);
+        }
     }
 
     /** Relacionar id de tecla (a menor id més prioritat al QAP) amb les seves coordenades */
     private void omplirCoordenades() {
-        int[] mov_x = new int[] {0, 1, 1, 1, 0,-1,-1,-1};
-        int[] mov_y = new int[] {1, 1, 0,-1,-1,-1, 0, 1};
         Pair<Integer, Integer> mig = new Pair<Integer,Integer>(nfil/2, ncol/2);
         if (ncol % 2 == 0) mig.second -= 1;
         int dir = 1;
@@ -71,10 +76,13 @@ public class Layout {
             if (k<=8) {
                 tecla.first = mig.first+mov_x[k-1];
                 tecla.second = mig.second+mov_y[k-1];
+                if (id == mida) {break;} // Surt si el cercle inicial ha de ser menor a 8, serveix per mides inferiors a 9
             }
             else {
                 int p = k % nfil; // canviar nom a variable p
+                
                 if (p == 0) {
+                    // Correccions dels offsets i la direcció
                     offset -= 2*offset; // intercanvia el signe del valor del offset
                     if (offset>0) offset++; // si offset és positiu, increm.
                     dir *= -1; // intercanviem la direcció de la coordenada first
@@ -98,6 +106,10 @@ public class Layout {
                     // p-1 corregeix p per a que faci d'offset per al eix first
                 }
                 tecla.second = mig.second+offset;
+
+                // Surt si la primera columna (que no formi part del cercle central) no fa falta que s'ompli més
+                // Serveix per mides entre 9 i 12 (excloses)
+                if (id == mida && ncol == 4) {break;}
             }
 
             coordenades.add(id, tecla);
@@ -139,12 +151,23 @@ public class Layout {
     }
 
     /**
+     * Check if a coordinate of the matrix distribution has some valid id stored.
+     * @param coordenada Indica una coordenada.
+     * @return cert si la coordeanada introduïda és vàlida.
+     */
+    public boolean isCoordenadaValida(Pair<Integer,Integer> coordenada) {
+        if (coordenada.first < 0 || coordenada.first > nfil) return false;
+        if (coordenada.second < 0 || coordenada.second > ncol) return false;
+        return distribucio[coordenada.first][coordenada.second] != -1;
+    }
+
+    /**
      * Get Id of a Pair of coordinates
-     * @param coordenada Indica les coordenades de les que es volen la id
+     * @param coordenada Indica una coordenada vàlida de les que es volen la id
      * @return Retorna la id de les coordenades coordenada
      */
-    public int getIdCoordenades(Pair<Integer,Integer> coordenada) {
-        // afegir possible excepció
+    public int getIdCoordenades(Pair<Integer,Integer> coordenada) throws CoordenadaIncorrecta {
+        if (!isCoordenadaValida(coordenada)) throw new CoordenadaIncorrecta(coordenada);
         return distribucio[coordenada.first][coordenada.second];
     }
 
@@ -174,8 +197,8 @@ public class Layout {
     }
 
     /**
-     * Get instance distribucio filled with the id of each position
-     * @return Retorna la distribució de les ids en les tecles/posicions
+     * Get instance distribucio filled with the id of each position, -1 if it's a empty position
+     * @return Retorna la distribució de les ids en les tecles/posicions 
      */
     public int[][] getDistribucioFilled() {
         return distribucio;
@@ -215,7 +238,7 @@ public class Layout {
         String s = "";
         for(int i = 0; i < nfil; i++) {
             for(int j = 0; j < ncol; j++) {
-                if (distribucio[i][j] == 0 && (j==0 || j>=ncol-2)) s+="--"; 
+                if (distribucio[i][j] == -1) s+="--"; // COMPROVAR QUE AIXO FUNCIONA -- VEURE ON MÉS ES POT APLICAR
                 else {
                     if (distribucio[i][j] < 10) s+='0';
                     s += distribucio[i][j];
