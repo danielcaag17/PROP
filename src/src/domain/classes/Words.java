@@ -6,7 +6,17 @@ import java.util.*;
 import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 
-public class Words implements StrategyAlfabet {
+public class Words extends Alfabet {
+
+    // Pre:
+    // Post: s'ha creat una instància de Text amb size = 0
+    public Words() {super();}
+
+    // Pre: no existeix cap Alfabet amb aquest nom
+    // Post: s'ha creat una instància de Words amb nom = nom i size = 0
+    public Words (String nom) {
+        super(nom);
+    }
     
     /**
      * Pre:
@@ -17,28 +27,26 @@ public class Words implements StrategyAlfabet {
      * @return l'Alfabet resultat de l'entrada donada
      */
     @Override
-    public Alfabet read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+    public void read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
         HashMap<String, Double> words = getWords(path);                             // Llegir l'entrada
-        Alfabet a = new Alfabet();
         int totalLenght = 0;
-        Map<Character, Double> map = new HashMap<>();
+        characters = new HashMap<>();
         for (String s : words.keySet()) {
             int lenght = s.length();
-            map = a.processCharacters(s, lenght, map);                              // Contar el nombre d'aparicions de totes les lletres de l'Alfabet
+            characters = processCharacters(s, lenght, characters);                              // Contar el nombre d'aparicions de totes les lletres de l'Alfabet
             totalLenght += lenght;                                                  // Saber quina és la mida total
         }
-        a.setCharacters(map);                                                       // Inicialitzar characters, abecedari i size
+        setCharacters(characters);                                                       // Inicialitzar characters, abecedari i size
 
-        double[][] matrix = new double[map.size()][map.size()];                     // Matrix NxN inicialitzada amb 0.0
-        a.setFrequencies(matrix);
+        frequencies = new double[characters.size()][characters.size()];                     // Matrix NxN inicialitzada amb 0.0
+        setFrequencies(frequencies);
         for (String s : words.keySet()) {
             int lenght = s.length();
-            a.processFrequencies(s, lenght);                                        // Contar el nombre d'aparicions que donada una lletre es doni la següent
+            processFrequencies(s, lenght);                                        // Contar el nombre d'aparicions que donada una lletre es doni la següent
         }
 
-        a.calculateFrequencies();                                                   // Passar el nombre d'aparicions a probabilitat per 1
-        a.calculateCharacters(totalLenght);
-        return a;
+        calculateFrequencies();                                                   // Passar el nombre d'aparicions a probabilitat per 1
+        calculateCharacters(totalLenght);
     }
 
     /**

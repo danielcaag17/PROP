@@ -4,13 +4,12 @@ import src.exceptions.*;
 import java.io.*;
 import java.util.*;
 
-public class Alfabet {
+public abstract class Alfabet {
     private String nom;                             // Clau primària de la classe Alfabet
-    private Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
-    private double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
+    protected Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
+    protected double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
     private int size;                               // Mida de l'Alfabet, els caràcters que té
     private Character[] abecedari;                       // Array de caràcters per guardar les lletres de l'Alfabet
-    private StrategyAlfabet strategy;               // Interfície StrategyAlfabet per llegir diferents tipus d'entrada
 
     // Pre:
     // Post: s'ha creat una instància d'Alfabet amb size = 0
@@ -25,19 +24,16 @@ public class Alfabet {
         setSize(0);
     }
 
+    protected abstract void read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament;
+
     /**
      * Pre:
      * Post: s'ha llegit l'entrada i s'han guardat les dades necessàries
      * 
-     * @param ta tipus de les dades per crear l'Alfabet i l'estrategia a utilitzar.
      * @param pf path al fitxer on hi ha guardades les dades.
      */
-    public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
-        setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
-        Alfabet a = strategy.read(path);            // Llegir i processar les dades del fitxer que es troba a path
-        
-        setCharacters(a.characters);                // Guardar al propi Alfabet les dades calculades
-        setFrequencies(a.frequencies);
+    public void readInput (String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+        read(path);                                 // Llegir i processar les dades del fitxer que es troba a path
     }
 
     /**
@@ -131,27 +127,6 @@ public class Alfabet {
             double nAparicions = characters.get(c);                 // Obtenir les aparicions de la lletra c
             double probabilitat = nAparicions / length;             // Calcular la probabilitat de la lletra c
             characters.replace(c, probabilitat);                    // Associar la lletra amb la seva probabilitat
-        }
-    }
-
-    /**
-     * Pre: 
-     * Post: s'ha instanciat la classe StrategyAlfabet pertinent
-     * 
-     * @param strategy string per identificar quina estrategia utilitzar.
-     * 
-     * @throws TipusDadesNoValid si no hi ha un tipus d'estrategia demanat per strategy.
-     */
-    private void setStrategy (String strategy) throws TipusDadesNoValid {
-        switch (strategy) {
-            case "text":
-                this.strategy = (StrategyAlfabet) new Text();
-                break;
-            case "llista-paraules":
-                this.strategy = (StrategyAlfabet) new Words();
-                break;
-            default:
-                throw new TipusDadesNoValid();
         }
     }
 

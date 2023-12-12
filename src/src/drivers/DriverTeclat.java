@@ -7,6 +7,8 @@ import src.domain.classes.Alfabet;
 import src.domain.classes.Generador;
 import src.domain.classes.Layout;
 import src.domain.classes.Teclat;
+import src.domain.classes.Text;
+import src.domain.classes.Words;
 import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 import src.exceptions.LletraNoTeclat;
@@ -17,7 +19,7 @@ public class DriverTeclat {
     // ../../test/exemples_input_alfabet/Text1.txt     --> text (mida = 26)
     // ../../test/exemples_input_alfabet/Words1.txt    --> llista-paraules (mida = 26)
 
-    public static void main (String[] args)  {
+    public static void main (String[] args) throws TipusDadesNoValid  {
         Alfabet A = iniAlfabet("Alfabet de prova", "text", "../../test/exemples_input_alfabet/Text1.txt");
 
         Layout L = new Layout(26);
@@ -75,7 +77,6 @@ public class DriverTeclat {
 
                     System.out.println("Indica el nom de l'Alfabet:");
                     String nomA = sc.next();
-                    A = new Alfabet(nomA);
                     System.out.println("Indica el format d'entrada:");
                     System.out.println("1 --> text");
                     System.out.println("2 --> llista-paraules");
@@ -85,11 +86,13 @@ public class DriverTeclat {
                         System.out.println("Indica el path:");
                         String path = sc.nextLine();
                         A = iniAlfabet(nomA, "text", path);
+                        
                     }
                     else if (opc == 2) {
                         System.out.println("Indica el path:");
                         String path = sc.nextLine();
                         A = iniAlfabet(nomA, "llista-paraules", path);
+                        
                     }
                     else System.out.println("Opció incorrecte");
 
@@ -113,10 +116,20 @@ public class DriverTeclat {
         }
     }
 
-    private static Alfabet iniAlfabet (String nom, String tipus, String path) {
-        Alfabet a = new Alfabet(nom);
+    private static Alfabet iniAlfabet (String nom, String tipus, String path) throws TipusDadesNoValid {
+        Alfabet a;
+        switch (tipus) {
+            case "text":
+                a = new Text(nom);
+                break;
+            case "llista-paraules":
+                a = new Words(nom);
+                break;        
+            default:
+                throw new TipusDadesNoValid();
+        }
         try {
-            a.readInput(tipus, path);
+            a.readInput(path);
             System.out.println("Input llegit");
         }
         catch(FileNotFoundException e) {
@@ -124,9 +137,6 @@ public class DriverTeclat {
         }
         catch (FormatDadesNoValid e) {
             System.out.println("El format de les dades del fitxer " + path + " introduït no es correspon amb el seu tipus.");
-        }
-        catch (TipusDadesNoValid e) {
-            System.out.println("El tipus de dades (" + tipus + ") no és vàlid.");
         }
         catch (EntradaLlegidaMalament e) {
             System.out.println("L'entrada no s'ha llegit correctament");
