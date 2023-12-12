@@ -9,10 +9,12 @@ public class CompleteAssignation {
     private int[] currentAssig;
     private int[] bestAssig;
     private int bestLines;
-
+    
+    /**
+     * Creadora de la classe, per a inicialitzar tots els atributs necessaris per al
+     * càlcul de la millor assignació.
+     */
     public CompleteAssignation(double[][] mat) {
-        // Creadora de la classe, per a inicialitzar tots els atributs necessaris per al
-        // càlcul de la millor assignació.
         this.n = mat.length;
         this.bestLines = 0;
         
@@ -29,9 +31,11 @@ public class CompleteAssignation {
         for (int i = 0; i < n; i++) bestAssig[i] = -1;
     }
 
+    /**
+     * Algorisme de backtracking que calcula la millor assignació possible = És el coll
+     * d'ampolla de totes les classes que l'implementen.
+     */
     private void backtrackingAssig(int row, int currLines) {
-        // Algorisme de backtracking que calcula la millor assignació possible => És el coll
-        // d'ampolla de totes les classes que l'implementen.
         if (row == n) {
             // En cas que arriba al final de l'algorisme, comprova si la solució és millor que 
             // la que tenim guardada fins al moment, i l'actualitza si és necessari.
@@ -61,9 +65,11 @@ public class CompleteAssignation {
         backtrackingAssig(row+1, currLines);
     }
 
+    /**
+     * Retorna la millor assignació possible, és a dir, la millor combinació de zeros en
+     * files i columnes diferents, utilitzant un algorisme de backtracking.
+     */
     public int[] mostCompleteAssig() {
-        // Retorna la millor assignació possible, és a dir, la millor combinació de zeros en
-        // files i columnes diferents, utilitzant un algorisme de backtracking.
         backtrackingAssig(0, 0);
         return this.bestAssig;
     }

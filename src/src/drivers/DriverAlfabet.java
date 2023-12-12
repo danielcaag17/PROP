@@ -5,17 +5,19 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import src.domain.classes.Alfabet;
+import src.domain.classes.Text;
+import src.domain.classes.Words;
 import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.FormatDadesNoValid;
 import src.exceptions.TipusDadesNoValid;
 
 public class DriverAlfabet {
     // Paths d'exemple per l'opció 1 executat des de terminal Windows
-    // ../../test/exemples_input_alfabet/Text1.txt     --> text
+    // ../../../test/exemples_input_alfabet/Text1.txt     --> text
     // ../../subgrup-prop32.2/test/exemples_input_alfabet/Words1.txt    --> llista-paraules
 
-    public static void main (String[] args) {
-        Alfabet A = new Alfabet("Alfabet de prova");
+    public static void main (String[] args) throws TipusDadesNoValid {
+        Alfabet A = new Text();
         Scanner sc = new Scanner(System.in);
         int func = 0;
         Boolean primeraOpt = false;
@@ -85,20 +87,27 @@ public class DriverAlfabet {
         }
     }
 
-    private static Alfabet iniAlfabet (String nom, String tipus, String path) {
-        Alfabet a = new Alfabet(nom);
+    private static Alfabet iniAlfabet (String nom, String tipus, String path) throws TipusDadesNoValid {
+        Alfabet a;
+        switch (tipus) {
+            case "text":
+                a = new Text(nom);
+                break;
+            case "llista-paraules":
+                a = new Words(nom);
+                break;        
+            default:
+                throw new TipusDadesNoValid();
+        }
         try {
-            a.readInput(tipus, path);
+            a.readInput(path);
             System.out.println("Input llegit");
         }
         catch(FileNotFoundException e) {
-            System.out.println("ERROR: El fitxer " + path);
+            System.out.println("ERROR: El fitxer " + path + " no s'ha trobat");
         }
         catch (FormatDadesNoValid e) {
             System.out.println("El format de les dades del fitxer " + path + " introduït no es correspon amb el seu tipus.");
-        }
-        catch (TipusDadesNoValid e) {
-            System.out.println("El tipus de dades (" + tipus + ") no és vàlid.");
         }
         catch (EntradaLlegidaMalament e) {
             System.out.println("L'entrada no s'ha llegit correctament");

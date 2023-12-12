@@ -222,8 +222,18 @@ public class CtrlDomini {
      */
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
-        Alfabet a = new Alfabet(na);
-        a.readInput(ta, pf);
+        Alfabet a;
+        switch (ta) {
+            case "text":
+                a = new Text(na);
+                break;
+            case "llista-paraules":
+                a = new Words(na);
+                break;        
+            default:
+                throw new TipusDadesNoValid();
+        }
+        a.readInput(pf);
         Alfabets.put(na, a);
     }
 

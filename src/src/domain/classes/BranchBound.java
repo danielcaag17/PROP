@@ -10,9 +10,11 @@ public class BranchBound implements Strategy {
     private int n_size;              // Nombre de caràcters = Nombre de tecles (l'array de
                                      // freqüències és de mida n_size, i les matrius n_size*n_size)
 
+    /**
+     * Pinta una barra de progrés que es va actualitzant en funció del percentatge
+     * que rep com a paràmetre.
+     */
     private void printProgressBar(int percentage) {
-        // Pinta una barra de progrés que es va actualitzant en funció del percentatge
-        // que rep com a paràmetre.
         int size = 30;
         int nbars = (int) ((double)percentage/100*size);
         int nspaces = size - nbars - 1;
@@ -23,34 +25,36 @@ public class BranchBound implements Strategy {
         }
     }
 
-
+    /**
+     * Retorna el cost de l'aresta entre (c1,p1) i (c2,p2) on:
+     *  - c1 i c2 són els IDs de caràcter
+     *  - p1 i p2 són les posicions (tecles) dels respectius caràcters
+     */
     private double cost(int c1, int p1, int c2, int p2) {
-        // Retorna el cost de l'aresta entre (c1,p1) i (c2,p2) on:
-        //  - c1 i c2 són els IDs de caràcter
-        //  - p1 i p2 són les posicions (tecles) dels respectius caràcters
         double freq_ab = this.Frequencies[c1][c2];
         double freq_ba = this.Frequencies[c2][c1];
         double dist_ab = this.Distancies[p1][p2];
         return ((freq_ab+freq_ba)/2)*dist_ab;
     }
     
+    /**
+     * Retorna la matriu C1, necessària per al càlcul del Hungarian Algorithm.
+     *
+     * Matriu C1:   Files    [i] - Caràcters no emplaçats
+     *              Columnes [j] - Tecles (posicions) no emplaçades
+     *
+     * Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
+     *           cada posició (i,j) de la matriu conté el valor corresponent al cost
+     *           de posar el caràcter [i] a la posició [j] en relació amb tots els
+     *           caràcters ja emplaçats en la solució parcial.
+     *      
+     * Exemple:
+     *     Solució parcial = [c1, c2, c3, ...]
+     *     Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
+     *     C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
+     *                ja emplaçades en la solució parcial.
+     */
     private double[][] matrixC1(ArrayList<Integer> partialSol, ArrayList<Integer> missingChars) {
-        // Retorna la matriu C1, necessària per al càlcul del Hungarian Algorithm.
-        //
-        // Matriu C1:   Files    [i] -> Caràcters no emplaçats
-        //              Columnes [j] -> Tecles (posicions) no emplaçades
-        //
-        // Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
-        //           cada posició (i,j) de la matriu conté el valor corresponent al cost
-        //           de posar el caràcter [i] a la posició [j] en relació amb tots els
-        //           caràcters ja emplaçats en la solució parcial.
-        //      
-        // Exemple:
-        //     Solució parcial = [c1, c2, c3, ...]
-        //     Per a qualsevol (i,j) de C1 suposem = Sol. [c1, c2, c3, ..., c(i), ...]
-        //     C1[i][j] = Cost de les arestes entre c[i] en tecla[j] i totes les tecles
-        //                ja emplaçades en la solució parcial.
-
         // Tots els index des de partialSol.size() fins a n_size-1 són les tecles buides
         int c1_size = missingChars.size();
         double[][] C1 = new double[c1_size][c1_size];
@@ -71,10 +75,12 @@ public class BranchBound implements Strategy {
         return C1; 
     }
 
+    /**
+     * Retorna el vector T, necessari per al càlcul de la matriu C2.
+     * Vector T: Vector de freqüències entre caràcter [i] i la resta de caràcters no
+     *        emplaçats. Ordre CREIXENT.
+     */
     private double[] vectorT(int char_id, ArrayList<Integer> missingChars) {
-        // Retorna el vector T, necessari per al càlcul de la matriu C2.
-        // Vector T: Vector de freqüències entre caràcter [i] i la resta de caràcters no
-        //        emplaçats. Ordre CREIXENT.
         int t_size = missingChars.size();
         double[] vecT = new double[t_size];
         
@@ -88,10 +94,12 @@ public class BranchBound implements Strategy {
         return vecT;
     }
     
+    /**
+     * Retorna el vector D, necessari per al càlcul de la matriu C2.
+     * Vector D: Vector de distàncies entre tecla [j] i la resta de tecles no emplaçades.
+     *        Ordre DECREIXENT.
+     */
     private double[] vectorD(int tecla_id, ArrayList<Integer> missingChars) {
-        // Retorna el vector D, necessari per al càlcul de la matriu C2.
-        // Vector D: Vector de distàncies entre tecla [j] i la resta de tecles no emplaçades.
-        //        Ordre DECREIXENT.
         int d_size = missingChars.size();
         double[] vecD = new double[d_size];
         
@@ -108,29 +116,32 @@ public class BranchBound implements Strategy {
         return reversed_vecD;
     }
 
+    /**
+     * Retorna el producte escalar de dos vectors de mida igual.
+     */
     private double scalarProduct(double[] vecA, double[] vecB) {
-        // Retorna el producte escalar de dos vectors de mida igual.
         int result = 0;
         for (int i = 0; i < vecA.length; i++) result += vecA[i]*vecB[i];
         return result;
     }
 
+    /**
+     * Retorna la matriu C2, necessària per al càlcul del Hungarian Algorithm.
+     *
+     * Matriu C2:   Files    [i] - Caràcters no emplaçats
+     *              Columnes [j] - Tecles (posicions) no emplaçades
+     *
+     * Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
+     *           cada posició (i,j) de la matriu conté el valor corresponent al producte
+     *           escalar de dos vectors T i D.
+     *
+     * Exemple: Tenim 5 caràcters i 5 posicions en total = (c1...c5) i (p1...p5)
+     *          Solució parcial = [c1, c2, ...] - (c1 en p1, c2 en p2)
+     *          Suposem Punt[i][j] = (c3,p5)
+     *          - Vector T = [freq(c3-c4), freq(c3-c5)] - (Ordre creixent)
+     *          - Vector D = [dist(p5-p3), dist(p5,p4)] - (Ordre decreixent)
+     */
     private double[][] matrixC2(ArrayList<Integer> partialSol, ArrayList<Integer> missingChars) {
-        // Retorna la matriu C2, necessària per al càlcul del Hungarian Algorithm.
-        //
-        // Matriu C2:   Files    [i] -> Caràcters no emplaçats
-        //              Columnes [j] -> Tecles (posicions) no emplaçades
-        //
-        // Resultat: Matriu quadrada (N-m)*(N-m) de caràcters i tecles no emplaçades, on
-        //           cada posició (i,j) de la matriu conté el valor corresponent al producte
-        //           escalar de dos vectors T i D.
-        //
-        // Exemple: Tenim 5 caràcters i 5 posicions en total = (c1...c5) i (p1...p5)
-        //          Solució parcial = [c1, c2, ...] -> (c1 en p1, c2 en p2)
-        //          Suposem Punt[i][j] = (c3,p5)
-        //          - Vector T = [freq(c3-c4), freq(c3-c5)] -> (Ordre creixent)
-        //          - Vector D = [dist(p5-p3), dist(p5,p4)] -> (Ordre decreixent)
-
         // Tots els index des de partialSol.size() fins a n_size-1 són les tecles buides
         int c2_size = missingChars.size();
         double[][] C2 = new double[c2_size][c2_size];
@@ -149,8 +160,10 @@ public class BranchBound implements Strategy {
         return C2;
     }
 
+    /**
+     * Retorna la suma de dues matrius de mida igual.
+     */
     private double[][] matrixSum(double[][] A, double[][] B) {
-        // Retorna la suma de dues matrius de mida igual.
         int n = A.length;
         double[][] res = new double[n][n];
         for (int i = 0; i < n; i++) {
@@ -160,12 +173,13 @@ public class BranchBound implements Strategy {
         return res;
     }
 
+    /**
+     * F1 = Suma del cost de les arestes entre tots els caràcters ja emplaçats en una tecla.
+     * 
+     * Exemple: Solució parcial = [c1, c2, c3, c4]
+     *          F1 = Cost(c1,c2)+Cost(c1,c3)+Cost(c1,c4)+Cost(c2,c3)+Cost(c2,c4)+Cost(c3,c4)
+     */
     private double calcF1(ArrayList<Integer> solParcial) {
-        // F1 = Suma del cost de les arestes entre tots els caràcters ja emplaçats en una tecla.
-        // 
-        // Exemple: Solució parcial = [c1, c2, c3, c4]
-        //          F1 = Cost(c1,c2)+Cost(c1,c3)+Cost(c1,c4)+Cost(c2,c3)+Cost(c2,c4)+Cost(c3,c4)
-        
         int n = solParcial.size();
         double res = 0;
         // Per cada element (fins al penúltim) de la solució parcial, obtenir el cost d'aquell
@@ -180,12 +194,14 @@ public class BranchBound implements Strategy {
         return res;
     }
 
+    /**
+     * Retorna el cost de l'assignació òptima calculada per Hungarian Algorithm.
+     *
+     * El ArrayList de la solució hungarian és de la forma:
+     *  - Index = Fila de la matriu (= index fila indica CARACTER)
+     *  - Value = Columna on hi ha el 0 de la solució (= index columna indica TECLA)
+     */
     private double costHungarian(ArrayList<Integer> solHungarian, double[][] matHungarian) {
-        // Retorna el cost de l'assignació òptima calculada per Hungarian Algorithm.
-        //
-        // El ArrayList de la solució hungarian és de la forma:
-        //  - Index = Fila de la matriu (=> index fila indica CARACTER)
-        //  - Value = Columna on hi ha el 0 de la solució (=> index columna indica TECLA)
         double res = 0;
         for (int i = 0; i < solHungarian.size(); i++) {
             int j = solHungarian.get(i);
@@ -194,11 +210,13 @@ public class BranchBound implements Strategy {
         return res;
     }
 
+    /**
+     * Retorna el valor de la cota Gilmore, calculada en funció d'una solució parcial
+     * de la qual disposem. Es calcula com a la suma de tres termes, F1+F2+F3.
+     *  - F1 ho calculem exacte
+     *  - F2+F3 calcument aproximació mitjançant Hungarian Algorithm
+     */
     private double cotaGilmore(ArrayList<Integer> solParcial, ArrayList<Integer> charsMissing) {
-        // Retorna el valor de la cota Gilmore, calculada en funció d'una solució parcial
-        // de la qual disposem. Es calcula com a la suma de tres termes, F1+F2+F3.
-        //  - F1 ho calculem exacte
-        //  - F2+F3 calcument aproximació mitjançant Hungarian Algorithm
         double cotaGil = 0;
         cotaGil += calcF1(solParcial);
 
@@ -214,15 +232,17 @@ public class BranchBound implements Strategy {
         return cotaGil;
     }
 
+    /**
+     * Retorna una array que conté els indexos dels n_chars caràcters més frequents.
+     * Serveix per a executar l'algoritme de branching de forma greedy, és a dir, que
+     * comencem amb una solució parcial on ja tenim alguns elements emplaçats.
+     * (Addicionalment, és escalable, per a poder determinar quin n_chars funciona millor)
+     *
+     * La funció ordena el vector de freqüències absolutes, per tal de determinar les N
+     * freqüències més altes, les guarda i busca a quin índex pertanyen aquestes freqüències.
+     * L'índex serà el ID del caràcter.
+     */
     private int[] mostFrequentChars(int n_chars) {
-        // Retorna una array que conté els indexos dels n_chars caràcters més frequents.
-        // Serveix per a executar l'algoritme de branching de forma greedy, és a dir, que
-        // comencem amb una solució parcial on ja tenim alguns elements emplaçats.
-        // (Addicionalment, és escalable, per a poder determinar quin n_chars funciona millor)
-        //
-        // La funció ordena el vector de freqüències absolutes, per tal de determinar les N
-        // freqüències més altes, les guarda i busca a quin índex pertanyen aquestes freqüències.
-        // L'índex serà el ID del caràcter.
         ArrayList<Double> auxFreqsList = new ArrayList<>(n_size);
         for (int i = 0; i < n_size; i++) auxFreqsList.add(AbsoluteFreqs[i]);
         
@@ -246,11 +266,13 @@ public class BranchBound implements Strategy {
         return res;
     }
 
+    /**
+     * Retorna un ArrayList amb el millor emplaçament possible aproximat per al Quadratic
+     * Assignment Problem, fent servir un algoritme de Branching similar al eager, amb un
+     * enfocament greedy per a millorar el temps d'execució, i una funció de bounding coneguda
+     * com a cota Gilmore, que es calcula amb l'ajuda del Hungarian Algorithm.
+     */
     private ArrayList<Integer> algorithm() {
-        // Retorna un ArrayList amb el millor emplaçament possible aproximat per al Quadratic
-        // Assignment Problem, fent servir un algoritme de Branching similar al eager, amb un
-        // enfocament greedy per a millorar el temps d'execució, i una funció de bounding coneguda
-        // com a cota Gilmore, que es calcula amb l'ajuda del Hungarian Algorithm.
         ArrayList<Integer> bestSolution = new ArrayList<Integer>();
         ArrayList<Integer> charsMissing = new ArrayList<Integer>(); 
         double bestCota = 0;
@@ -329,9 +351,11 @@ public class BranchBound implements Strategy {
         return bestSolution;
     }
 
+    /**
+     * Actualitza/estableix els valors dels atributs de la classe i retorna la solució
+     * aproximada per al Quadratic Assignment Problem.
+     */
     public ArrayList<Integer> generarTeclat(double[][] freq_matrix, double[] abs_frequencies, double[][] dist_matrix) {
-        // Actualitza/estableix els valors dels atributs de la classe i retorna la solució
-        // aproximada per al Quadratic Assignment Problem.
         this.AbsoluteFreqs = abs_frequencies;
         this.Frequencies = freq_matrix;
         this.Distancies = dist_matrix;

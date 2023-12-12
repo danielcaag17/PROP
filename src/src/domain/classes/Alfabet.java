@@ -4,13 +4,12 @@ import src.exceptions.*;
 import java.io.*;
 import java.util.*;
 
-public class Alfabet {
+public abstract class Alfabet {
     private String nom;                             // Clau primària de la classe Alfabet
-    private Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
-    private double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
+    protected Map<Character, Double> characters;      // Relació de cada caràcter de l'Alfaber amb la seva probabilitat
+    protected double[][] frequencies;                 // Matriu de probabilitats, donat un caràcter saber quina probabilitat que el següent sigui un altre
     private int size;                               // Mida de l'Alfabet, els caràcters que té
     private Character[] abecedari;                       // Array de caràcters per guardar les lletres de l'Alfabet
-    private StrategyAlfabet strategy;               // Interfície StrategyAlfabet per llegir diferents tipus d'entrada
 
     // Pre:
     // Post: s'ha creat una instància d'Alfabet amb size = 0
@@ -25,19 +24,16 @@ public class Alfabet {
         setSize(0);
     }
 
+    protected abstract void read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament;
+
     /**
      * Pre:
      * Post: s'ha llegit l'entrada i s'han guardat les dades necessàries
      * 
-     * @param ta tipus de les dades per crear l'Alfabet i l'estrategia a utilitzar.
      * @param pf path al fitxer on hi ha guardades les dades.
      */
-    public void readInput (String ta, String path) throws FormatDadesNoValid, TipusDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
-        setStrategy(ta);                            // Crear la instància de StrategyAlfabet a utilitzar segons ta
-        Alfabet a = strategy.read(path);            // Llegir i processar les dades del fitxer que es troba a path
-        
-        setCharacters(a.characters);                // Guardar al propi Alfabet les dades calculades
-        setFrequencies(a.frequencies);
+    public void readInput (String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament {
+        read(path);                                 // Llegir i processar les dades del fitxer que es troba a path
     }
 
     /**
@@ -51,7 +47,7 @@ public class Alfabet {
      * 
      * @return la relació entre caràcter i les vegades que apareix.
      */
-    public Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> map) {
+    protected Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> map) {
         for (int i = 0; i < length; i++) {
             Character c = text.charAt(i);             // Agafar la lletra que es troba en la posició i del text
             if (! map.containsKey(c)) {               // Comprovar que la lletra c no s'ha vist encara
@@ -71,7 +67,7 @@ public class Alfabet {
      * @param text cadena de caràcters a processar.
      * @param length longitud del text.
      */
-    public void processFrequencies (String text, int length) throws EntradaLlegidaMalament {
+    protected void processFrequencies (String text, int length) throws EntradaLlegidaMalament {
         for (int i = 0; i < length - 1; i++) {          // Recorregut del text fins la lletra anterior a la última
             char c = text.charAt(i);                    // Agafar la lletra actual
             char next = text.charAt(i+1);               // Agafar la següent lletra
@@ -108,7 +104,7 @@ public class Alfabet {
      * Pre: 
      * Post: s'ha calculat la probabilitat que donada una lletra aparegui la següent
      */
-    public void calculateFrequencies () throws EntradaLlegidaMalament {
+    protected void calculateFrequencies () throws EntradaLlegidaMalament {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                            // Obtenir el nombre d'aparicions de la lletra c
             if (nAparicions != 0) {                                     // No hauria de passar, però vigilar les divisions entre 0
@@ -126,7 +122,7 @@ public class Alfabet {
      * 
      * @param length longitud de les dades amb les que s'ha creat l'Alfabet
      */
-    public void calculateCharacters (int length) {
+    protected void calculateCharacters (int length) {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                 // Obtenir les aparicions de la lletra c
             double probabilitat = nAparicions / length;             // Calcular la probabilitat de la lletra c
@@ -136,32 +132,11 @@ public class Alfabet {
 
     /**
      * Pre: 
-     * Post: s'ha instanciat la classe StrategyAlfabet pertinent
-     * 
-     * @param strategy string per identificar quina estrategia utilitzar.
-     * 
-     * @throws TipusDadesNoValid si no hi ha un tipus d'estrategia demanat per strategy.
-     */
-    private void setStrategy (String strategy) throws TipusDadesNoValid {
-        switch (strategy) {
-            case "text":
-                this.strategy = (StrategyAlfabet) new Text();
-                break;
-            case "llista-paraules":
-                this.strategy = (StrategyAlfabet) new Words();
-                break;
-            default:
-                throw new TipusDadesNoValid();
-        }
-    }
-
-    /**
-     * Pre: 
      * Post: associa l'estructura de dades per guardar la freqüencia de cada lletra amb map,
      *       instancia l'abecedari de l'Alfabet,
      *       instancia la mida de l'Alfabet
      */
-    public void setCharacters (Map<Character, Double> map) {
+    protected void setCharacters (Map<Character, Double> map) {
         this.characters = map;
         setAbecedari();
         setSize(map.size());
@@ -172,7 +147,7 @@ public class Alfabet {
      * Post: associa l'estructura de dades per guardar la probabilitat que donada una lletra
      *       aparegui la següent amb matrix
      */
-    public void setFrequencies (double[][] matrix) {
+    protected void setFrequencies (double[][] matrix) {
         this.frequencies = matrix;
     }
 
