@@ -22,7 +22,7 @@ public class CtrlDomini {
 
     // Pre:
     // Post: s'ha creat una instància de controlador de domini
-    public CtrlDomini() {
+    private CtrlDomini() {
         init();
     }
 
