@@ -47,7 +47,7 @@ public abstract class Alfabet {
      * 
      * @return la relació entre caràcter i les vegades que apareix.
      */
-    public Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> map) {
+    protected Map<Character, Double> processCharacters (String text, int length, Map<Character, Double> map) {
         for (int i = 0; i < length; i++) {
             Character c = text.charAt(i);             // Agafar la lletra que es troba en la posició i del text
             if (! map.containsKey(c)) {               // Comprovar que la lletra c no s'ha vist encara
@@ -67,7 +67,7 @@ public abstract class Alfabet {
      * @param text cadena de caràcters a processar.
      * @param length longitud del text.
      */
-    public void processFrequencies (String text, int length) throws EntradaLlegidaMalament {
+    protected void processFrequencies (String text, int length) throws EntradaLlegidaMalament {
         for (int i = 0; i < length - 1; i++) {          // Recorregut del text fins la lletra anterior a la última
             char c = text.charAt(i);                    // Agafar la lletra actual
             char next = text.charAt(i+1);               // Agafar la següent lletra
@@ -104,7 +104,7 @@ public abstract class Alfabet {
      * Pre: 
      * Post: s'ha calculat la probabilitat que donada una lletra aparegui la següent
      */
-    public void calculateFrequencies () throws EntradaLlegidaMalament {
+    protected void calculateFrequencies () throws EntradaLlegidaMalament {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                            // Obtenir el nombre d'aparicions de la lletra c
             if (nAparicions != 0) {                                     // No hauria de passar, però vigilar les divisions entre 0
@@ -122,7 +122,7 @@ public abstract class Alfabet {
      * 
      * @param length longitud de les dades amb les que s'ha creat l'Alfabet
      */
-    public void calculateCharacters (int length) {
+    protected void calculateCharacters (int length) {
         for (Character c : characters.keySet()) {
             double nAparicions = characters.get(c);                 // Obtenir les aparicions de la lletra c
             double probabilitat = nAparicions / length;             // Calcular la probabilitat de la lletra c
@@ -136,7 +136,7 @@ public abstract class Alfabet {
      *       instancia l'abecedari de l'Alfabet,
      *       instancia la mida de l'Alfabet
      */
-    public void setCharacters (Map<Character, Double> map) {
+    protected void setCharacters (Map<Character, Double> map) {
         this.characters = map;
         setAbecedari();
         setSize(map.size());
@@ -147,7 +147,7 @@ public abstract class Alfabet {
      * Post: associa l'estructura de dades per guardar la probabilitat que donada una lletra
      *       aparegui la següent amb matrix
      */
-    public void setFrequencies (double[][] matrix) {
+    protected void setFrequencies (double[][] matrix) {
         this.frequencies = matrix;
     }
 
