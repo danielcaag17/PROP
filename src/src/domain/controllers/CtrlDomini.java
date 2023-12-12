@@ -38,9 +38,12 @@ public class CtrlDomini {
         Teclats = new HashMap<String, Teclat>();
         Alfabets = new HashMap<String, Alfabet>();
         Layouts = new HashMap<Integer, Layout>();
+
+        // Si hi ha un estat previ s'haurien de omplir els valors del estat
+
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
-        inicialitzarLayoutsBase();
+        inicialitzarLayoutsBase(); // només si és execució incial
 //      strategy = "QuadraticAssignmentProblem"
     }
 
@@ -299,4 +302,6 @@ public class CtrlDomini {
         Layouts.remove(idL);
     }
 
+
+    // FALTEN FUNCIONS DE CAPA DE PERSISTÈNCIA (de recuperar i de desar) 
 }
