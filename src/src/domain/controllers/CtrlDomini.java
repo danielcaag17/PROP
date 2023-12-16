@@ -47,8 +47,9 @@ public class CtrlDomini {
 
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
-        inicialitzarLayoutsBase(); // només si és execució incial
-//      strategy = "QuadraticAssignmentProblem"
+        
+        restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
+        if (Layouts.isEmpty()) inicialitzarLayoutsBase(); // només si és execució incial
     }
 
     /* Funcions de Transacció i de Domini */
@@ -147,21 +148,28 @@ public class CtrlDomini {
 
     /**
      * Pre: el teclat amb nom nt no existeix. -
-     * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i el Layout amb id idL.
+     * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i amb l'estratègia generadora ge.
      * 
      * @param nt: nom del teclat.
      * @param na: nom del alfabet del teclat.
-     * @param idL: id del Layout del teclat.
+     * @param ge: nom de l'estratègia generadora del teclat.
      * 
      * @throws TeclatJaExisteix si existeix una instància Teclat amb nom nt.
+     * @throws AlfabetNoExisteix si no existeix una instància Alfabet amb nom na.
      * @throws MidesDiferents si la mida del Alfabet amb nom na i el Layout amb id idL són diferents. 
      */
-    public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
+    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix {
         if (Teclats.get(nt) != null) throw new TeclatJaExisteix(nt);
         if (Alfabets.get(na) == null) throw new AlfabetNoExisteix(na);
-        if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
         Alfabet a = Alfabets.get(na);
-        Layout l = Layouts.get(idL);
+        Integer idL = a.getSize();
+        Layout l;
+        // Comprovem que existeix un layout amb mida idL i si no el creem.
+        if (!Layouts.containsKey(idL)) {
+            try { this.afegirLayout(idL); }
+            catch(Excepcions e) {}
+        }
+        l = Layouts.get(idL);
         if (a.getSize() != l.getSize()) throw new MidesDiferents(a.getSize(), l.getSize());
         Teclat t = new Teclat(nt, l, a, Generador); // IMPORTANT QUE CREADORA TECLAT SIGUI PUBLIC
         t.crearTeclat(); // potser passar strategy?
@@ -306,6 +314,11 @@ public class CtrlDomini {
         Layouts.remove(idL);
     }
 
+    public void saveState() {
 
-    // FALTEN FUNCIONS DE CAPA DE PERSISTÈNCIA (de recuperar i de desar) 
+    }
+    
+    private void restoreState() {
+
+    }
 }
