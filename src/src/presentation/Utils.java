@@ -1,6 +1,7 @@
 package src.presentation;
 
 import java.awt.*;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 
@@ -46,7 +47,8 @@ public class Utils {
     }
 
     public static ImageIcon getReturnImage() {
-        // descarregar imatge + path
-        return new ImageIcon("backArrow.png");
+        // descarregar imatge + path + definir nom carpeta
+        String path = ".." + File.separator + ".." + File.separator + "data/imatges/backArrow.png";
+        return new ImageIcon(path);
     }
 }
