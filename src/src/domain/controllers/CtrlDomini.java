@@ -5,13 +5,14 @@ import java.util.*;
 
 //import src.data.*;
 import src.domain.classes.*;
+import src.data.CtrlPersistenciaFile;
 import src.exceptions.*;
 
 public class CtrlDomini {
     /*
      * Instàncies de les classes del model
      */
-    // private CtrlAlfabetFile ctrlAlfabetFile;
+    private CtrlPersistenciaFile ctrlPersistFile;
     private Generador Generador;
     private int[] midesInicials = new int[] {24, 25, 26, 27}; // mides inicials dels Layouts disponibles
     private String strategy;
@@ -19,6 +20,7 @@ public class CtrlDomini {
     private HashMap<String, Alfabet> Alfabets; // Cjt d'Alfabets, on String és el nom de l'Alfabet
     private HashMap<Integer, Layout> Layouts; // Cjt de Layouts, on String és l'id del Layout
     private static CtrlDomini singletonDomini;
+    private Factoria factoria;
 
     // Pre:
     // Post: s'ha creat una instància de controlador de domini
@@ -34,7 +36,9 @@ public class CtrlDomini {
     // Pre:
     // Post: s'han inicialitzat les instàncies del model i variables del CtrlDomini
     public void init() {
-//      ctrlAlfabetFile = CtrlAlfabetFile.getInstance();
+        factoria = Factoria.getInstance();
+
+        ctrlPersistFile = factoria.getCtrlPersistenciaFile();
         Teclats = new HashMap<String, Teclat>();
         Alfabets = new HashMap<String, Alfabet>();
         Layouts = new HashMap<Integer, Layout>();

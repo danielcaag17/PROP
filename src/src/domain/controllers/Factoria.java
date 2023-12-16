@@ -1,9 +1,12 @@
 package src.domain.controllers;
 
+import src.data.CtrlPersistenciaFile;
+
 public class Factoria {
     private static Factoria singletonFactoria;
     private Factoria(){}
     private CtrlDomini ControladorDomini;
+    private CtrlPersistenciaFile ControladorPersistencia;
 
     public static Factoria getInstance() {
         if (singletonFactoria == null) singletonFactoria = new Factoria();
@@ -14,8 +17,15 @@ public class Factoria {
     public void crearControladorDomini() {
         ControladorDomini = CtrlDomini.getInstance();
     }
-    // potser es poden fusionar funcions.
+
+    // Retorna el CtrlDomini
     public CtrlDomini getCtrlDomini() {
         return ControladorDomini;
+    }
+
+    // Retorna el CtrlPersistencia
+    public CtrlPersistenciaFile getCtrlPersistenciaFile() {
+        ControladorPersistencia = CtrlPersistenciaFile.getInstance();
+        return ControladorPersistencia;
     }
 }
