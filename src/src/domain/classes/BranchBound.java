@@ -292,10 +292,12 @@ public class BranchBound implements Strategy {
         // emplaçar a la solució parcial abans d'inicialitzar l'algoritme, i escull els N caràcters
         // més freqüents.
         int greedy_lvl = 4;
-        int[] greedyStart = mostFrequentChars(greedy_lvl);
-        for (int i = 0; i < greedy_lvl; i++) {
-            bestSolution.add(greedyStart[i]);
-            charsMissing.remove((Integer)greedyStart[i]);
+        if (n_size > greedy_lvl) {
+            int[] greedyStart = mostFrequentChars(greedy_lvl);
+            for (int i = 0; i < greedy_lvl; i++) {
+                bestSolution.add(greedyStart[i]);
+                charsMissing.remove((Integer)greedyStart[i]);
+            }
         }
         
         // Progress Bar
