@@ -1,6 +1,7 @@
 package src.domain.controllers;
 
 import java.io.FileNotFoundException;
+import org.json.*;
 import java.util.*;
 
 //import src.data.*;
@@ -84,8 +85,8 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: -
-     * Post: la estratègia de generador ha sigut canviada.
+     * <li>Pre:</li>
+     * <li>Post: la estratègia de generador ha sigut canviada.</li>
      */
     public String toggleStrategy() {
         if (this.strategy == "BranchBound") {
@@ -147,12 +148,12 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt no existeix. -
-     * Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i amb l'estratègia generadora ge.
+     * <li>Pre: el teclat amb nom nt no existeix.</li>
+     * <li>Post: el teclat amb nom nt s'ha creat i associat amb l'alfabet amb nom na i amb l'estratègia generadora ge.</li>
      * 
-     * @param nt: nom del teclat.
-     * @param na: nom del alfabet del teclat.
-     * @param ge: nom de l'estratègia generadora del teclat.
+     * @param nt nom del teclat.
+     * @param na nom del alfabet del teclat.
+     * @param ge nom de l'estratègia generadora del teclat.
      * 
      * @throws TeclatJaExisteix si existeix una instància Teclat amb nom nt.
      * @throws AlfabetNoExisteix si no existeix una instància Alfabet amb nom na.
@@ -172,16 +173,17 @@ public class CtrlDomini {
         l = Layouts.get(idL);
         if (a.getSize() != l.getSize()) throw new MidesDiferents(a.getSize(), l.getSize());
         Teclat t = new Teclat(nt, l, a, Generador); // IMPORTANT QUE CREADORA TECLAT SIGUI PUBLIC
+        Generador.setStrategy(ge);
         t.crearTeclat(); // potser passar strategy?
         Teclats.put(nt, t);
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix, els canvis són vàlids. -
-     * Post: el teclat amb nom nt s'ha modificat amb els canvis aplicats.
+     * <li>Pre: el teclat amb nom nt existeix, els canvis són vàlids.</li>
+     * <li>Post: el teclat amb nom nt s'ha modificat amb els canvis aplicats.</li>
      * 
-     * @param nt: nom del teclat 
-     * @param canvis: canvis que es volen aplicar al teclat
+     * @param nt nom del teclat 
+     * @param canvis canvis que es volen aplicar al teclat
      * @return Teclat que ha sigut modificat. 
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
@@ -197,9 +199,9 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix.
+     * <li>Pre: el teclat amb nom nt existeix.</li>
      * 
-     * @param nt: nom del teclat.
+     * @param nt nom del teclat.
      * @return Retorna el string que representa el teclat amb nom nt.
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
@@ -210,10 +212,10 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el teclat amb nom nt existeix. -
-     * Post: el teclat amb nom nt s'ha esborrat.
+     * <li>Pre: el teclat amb nom nt existeix.</li>
+     * <li>Post: el teclat amb nom nt s'ha esborrat.</li>
      * 
-     * @param nt: nom del teclat.
+     * @param nt nom del teclat.
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
@@ -223,13 +225,12 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: l'alfabet amb nom na no existeix. -
-     * Post: s'ha creat un alfabet amb nom na i dades extretes de pf.
+     * <li>Pre: l'alfabet amb nom na no existeix.</li>
+     * <li>Post: s'ha creat un alfabet amb nom na i dades extretes de pf.</li>
      * 
      * @param na nom del alfabet.
      * @param ta tipus de les dades per crear l'alfabet.
-     * @param pf path (vàlid*) al fitxer on hi ha guardades les dades.
-     * @see (*)que s'ha comprovat previàment.
+     * @param pf path al fitxer on hi ha guardades les dades.
      * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
      */
     public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
@@ -250,7 +251,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: l'alfabet amb nom na existeix.
+     * <li>Pre: l'alfabet amb nom na existeix.</li>
      * 
      * @param na nom del alfabet.
      * @return Retorna el string que representa l'alfabet amb nom na.
@@ -262,8 +263,8 @@ public class CtrlDomini {
     }
     
     /**
-     * Pre: l'alfabet amb nom na existeix. -
-     * Post: l'alfabet amb nom na s'ha esborrat.
+     * <li>Pre: l'alfabet amb nom na existeix.</li>
+     * <li>Post: l'alfabet amb nom na s'ha esborrat.</li>
      * 
      * @param na nom del alfabet.
      * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na.
@@ -274,8 +275,8 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: l'alfabet amb id idL no existeix. -
-     * Post: s'ha creat un Layout amb mida idL.
+     * <li>Pre: l'alfabet amb id idL no existeix.</li>
+     * <li>Post: s'ha creat un Layout amb mida idL.</li>
      * 
      * @param idL mida del Layout a crear. Funciona com a id.
      * @throws LayoutJaExisteix si existeix una instància Layout amb id idl.
@@ -288,7 +289,7 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el layout amb id idL existeix.
+     * <li>Pre: el layout amb id idL existeix.</li>
      * 
      * @param idL id del Layout.
      * @return Retorna el string que representa el layout amb id idL.
@@ -300,8 +301,8 @@ public class CtrlDomini {
     }
 
     /**
-     * Pre: el layout amb id idL existeix. - 
-     * Post: el layout amb id idL s'ha esborrat.
+     * <li>Pre: el layout amb id idL existeix.</li>
+     * <li>Post: el layout amb id idL s'ha esborrat.</li>
      * 
      * @param idL id del Layout
      * @throws LayoutNoExisteix si no existeix una instància de layout amb id idl.
@@ -314,11 +315,57 @@ public class CtrlDomini {
         Layouts.remove(idL);
     }
 
+    /**
+     * <li>Pre: </li>
+     * <li>Post: el estat de totes les instàncies, d'alfabet, de teclat i de layout està desat a fitxers del directori: <code>data/</code> </li>
+     */
     public void saveState() {
-
+        for (String key : Teclats.keySet()) {
+            Teclat t = Teclats.get(key);
+            String tRaw = t.saveData(); 
+            ctrlPersistFile.saveState("teclats", t.getNom(), tRaw);
+        }
+        for (String key : Alfabets.keySet()) {
+            Alfabet a = Alfabets.get(key);
+            String aRaw = a.saveData();
+            ctrlPersistFile.saveState("alfabets", a.getNom(), aRaw);
+        }
+        for (Integer key : Layouts.keySet()) {
+            Layout l = Layouts.get(key);
+            String lRaw = l.saveData();
+            ctrlPersistFile.saveState("layouts", Integer.toString(l.getSize()), lRaw);
+        }
     }
     
+    /**
+     * <li>Pre: l'aplicació s'acaba d'iniciar </li>
+     * <li>Post: l'estat de l'aplicació s'ha resturat de la última vegada desada. </li>
+     */
     private void restoreState() {
-
+        String[] filesTeclats = ctrlPersistFile.getAll("teclats");
+        String[] filesAlfabets = ctrlPersistFile.getAll("alfabets");
+        String[] filesLayouts = ctrlPersistFile.getAll("layouts");
+        for (String file : filesTeclats) {
+            String tRaw = ctrlPersistFile.getObject(file);
+            // TODO: extreure dades de tRaw del JSON i crear instància de Teclat
+            String nom = ""; 
+            Teclat t = new Teclat(nom, null, null, null);
+            Teclats.put(nom, t);
+        }
+        for (String file : filesAlfabets) {
+            String aRaw = ctrlPersistFile.getObject(file);
+            // TODO: extreure dades de aRaw del JSON i crear instància de Alfabet
+            String nom = "";
+            Alfabet a;
+            a = new Text(nom); 
+            Alfabets.put(nom, a);
+        }
+        for (String file : filesLayouts) {
+            String lRaw = ctrlPersistFile.getObject(file);
+            // TODO: extreure dades de lRaw del JSON i crear instància de Layout
+            Integer idL = 1;
+            Layout l = new Layout(idL);
+            Layouts.put(idL, l);
+        }
     }
 }
