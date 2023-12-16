@@ -177,4 +177,9 @@ public class Teclat {
         }
         return result;
     }
+
+    public String saveData() {
+        // Guardar dades de Teclat importants. En format per determinar.
+        return "";
+    }
  }

@@ -13,4 +13,16 @@ public class CtrlPersistenciaFile {
         if(singletonPersistenciaFile == null) singletonPersistenciaFile = new CtrlPersistenciaFile();
         return singletonPersistenciaFile;
     }
+
+    public void saveState(String tipus, String nom, String data) {
+
+    }
+
+    public String[] getAll(String tipus) {
+        return null; // provisional
+    }
+
+    public String getObject(String filename) {
+        return null; // provisional
+    }
 }

@@ -290,4 +290,9 @@ public class Layout {
         result += "- Distàncies entre Ids: \n" + distanciesToString();
         return result;
     }
+
+    public String saveData() {
+        // Guardar dades de Layout importants. En format per determinar.
+        return "";
+    }
 }
