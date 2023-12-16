@@ -35,8 +35,8 @@ public class CtrlPresentacio {
         return cd.toggleStrategy();
     }
 
-    public void crearNouTeclat(String nt, String na, Integer idL) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, LayoutNoExisteix {
-        cd.crearNouTeclat(nt, na, idL);
+    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix {
+        cd.crearNouTeclat(nt, na, ge);
     }
 
     public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat {

@@ -246,4 +246,9 @@ public abstract class Alfabet {
         result += "Lletres: \n" + characters.toString();                    // Guardar el map amb les freqüències de cada lletra a result
         return result;
     }
+
+    public String saveData() {
+        // Guardar dades de Alfabet importants. En format per determinar.
+        return "";
+    }
 }
