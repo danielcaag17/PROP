@@ -92,6 +92,7 @@ public class CtrlPantallaInici {
                 membre3.setFont(Utils.getFontText());
                 break;
             default:
+                // Error
                 break;
         }
     }
@@ -112,6 +113,6 @@ public class CtrlPantallaInici {
     }
 
     private void start() {
-        ctrlPresentacio.canviVista();
+        ctrlPresentacio.canviVista("LlistaTeclats");
     }
 }

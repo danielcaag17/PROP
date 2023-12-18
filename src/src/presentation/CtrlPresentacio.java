@@ -23,7 +23,7 @@ public class CtrlPresentacio {
         // iot = new IOterminal(this);
         // Inicialització de terminal
         // iot.inicialitzaTerminal();
-        new CtrlPantallaInici();
+        canviVista("PantallaInici");
     }
 
     public String[] getListTeclats() {
@@ -86,7 +86,52 @@ public class CtrlPresentacio {
 
     }
 
-    public void canviVista() {
+    public void canviVista(String vista) {
+        switch (vista) {
+            case "PantallaInici":
+                new CtrlPantallaInici();
+                break;
+            case "LlistaTeclats":
+                new CtrlLlistaTeclats();
+                break;
+            case "LlistaAlfabets":
+                new CtrlLlistaAlfabets();
+                break;
+            case "LlistaLayouts":
+                new CtrlLlistaLayouts();
+                break;
+            case "Eliminar":
+                new CtrlEliminar();
+                break;
+            case "AfegirTeclat":
+                new CtrlAfegirTeclat();
+                break;
+            case "MostrarTeclat":
+                new CtrlMostrarTeclat();
+                break;
+            case "PreMostrarTeclat":
+                new CtrlPreMostrarTeclat();
+                break;
+            case "ModificarTeclat":
+                new CtrlModificarTeclat();
+                break;
+            case "AfegirAlfabet":
+                new CtrlAfegirAlfabet();
+                break;
+            case "MostrarAlfabet":
+                new CtrlMostrarAlfabet();
+                break;
+            case "AfegirLayout":
+                new CtrlAfegirLayout();
+                break;
+            case "MostrarLayout\r":
+                new CtrlostrarLayout();
+                break;
+
+            default:
+                //Error
+                break;
+        }
 
     }
 
