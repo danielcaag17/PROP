@@ -1,48 +1,66 @@
 import java.awt.Color;
-import java.awt.Menu;
+import java.awt.Dimension;
+import java.awt.Font;
+// import java.awt.Menu;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
+// import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Main implements ActionListener{
     static JLabel label1, label2, label3, label4;
     static JButton button;
     static JMenu menu;
     public static void main(String[] args) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        Font serifFont = new Font("Serif", Font.BOLD, 30);
+        Font sansSeriFont = new Font("SansSerif", Font.PLAIN, 12);
+        Font monospacedFont = new Font("Monospaced", Font.PLAIN, 12);
+        Font boldFont = new Font("Arial", Font.BOLD, 12);
+        Font timesNewRomanFont = new Font("Times New Roman", Font.PLAIN, 20);
+
+
         label1 = new JLabel();
         label1.setVisible(false);
         label1.setText("PROP");
         label1.setHorizontalAlignment(JLabel.CENTER);
         label1.setVerticalAlignment(JLabel.CENTER);
-        label1.setBounds(0,0,1000,100);
+        label1.setBounds(0,0,screenWidth,screenHeight/6);
+        label1.setFont(serifFont);
 
         label2 = new JLabel();
         label2.setVisible(false);
         label2.setText("Pau Rambla");
         label2.setHorizontalAlignment(JLabel.LEFT);
         label2.setVerticalAlignment(JLabel.TOP);
-        label2.setBounds(15,100,300,200);
+        label2.setBounds(0,screenHeight/3,screenWidth/3,2*screenHeight/3);
+        label2.setFont(serifFont);
 
         label3 = new JLabel();
         label3.setVisible(false);
         label3.setText("Daniel Canizares");
         label3.setHorizontalAlignment(JLabel.CENTER);
         label3.setVerticalAlignment(JLabel.TOP);
-        label3.setBounds(300,100,300,200);
+        label3.setBounds(screenWidth/3,screenHeight/3,screenWidth/3,2*screenHeight/3);
+        label3.setFont(serifFont);
 
         label4 = new JLabel();
         label4.setVisible(false);
         label4.setText("Jordi Otal");
         label4.setHorizontalAlignment(JLabel.RIGHT);
         label4.setVerticalAlignment(JLabel.TOP);
-        label4.setBounds(600,100,300,200);
+        label4.setBounds(2*screenWidth/3,screenHeight/3,(screenWidth/3),2*screenHeight/3);
+        label4.setFont(serifFont);
 
         // ImageIcon imageIcon = new ImageIcon("OK.png");
 
 
         button = new JButton();
-        button.setBounds(450,475,100,50);
+        button.setBounds((screenWidth/2) - 50, (2 * screenHeight/3),100,50);
         // posar que es canvii la vista per exemple
         // button.addActionListener(e -> System.out.println("CLICK"));
         // button.addActionListener(e -> button.setEnabled(false));
@@ -62,6 +80,7 @@ public class Main implements ActionListener{
         button2.setIcon(imageIcon);
         */
 
+        /*
         JButton buttonA = new JButton();
         JButton buttonB = new JButton();
         buttonA.setText("A");
@@ -69,6 +88,7 @@ public class Main implements ActionListener{
         buttonA.setSelected(true);
         buttonB.setText("B");
         buttonB.setBounds(200,100,100,100);
+        */
 
         // JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem();
         // checkBox.setBounds(0,0,20,20);
@@ -83,10 +103,12 @@ public class Main implements ActionListener{
             System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
         }*/
 
+        
         JFrame frame = new JFrame();
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
+        frame.setSize(screenWidth, screenHeight);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(null);
         frame.setVisible(true);
         frame.add(label1);
@@ -96,10 +118,10 @@ public class Main implements ActionListener{
         frame.add(button);
         // frame.add(checkBox);
         // frame.add(colorChooser);
-        frame.add(buttonA);
-        frame.add(buttonB);
+        // frame.add(buttonA);
+        // frame.add(buttonB);
         // frame.add(button2);
-        frame.add(menu);
+        // frame.add(menu);
         // frame.pack();
     }
 
