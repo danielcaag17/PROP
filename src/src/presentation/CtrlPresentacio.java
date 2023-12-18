@@ -100,9 +100,6 @@ public class CtrlPresentacio {
             case "LlistaLayouts":
                 new CtrlLlistaLayouts();
                 break;
-            case "Eliminar":
-                new CtrlEliminar();
-                break;
             case "AfegirTeclat":
                 new CtrlAfegirTeclat();
                 break;
@@ -132,7 +129,9 @@ public class CtrlPresentacio {
                 //Error
                 break;
         }
-
     }
 
+    public void elimina(String tipus, String missatge) {
+        new CtrlEliminar(tipus, missatge);
+    }
 }
