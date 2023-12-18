@@ -87,7 +87,7 @@ public class Utils {
         image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
         back.setIcon(imageIcon);
-
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));   // Donar sensació al usuari
         back.setContentAreaFilled(false);               // Només es vegi la foto i no el botó
         back.setBorder(null);                   
         // back.addActionListener(e -> canviStage());     // Potser cada classe que té un back ha de fer aquest addActionListener
