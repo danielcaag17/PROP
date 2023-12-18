@@ -8,8 +8,14 @@ import src.exceptions.*;
 public class CtrlPresentacio {
     private IOterminal iot;
     private CtrlDomini cd;
+    private static CtrlPresentacio ctrlPresentacio;
 
-    public CtrlPresentacio() throws FileNotFoundException {
+    public static CtrlPresentacio getInstance() {
+        if(ctrlPresentacio == null) ctrlPresentacio = new CtrlPresentacio();
+        return ctrlPresentacio;
+    }
+
+    private CtrlPresentacio() throws FileNotFoundException {
         // Aquí s'ha d'iniciar Factoria, Controlador domini, la visualització (per a la primera entrega potser per terminal)
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
@@ -73,6 +79,14 @@ public class CtrlPresentacio {
 
     public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
         cd.esborrarLayout(idL);
+    }
+
+    public void guarda() {
+
+    }
+
+    public void canviVista() {
+
     }
 
 }
