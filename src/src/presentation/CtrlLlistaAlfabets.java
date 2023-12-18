@@ -23,6 +23,8 @@ public class CtrlLlistaAlfabets {
     private void init() {
         títol = Utils.initLabel("Llista Alfabets", "title");
 
+        back = Utils.backButton();
+
         vista = Utils.initFrame();
     }
 

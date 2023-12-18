@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -16,6 +17,7 @@ public class Utils {
     // potser no cal
     // private static int elementWidth = 100;      // Altura d'element de les vistes de llista
 
+
     public static int getScreenHeight() {
         return screenHeight;
     }
@@ -24,11 +26,13 @@ public class Utils {
         return screenWidth;
     }
 
+    // potser privat
     public static Font getFontTitle() {
         // A definir
         return new Font("Serif", Font.BOLD, 30);
     }
 
+    // potser privat
     public static Font getFontText() {
         // A definir
         return new Font("Serif", Font.PLAIN, 16);
@@ -48,7 +52,8 @@ public class Utils {
         return Color.lightGray;
     }
 
-    public static ImageIcon getReturnImage() {
+    //potser privat
+    public static ImageIcon getBackImage() {
         // descarregar imatge + path + definir nom carpeta
         String path = ".." + File.separator + ".." + File.separator + "data/imatges/backArrow.png";
         return new ImageIcon(path);
@@ -70,6 +75,25 @@ public class Utils {
         frame.setSize(Utils.getScreenWidth(), Utils.getScreenHeight());
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(new BorderLayout());
+        // frame.setIconImage(null);        // Si volem que surti algun logo en la part superior esquerra
         return frame;
+    }
+
+    public static JButton backButton() {
+        JButton back = new JButton();
+        ImageIcon imageIcon = getBackImage();
+        Image image = imageIcon.getImage();
+        // A definir quina es la mida del botó
+        image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        back.setIcon(imageIcon);
+
+        back.setContentAreaFilled(false);               // Només es vegi la foto i no el botó
+        back.setBorder(null);                   
+        // back.addActionListener(e -> canviStage());     // Potser cada classe que té un back ha de fer aquest addActionListener
+
+        //Potser un setPos, es a dir, dreta / esquerra (on es troba el button)
+
+        return back;
     }
 }
