@@ -121,8 +121,8 @@ public class CtrlPresentacio {
             case "AfegirLayout":
                 new CtrlAfegirLayout();
                 break;
-            case "MostrarLayout\r":
-                new CtrlostrarLayout();
+            case "MostrarLayout":
+                new CtrlMostrarLayout();
                 break;
 
             default:
