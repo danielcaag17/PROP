@@ -3,7 +3,9 @@ package src.presentation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.concurrent.Flow;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,20 +30,21 @@ private CtrlPresentacio ctrlPresentacio;
 
         afegir = new JButton();
         afegir.setSize(new Dimension(100, 50));
+        afegir.addActionListener(e -> canvi("AfegirTeclat"));
 
         llistaAlfabets = new JButton();
         llistaAlfabets.setText("Alfabets");
         llistaAlfabets.setFocusable(false);
-        llistaAlfabets.setSize(new Dimension(100, 50));
+        llistaAlfabets.setSize(new Dimension(0, 100));
         llistaAlfabets.setFont(Utils.getFontText());
-        llistaAlfabets.addActionListener(e -> llistaAlfabets());
+        llistaAlfabets.addActionListener(e -> canvi("LlistaAlfabets"));
 
         llistaLayouts = new JButton();
         llistaLayouts.setText("Layouts");
         llistaLayouts.setFocusable(false);
-        llistaLayouts.setSize(new Dimension(100, 50));
+        llistaLayouts.setSize(new Dimension(0, 100));
         llistaLayouts.setFont(Utils.getFontText());
-        llistaLayouts.addActionListener(e -> llistaLayouts());
+        llistaLayouts.addActionListener(e -> canvi("LlistaLayouts"));
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -49,18 +52,17 @@ private CtrlPresentacio ctrlPresentacio;
 
         PSouth = new JPanel();
         PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.setLayout(new BorderLayout());
-        PSouth.setBackground(Color.BLACK);
-        PSouth.add(llistaAlfabets,  BorderLayout.WEST);
-        PSouth.add(llistaLayouts, BorderLayout.EAST);
+        PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        PSouth.add(llistaAlfabets);
+        PSouth.add(llistaLayouts);
 
         PAfegir = new JPanel();
-        PAfegir.setBackground(Color.red);
         PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PAfegir.add(afegir);
+        PAfegir.setLayout(new BorderLayout());
+        PAfegir.add(afegir, BorderLayout.CENTER);
 
         PLlista = new JPanel();
-        PLlista.setLayout(new GridLayout());
+        PLlista.setLayout(new GridLayout()); // o boxLayout
         // la mida és tota la restant de la pantall
         
         PCenter = new JPanel();
@@ -77,14 +79,9 @@ private CtrlPresentacio ctrlPresentacio;
         vista.add(PSouth, BorderLayout.SOUTH);
     }
 
-    private void llistaAlfabets() {
-        // Eliminar la vista
-        ctrlPresentacio.canviVista("LlistaAlfabets");
-    }
-
-    private void llistaLayouts() {
-        // Eliminar la vista
-        ctrlPresentacio.canviVista("LlistaLayouts");
+    private void canvi(String pantalla) {
+        vista.setVisible(false);
+        ctrlPresentacio.canviVista(pantalla);
     }
 }
 
