@@ -113,6 +113,7 @@ public class CtrlPantallaInici {
     }
 
     private void start() {
+        vista.setVisible(false);
         ctrlPresentacio.canviVista("LlistaTeclats");
     }
 }
