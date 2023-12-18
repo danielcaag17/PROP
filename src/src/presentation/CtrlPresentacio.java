@@ -15,7 +15,7 @@ public class CtrlPresentacio {
         return ctrlPresentacio;
     }
 
-    private CtrlPresentacio() throws FileNotFoundException {
+    private CtrlPresentacio() {
         // Aquí s'ha d'iniciar Factoria, Controlador domini, la visualització (per a la primera entrega potser per terminal)
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
