@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Utils {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -50,5 +52,24 @@ public class Utils {
         // descarregar imatge + path + definir nom carpeta
         String path = ".." + File.separator + ".." + File.separator + "data/imatges/backArrow.png";
         return new ImageIcon(path);
+    }
+
+    public static JLabel initLabel(String name, String type) {
+        JLabel label = new JLabel();
+        label.setText(name);
+        label.setVisible(true);
+        if (type.equals("title")) label.setFont(getFontTitle());
+        else if (type.equals("text")) label.setFont(getFontText());
+        return label;
+    }
+
+    public static JFrame initFrame() {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(Utils.getScreenWidth(), Utils.getScreenHeight());
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setLayout(new BorderLayout());
+        return frame;
     }
 }

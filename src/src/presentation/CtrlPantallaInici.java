@@ -22,22 +22,11 @@ public class CtrlPantallaInici {
     }
 
     private void init() {
-        initElements();
-        initFrame();
-    }
+        títol = Utils.initLabel("PROP", "title");
 
-    private void initElements() {
-        títol = new JLabel();
-        initLabel("títol", "PROP");
-
-        membre1 = new JLabel();
-        initLabel("membre1", "Pau Rambla");
-        
-        membre2 = new JLabel();
-        initLabel("membre2", "Daniel Canizares");
-
-        membre3 = new JLabel();
-        initLabel("membre3", "Jordi Otal");
+        membre1 = Utils.initLabel("Pau Rambla", "text");
+        membre2 = Utils.initLabel("Daniel Canizares", "text");
+        membre3 = Utils.initLabel("Jordi Otal", "text");
 
         start = new JButton();
         start.setPreferredSize(new Dimension(100,50));
@@ -67,43 +56,8 @@ public class CtrlPantallaInici {
         PCenter.add(PMembre1, BorderLayout.WEST);
         PCenter.add(PMembre2, BorderLayout.CENTER);
         PCenter.add(PMembre3, BorderLayout.EAST);
-    }
 
-    private void initLabel(String labelName, String name) {
-        switch (labelName) {
-            case "títol":
-                títol.setVisible(true);
-                títol.setText(name);
-                vista.setFont(Utils.getFontTitle());
-                break;
-            case "membre1":
-                membre1.setVisible(true);
-                membre1.setText(name);
-                membre1.setFont(Utils.getFontText());
-                break;
-            case "membre2":
-                membre2.setVisible(true);
-                membre2.setText(name);
-                membre2.setFont(Utils.getFontText());
-                break;
-            case "membre3":
-                membre3.setVisible(true);
-                membre3.setText(name);
-                membre3.setFont(Utils.getFontText());
-                break;
-            default:
-                // Error
-                break;
-        }
-    }
-
-    private void initFrame() {
-        vista = new JFrame();
-        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vista.setVisible(true);
-        vista.setSize(Utils.getScreenWidth(), Utils.getScreenHeight());
-        vista.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        vista.setLayout(new BorderLayout());
+        vista = Utils.initFrame();
     }
 
     private void addElementsFrame() {
