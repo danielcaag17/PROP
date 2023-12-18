@@ -350,7 +350,7 @@ public class IOterminal {
         Integer idLayout = answerInteger();
         try {
             System.out.println("Generant teclat...");
-            ctrlPresentacio.crearNouTeclat(nom, nomAlfabet, idLayout);
+            ctrlPresentacio.crearNouTeclat(nom, nomAlfabet, idLayout.toString());
             System.out.println(output + "Teclat "+nom+" creat.");
         }
         catch (Excepcions e) {

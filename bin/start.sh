@@ -1,3 +1,2 @@
-echo "Veure bin/README.md per a informació d'execució"
 cd class
-java src.Main
+java -cp .:../../lib/json-20231013.jar src.Main
