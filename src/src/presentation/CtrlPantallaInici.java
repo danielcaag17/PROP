@@ -15,8 +15,8 @@ public class CtrlPantallaInici {
     private JFrame vista;
     private JPanel PTítol, PMembre1, PMembre2, PMembre3, PStart, PCenter;
 
-    public CtrlPantallaInici() {
-        ctrlPresentacio = CtrlPresentacio.getInstance();
+    public CtrlPantallaInici(CtrlPresentacio ctrlPresentacio) {
+        this.ctrlPresentacio = ctrlPresentacio;
         init();
         addElementsFrame();
     }

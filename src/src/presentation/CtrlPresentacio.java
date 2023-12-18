@@ -8,7 +8,7 @@ import src.exceptions.*;
 public class CtrlPresentacio {
     // private IOterminal iot;
     private CtrlDomini cd;
-    private static CtrlPresentacio ctrlPresentacio;
+    private static CtrlPresentacio ctrlPresentacio = null;
 
     public static CtrlPresentacio getInstance() {
         if(ctrlPresentacio == null) ctrlPresentacio = new CtrlPresentacio();
@@ -89,7 +89,7 @@ public class CtrlPresentacio {
     public void canviVista(String vista) {
         switch (vista) {
             case "PantallaInici":
-                new CtrlPantallaInici();
+                new CtrlPantallaInici(this);
                 break;
             case "LlistaTeclats":
                 new CtrlLlistaTeclats();
