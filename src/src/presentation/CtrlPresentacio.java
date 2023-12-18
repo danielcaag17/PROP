@@ -6,7 +6,7 @@ import src.domain.controllers.*;
 import src.exceptions.*;
 
 public class CtrlPresentacio {
-    private IOterminal iot;
+    // private IOterminal iot;
     private CtrlDomini cd;
     private static CtrlPresentacio ctrlPresentacio;
 
@@ -20,9 +20,10 @@ public class CtrlPresentacio {
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
         cd = factoriaCtrl.getCtrlDomini();
-        iot = new IOterminal(this);
+        // iot = new IOterminal(this);
         // Inicialització de terminal
-        iot.inicialitzaTerminal();
+        // iot.inicialitzaTerminal();
+        new CtrlPantallaInici();
     }
 
     public String[] getListTeclats() {
