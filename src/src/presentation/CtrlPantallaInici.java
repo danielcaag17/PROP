@@ -68,6 +68,6 @@ public class CtrlPantallaInici {
 
     private void start() {
         vista.setVisible(false); // Diferent entre no fer visible i eliminar la pantalla 
-        ctrlPresentacio.canviVista("LlistaAlfabets");
+        ctrlPresentacio.canviVista("LlistaTeclats");
     }
 }
