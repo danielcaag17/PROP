@@ -22,7 +22,7 @@ public class CtrlAfegirAlfabet {
     private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, indicaNom;
     private JTextField nomAlfabet;
-    private JComboBox tipusEntrada;
+    private JComboBox<String> tipusEntrada;
     private String[] arrayTipusEntrada;
     private String nomAlf;
     private String tipus;   // tipus seleccionat per l'usuari
