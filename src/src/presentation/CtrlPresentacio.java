@@ -141,4 +141,8 @@ public class CtrlPresentacio {
     public void elimina(String tipus, String missatge) {
         new CtrlEliminar(tipus, missatge);
     }
+
+    public void Excepcio(String tipus, String msg) {
+        // Tractar EXC amb nova finestra
+    }
 }

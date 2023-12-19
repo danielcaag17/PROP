@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import src.exceptions.Excepcions;
 
 public class CtrlAfegirAlfabet {
     private CtrlPresentacio ctrlPresentacio;
@@ -28,6 +31,7 @@ public class CtrlAfegirAlfabet {
     private JButton cancelar, confirmar, openFile;
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PNom;
+    private Boolean pathSelected = false;
 
     public CtrlAfegirAlfabet() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
@@ -67,7 +71,7 @@ public class CtrlAfegirAlfabet {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 nomAlf = nomAlfabet.getText();
-                if (! nomAlf.equals("")) confirmar.setEnabled(true);
+                if (! nomAlf.equals("") && pathSelected) confirmar.setEnabled(true);
             }
 
             @Override
@@ -125,8 +129,14 @@ public class CtrlAfegirAlfabet {
         fileChooser.setCurrentDirectory(new File("."));
         int response = fileChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
+            pathSelected = true;
+            if (! nomAlf.equals("")) confirmar.setEnabled(true);
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             path = file.toString();
+        }
+        else {
+            pathSelected = false;
+            confirmar.setEnabled(false);
         }
     }
 
@@ -138,17 +148,26 @@ public class CtrlAfegirAlfabet {
             if (s[i] == nomAlf) {}// throw new AlfabetJaExisteix();
         }
         tipus = (String) tipusEntrada.getSelectedItem();
-        /* try {
+        try {
             ctrlPresentacio.afegirAlfabet(nomAlf, tipus, path);
+            // pantalla informativa
         }
-        catch (FormatDadesNoValid e) {
-
+        catch(Excepcions e) {
+            String msg;
+            switch (e.getTipus()) {
+                case "FormatDadesNoValid":
+                    msg = "El format de les dades del fitxer "+ path + " no és vàlid. (Veure more_info)";
+                    break;
+                case "EntradaLlegidaMalament":
+                    msg = "Hi ha hagut un error en el processament de les dades.";
+                    break;
+                default:
+                    msg = e.getMessage();
+            }
+            ctrlPresentacio.Excepcio(e.getTipus(), msg);
+        } catch (FileNotFoundException e) {
+            // No fer res, sempre es troba el fitxer
         }
-        catch (EntradaLlegidaMalament e) {
-
-        }
-        */ 
-
         Utils.canviPantalla(vista, "LlistaAlfabets");
     }
 }
