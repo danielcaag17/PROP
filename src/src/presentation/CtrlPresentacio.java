@@ -42,6 +42,10 @@ public class CtrlPresentacio {
         return cd.getListGeneradors();
     }
 
+    public String[] getListTipusEntrada() {
+        return cd.getListTipusEntrada();
+    }
+
     public String toggleStrategy() {
         return cd.toggleStrategy();
     }

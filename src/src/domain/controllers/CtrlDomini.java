@@ -133,7 +133,12 @@ public class CtrlDomini {
     }
 
     public String[] getListGeneradors() {
-        String[] s = new String[]{"Genetic", "QAP"};
+        String[] s = new String[]{"Genetic", "BranchBound"};
+        return s;
+    }
+
+    public String[] getListTipusEntrada() {
+        String[] s = new String[]{"text", "llista-paraules"};
         return s;
     }
 
