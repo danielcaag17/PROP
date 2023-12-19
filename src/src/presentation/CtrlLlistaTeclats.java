@@ -24,11 +24,7 @@ public class CtrlLlistaTeclats {
     private void init() {
         títol = Utils.initLabel("Llista Teclats", "title");
 
-        afegir = new JButton();
-        afegir.setPreferredSize(new Dimension(100, 50));
-        afegir.setText("+");
-        afegir.setFont(Utils.getFontText());
-        afegir.setFocusable(false);
+        afegir = Utils.addButton();
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirTeclat"));
 
         llistaAlfabets = new JButton();

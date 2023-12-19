@@ -2,7 +2,6 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -11,14 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CtrlLlistaAlfabets {
-    private CtrlPresentacio ctrlPresentacio;
     private JLabel títol;
     private JButton afegir, back; 
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
 
     public CtrlLlistaAlfabets() {
-        ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
         addElementsFrame();
     }
@@ -28,7 +25,9 @@ public class CtrlLlistaAlfabets {
 
         back = Utils.backButton();
         back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
-        afegir = new JButton();
+        
+        afegir = Utils.addButton();
+        afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirAlfabet"));
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
