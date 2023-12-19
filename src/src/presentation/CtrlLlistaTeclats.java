@@ -1,11 +1,9 @@
 package src.presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.concurrent.Flow;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,14 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CtrlLlistaTeclats {
-private CtrlPresentacio ctrlPresentacio;
     private JLabel títol;
     private JButton afegir, llistaAlfabets, llistaLayouts; 
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
 
     public CtrlLlistaTeclats() {
-        ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
         addElementsFrame();
     }
@@ -30,6 +26,9 @@ private CtrlPresentacio ctrlPresentacio;
 
         afegir = new JButton();
         afegir.setPreferredSize(new Dimension(100, 50));
+        afegir.setText("+");
+        afegir.setFont(Utils.getFontText());
+        afegir.setFocusable(false);
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirTeclat"));
 
         llistaAlfabets = new JButton();
@@ -58,8 +57,6 @@ private CtrlPresentacio ctrlPresentacio;
 
         PAfegir = new JPanel();
         PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        //PAfegir.setLayout(new BorderLayout());
-        //PAfegir.add(afegir, BorderLayout.CENTER);
         PAfegir.add(afegir);
 
         PLlista = new JPanel();
