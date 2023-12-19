@@ -53,9 +53,9 @@ public class Utils {
     }
 
     //potser privat
-    public static ImageIcon getBackImage() {
+    public static ImageIcon getImage(String imatge) {
         // descarregar imatge + path + definir nom carpeta
-        String path = ".." + File.separator + ".." + File.separator + "data/imatges/backArrow.png";
+        String path = ".." + File.separator + ".." + File.separator + "data/imatges/" + imatge + ".png";
         return new ImageIcon(path);
     }
 
@@ -72,16 +72,17 @@ public class Utils {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(Utils.getScreenWidth(), Utils.getScreenHeight());
+        frame.setSize(Utils.getScreenWidth()/3, Utils.getScreenHeight()/3);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
         // frame.setIconImage(null);        // Si volem que surti algun logo en la part superior esquerra
         return frame;
     }
 
-    public static JButton backButton() {
+    public static JButton imatgeButton(String imatge) {
         JButton back = new JButton();
-        ImageIcon imageIcon = getBackImage();
+        ImageIcon imageIcon = getImage(imatge);
         Image image = imageIcon.getImage();
         // A definir quina es la mida del botó
         image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
