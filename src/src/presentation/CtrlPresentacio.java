@@ -38,6 +38,14 @@ public class CtrlPresentacio {
         return cd.getListLayouts();
     }
 
+    public String[] getListGeneradors() {
+        return cd.getListGeneradors();
+    }
+
+    public String[] getListTipusEntrada() {
+        return cd.getListTipusEntrada();
+    }
+
     public String toggleStrategy() {
         return cd.toggleStrategy();
     }
@@ -121,12 +129,11 @@ public class CtrlPresentacio {
             case "AfegirLayout":
                 new CtrlAfegirLayout();
                 break;
-            case "MostrarLayout\r":
-                new CtrlostrarLayout();
+            case "MostrarLayout":
+                new CtrlMostrarLayout();
                 break;
-
             default:
-                //Error
+                System.out.println("No existeix aquesta pantalla");
                 break;
         }
     }

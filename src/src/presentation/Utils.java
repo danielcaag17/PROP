@@ -96,4 +96,19 @@ public class Utils {
 
         return back;
     }
+
+    public static JButton addButton() {
+        JButton addButton = new JButton();
+        addButton.setPreferredSize(new Dimension(100, 50));
+        addButton.setText("+");
+        addButton.setFont(getFontText());
+        addButton.setFocusable(false);
+        return addButton;
+    }
+
+    // Tanca la pantalla actual i mostra la nova pantalla
+    public static void canviPantalla(JFrame vista, String pantalla) {
+        vista.dispose();
+        CtrlPresentacio.getInstance().canviVista(pantalla);
+    }
 }

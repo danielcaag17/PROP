@@ -132,6 +132,16 @@ public class CtrlDomini {
         return s;
     }
 
+    public String[] getListGeneradors() {
+        String[] s = new String[]{"Genetic", "BranchBound"};
+        return s;
+    }
+
+    public String[] getListTipusEntrada() {
+        String[] s = new String[]{"text", "llista-paraules"};
+        return s;
+    }
+
     /**
      * @return Retorna un array de String amb la mida i la matriu de distribució d'ids de cada layout del sistema
      */
