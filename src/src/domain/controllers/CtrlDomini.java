@@ -116,6 +116,16 @@ public class CtrlDomini {
         return s;
     }
 
+    public String[] getNomTeclats() {
+        String[] s = new String[Teclats.size()];
+        int i = 0;
+        for (String key : Teclats.keySet()) {
+            s[i] = key;
+            i++;
+        }
+        return s;
+    }
+
     /**
      * @return Retorna un array de Strings amb el nom, la mida i l'abecedari de cada alfabet del sistema.
      */
@@ -127,6 +137,16 @@ public class CtrlDomini {
             s[i] = "Nom: " + a.getNom() + 
                    " - Mida: " + a.getSize() +
                    " - Abecedari: " + Arrays.toString(a.getAbecedari());
+            i++;
+        }
+        return s;
+    }
+
+    public String[] getNomAlfabets() {
+        String[] s = new String[Alfabets.size()];
+        int i = 0;
+        for (String key : Alfabets.keySet()) {
+            s[i] = key;
             i++;
         }
         return s;
@@ -152,6 +172,16 @@ public class CtrlDomini {
             Layout l = Layouts.get(key);
             s[i] = "Mida: " + l.getSize() + 
                    "\n - Matriu distribució d'ids: \n" + l.getDistribucioFilledString(); // Aquest toString() s'hauria de veure que fa.
+            i++;
+        }
+        return s;
+    }
+
+    public Integer[] getNomLayouts() {
+        Integer[] s = new Integer[Layouts.size()];
+        int i = 0;
+        for (Integer key : Layouts.keySet()) {
+            s[i] = key;
             i++;
         }
         return s;

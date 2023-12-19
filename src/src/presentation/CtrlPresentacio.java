@@ -30,12 +30,24 @@ public class CtrlPresentacio {
         return cd.getListTeclats();
     }
 
+    public String[] getNomTeclats() {
+        return cd.getNomTeclats();
+    }
+
     public String[] getListAlfabets() {
         return cd.getListAlfabets();
     }
 
+    public String[] getNomAlfabets() {
+        return cd.getNomAlfabets();
+    }
+
     public String[] getListLayouts() {
         return cd.getListLayouts();
+    }
+
+    public Integer[] getNomLayouts() {
+        return cd.getNomLayouts();
     }
 
     public String[] getListGeneradors() {
