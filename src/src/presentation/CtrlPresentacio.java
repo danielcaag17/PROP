@@ -38,6 +38,10 @@ public class CtrlPresentacio {
         return cd.getListLayouts();
     }
 
+    public String[] getListGeneradors() {
+        return cd.getListGeneradors();
+    }
+
     public String toggleStrategy() {
         return cd.toggleStrategy();
     }

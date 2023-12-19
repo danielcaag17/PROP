@@ -132,6 +132,11 @@ public class CtrlDomini {
         return s;
     }
 
+    public String[] getListGeneradors() {
+        String[] s = new String[]{"Genètic", "QAP"};
+        return s;
+    }
+
     /**
      * @return Retorna un array de String amb la mida i la matriu de distribució d'ids de cada layout del sistema
      */
