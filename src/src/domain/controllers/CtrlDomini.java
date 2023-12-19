@@ -49,7 +49,7 @@ public class CtrlDomini {
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
         
-        restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
+        // restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
         if (Layouts.isEmpty()) inicialitzarLayoutsBase(); // només si és execució incial
     }
 
@@ -133,7 +133,7 @@ public class CtrlDomini {
     }
 
     public String[] getListGeneradors() {
-        String[] s = new String[]{"Genètic", "QAP"};
+        String[] s = new String[]{"Genetic", "QAP"};
         return s;
     }
 
