@@ -49,7 +49,7 @@ public class CtrlDomini {
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
         
-        restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
+        // restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
         if (Layouts.isEmpty()) inicialitzarLayoutsBase(); // només si és execució incial
     }
 
@@ -348,7 +348,8 @@ public class CtrlDomini {
         for (String file : filesTeclats) {
             String tRaw = ctrlPersistFile.getObject(file);
             // TODO: extreure dades de tRaw del JSON i crear instància de Teclat
-            String nom = ""; 
+            JSONObject obj = new JSONObject(tRaw);
+            String nom = obj.getJSONObject("nom").getString("nom");
             Teclat t = new Teclat(nom, null, null, null);
             Teclats.put(nom, t);
         }
@@ -362,9 +363,9 @@ public class CtrlDomini {
         }
         for (String file : filesLayouts) {
             String lRaw = ctrlPersistFile.getObject(file);
-            // TODO: extreure dades de lRaw del JSON i crear instància de Layout
-            Integer idL = 1;
-            Layout l = new Layout(idL);
+            JSONObject obj = new JSONObject(lRaw);
+            Integer idL = obj.getJSONObject("id").getInt("id");
+            Layout l = new Layout(idL); // Només amb la mida ja es pot crear un Layout, prou ràpid com per no haver de fer còpies.
             Layouts.put(idL, l);
         }
     }

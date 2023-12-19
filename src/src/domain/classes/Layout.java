@@ -51,15 +51,20 @@ public class Layout {
 
     /** Inicialitzar el nombre de columnes i files de l'atribut distribucio */
     private void inicialitzarDistribucio() {
-        double x = (double)mida/3;
-        if (mida%3 != 0) { ncol = round(x, false); }
-        else { ncol = round(x, true); }
-        if (ncol < 3) ncol = 3; // Per evitar segmentation fault al omplir el cercle inicial
+        setNcol();
 
         distribucio = new int[nfil][ncol]; // creem una distribució de les mesures buscades
         for (int i = 0; i<nfil; i++) {
             Arrays.fill(distribucio[i], -1);
         }
+    }
+
+    /** Inicialitza ncol en funció de la mida del Layout */
+    private void setNcol() {
+        double x = (double)mida/3;
+        if (mida%3 != 0) { ncol = round(x, false); }
+        else { ncol = round(x, true); }
+        if (ncol < 3) ncol = 3; // Per evitar segmentation fault al omplir el cercle inicial
     }
 
     /** Relacionar id de tecla (a menor id més prioritat al QAP) amb les seves coordenades */
