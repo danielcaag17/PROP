@@ -124,9 +124,8 @@ public class CtrlPresentacio {
             case "MostrarLayout":
                 new CtrlMostrarLayout();
                 break;
-
             default:
-                //Error
+                System.out.println("No existeix aquesta pantalla");
                 break;
         }
     }
