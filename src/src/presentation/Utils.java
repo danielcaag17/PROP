@@ -96,4 +96,10 @@ public class Utils {
 
         return back;
     }
+
+    // Tanca la pantalla actual i mostra la nova pantalla
+    public static void canviPantalla(JFrame vista, String pantalla) {
+        vista.dispose();
+        CtrlPresentacio.getInstance().canviVista(pantalla);
+    }
 }

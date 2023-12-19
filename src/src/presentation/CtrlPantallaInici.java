@@ -32,7 +32,7 @@ public class CtrlPantallaInici {
         start.setPreferredSize(new Dimension(100,50));
         start.setText("START");
         start.setFocusable(false);
-        start.addActionListener(e -> start());
+        start.addActionListener(e -> Utils.canviPantalla(vista,"LlistaTeclats"));
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -64,10 +64,5 @@ public class CtrlPantallaInici {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PStart, BorderLayout.SOUTH);
-    }
-
-    private void start() {
-        vista.setVisible(false); // Diferent entre no fer visible i eliminar la pantalla 
-        ctrlPresentacio.canviVista("LlistaTeclats");
     }
 }

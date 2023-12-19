@@ -27,7 +27,7 @@ public class CtrlLlistaAlfabets {
         títol = Utils.initLabel("Llista Alfabets", "title");
 
         back = Utils.backButton();
-        back.addActionListener(e -> back());
+        back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
         afegir = new JButton();
 
         PTítol = new JPanel();
@@ -59,10 +59,5 @@ public class CtrlLlistaAlfabets {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
-    }
-
-    private void back() {
-        // Eliminar la vista
-        ctrlPresentacio.canviVista("LlistaTeclats");
     }
 }

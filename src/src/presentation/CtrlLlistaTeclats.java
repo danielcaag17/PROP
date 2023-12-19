@@ -29,22 +29,22 @@ private CtrlPresentacio ctrlPresentacio;
         títol = Utils.initLabel("Llista Teclats", "title");
 
         afegir = new JButton();
-        afegir.setSize(new Dimension(100, 50));
-        afegir.addActionListener(e -> canvi("AfegirTeclat"));
+        afegir.setPreferredSize(new Dimension(100, 50));
+        afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirTeclat"));
 
         llistaAlfabets = new JButton();
         llistaAlfabets.setText("Alfabets");
         llistaAlfabets.setFocusable(false);
         llistaAlfabets.setSize(new Dimension(0, 100));
         llistaAlfabets.setFont(Utils.getFontText());
-        llistaAlfabets.addActionListener(e -> canvi("LlistaAlfabets"));
+        llistaAlfabets.addActionListener(e -> Utils.canviPantalla(vista,"LlistaAlfabets"));
 
         llistaLayouts = new JButton();
         llistaLayouts.setText("Layouts");
         llistaLayouts.setFocusable(false);
         llistaLayouts.setSize(new Dimension(0, 100));
         llistaLayouts.setFont(Utils.getFontText());
-        llistaLayouts.addActionListener(e -> canvi("LlistaLayouts"));
+        llistaLayouts.addActionListener(e -> Utils.canviPantalla(vista,"LlistaLayouts"));
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -58,8 +58,9 @@ private CtrlPresentacio ctrlPresentacio;
 
         PAfegir = new JPanel();
         PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PAfegir.setLayout(new BorderLayout());
-        PAfegir.add(afegir, BorderLayout.CENTER);
+        //PAfegir.setLayout(new BorderLayout());
+        //PAfegir.add(afegir, BorderLayout.CENTER);
+        PAfegir.add(afegir);
 
         PLlista = new JPanel();
         PLlista.setLayout(new GridLayout()); // o boxLayout
@@ -77,11 +78,6 @@ private CtrlPresentacio ctrlPresentacio;
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
-    }
-
-    private void canvi(String pantalla) {
-        vista.setVisible(false);
-        ctrlPresentacio.canviVista(pantalla);
     }
 }
 
