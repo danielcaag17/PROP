@@ -99,7 +99,6 @@ public class Utils {
 
     public static JButton addButton() {
         JButton addButton = new JButton();
-        addButton = new JButton();
         addButton.setPreferredSize(new Dimension(100, 50));
         addButton.setText("+");
         addButton.setFont(getFontText());
