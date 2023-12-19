@@ -6,21 +6,31 @@ import java.awt.FlowLayout;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class CtrlAfegirAlfabet {
+    private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, indicaNom;
     private JTextField nomAlfabet;
+    private JComboBox tipusEntrada;
+    private String[] arrayTipusEntrada;
+    private String nomAlf;
+    private String tipus;   // tipus seleccionat per l'usuari
+    private String path;
     private JFileChooser fileChooser;
     private JButton cancelar, confirmar, openFile;
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PNom;
 
     public CtrlAfegirAlfabet() {
+        ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
         addElementsFrame();
     }
@@ -49,7 +59,30 @@ public class CtrlAfegirAlfabet {
         confirmar.setText("Confirmar");
         confirmar.setFont(Utils.getFontText());
         confirmar.setFocusable(false);
-        confirmar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaAlfabets"));
+        confirmar.setEnabled(false);
+        confirmar.addActionListener(e -> confirmar());
+
+        nomAlfabet.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                nomAlf = nomAlfabet.getText();
+                if (! nomAlf.equals("")) confirmar.setEnabled(true);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                nomAlf = nomAlfabet.getText();
+                if (nomAlf.equals("")) confirmar.setEnabled(false);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'changedUpdate'");
+            }
+            
+        });
 
         openFile = new JButton();
         openFile.setPreferredSize(new Dimension(100, 50));
@@ -58,8 +91,13 @@ public class CtrlAfegirAlfabet {
         openFile.setFocusable(false);
         openFile.addActionListener(e -> seleccionaFitxer());
 
+        arrayTipusEntrada = ctrlPresentacio.getListTipusEntrada();
+        tipusEntrada = new JComboBox<>(arrayTipusEntrada);
+
+        // FALTA POSAR MILLOR LA UI
         PCenter = new JPanel();
         PCenter.add(PNom);
+        PCenter.add(tipusEntrada);
         PCenter.add(openFile);
 
         PTítol = new JPanel();
@@ -83,12 +121,34 @@ public class CtrlAfegirAlfabet {
 
     private void seleccionaFitxer() {
         fileChooser = new JFileChooser();
-        // Es per obrir el file chooser directament en el directori actual
-        // fileChooser.setCurrentDirectory(new File("."));
+        // Per obrir el file chooser directament en el directori actual
+        fileChooser.setCurrentDirectory(new File("."));
         int response = fileChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-            System.out.println(file);
+            path = file.toString();
         }
+    }
+
+    private void confirmar() {
+        nomAlf = nomAlfabet.getText();
+        System.out.println(nomAlf);
+        String[] s = ctrlPresentacio.getListAlfabets();
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] == nomAlf) {}// throw new AlfabetJaExisteix();
+        }
+        tipus = (String) tipusEntrada.getSelectedItem();
+        /* try {
+            ctrlPresentacio.afegirAlfabet(nomAlf, tipus, path);
+        }
+        catch (FormatDadesNoValid e) {
+
+        }
+        catch (EntradaLlegidaMalament e) {
+
+        }
+        */ 
+
+        Utils.canviPantalla(vista, "LlistaAlfabets");
     }
 }
