@@ -2,7 +2,6 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -12,7 +11,7 @@ import javax.swing.JPanel;
 
 public class CtrlLlistaTeclats {
     private JLabel títol;
-    private JButton afegir, llistaAlfabets, llistaLayouts; 
+    private JButton afegir, llistaAlfabets, llistaLayouts, exit; 
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
 
@@ -26,6 +25,13 @@ public class CtrlLlistaTeclats {
 
         afegir = Utils.addButton();
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirTeclat"));
+
+        exit = new JButton();
+        exit.setPreferredSize(new Dimension(100, 50));
+        exit.setText("Exit");
+        exit.setFont(Utils.getFontText());
+        exit.setFocusable(false);
+        exit.addActionListener(e -> exit());
 
         llistaAlfabets = new JButton();
         llistaAlfabets.setText("Alfabets");
@@ -47,9 +53,11 @@ public class CtrlLlistaTeclats {
 
         PSouth = new JPanel();
         PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
-        PSouth.add(llistaAlfabets);
-        PSouth.add(llistaLayouts);
+        // PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        PSouth.setLayout(new BorderLayout());
+        PSouth.add(exit, BorderLayout.CENTER);
+        PSouth.add(llistaAlfabets, BorderLayout.WEST);
+        PSouth.add(llistaLayouts, BorderLayout.EAST);
 
         PAfegir = new JPanel();
         PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -71,6 +79,11 @@ public class CtrlLlistaTeclats {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
+    }
+
+    private void exit() {
+        // Sortir i guardar les dades
+        vista.dispose();
     }
 }
 
