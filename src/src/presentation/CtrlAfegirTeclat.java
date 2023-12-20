@@ -13,6 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import src.exceptions.AlfabetNoExisteix;
+import src.exceptions.Excepcions;
+import src.exceptions.MidesDiferents;
+import src.exceptions.TeclatJaExisteix;
+
 public class CtrlAfegirTeclat {
     private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, indicaNom;
@@ -54,7 +59,7 @@ public class CtrlAfegirTeclat {
         confirmar.setFont(Utils.getFontText());
         confirmar.setFocusable(false);
         confirmar.setEnabled(false);
-        confirmar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat.getText()));
+        confirmar.addActionListener(e -> PreMostrarTeclat());
 
         nomTeclat.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -101,9 +106,31 @@ public class CtrlAfegirTeclat {
         vista = Utils.initFrame();
     }
 
-    public void addElementsFrame() {
+    private void addElementsFrame() {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
+    }
+
+    private void PreMostrarTeclat() {
+        String alfabet = (String) listAlfabets.getSelectedItem();
+        String generador = (String) listGeneradors.getSelectedItem();
+        try {
+            ctrlPresentacio.crearNouTeclat(nomTeclat.getText(), alfabet, generador);
+        } catch (Excepcions e) {
+            switch (e.getTipus()) {
+                case "TeclatJaExisteix": 
+                    System.out.println("Ja existeix un Teclat amb el nom: " + nomTeclat + ". Prova amb un altre nom.");
+                    break;
+                case "AlfabetNoExisteix":
+                    System.out.println("No existeix un Alfabet amb el nom: " + alfabet + ".");
+                    break;
+                case "MidesDiferents":
+                    // EXC que ja no ha d'estar
+                    System.out.println("Les mides de l'Alfabet seleccionat i del Layout han de ser iguals.");
+                    break;
+            }
+        }
+        Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat.getText());
     }
 }
