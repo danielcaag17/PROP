@@ -1,9 +1,12 @@
 package src.presentation;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +22,7 @@ public class CtrlLlistaTeclats {
     public CtrlLlistaTeclats() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
+        initPanels();
         addElementsFrame();
     }
 
@@ -36,6 +40,28 @@ public class CtrlLlistaTeclats {
 
         llistaLayouts = Utils.Button("Layouts", null);
         llistaLayouts.addActionListener(e -> Utils.canviPantalla(vista,"LlistaLayouts"));
+    }
+
+    private void initPanels() {
+        PLlista = new JPanel();
+        PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
+        String[] teclats = ctrlPresentacio.getNomTeclats();
+        for (int i = 0; i < teclats.length; i++) {
+            String nt = teclats[i];
+            JLabel label = Utils.initLabel(nt, "text");
+            label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            JButton edit = Utils.Button(null, "edit");
+            edit.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "ModificarTeclat", nt));
+            JButton delete = Utils.Button(null, "delete");
+            delete.addActionListener(e -> ctrlPresentacio.elimina("Teclat", nt, vista, "LlistaTeclats"));
+
+            JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            panel.add(label);
+            panel.add(edit);
+            panel.add(delete);
+
+            PLlista.add(panel);
+        }
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -58,11 +84,10 @@ public class CtrlLlistaTeclats {
         PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(PLlista, BorderLayout.SOUTH);
-
-        vista = Utils.initFrame("LlistaTeclats");
     }
 
     private void addElementsFrame() {
+        vista = Utils.initFrame("LlistaTeclats");
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
