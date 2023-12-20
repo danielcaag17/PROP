@@ -12,15 +12,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CtrlAfegirTeclat {
+    private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, indicaNom;
     private JTextField nomTeclat;
-    private JComboBox listAlfabets, generadors;
-    private String[] arryAlfabets;
+    private JComboBox<String> listAlfabets, listGeneradors;
+    private String[] arrayAlfabets, arrayGeneradors;
     private JButton cancelar, confirmar;
     private JFrame vista;
-    private JPanel PTítol, PSouth, PNom;
+    private JPanel PTítol, PSouth, PNom, PCenter;
 
     public CtrlAfegirTeclat() {
+        ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
         addElementsFrame();
     }
@@ -55,6 +57,18 @@ public class CtrlAfegirTeclat {
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
+        arrayAlfabets = ctrlPresentacio.getNomAlfabets();
+        listAlfabets = new JComboBox<>(arrayAlfabets);
+
+        arrayGeneradors = ctrlPresentacio.getListGeneradors();
+        listGeneradors = new JComboBox<>(arrayGeneradors);
+
+        // FALTA POSAR MILLOR LA UI
+        PCenter = new JPanel();
+        PCenter.add(PNom);
+        PCenter.add(listGeneradors);
+        PCenter.add(listAlfabets);
+
         PSouth = new JPanel();
         PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
@@ -66,7 +80,7 @@ public class CtrlAfegirTeclat {
 
     public void addElementsFrame() {
         vista.add(PTítol, BorderLayout.NORTH);
-        vista.add(PNom, BorderLayout.CENTER);
+        vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
     }
 }

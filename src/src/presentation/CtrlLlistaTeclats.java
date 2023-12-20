@@ -10,12 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CtrlLlistaTeclats {
+    private CtrlPresentacio ctrlPresentacio;
     private JLabel títol;
     private JButton afegir, llistaAlfabets, llistaLayouts, exit; 
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
 
     public CtrlLlistaTeclats() {
+        ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
         addElementsFrame();
     }
@@ -24,7 +26,7 @@ public class CtrlLlistaTeclats {
         títol = Utils.initLabel("Llista Teclats", "title");
 
         afegir = Utils.addButton();
-        afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirTeclat"));
+        afegir.addActionListener(e -> addTeclat());
 
         exit = new JButton();
         exit.setPreferredSize(new Dimension(100, 50));
@@ -84,6 +86,14 @@ public class CtrlLlistaTeclats {
     private void exit() {
         // Sortir i guardar les dades
         vista.dispose();
+    }
+
+    private void addTeclat() {
+        String[] s = ctrlPresentacio.getNomAlfabets();
+        if (s.length == 0) {
+            // no es pot crear un teclat perque no hi ha cap alfabet
+        }
+        else Utils.canviPantalla(vista, "AfegirTeclat");
     }
 }
 
