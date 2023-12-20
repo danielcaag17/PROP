@@ -80,31 +80,27 @@ public class Utils {
         return frame;
     }
 
-    public static JButton imatgeButton(String imatge) {
-        JButton back = new JButton();
-        ImageIcon imageIcon = getImage(imatge);
-        Image image = imageIcon.getImage();
-        // A definir quina es la mida del botó
-        image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
-        back.setIcon(imageIcon);
-        back.setCursor(new Cursor(Cursor.HAND_CURSOR));   // Donar sensació al usuari
-        back.setContentAreaFilled(false);               // Només es vegi la foto i no el botó
-        back.setBorder(null);                   
-        // back.addActionListener(e -> canviStage());     // Potser cada classe que té un back ha de fer aquest addActionListener
-
-        //Potser un setPos, es a dir, dreta / esquerra (on es troba el button)
-
-        return back;
-    }
-
-    public static JButton Button(String text) {
-        JButton addButton = new JButton();
-        addButton.setPreferredSize(new Dimension(100, 50));
-        addButton.setText(text);
-        addButton.setFont(getFontText());
-        addButton.setFocusable(false);
-        return addButton;
+    public static JButton Button(String text, String imatge) {
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(100, 50));
+        if (text != null) {
+            button.setText(text);
+            button.setFont(getFontText());
+            button.setFocusable(false);
+        }
+        else if (imatge != null) {
+            ImageIcon imageIcon = getImage(imatge);
+            Image image = imageIcon.getImage();
+            // A definir quina es la mida del botó
+            image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(image);
+            button.setIcon(imageIcon);
+            button.setCursor(new Cursor(Cursor.HAND_CURSOR));   // Donar sensació al usuari
+            button.setContentAreaFilled(false);               // Només es vegi la foto i no el botó
+            button.setBorder(null);
+        }
+        
+        return button;
     }
 
     // Tanca la pantalla actual i mostra la nova pantalla
