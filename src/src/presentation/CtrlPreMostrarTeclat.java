@@ -15,7 +15,7 @@ import src.exceptions.TeclatNoExisteix;
 public class CtrlPreMostrarTeclat {
     private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, nomTeclat;
-    private JButton descartar, editar, confirmar;
+    private JButton descartar, confirmar;
     private JFrame vista;
     private JPanel PTítol, PSouth, PNom, PCenter, PTeclat;
     private String teclat;
@@ -33,8 +33,9 @@ public class CtrlPreMostrarTeclat {
         nomTeclat = Utils.initLabel(teclat, "text");
 
         descartar = Utils.Button(null, "cross");
-        editar = Utils.Button(null, "edit");
+        descartar.addActionListener(e -> ctrlPresentacio.elimina("Teclat", teclat, vista, "LlistaTeclats"));
         confirmar = Utils.Button(null, "check");
+        confirmar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
 
         try {
             distribucio = ctrlPresentacio.getDistribucio(teclat);
@@ -45,7 +46,9 @@ public class CtrlPreMostrarTeclat {
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
                 String character = String.valueOf(distribucio[i][j]);
-                PTeclat.add(Utils.Button(character, null));
+                System.out.println(character);
+                if (character.equals("-")) PTeclat.add(Utils.initLabel("", ""));
+                else PTeclat.add(Utils.Button(character, null));
             }
         }
 
@@ -61,7 +64,6 @@ public class CtrlPreMostrarTeclat {
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(descartar);
-        PSouth.add(editar);
         PSouth.add(confirmar);
 
         vista = Utils.initFrame("PreMostrarTeclat");

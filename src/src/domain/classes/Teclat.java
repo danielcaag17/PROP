@@ -50,7 +50,7 @@ public class Teclat {
      * Post: s'ha omplert la matriu segons la relació entre les lletres i les seves posicions
      */
     private void omplirDistribucio() {
-        distribucioCharacters = new char[L.getRows()][L.getColumns()];
+        distribucioCharacters = L.getDistribucio();
         for (Character c : teclat.keySet()) {
             int id = teclat.get(c);                                     // Obtenir la id de cada lletra
             Pair<Integer, Integer> p = L.getCoordenadaFromId(id);       // Traduir la id a la posició de la matriu
