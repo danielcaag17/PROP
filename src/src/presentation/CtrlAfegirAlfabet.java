@@ -53,6 +53,7 @@ public class CtrlAfegirAlfabet {
         textFieldNomAlfabet.setFont(Utils.getFontText());
         // Afegir document listener per detectar canvis en el textField i així acitvar o desactivar el botó de confirmar
         afegirDocumentListener();
+        nomAlfabet = "";
 
         arrayTipusEntrada = ctrlPresentacio.getListTipusEntrada();
         listTipusEntrada = new JComboBox<>(arrayTipusEntrada);
@@ -117,7 +118,6 @@ public class CtrlAfegirAlfabet {
     // Es vol crear un nou alfabet amb les dades indicades per l'usuari
     private void confirmar() {
         nomAlfabet = textFieldNomAlfabet.getText();
-        System.out.println(nomAlfabet);
         String[] s = ctrlPresentacio.getListAlfabets();
         for (int i = 0; i < s.length; i++) {
             if (s[i] == nomAlfabet) {}// throw new AlfabetJaExisteix();
@@ -125,6 +125,7 @@ public class CtrlAfegirAlfabet {
         tipusEntrada = (String) listTipusEntrada.getSelectedItem();
         try {
             ctrlPresentacio.afegirAlfabet(nomAlfabet, tipusEntrada, path);
+            System.out.println(nomAlfabet + " -> creat");
             pantallaInformativa();
         }
         catch(Excepcions | FileNotFoundException e) {
