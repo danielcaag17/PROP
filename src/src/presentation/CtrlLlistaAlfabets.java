@@ -51,7 +51,7 @@ public class CtrlLlistaAlfabets {
             JLabel label = Utils.initLabel(na, "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             JButton delete = Utils.Button(null, "delete");
-            delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista));
+            delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista, "LlistaAlfabets"));
 
             JPanel panel = Utils.JPanel(new FlowLayout(), null);
             panel.add(label);

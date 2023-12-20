@@ -163,8 +163,8 @@ public class CtrlPresentacio {
      * @param clau clau de l'instància eliminada 
      * @param pantalla pantalla on es vol retornar una vegada acabat el diàleg
      */
-    public void elimina(String tipus, String clau, JFrame pantalla) {
-        new CtrlEliminar(tipus, clau, pantalla);
+    public void elimina(String tipus, String clau, JFrame pantalla, String pantallaRetorn) {
+        new CtrlEliminar(tipus, clau, pantalla, pantallaRetorn);
     }
 
     public void Excepcio(JFrame pantalla, String title, String msg) {
