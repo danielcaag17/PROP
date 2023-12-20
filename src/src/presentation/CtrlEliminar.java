@@ -42,6 +42,7 @@ public class CtrlEliminar {
         popupEliminarMenu.add(new JLabel("Estàs segur que vols eliminar aquesta instància?"), BorderLayout.CENTER);
         buttons.add(okButton);
         buttons.add(cancelButton);
+        buttonsListener();
         popupEliminarMenu.add(buttons, BorderLayout.SOUTH);
 
         popupEliminarMenu.setSize(new Dimension(420,200));
@@ -50,14 +51,20 @@ public class CtrlEliminar {
         popupEliminarMenu.setResizable(false);
     }
 
-    public void documentListener() {
+    public void buttonsListener() {
         okButton.addActionListener(e -> {
             eliminar();
-            Utils.canviPantalla(popupEliminarMenu, pantalla);
+            apagaPantalla();
         });
         cancelButton.addActionListener(e -> {
-            popupEliminarMenu.dispose();
+            apagaPantalla();
         });
+    }
+
+    public void apagaPantalla() {
+        String titlePantalla = pantalla.getTitle();
+        pantalla.dispose();
+        Utils.canviPantalla(popupEliminarMenu, titlePantalla);
     }
 
     /**
