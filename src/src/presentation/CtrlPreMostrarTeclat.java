@@ -46,7 +46,6 @@ public class CtrlPreMostrarTeclat {
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
                 String character = String.valueOf(distribucio[i][j]);
-                System.out.println(character);
                 if (character.equals("-")) PTeclat.add(Utils.initLabel("", ""));
                 else PTeclat.add(Utils.Button(character, null));
             }

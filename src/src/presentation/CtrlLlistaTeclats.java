@@ -4,13 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class CtrlLlistaTeclats {
     private CtrlPresentacio ctrlPresentacio;
@@ -63,6 +63,9 @@ public class CtrlLlistaTeclats {
             PLlista.add(panel);
         }
 
+        JScrollPane scrollPane = new JScrollPane(PLlista);
+        scrollPane.setBorder(null);     // No se que queda millor
+
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
@@ -77,13 +80,10 @@ public class CtrlLlistaTeclats {
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir);
-
-        PLlista = Utils.JPanel(new GridLayout(), null); // o boxLayout
-        // la mida és tota la restant de la pantall
         
         PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PAfegir, BorderLayout.NORTH);
-        PCenter.add(PLlista, BorderLayout.SOUTH);
+        PCenter.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void addElementsFrame() {
