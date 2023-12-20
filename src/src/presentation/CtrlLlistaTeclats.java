@@ -2,11 +2,9 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,7 +59,7 @@ public class CtrlLlistaTeclats {
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(PLlista, BorderLayout.SOUTH);
 
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("LlistaTeclats");
     }
 
     private void addElementsFrame() {

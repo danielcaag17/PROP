@@ -70,7 +70,7 @@ public class CtrlLlistaAlfabets {
     }
 
     private void addElementsFrame() {
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("LlistaAlfabets");
         vista.add(PNorth, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);

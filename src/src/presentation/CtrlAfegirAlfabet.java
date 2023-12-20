@@ -87,7 +87,7 @@ public class CtrlAfegirAlfabet {
     }
 
     private void addElementsFrame() {
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("AfegirAlfabet");
         vista.add(PNorth, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);

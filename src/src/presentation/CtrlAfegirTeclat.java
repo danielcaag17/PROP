@@ -76,7 +76,7 @@ public class CtrlAfegirTeclat {
     }
 
     private void addElementsFrame() {
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("AfegirTeclat");
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);

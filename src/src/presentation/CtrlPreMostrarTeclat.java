@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.exceptions.Excepcions;
 import src.exceptions.TeclatNoExisteix;
 
 public class CtrlPreMostrarTeclat {
@@ -65,7 +64,7 @@ public class CtrlPreMostrarTeclat {
         PSouth.add(editar);
         PSouth.add(confirmar);
 
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("PreMostrarTeclat");
     }
 
     private void addElementsFrame() {

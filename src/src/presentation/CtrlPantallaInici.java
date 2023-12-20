@@ -49,7 +49,7 @@ public class CtrlPantallaInici {
         PCenter.add(PMembre2, BorderLayout.CENTER);
         PCenter.add(PMembre3, BorderLayout.EAST);
 
-        vista = Utils.initFrame();
+        vista = Utils.initFrame("PantallaInici");
     }
 
     private void addElementsFrame() {
