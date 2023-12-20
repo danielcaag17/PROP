@@ -140,7 +140,7 @@ public class CtrlAfegirAlfabet {
                 default:
                     msg = e.getMessage();
             }
-            ctrlPresentacio.Excepcio(((Excepcions) e).getTipus(), msg);
+            ctrlPresentacio.Excepcio(vista, ((Excepcions) e).getTipus(), msg);
         }
         Utils.canviPantalla(vista, "LlistaAlfabets");
     }
