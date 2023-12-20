@@ -30,6 +30,10 @@ public class CtrlPresentacio {
         return cd.getListTeclats();
     }
 
+    public char[][] getDistribucio(String nt) {
+        return cd.getDistribucio(nt);
+    }
+
     public String[] getNomTeclats() {
         return cd.getNomTeclats();
     }

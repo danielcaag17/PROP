@@ -251,6 +251,13 @@ public class CtrlDomini {
         return getTeclat(nt).toString();
     }
 
+    public char[][] getDistribucio(String nt) {
+        if (Teclats.get(nt) == null) {
+            // EXC
+        }
+        return getTeclat(nt).getDistribucioCharacters();
+    }
+
     /**
      * <li>Pre: el teclat amb nom nt existeix.</li>
      * <li>Post: el teclat amb nom nt s'ha esborrat.</li>
