@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class CtrlAfegirTeclat {
     private CtrlPresentacio ctrlPresentacio;
@@ -51,7 +53,28 @@ public class CtrlAfegirTeclat {
         confirmar.setText("Confirmar");
         confirmar.setFont(Utils.getFontText());
         confirmar.setFocusable(false);
-        confirmar.addActionListener(e -> Utils.canviPantalla(vista, "PreMostrarTeclat"));
+        confirmar.setEnabled(false);
+        confirmar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat.getText()));
+
+        nomTeclat.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (! nomTeclat.getText().equals("")) confirmar.setEnabled(true);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (nomTeclat.getText().equals("")) confirmar.setEnabled(false);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'changedUpdate'");
+            }
+            
+        });
 
         PTítol = new JPanel();
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
