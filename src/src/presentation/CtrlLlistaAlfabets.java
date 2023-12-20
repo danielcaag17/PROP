@@ -14,31 +14,31 @@ import javax.swing.JScrollPane;
 
 public class CtrlLlistaAlfabets {
     private CtrlPresentacio ctrlPresentacio;
-    private JLabel títol;
+    private JLabel title;
     private JButton afegir, back; 
     private JFrame vista;
-    private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
+    private JPanel PNorth, PAfegir, PLlista, PCenter, PSouth;
 
     public CtrlLlistaAlfabets() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
-        init();
+        initElements();
+        initPanels();
         addElementsFrame();
     }
 
-    private void init() {
-        títol = Utils.initLabel("Llista Alfabets", "title");
+    private void initElements() {
+        title = Utils.initLabel("Llista Alfabets", "title");
 
-        back = Utils.Button(null, "backArrow");
-        back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
-        
         afegir = Utils.Button("+", null);
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirAlfabet"));
 
-        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PTítol.add(títol);
+        back = Utils.Button(null, "backArrow");
+        back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
+    }
 
-        PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.add(back);
+    private void initPanels() {
+        PNorth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PNorth.add(title);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir);
@@ -65,11 +65,13 @@ public class CtrlLlistaAlfabets {
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(scrollPane, BorderLayout.CENTER);
 
-        vista = Utils.initFrame();
+        PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PSouth.add(back);
     }
 
     private void addElementsFrame() {
-        vista.add(PTítol, BorderLayout.NORTH);
+        vista = Utils.initFrame();
+        vista.add(PNorth, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
     }
