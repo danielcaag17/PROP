@@ -23,7 +23,7 @@ public class CtrlPresentacio {
         // iot = new IOterminal(this);
         // Inicialització de terminal
         // iot.inicialitzaTerminal();
-        canviVista("PantallaInici");
+        canviVista("PantallaInici", null);
     }
 
     public String[] getListTeclats() {
@@ -106,7 +106,7 @@ public class CtrlPresentacio {
 
     }
 
-    public void canviVista(String vista) {
+    public void canviVista(String vista, String elementAMostrar) {
         switch (vista) {
             case "PantallaInici":
                 new CtrlPantallaInici(this);
@@ -127,7 +127,7 @@ public class CtrlPresentacio {
                 new CtrlMostrarTeclat();
                 break;
             case "PreMostrarTeclat":
-                new CtrlPreMostrarTeclat();
+                new CtrlPreMostrarTeclat(elementAMostrar);
                 break;
             case "ModificarTeclat":
                 new CtrlModificarTeclat();
