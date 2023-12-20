@@ -136,7 +136,7 @@ public class CtrlPresentacio {
                 new CtrlPreMostrarTeclat(elementAMostrar);
                 break;
             case "ModificarTeclat":
-                new CtrlModificarTeclat();
+                new CtrlModificarTeclat(elementAMostrar);
                 break;
             case "AfegirAlfabet":
                 new CtrlAfegirAlfabet();
