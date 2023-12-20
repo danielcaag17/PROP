@@ -130,7 +130,7 @@ public class CtrlPresentacio {
                 new CtrlAfegirTeclat();
                 break;
             case "MostrarTeclat":
-                new CtrlMostrarTeclat();
+                new CtrlMostrarTeclat(elementAMostrar);
                 break;
             case "PreMostrarTeclat":
                 new CtrlPreMostrarTeclat(elementAMostrar);
