@@ -70,8 +70,8 @@ public class Utils {
         return label;
     }
 
-    public static JFrame initFrame() {
-        JFrame frame = new JFrame();
+    public static JFrame initFrame(String title) {
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(Utils.getScreenWidth()/3, Utils.getScreenHeight()/3);
