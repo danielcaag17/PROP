@@ -251,10 +251,8 @@ public class CtrlDomini {
         return getTeclat(nt).toString();
     }
 
-    public char[][] getDistribucio(String nt) {
-        if (Teclats.get(nt) == null) {
-            // EXC
-        }
+    public char[][] getDistribucio(String nt) throws TeclatNoExisteix {
+        if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         return getTeclat(nt).getDistribucioCharacters();
     }
 

@@ -9,14 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CtrlPantallaInici {
-    private CtrlPresentacio ctrlPresentacio;
     private JLabel títol, membre1, membre2, membre3;
     private JButton start;
     private JFrame vista;
     private JPanel PTítol, PMembre1, PMembre2, PMembre3, PStart, PCenter;
 
-    public CtrlPantallaInici(CtrlPresentacio ctrlPresentacio) {
-        this.ctrlPresentacio = ctrlPresentacio;
+    public CtrlPantallaInici() {
         init();
         addElementsFrame();
     }

@@ -30,7 +30,7 @@ public class CtrlPresentacio {
         return cd.getListTeclats();
     }
 
-    public char[][] getDistribucio(String nt) {
+    public char[][] getDistribucio(String nt) throws TeclatNoExisteix {
         return cd.getDistribucio(nt);
     }
 
@@ -113,7 +113,7 @@ public class CtrlPresentacio {
     public void canviVista(String vista, String elementAMostrar) {
         switch (vista) {
             case "PantallaInici":
-                new CtrlPantallaInici(this);
+                new CtrlPantallaInici();
                 break;
             case "LlistaTeclats":
                 new CtrlLlistaTeclats();

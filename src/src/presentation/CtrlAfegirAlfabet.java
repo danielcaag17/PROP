@@ -134,7 +134,7 @@ public class CtrlAfegirAlfabet {
                     msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
                     break;
                 case "EntradaLlegidaMalament":
-                    msg = "Hi ha hagut un error en la lectura de les dades.";
+                    msg = "Hi ha hagut un error en la lectura de les dades";
                     break;
                 default:
                     msg = e.getMessage();
