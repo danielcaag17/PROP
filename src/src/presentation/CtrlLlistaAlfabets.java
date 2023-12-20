@@ -47,9 +47,11 @@ public class CtrlLlistaAlfabets {
         PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
         String[] alfabets = ctrlPresentacio.getNomAlfabets();
         for (int i = 0; i < alfabets.length; i++) {
-            JLabel label = Utils.initLabel(alfabets[i], "text");
+            String na = alfabets[i];
+            JLabel label = Utils.initLabel(na, "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             JButton delete = Utils.Button(null, "delete");
+            delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista));
 
             JPanel panel = Utils.JPanel(new FlowLayout(), null);
             panel.add(label);
