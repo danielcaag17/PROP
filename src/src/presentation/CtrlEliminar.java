@@ -10,6 +10,7 @@ public class CtrlEliminar {
     String tipus = "";
     String clau = "";
     JFrame pantalla;
+    String pantallaRetorn;
     CtrlPresentacio cp;
     JDialog popupEliminarMenu;
     JButton okButton;
@@ -21,10 +22,11 @@ public class CtrlEliminar {
      * @param tipus indica el tipus d'instància que es vol eliminar
      * @param clau indica la clau de l'instància que es vol eliminar
      */
-    public CtrlEliminar (String tipus, String clau, JFrame pantalla) {
+    public CtrlEliminar (String tipus, String clau, JFrame pantalla, String pantallaRetorn) {
         this.tipus = tipus;
         this.clau = clau;
         this.pantalla = pantalla;
+        this.pantallaRetorn = pantallaRetorn;
         cp = CtrlPresentacio.getInstance();
         initPopup();
     }
@@ -62,9 +64,8 @@ public class CtrlEliminar {
     }
 
     public void apagaPantalla() {
-        String titlePantalla = pantalla.getTitle();
         pantalla.dispose();
-        Utils.canviPantalla(popupEliminarMenu, titlePantalla);
+        Utils.canviPantalla(popupEliminarMenu, pantallaRetorn);
     }
 
     /**
@@ -97,5 +98,6 @@ public class CtrlEliminar {
                 }
                 break;
         }
+        System.out.println(tipus + " " + clau + "-> eliminat");
     }    
 }
