@@ -154,8 +154,8 @@ public class CtrlPresentacio {
         }
     }
 
-    public void elimina(String tipus, String missatge) {
-        new CtrlEliminar(tipus, missatge);
+    public void elimina(String tipus, String missatge, String pantalla) {
+        new CtrlEliminar(tipus, missatge, pantalla);
     }
 
     public void Excepcio(String tipus, String msg) {
