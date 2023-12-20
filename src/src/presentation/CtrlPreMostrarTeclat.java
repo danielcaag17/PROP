@@ -6,11 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class CtrlPreMostrarTeclat {
     private CtrlPresentacio ctrlPresentacio;
@@ -32,9 +30,9 @@ public class CtrlPreMostrarTeclat {
         títol = Utils.initLabel("PreMostrar Teclat", "title");
         nomTeclat = Utils.initLabel(teclat, "text");
 
-        descartar = Utils.imatgeButton("cross");
-        editar = Utils.imatgeButton("edit");
-        confirmar = Utils.imatgeButton("check");
+        descartar = Utils.Button(null, "cross");
+        editar = Utils.Button(null, "edit");
+        confirmar = Utils.Button(null, "check");
 
         distribucio = ctrlPresentacio.getDistribucio(teclat);
         PTeclat = new JPanel();
@@ -42,7 +40,7 @@ public class CtrlPreMostrarTeclat {
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
                 String character = String.valueOf(distribucio[i][j]);
-                PTeclat.add(Utils.Button(character));
+                PTeclat.add(Utils.Button(character, null));
             }
         }
 
