@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.RootPaneContainer;
 
 public class Utils {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -112,7 +113,7 @@ public class Utils {
     }
 
     // Tanca la pantalla actual i mostra la nova pantalla
-    public static void canviPantalla(JFrame vista, String pantalla) {
+    public static void canviPantalla(Window vista, String pantalla) {
         vista.dispose();
         CtrlPresentacio.getInstance().canviVista(pantalla, null);
     }

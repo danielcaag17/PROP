@@ -2,7 +2,7 @@ package src.presentation;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import src.domain.controllers.*;
 import src.exceptions.*;
@@ -156,8 +156,15 @@ public class CtrlPresentacio {
         }
     }
 
-    public void elimina(String tipus, String missatge, String pantalla) {
-        new CtrlEliminar(tipus, missatge, pantalla);
+    /**
+     * Elimina una instància
+     * 
+     * @param tipus tipus d'instància eliminada
+     * @param clau clau de l'instància eliminada 
+     * @param pantalla pantalla on es vol retornar una vegada acabat el diàleg
+     */
+    public void elimina(String tipus, String clau, JFrame pantalla) {
+        new CtrlEliminar(tipus, clau, pantalla);
     }
 
     public void Excepcio(JFrame pantalla, String title, String msg) {

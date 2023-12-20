@@ -1,14 +1,19 @@
 package src.presentation;
 
-import javax.swing.JPopupMenu;
+import javax.swing.*;
+
+import java.awt.*;
 
 import src.exceptions.*;
 
 public class CtrlEliminar {
     String tipus = "";
     String clau = "";
+    JFrame pantalla;
     CtrlPresentacio cp;
-    JPopupMenu popupEliminarMenu;
+    JDialog popupEliminarMenu;
+    JButton okButton;
+    JButton cancelButton;
 
     /**
      * Constructora per defecte
@@ -16,9 +21,10 @@ public class CtrlEliminar {
      * @param tipus indica el tipus d'instància que es vol eliminar
      * @param clau indica la clau de l'instància que es vol eliminar
      */
-    public CtrlEliminar (String tipus, String clau, String pantalla) {
+    public CtrlEliminar (String tipus, String clau, JFrame pantalla) {
         this.tipus = tipus;
         this.clau = clau;
+        this.pantalla = pantalla;
         cp = CtrlPresentacio.getInstance();
         initPopup();
     }
@@ -27,9 +33,31 @@ public class CtrlEliminar {
      * Inicialitza el popup per a eliminar
      */
     public void initPopup() {
-        popupEliminarMenu = new JPopupMenu();
-        popupEliminarMenu.add("Eliminar");
-        popupEliminarMenu.add("Cancelar");
+        popupEliminarMenu = new JDialog(pantalla, "Eliminar", true);
+        popupEliminarMenu.setLayout(new BorderLayout());
+        okButton = Utils.Button("Confirmar", null);
+        cancelButton = Utils.Button("Cancel·lar", null);
+        
+        JPanel buttons = new JPanel();
+        popupEliminarMenu.add(new JLabel("Estàs segur que vols eliminar aquesta instància?"), BorderLayout.CENTER);
+        buttons.add(okButton);
+        buttons.add(cancelButton);
+        popupEliminarMenu.add(buttons, BorderLayout.SOUTH);
+
+        popupEliminarMenu.setSize(new Dimension(420,200));
+        popupEliminarMenu.setLocationRelativeTo(pantalla);
+        popupEliminarMenu.setVisible(true);
+        popupEliminarMenu.setResizable(false);
+    }
+
+    public void documentListener() {
+        okButton.addActionListener(e -> {
+            eliminar();
+            Utils.canviPantalla(popupEliminarMenu, pantalla);
+        });
+        cancelButton.addActionListener(e -> {
+            popupEliminarMenu.dispose();
+        });
     }
 
     /**
@@ -42,7 +70,7 @@ public class CtrlEliminar {
                     cp.esborrarTeclat(clau);
                 }
                 catch (Excepcions e) {
-                    cp.Excepcio(e.getTipus(), e.getMessage());;
+                    cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
                 }
                 break;
             case "Alfabet":
@@ -50,7 +78,7 @@ public class CtrlEliminar {
                     cp.esborrarAlfabet(clau);
                 }
                 catch (Excepcions e) {
-                    cp.Excepcio(e.getTipus(), e.getMessage());;
+                    cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
                 }
                 break;
             case "Layout":
@@ -58,7 +86,7 @@ public class CtrlEliminar {
                     cp.esborrarLayout(Integer.valueOf(clau));
                 }
                 catch (Excepcions e) {
-                    cp.Excepcio(e.getTipus(), e.getMessage());;
+                    cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
                 }
                 break;
         }
