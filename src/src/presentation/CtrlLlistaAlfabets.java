@@ -52,13 +52,11 @@ public class CtrlLlistaAlfabets {
         for (int i = 0; i < alfabets.length; i++) {
             JLabel label = Utils.initLabel(alfabets[i], "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
-            JButton edit = Utils.imatgeButton("edit");
             JButton delete = Utils.imatgeButton("delete");
 
             JPanel panel = new JPanel();
             panel.setLayout(new FlowLayout());
             panel.add(label);
-            panel.add(edit);
             panel.add(delete);
 
             PLlista.add(panel);
