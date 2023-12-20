@@ -28,10 +28,10 @@ public class CtrlLlistaAlfabets {
     private void init() {
         títol = Utils.initLabel("Llista Alfabets", "title");
 
-        back = Utils.imatgeButton("backArrow");
+        back = Utils.Button(null, "backArrow");
         back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
         
-        afegir = Utils.Button("+");
+        afegir = Utils.Button("+", null);
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirAlfabet"));
 
         PTítol = new JPanel();
@@ -52,7 +52,7 @@ public class CtrlLlistaAlfabets {
         for (int i = 0; i < alfabets.length; i++) {
             JLabel label = Utils.initLabel(alfabets[i], "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
-            JButton delete = Utils.imatgeButton("delete");
+            JButton delete = Utils.Button(null, "delete");
 
             JPanel panel = new JPanel();
             panel.setLayout(new FlowLayout());

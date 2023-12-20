@@ -28,10 +28,7 @@ public class CtrlPantallaInici {
         membre2 = Utils.initLabel("Daniel Canizares", "text");
         membre3 = Utils.initLabel("Jordi Otal", "text");
 
-        start = new JButton();
-        start.setPreferredSize(new Dimension(100,50));
-        start.setText("START");
-        start.setFocusable(false);
+        start = Utils.Button("START", null);
         start.addActionListener(e -> Utils.canviPantalla(vista,"LlistaTeclats"));
 
         PTítol = new JPanel();

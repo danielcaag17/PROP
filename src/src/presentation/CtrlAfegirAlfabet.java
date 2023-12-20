@@ -51,18 +51,10 @@ public class CtrlAfegirAlfabet {
         PNom.add(indicaNom);
         PNom.add(nomAlfabet);
 
-        cancelar = new JButton();
-        cancelar.setPreferredSize(new Dimension(100, 50));
-        cancelar.setText("Cancelar");
-        cancelar.setFont(Utils.getFontText());
-        cancelar.setFocusable(false);
+        cancelar = Utils.Button("Cancelar", null);
         cancelar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaAlfabets"));
 
-        confirmar = new JButton();
-        confirmar.setPreferredSize(new Dimension(100, 50));
-        confirmar.setText("Confirmar");
-        confirmar.setFont(Utils.getFontText());
-        confirmar.setFocusable(false);
+        confirmar = Utils.Button("Confirmar", null);
         confirmar.setEnabled(false);
         confirmar.addActionListener(e -> confirmar());
 
@@ -88,11 +80,7 @@ public class CtrlAfegirAlfabet {
             
         });
 
-        openFile = new JButton();
-        openFile.setPreferredSize(new Dimension(100, 50));
-        openFile.setText("Selecciona fitxer");
-        openFile.setFont(Utils.getFontText());
-        openFile.setFocusable(false);
+        openFile = Utils.Button("Selecciona fitxer", null);
         openFile.addActionListener(e -> seleccionaFitxer());
 
         arrayTipusEntrada = ctrlPresentacio.getListTipusEntrada();

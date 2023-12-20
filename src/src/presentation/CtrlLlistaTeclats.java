@@ -25,28 +25,16 @@ public class CtrlLlistaTeclats {
     private void init() {
         títol = Utils.initLabel("Llista Teclats", "title");
 
-        afegir = Utils.Button("+");
+        afegir = Utils.Button("+", null);
         afegir.addActionListener(e -> addTeclat());
 
-        exit = new JButton();
-        exit.setPreferredSize(new Dimension(100, 50));
-        exit.setText("Exit");
-        exit.setFont(Utils.getFontText());
-        exit.setFocusable(false);
+        exit = Utils.Button("Exit", null);
         exit.addActionListener(e -> exit());
 
-        llistaAlfabets = new JButton();
-        llistaAlfabets.setText("Alfabets");
-        llistaAlfabets.setFocusable(false);
-        llistaAlfabets.setSize(new Dimension(0, 100));
-        llistaAlfabets.setFont(Utils.getFontText());
+        llistaAlfabets = Utils.Button("Alfabets", null);
         llistaAlfabets.addActionListener(e -> Utils.canviPantalla(vista,"LlistaAlfabets"));
 
-        llistaLayouts = new JButton();
-        llistaLayouts.setText("Layouts");
-        llistaLayouts.setFocusable(false);
-        llistaLayouts.setSize(new Dimension(0, 100));
-        llistaLayouts.setFont(Utils.getFontText());
+        llistaLayouts = Utils.Button("Layouts", null);
         llistaLayouts.addActionListener(e -> Utils.canviPantalla(vista,"LlistaLayouts"));
 
         PTítol = new JPanel();

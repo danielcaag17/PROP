@@ -13,10 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import src.exceptions.AlfabetNoExisteix;
 import src.exceptions.Excepcions;
-import src.exceptions.MidesDiferents;
-import src.exceptions.TeclatJaExisteix;
 
 public class CtrlAfegirTeclat {
     private CtrlPresentacio ctrlPresentacio;
@@ -46,18 +43,10 @@ public class CtrlAfegirTeclat {
         PNom.add(indicaNom);
         PNom.add(nomTeclat);
 
-        cancelar = new JButton();
-        cancelar.setPreferredSize(new Dimension(100, 50));
-        cancelar.setText("Cancelar");
-        cancelar.setFont(Utils.getFontText());
-        cancelar.setFocusable(false);
+        cancelar = Utils.Button("Cancelar", null);
         cancelar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
 
-        confirmar = new JButton();
-        confirmar.setPreferredSize(new Dimension(100, 50));
-        confirmar.setText("Confirmar");
-        confirmar.setFont(Utils.getFontText());
-        confirmar.setFocusable(false);
+        confirmar = Utils.Button("Confirmar", null);
         confirmar.setEnabled(false);
         confirmar.addActionListener(e -> PreMostrarTeclat());
 

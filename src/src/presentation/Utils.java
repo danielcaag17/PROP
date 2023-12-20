@@ -82,8 +82,8 @@ public class Utils {
 
     public static JButton Button(String text, String imatge) {
         JButton button = new JButton();
-        button.setPreferredSize(new Dimension(100, 50));
         if (text != null) {
+            button.setPreferredSize(new Dimension(100, 50));
             button.setText(text);
             button.setFont(getFontText());
             button.setFocusable(false);
