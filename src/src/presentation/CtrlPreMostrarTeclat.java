@@ -40,7 +40,7 @@ public class CtrlPreMostrarTeclat {
         try {
             distribucio = ctrlPresentacio.getDistribucio(teclat);
         } catch (TeclatNoExisteix e) {
-            ctrlPresentacio.Excepcio(e.getTipus(), "Teclat " + teclat + " no exiteix");
+            ctrlPresentacio.Excepcio(vista, e.getTipus(), "Teclat " + teclat + " no exiteix");
         }
         PTeclat = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
         for (int i = 0; i < distribucio.length; i++) {

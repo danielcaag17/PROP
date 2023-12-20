@@ -2,9 +2,11 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -76,7 +78,7 @@ public class CtrlLlistaTeclats {
     private void addTeclat() {
         String[] s = ctrlPresentacio.getNomAlfabets();
         if (s.length == 0) {
-            // no es pot crear un teclat perque no hi ha cap alfabet
+            ctrlPresentacio.Excepcio(vista, "NoEsPotCrearTeclat", "No hi ha cap alfabet creat per a generar un teclat");
         }
         else Utils.canviPantalla(vista, "AfegirTeclat");
     }

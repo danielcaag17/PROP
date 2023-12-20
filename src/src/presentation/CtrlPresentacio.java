@@ -2,6 +2,8 @@ package src.presentation;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+import javax.swing.JFrame;
+
 import src.domain.controllers.*;
 import src.exceptions.*;
 
@@ -158,7 +160,7 @@ public class CtrlPresentacio {
         new CtrlEliminar(tipus, missatge, pantalla);
     }
 
-    public void Excepcio(String tipus, String msg) {
-        // Tractar EXC amb nova finestra
+    public void Excepcio(JFrame pantalla, String title, String msg) {
+        new PantallaInformativa(pantalla, title, msg);
     }
 }
