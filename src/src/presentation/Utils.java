@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Utils {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -103,12 +104,20 @@ public class Utils {
         return button;
     }
 
+    public static JPanel JPanel(LayoutManager mgr, Dimension preferredSize) {
+        JPanel panel = new JPanel();
+        if (mgr != null) panel.setLayout(mgr);
+        if (preferredSize != null) panel.setPreferredSize(preferredSize);
+        return panel;
+    }
+
     // Tanca la pantalla actual i mostra la nova pantalla
     public static void canviPantalla(JFrame vista, String pantalla) {
         vista.dispose();
         CtrlPresentacio.getInstance().canviVista(pantalla, null);
     }
 
+    // pantalla que necessita algun parametre addicional
     public static void canviPantallaElementMostrar(JFrame vista, String pantalla, String elementAMostrar) {
         vista.dispose();
         if (elementAMostrar != null) {
@@ -118,4 +127,5 @@ public class Utils {
             // salta EXC
         }
     }
+
 }

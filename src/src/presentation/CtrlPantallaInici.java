@@ -31,8 +31,7 @@ public class CtrlPantallaInici {
         start = Utils.Button("START", null);
         start.addActionListener(e -> Utils.canviPantalla(vista,"LlistaTeclats"));
 
-        PTítol = new JPanel();
-        PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
         
         PMembre1 = new JPanel();
@@ -44,12 +43,10 @@ public class CtrlPantallaInici {
         PMembre3 = new JPanel();
         PMembre3.add(membre3);
 
-        PStart = new JPanel();
-        PStart.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PStart = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PStart.add(start);
 
-        PCenter = new JPanel();
-        PCenter.setLayout(new BorderLayout());
+        PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PMembre1, BorderLayout.WEST);
         PCenter.add(PMembre2, BorderLayout.CENTER);
         PCenter.add(PMembre3, BorderLayout.EAST);

@@ -92,13 +92,10 @@ public class CtrlAfegirAlfabet {
         PCenter.add(tipusEntrada);
         PCenter.add(openFile);
 
-        PTítol = new JPanel();
-        PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
-        PSouth = new JPanel();
-        PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(cancelar);
         PSouth.add(confirmar);
 

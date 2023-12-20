@@ -35,8 +35,7 @@ public class CtrlPreMostrarTeclat {
         confirmar = Utils.Button(null, "check");
 
         distribucio = ctrlPresentacio.getDistribucio(teclat);
-        PTeclat = new JPanel();
-        PTeclat.setLayout(new GridLayout(distribucio.length, distribucio[0].length));
+        PTeclat = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
                 String character = String.valueOf(distribucio[i][j]);
@@ -44,21 +43,17 @@ public class CtrlPreMostrarTeclat {
             }
         }
 
-        PTítol = new JPanel();
-        PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
         PNom = new JPanel();
         PNom.add(nomTeclat);
 
-        PCenter = new JPanel();
-        PCenter.setLayout(new BorderLayout());
+        PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PNom, BorderLayout.NORTH);
         PCenter.add(PTeclat, BorderLayout.CENTER);
 
-        PSouth = new JPanel();
-        PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(descartar);
         PSouth.add(editar);
         PSouth.add(confirmar);

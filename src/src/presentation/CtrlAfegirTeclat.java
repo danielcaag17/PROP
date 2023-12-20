@@ -70,8 +70,8 @@ public class CtrlAfegirTeclat {
             
         });
 
-        PTítol = new JPanel();
-        PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        // Veure si cal un Panel per un Label
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
         arrayAlfabets = ctrlPresentacio.getNomAlfabets();
@@ -86,9 +86,7 @@ public class CtrlAfegirTeclat {
         PCenter.add(listGeneradors);
         PCenter.add(listAlfabets);
 
-        PSouth = new JPanel();
-        PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
+        PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(cancelar);
         PSouth.add(confirmar);
 

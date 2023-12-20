@@ -49,16 +49,13 @@ public class CtrlLlistaTeclats {
         PSouth.add(llistaAlfabets, BorderLayout.WEST);
         PSouth.add(llistaLayouts, BorderLayout.EAST);
 
-        PAfegir = new JPanel();
-        PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir);
 
-        PLlista = new JPanel();
-        PLlista.setLayout(new GridLayout()); // o boxLayout
+        PLlista = Utils.JPanel(new GridLayout(), null); // o boxLayout
         // la mida és tota la restant de la pantall
         
-        PCenter = new JPanel();
-        PCenter.setLayout(new BorderLayout());
+        PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(PLlista, BorderLayout.SOUTH);
 

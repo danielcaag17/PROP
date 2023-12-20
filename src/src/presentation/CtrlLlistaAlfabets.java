@@ -34,28 +34,24 @@ public class CtrlLlistaAlfabets {
         afegir = Utils.Button("+", null);
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirAlfabet"));
 
-        PTítol = new JPanel();
-        PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
-        PSouth = new JPanel();
-        PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(back);
 
-        PAfegir = new JPanel();
-        PAfegir.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir);
 
         PLlista = new JPanel();
-        PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));
+        PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
         String[] alfabets = ctrlPresentacio.getNomAlfabets();
         for (int i = 0; i < alfabets.length; i++) {
             JLabel label = Utils.initLabel(alfabets[i], "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             JButton delete = Utils.Button(null, "delete");
 
-            JPanel panel = new JPanel();
-            panel.setLayout(new FlowLayout());
+            JPanel panel = Utils.JPanel(new FlowLayout(), null);
             panel.add(label);
             panel.add(delete);
 
@@ -65,8 +61,7 @@ public class CtrlLlistaAlfabets {
         JScrollPane scrollPane = new JScrollPane(PLlista);
         scrollPane.setBorder(null);     // No se que queda millor
 
-        PCenter = new JPanel();
-        PCenter.setLayout(new BorderLayout());
+        PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(scrollPane, BorderLayout.CENTER);
 
