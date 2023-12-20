@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -126,7 +125,7 @@ public class CtrlAfegirAlfabet {
         try {
             ctrlPresentacio.afegirAlfabet(nomAlfabet, tipusEntrada, path);
             System.out.println(nomAlfabet + " -> creat");
-            pantallaInformativa();
+            ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
         }
         catch(Excepcions | FileNotFoundException e) {
             String msg = "";
@@ -143,16 +142,6 @@ public class CtrlAfegirAlfabet {
             ctrlPresentacio.Excepcio(vista, ((Excepcions) e).getTipus(), msg);
         }
         Utils.canviPantalla(vista, "LlistaAlfabets");
-    }
-
-    private void pantallaInformativa() {
-        vista.setEnabled(false);
-        JDialog dialog = new JDialog(vista, "Crear Alfabet", true);
-        dialog.setLayout(new FlowLayout());
-        dialog.add(new JLabel("Alfabet " + nomAlfabet + " creat correctament"));
-        dialog.setSize(420, 210);
-        dialog.setLocationRelativeTo(vista);
-        dialog.setVisible(true);
     }
 
     private void afegirDocumentListener() {
