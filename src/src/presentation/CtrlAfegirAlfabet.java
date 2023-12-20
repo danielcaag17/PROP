@@ -22,15 +22,14 @@ public class CtrlAfegirAlfabet {
     private CtrlPresentacio ctrlPresentacio;            // instancia unica de ctrlPresentacio
     private JLabel title, labelIndicaNomAlfabet;        // títol de la pantalla + label informativa per indicar el nom de l'Alfabet
     private JTextField textFieldNomAlfabet;             // textField pel nom de l'Alfabet
-    private JComboBox<String> listTipusEntrada;         // llista que es mostra amb els diferents tipus d'entrada      
-    private String[] arrayTipusEntrada;                 // array que conte els diferents tipus d'entrada
+    private JComboBox<String> listTipusEntrada;         // llista que es mostra amb els diferents tipus d'entrada                    
     private String nomAlfabet;                          // nom de l'alfabet escrit per l'usuari                            
     private String tipusEntrada;                        // tipus d'entrada seleccionat per l'usuari
     private String path;                                // path on es troba el fitxer
     private JFileChooser fileChooser;                   // file chooser per indicar el fitxer d'entrada
     private JButton cancelar, confirmar, openFile;      // butons per cancelar, confirmar o obrir un fitxer
     private JFrame vista;                               // pantalla on es mostren tots els elements
-    private JPanel PNorth, PIndicaNomAlfabet;           // panel amb el títol + panel que inclou els elements per indicar el nom de l'Alfabet
+    private JPanel PNorth;                              // panel amb el títol
     private JPanel PCenter, PSouth;                     // panel central amb la informació necessaria per a crear un Alfabet + panel amb botons cancelar i confirmar
     private Boolean pathSelected = false;               // controlar si s'ha seleccionat un fitxer o no
 
@@ -54,7 +53,7 @@ public class CtrlAfegirAlfabet {
         afegirDocumentListener();
         nomAlfabet = "";
 
-        arrayTipusEntrada = ctrlPresentacio.getListTipusEntrada();
+        String[] arrayTipusEntrada = ctrlPresentacio.getListTipusEntrada();  // array que conte els diferents tipus d'entrada
         listTipusEntrada = new JComboBox<>(arrayTipusEntrada);
 
         openFile = Utils.Button("Selecciona fitxer", null);
@@ -72,7 +71,7 @@ public class CtrlAfegirAlfabet {
         PNorth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PNorth.add(title);
 
-        PIndicaNomAlfabet = new JPanel();
+        JPanel PIndicaNomAlfabet = new JPanel();                    //  panel que inclou els elements per indicar el nom de l'Alfabet
         PIndicaNomAlfabet.add(labelIndicaNomAlfabet);
         PIndicaNomAlfabet.add(textFieldNomAlfabet);
 
