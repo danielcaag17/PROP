@@ -29,7 +29,7 @@ public class CtrlPreMostrarTeclat {
     }
 
     private void init() {
-        títol = Utils.initLabel("PreMostrar Teclat", "title");
+        títol = Utils.initLabel("Previsualitzar Teclat", "title");
         nomTeclat = Utils.initLabel(teclat, "text");
 
         descartar = Utils.Button(null, "cross");
