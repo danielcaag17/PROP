@@ -25,7 +25,7 @@ public class CtrlLlistaTeclats {
     private void init() {
         títol = Utils.initLabel("Llista Teclats", "title");
 
-        afegir = Utils.addButton();
+        afegir = Utils.Button("+");
         afegir.addActionListener(e -> addTeclat());
 
         exit = new JButton();

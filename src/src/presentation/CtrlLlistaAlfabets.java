@@ -31,7 +31,7 @@ public class CtrlLlistaAlfabets {
         back = Utils.imatgeButton("backArrow");
         back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
         
-        afegir = Utils.addButton();
+        afegir = Utils.Button("+");
         afegir.addActionListener(e -> Utils.canviPantalla(vista, "AfegirAlfabet"));
 
         PTítol = new JPanel();

@@ -98,10 +98,10 @@ public class Utils {
         return back;
     }
 
-    public static JButton addButton() {
+    public static JButton Button(String text) {
         JButton addButton = new JButton();
         addButton.setPreferredSize(new Dimension(100, 50));
-        addButton.setText("+");
+        addButton.setText(text);
         addButton.setFont(getFontText());
         addButton.setFocusable(false);
         return addButton;
