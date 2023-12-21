@@ -40,8 +40,8 @@ public class CtrlEliminar {
         okButton = Utils.Button("Confirmar", null);
         cancelButton = Utils.Button("Cancel·lar", null);
         
-        JPanel buttons = new JPanel();
-        popupEliminarMenu.add(new JLabel("Estàs segur que vols eliminar aquesta instància?"), BorderLayout.CENTER);
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        popupEliminarMenu.add(new JLabel("Estàs segur que vols eliminar aquest "+ tipus +"?"), BorderLayout.CENTER);
         buttons.add(okButton);
         buttons.add(cancelButton);
         buttonsListener();
