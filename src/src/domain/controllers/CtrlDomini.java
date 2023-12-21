@@ -404,11 +404,11 @@ public class CtrlDomini {
             String aRaw = ctrlPersistFile.getObject(file);
             // TODO: extreure dades de aRaw del JSON i crear instància de Alfabet
             String nom = "";
-            Map<Character, Double> character = new HashMap<Character, Double>(); 
-            Character[] abecedari = new Character[0];
-            
+            Map<Character, Double> character; 
+            Character[] abecedari;
+            double[][] frequencies;
             Alfabet a;
-            a = new Text(nom); 
+            a = new Text(nom);
             Alfabets.put(nom, a);
         }
         for (String file : filesLayouts) {
