@@ -5,10 +5,11 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,7 +48,8 @@ public class CtrlMostrarAlfabet {
         JPanel PNomAlfabet = new JPanel();
         PNomAlfabet.add(labelNomAlfabet);
         JPanel PAbecedari = new JPanel();
-        PAbecedari.setLayout(new BoxLayout(PAbecedari, BoxLayout.Y_AXIS));
+        // PAbecedari.setLayout(new BoxLayout(PAbecedari, BoxLayout.Y_AXIS));
+        PAbecedari.setLayout(new GridLayout(2,13));
         JPanel PInfoAdicional = Utils.JPanel(new BorderLayout(), null);
         Map<Character, Double> characters = ctrlPresentacio.getCharacters(nomAlfabet);
         for (Character c : characters.keySet()) {
