@@ -98,6 +98,6 @@ public class CtrlEliminar {
                 }
                 break;
         }
-        System.out.println(tipus + " " + clau + "-> eliminat");
+        System.out.println(tipus + " " + clau + " -> eliminat");
     }    
 }
