@@ -126,26 +126,29 @@ public class CtrlAfegirAlfabet {
             System.out.println("Alfabet " + nomAlfabet + " -> creat");
             ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
         }
-        catch(Excepcions e) {
+        catch(Exception e) { // TODO: mirar possibles errors que poden sortir
             String msg = "";
-            switch (e.getTipus()) {
-                case "FormatDadesNoValid":
-                    msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
-                    break;
-                case "EntradaLlegidaMalament":
-                    msg = "Hi ha hagut un error en la lectura de les dades";
-                    break;
-                default:
-                    msg = e.getMessage();
+            String tipus = "";
+            if (e instanceof FileNotFoundException) {
+                msg = e.getMessage();
+                tipus = "FileNotFoundException";
             }
-            ctrlPresentacio.Excepcio(vista, ((Excepcions) e).getTipus(), msg);
+            else if (e instanceof Excepcions) {
+                tipus = ((Excepcions) e).getTipus();
+                switch (((Excepcions) e).getTipus()) {
+                    case "FormatDadesNoValid":
+                        msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
+                        break;
+                    case "EntradaLlegidaMalament":
+                        msg = "Hi ha hagut un error en la lectura de les dades";
+                        break;
+                    default:
+                        msg = e.getMessage();
+                }
+            }
+            ctrlPresentacio.Excepcio(vista, tipus, msg);
         }
-        catch(FileNotFoundException e) {
-            ctrlPresentacio.Excepcio(vista, "Error", "No s'ha trobat el fitxer " + path);
-        }
-        catch(Exception e) {
-            ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
-        }
+
         Utils.canviPantalla(vista, "LlistaAlfabets");
     }
 
