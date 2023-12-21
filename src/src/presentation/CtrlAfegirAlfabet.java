@@ -123,7 +123,7 @@ public class CtrlAfegirAlfabet {
         tipusEntrada = (String) listTipusEntrada.getSelectedItem();
         try {
             ctrlPresentacio.afegirAlfabet(nomAlfabet, tipusEntrada, path);
-            System.out.println(nomAlfabet + " -> creat");
+            System.out.println("Alfabet " + nomAlfabet + " -> creat");
             ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
         }
         catch(Excepcions | FileNotFoundException e) {
