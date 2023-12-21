@@ -297,14 +297,9 @@ public class Layout {
         return result;
     }
 
-    public String toJSON() {
+    public String saveData() {
         JSONObject ret = new JSONObject();
         ret.put("mida", this.mida);
         return ret.toString(4);
-    }
-
-    public String saveData() {
-        // Guardar dades de Layout importants. En format per determinar.
-        return "";
     }
 }
