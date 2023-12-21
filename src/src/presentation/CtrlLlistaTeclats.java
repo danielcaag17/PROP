@@ -70,12 +70,10 @@ public class CtrlLlistaTeclats {
         PTítol.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
 
-        PSouth = new JPanel();
-        PSouth.setPreferredSize(new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        // PSouth.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 10));
-        PSouth.setLayout(new BorderLayout());
-        PSouth.add(exit, BorderLayout.CENTER);
+        PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        // si es fa flowLayout, treure el BorderLayout
         PSouth.add(llistaAlfabets, BorderLayout.WEST);
+        PSouth.add(exit, BorderLayout.CENTER);
         PSouth.add(llistaLayouts, BorderLayout.EAST);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
