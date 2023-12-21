@@ -2,19 +2,27 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.*;
 
 public class PantallaInformativa {
     private JDialog dialog;
 
-    public PantallaInformativa(JFrame pantalla, String title, String msg) {
-        dialog = new JDialog(pantalla, "NoEsPotCrearTeclat", true);
-        dialog.setLayout(new BorderLayout());
+    public PantallaInformativa(JFrame pantalla, String title, String msg) {        
+        JLabel label = Utils.initLabel(msg, "text");
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+
         JButton button = Utils.Button("OK", null);
         button.addActionListener(e -> close());
-        dialog.add(new JLabel(msg), BorderLayout.CENTER);
-        dialog.add(button, BorderLayout.SOUTH);
+        JPanel POKButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        POKButton.add(button);
+
+        dialog = new JDialog(pantalla, "NoEsPotCrearTeclat", true);
+        dialog.setLayout(new BorderLayout());
+        dialog.add(label, BorderLayout.CENTER);
+        dialog.add(POKButton, BorderLayout.SOUTH);
         dialog.setSize(new Dimension(420,200));
         dialog.setLocationRelativeTo(pantalla);
         dialog.setVisible(true);
