@@ -126,9 +126,9 @@ public class CtrlAfegirAlfabet {
             System.out.println("Alfabet " + nomAlfabet + " -> creat");
             ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
         }
-        catch(Excepcions | FileNotFoundException e) {
+        catch(Excepcions e) {
             String msg = "";
-            switch (((Excepcions) e).getTipus()) {
+            switch (e.getTipus()) {
                 case "FormatDadesNoValid":
                     msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
                     break;
@@ -139,6 +139,9 @@ public class CtrlAfegirAlfabet {
                     msg = e.getMessage();
             }
             ctrlPresentacio.Excepcio(vista, ((Excepcions) e).getTipus(), msg);
+        }
+        catch(FileNotFoundException e) {
+            ctrlPresentacio.Excepcio(vista, "Error", "No s'ha trobat el fitxer " + path);
         }
         catch(Exception e) {
             ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
