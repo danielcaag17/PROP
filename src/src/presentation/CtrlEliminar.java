@@ -37,17 +37,20 @@ public class CtrlEliminar {
     public void initPopup() {
         popupEliminarMenu = new JDialog(pantalla, "Eliminar", true);
         popupEliminarMenu.setLayout(new BorderLayout());
-        okButton = Utils.Button("Confirmar", null);
-        cancelButton = Utils.Button("Cancel·lar", null);
+        okButton = Utils.Button(null, "check");
+        cancelButton = Utils.Button(null, "cross");
         
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        popupEliminarMenu.add(new JLabel("Estàs segur que vols eliminar aquest "+ tipus +"?"), BorderLayout.CENTER);
+        JLabel label = Utils.initLabel("Estàs segur que vols eliminar aquest " + tipus +"?", "text");
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER); 
+        popupEliminarMenu.add(label, BorderLayout.CENTER);
         buttons.add(okButton);
         buttons.add(cancelButton);
         buttonsListener();
         popupEliminarMenu.add(buttons, BorderLayout.SOUTH);
 
-        popupEliminarMenu.setSize(new Dimension(420,200));
+        popupEliminarMenu.setSize(new Dimension(400, 200));
         popupEliminarMenu.setLocationRelativeTo(pantalla);
         popupEliminarMenu.setVisible(true);
         popupEliminarMenu.setResizable(false);
