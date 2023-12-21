@@ -19,7 +19,7 @@ public class PantallaInformativa {
         JPanel POKButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         POKButton.add(button);
 
-        dialog = new JDialog(pantalla, "NoEsPotCrearTeclat", true);
+        dialog = new JDialog(pantalla, title, true);
         dialog.setLayout(new BorderLayout());
         dialog.add(label, BorderLayout.CENTER);
         dialog.add(POKButton, BorderLayout.SOUTH);
