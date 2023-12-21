@@ -35,7 +35,7 @@ public class CtrlPreMostrarTeclat {
         descartar = Utils.Button(null, "cross");
         descartar.addActionListener(e -> ctrlPresentacio.elimina("Teclat", teclat, vista, "LlistaTeclats"));
         confirmar = Utils.Button(null, "check");
-        confirmar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
+        confirmar.addActionListener(e -> confirmar());
 
         try {
             distribucio = ctrlPresentacio.getDistribucio(teclat);
@@ -72,5 +72,11 @@ public class CtrlPreMostrarTeclat {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
+    }
+
+    private void confirmar() {
+        System.out.println("Teclat " + teclat + " -> creat");
+        ctrlPresentacio.Excepcio(vista, "TeclatCreat", "Teclat " + teclat + " creat correctament");
+        Utils.canviPantalla(vista, "LlistaTeclats");
     }
 }
