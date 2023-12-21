@@ -169,13 +169,13 @@ public class Utils {
     /**
      * Realitza el canvi de pantalla cridant a CtrlPresentacio
      * @param vista pantalla actual
-     * @param pantalla ¿?
-     * @param elementAMostrar ¿?
+     * @param pantalla nom de la pantalla a la que es vol canviar
+     * @param parametresPantalla informació addicional que necessita la pantalla a la que es vol canviar
      */
-    public static void canviPantallaElementMostrar(JFrame vista, String pantalla, String elementAMostrar) {
+    public static void canviPantalla(JFrame vista, String pantalla, String parametresPantalla) {
         vista.dispose();
-        if (elementAMostrar != null) {
-            CtrlPresentacio.getInstance().canviVista(pantalla, elementAMostrar);
+        if (parametresPantalla != null) {
+            CtrlPresentacio.getInstance().canviVista(pantalla, parametresPantalla);
         }
         else {
             // salta EXC
