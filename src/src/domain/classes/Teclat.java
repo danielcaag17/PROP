@@ -15,7 +15,16 @@ public class Teclat {
     // Pre: no existeix cap Teclat amb aquest nom
     // Post: s'ha creat una instància de Teclat amb nom = nom
     public Teclat(String nom) {
-        this.nom = nom;
+        setNom(nom);
+    }
+
+    public Teclat(String nom, Layout L, Alfabet A, Generador G, Map<Character, Integer> teclat, char[][] distribucioCharacters) {
+        setNom(nom);
+        setLayout(L);
+        setAlfabet(A);
+        setGenerador(G);
+        setTeclat(teclat);
+        setDistribucioCharacters(distribucioCharacters);
     }
 
     /**
@@ -27,10 +36,10 @@ public class Teclat {
      *       Alfabet = A, Generador = G
      */
     public Teclat(String nom, Layout L, Alfabet A, Generador G) {
-        this.nom = nom;
-        this.L = L;
-        this.A = A;
-        this.G = G;
+        setNom(nom);
+        setLayout(L);
+        setAlfabet(A);
+        setGenerador(G);
     }
     
     /**
@@ -92,6 +101,31 @@ public class Teclat {
         Pair<Integer, Integer> bPos = L.getCoordenadaFromId(teclat.get(b));
         distribucioCharacters[aPos.first][aPos.second] = a;
         distribucioCharacters[bPos.first][bPos.second] = b;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    private void setLayout(Layout L) {
+        this.L = L;
+    }
+
+    private void setAlfabet(Alfabet A) {
+        this.A = A;
+    }
+
+    private void setGenerador(Generador G) {
+        this.G = G;
+    }
+
+
+    private void setTeclat(Map<Character, Integer> teclat) {
+        this.teclat = teclat;
+    }
+
+    private void setDistribucioCharacters(char[][] distribucioCharacters) {
+        this.distribucioCharacters = distribucioCharacters;
     }
 
     /**
