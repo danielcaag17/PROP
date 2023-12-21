@@ -34,7 +34,7 @@ public class CtrlLlistaLayouts {
         PNorth.add(title);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PAfegir.add(afegir);
+        PAfegir.add(afegir, BorderLayout.CENTER);
 
         PLlista = new JPanel();
         PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
@@ -58,26 +58,27 @@ public class CtrlLlistaLayouts {
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent e) {}
             });
-            label.setBackground(Utils.getBackgroundColorElement());
+            //label.setBackground(Utils.getBackgroundColorElement());
 
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> cp.elimina("Layout", Integer.toString(nl), vista, "LlistaLayouts"));
 
             JPanel panel = Utils.JPanel(new FlowLayout(), null);
-            panel.add(label);
-            panel.add(delete);
+            panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
+            panel.add(label, BorderLayout.WEST);
+            panel.add(delete, BorderLayout.EAST);
 
             PLlista.add(panel);
         }
         JScrollPane scrollPane = new JScrollPane(PLlista);
-        scrollPane.setBorder(null);     // No se que queda millor
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
+        PCenter.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
         PCenter.add(scrollPane, BorderLayout.CENTER);
         PCenter.add(PAfegir, BorderLayout.NORTH);
 
         PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(), Utils.getScreenHeight()/6));
-        PSouth.add(back);
+        PSouth.add(back, BorderLayout.CENTER);
 
         PEast = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));
         PWest = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));

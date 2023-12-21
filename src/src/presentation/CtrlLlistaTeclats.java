@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ public class CtrlLlistaTeclats {
     private JLabel títol;
     private JButton afegir, llistaAlfabets, llistaLayouts, exit; 
     private JFrame vista;
-    private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista;
+    private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista, PEast, PWest;
 
     public CtrlLlistaTeclats() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
@@ -74,6 +75,7 @@ public class CtrlLlistaTeclats {
             delete.addActionListener(e -> ctrlPresentacio.elimina("Teclat", nt, vista, "LlistaTeclats"));
 
             JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
             panel.add(label);
             panel.add(edit);
             panel.add(delete);
@@ -94,11 +96,15 @@ public class CtrlLlistaTeclats {
         PSouth.add(llistaLayouts);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PAfegir.add(afegir);
+        PAfegir.add(afegir, BorderLayout.CENTER);
         
         PCenter = Utils.JPanel(new BorderLayout(), null);
+        PCenter.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(scrollPane, BorderLayout.CENTER);
+
+        PEast = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));
+        PWest = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));
     }
 
     private void addElementsFrame() {
@@ -106,10 +112,13 @@ public class CtrlLlistaTeclats {
         vista.add(PTítol, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
+        vista.add(PEast, BorderLayout.EAST);
+        vista.add(PWest, BorderLayout.WEST);
     }
 
     private void exit() {
         // Sortir i guardar les dades
+        // ctrlPresentacio.guarda();
         vista.dispose();
     }
 
