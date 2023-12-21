@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import src.exceptions.EntradaLlegidaMalament;
 import src.exceptions.Excepcions;
 
 public class CtrlMostrarAlfabet {
@@ -52,7 +51,7 @@ public class CtrlMostrarAlfabet {
         JPanel PInfoAdicional = Utils.JPanel(new BorderLayout(), null);
         Map<Character, Double> characters = ctrlPresentacio.getCharacters(nomAlfabet);
         for (Character c : characters.keySet()) {
-            JLabel labelInfoAdicional = Utils.initLabel("", "text");
+            JLabel labelInfoAdicional = Utils.initLabel("a", "text");
             labelInfoAdicional.setHorizontalAlignment(JLabel.CENTER);
             labelInfoAdicional.setVerticalAlignment(JLabel.CENTER);
             String lletra = String.valueOf(c);
@@ -82,16 +81,14 @@ public class CtrlMostrarAlfabet {
                             else infoAdicional += character + " -> " + f + "%";
                         }
                         labelInfoAdicional.setText(infoAdicional);
-                        System.out.println(infoAdicional);
+                        labelInfoAdicional.setVisible(true);
+                        PInfoAdicional.add(labelInfoAdicional, BorderLayout.CENTER);
                     } catch (Excepcions exc) {
                         ctrlPresentacio.Excepcio(vista, exc.getTipus(), "Hi ha hagut un error");
                     }                    
                 }
                 @Override
-                public void mouseExited(java.awt.event.MouseEvent e) {
-                    labelInfoAdicional.setVisible(false);
-                    System.out.println("OUT");
-                }
+                public void mouseExited(java.awt.event.MouseEvent e) {}
             });
             label.setBackground(Utils.getBackgroundColorElement());
 
