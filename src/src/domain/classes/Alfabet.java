@@ -24,6 +24,12 @@ public abstract class Alfabet {
         setSize(0);
     }
 
+    public Alfabet(String nom, Map<Character, Double> characters, double[][] frequencies, int size, Character[] abecedari) {
+        setNom(nom);
+        setCharacters(characters);
+        setFrequencies(frequencies);
+    }
+
     protected abstract void read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament;
 
     /**
