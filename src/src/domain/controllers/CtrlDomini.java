@@ -447,3 +447,52 @@ public class CtrlDomini {
         }
     }
 }
+
+/*
+    // Funcio que retorna JSONArray a Matriu
+    // Exemple:
+    //           JSONArray matrixArray = jsonObject.getJSONArray("matrix");
+    //           int[][] matrix = jsonArrToMat(matrixArray);
+    //
+    private static int[][] jsonArrToMat(JSONArray in_mat) {
+        // Convert the JSONArray to a 2D array (matrix)
+        int rows = in_mat.length();
+        int cols = in_mat.getJSONArray(0).length();
+
+        int[][] res_mat = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            JSONArray row = in_mat.getJSONArray(i);
+            for (int j = 0; j < cols; j++) {
+                res_mat[i][j] = row.getInt(j);
+            }
+        }
+        return res_mat;
+    }
+
+    // Funcio que retorna JSONArray a array Character[]
+    // Exemple:
+    //          JSONArray jsoncharArray = jsonObject.getJSONArray("char_array");
+    //          Character[] new_arr = jsonArrToArray(jsoncharArray);
+    //
+    private static Character[] jsonArrToArray(JSONArray json_arr) {
+        int length = json_arr.length();
+        Character[] res_arr = new Character[length];
+        for (int i = 0; i < length; i++) res_arr[i] = json_arr.getString(i).charAt(0);
+        return res_arr;
+    }
+
+    // Funcio que retorna JSONObject a Map<Character, Double>
+    // Exemple:
+    // Map<Character, Double> recoveredMap = jsonObjToMap(jsonObject.getJSONObject("mapCharDouble"));
+    //
+    private static Map<Character, Double> jsonObjToMap(JSONObject json_obj) {
+        Map<Character, Double> res_map = new HashMap<>();
+        for (String key : json_obj.keySet()) {
+            char charKey = key.charAt(0);
+            double value = json_obj.getDouble(key);
+            res_map.put(charKey, value);
+        }
+        return res_map;
+    }
+*/
