@@ -397,21 +397,16 @@ public class CtrlDomini {
      * <li>Post: l'estat de l'aplicació s'ha resturat de la última vegada desada. </li>
      */
     private void restoreState() {
-        String[] filesTeclats = ctrlPersistFile.getAll("teclats");
-        String[] filesAlfabets = ctrlPersistFile.getAll("alfabets");
-        String[] filesLayouts = ctrlPersistFile.getAll("layouts");
-        for (String file : filesTeclats) {
-            String tRaw = ctrlPersistFile.getObject(file);
-            // TODO: extreure dades de tRaw del JSON i crear instància de Teclat
-            JSONObject obj = new JSONObject(tRaw);
-            String nom = obj.getJSONObject("nom").getString("nom");
-            Teclat t = new Teclat(nom, null, null, null);
-            Teclats.put(nom, t);
-        }
+        ArrayList<String> filesTeclats = ctrlPersistFile.getAll("teclats");
+        ArrayList<String> filesAlfabets = ctrlPersistFile.getAll("alfabets");
+        ArrayList<String> filesLayouts = ctrlPersistFile.getAll("layouts");
         for (String file : filesAlfabets) {
             String aRaw = ctrlPersistFile.getObject(file);
             // TODO: extreure dades de aRaw del JSON i crear instància de Alfabet
             String nom = "";
+            Map<Character, Double> character = new HashMap<Character, Double>(); 
+            Character[] abecedari = new Character[0];
+            
             Alfabet a;
             a = new Text(nom); 
             Alfabets.put(nom, a);
@@ -422,6 +417,14 @@ public class CtrlDomini {
             Integer idL = obj.getJSONObject("id").getInt("id");
             Layout l = new Layout(idL); // Només amb la mida ja es pot crear un Layout, prou ràpid com per no haver de fer còpies.
             Layouts.put(idL, l);
+        }
+        for (String file : filesTeclats) {
+            String tRaw = ctrlPersistFile.getObject(file);
+            // TODO: extreure dades de tRaw del JSON i crear instància de Teclat
+            JSONObject obj = new JSONObject(tRaw);
+            String nom = obj.getJSONObject("nom").getString("nom");
+            Teclat t = new Teclat(nom, null, null, null);
+            Teclats.put(nom, t);
         }
     }
 }

@@ -24,7 +24,7 @@ public abstract class Alfabet {
         setSize(0);
     }
 
-    public Alfabet(String nom, Map<Character, Double> characters, double[][] frequencies, int size, Character[] abecedari) {
+    public Alfabet(String nom, Map<Character, Double> characters, double[][] frequencies) {
         setNom(nom);
         setCharacters(characters);
         setFrequencies(frequencies);
