@@ -77,7 +77,6 @@ public class CtrlPersistenciaFile {
                 String new_filepath = tg_dir + "/" + id + ".json";
                 json_db.put(id, new_filepath);
                 String filepath = base_path + new_filepath;
-                File file = new File(filepath);
                 FileWriter fw = new FileWriter(filepath, false);
                 fw.write(content);
                 fw.close();
