@@ -97,7 +97,7 @@ public class CtrlAfegirAlfabet {
     private void seleccionaFitxer() {
         fileChooser = new JFileChooser();
         // Obrir el file chooser directament en el directori actual
-        fileChooser.setCurrentDirectory(new File("."));
+        fileChooser.setCurrentDirectory(new File("../.."));
         int response = fileChooser.showOpenDialog(null);
         // S'ha obert un fitxer
         if (response == JFileChooser.APPROVE_OPTION) {
