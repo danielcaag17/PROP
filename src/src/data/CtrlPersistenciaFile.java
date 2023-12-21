@@ -1,9 +1,6 @@
 package src.data;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.io.*;
 import org.json.*;
 
 public class CtrlPersistenciaFile {
