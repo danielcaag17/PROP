@@ -48,13 +48,13 @@ public class CtrlLlistaLayouts {
             label.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent e) {
-                    Utils.canviPantalla(vista, "MostrarLayout", Integer.toString(nl));
+                    Utils.canviPantallaElementMostrar(vista, "MostrarLayout", Integer.toString(nl));
                 }
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mouseReleased(java.awt.event.MouseEvent e) {
-                    Utils.canviPantalla(vista, "MostrarLayout", Integer.toString(nl));
+                    Utils.canviPantallaElementMostrar(vista, "MostrarLayout", Integer.toString(nl));
                 }
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent e) {}

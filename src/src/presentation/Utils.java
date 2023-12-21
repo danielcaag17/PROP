@@ -172,7 +172,7 @@ public class Utils {
      * @param pantalla nom de la pantalla a la que es vol canviar
      * @param parametresPantalla informació addicional que necessita la pantalla a la que es vol canviar
      */
-    public static void canviPantalla(JFrame vista, String pantalla, String parametresPantalla) {
+    public static void canviPantallaElementMostrar(JFrame vista, String pantalla, String parametresPantalla) {
         vista.dispose();
         if (parametresPantalla != null) {
             CtrlPresentacio.getInstance().canviVista(pantalla, parametresPantalla);

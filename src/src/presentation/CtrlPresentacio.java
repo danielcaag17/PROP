@@ -148,7 +148,7 @@ public class CtrlPresentacio {
                 new CtrlAfegirLayout();
                 break;
             case "MostrarLayout":
-                new CtrlMostrarLayout();
+                new CtrlMostrarLayout(elementAMostrar);
                 break;
             default:
                 System.out.println("No existeix aquesta pantalla");
