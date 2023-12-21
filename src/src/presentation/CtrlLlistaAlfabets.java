@@ -2,8 +2,10 @@ package src.presentation;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -50,6 +52,22 @@ public class CtrlLlistaAlfabets {
             String na = alfabets[i];
             JLabel label = Utils.initLabel(na, "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            label.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent e) {
+                    Utils.canviPantallaElementMostrar(vista, "MostrarAlfabet", na);
+                }
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent e) {}
+                @Override
+                public void mouseReleased(java.awt.event.MouseEvent e) {}
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent e) {}
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent e) {}
+            });
+            label.setBackground(Utils.getBackgroundColorElement());
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista, "LlistaAlfabets"));
 
