@@ -1,5 +1,6 @@
 package src.domain.classes;
 
+import org.json.*;
 import java.util.*;
 import src.exceptions.CoordenadaIncorrecta;
 
@@ -294,6 +295,12 @@ public class Layout {
         result += "- Distribució de Ids: \n" + distribucioFilledToString();
         result += "- Distàncies entre Ids: \n" + distanciesToString();
         return result;
+    }
+
+    public String toJSON() {
+        JSONObject ret = new JSONObject();
+        ret.put("mida", this.mida);
+        return ret.toString(4);
     }
 
     public String saveData() {

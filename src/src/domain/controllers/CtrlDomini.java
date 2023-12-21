@@ -433,7 +433,7 @@ public class CtrlDomini {
         for (String file : filesLayouts) {
             String lRaw = ctrlPersistFile.getObject(file);
             JSONObject obj = new JSONObject(lRaw);
-            Integer idL = obj.getJSONObject("id").getInt("id");
+            Integer idL = obj.getJSONObject("mida").getInt("mida");
             Layout l = new Layout(idL); // Només amb la mida ja es pot crear un Layout, prou ràpid com per no haver de fer còpies.
             Layouts.put(idL, l);
         }
