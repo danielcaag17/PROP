@@ -84,6 +84,7 @@ public class CtrlLlistaTeclats {
         }
 
         JScrollPane scrollPane = new JScrollPane(PLlista);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setBorder(null);     // No se que queda millor
 
         PTítol = new JPanel();
