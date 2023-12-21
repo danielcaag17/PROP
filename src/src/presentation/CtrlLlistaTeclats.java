@@ -71,10 +71,9 @@ public class CtrlLlistaTeclats {
         PTítol.add(títol);
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        // si es fa flowLayout, treure el BorderLayout
-        PSouth.add(llistaAlfabets, BorderLayout.WEST);
-        PSouth.add(exit, BorderLayout.CENTER);
-        PSouth.add(llistaLayouts, BorderLayout.EAST);
+        PSouth.add(llistaAlfabets);
+        PSouth.add(exit);
+        PSouth.add(llistaLayouts);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir);
