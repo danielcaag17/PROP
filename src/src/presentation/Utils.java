@@ -18,48 +18,77 @@ public class Utils {
     // potser no cal
     // private static int elementWidth = 100;      // Altura d'element de les vistes de llista
 
-
+    /**
+     * @return Altura de la pantalla
+     */
     public static int getScreenHeight() {
         return screenHeight;
     }
 
+    /*+
+     * @return Amplada de la pantalla
+     */
     public static int getScreenWidth() {
         return screenWidth;
     }
 
     // potser privat
+    /**
+     * @return Retorna la font per als títols
+     */
     public static Font getFontTitle() {
         // A definir
         return new Font("Serif", Font.BOLD, 30);
     }
 
     // potser privat
+    /**
+     * @return Retorna la font per als textos
+     */
     public static Font getFontText() {
         // A definir
         return new Font("Serif", Font.PLAIN, 16);
     }
 
+    /**
+     * @return Retorna l'altura dels elements de les vistes de llista
+     */
     public static int getElementHeight() {
         return elementHeight;
     }
 
+    /**
+     * @return Retorna el color de fons de les vistes
+     */
     public static Color getBackgroundColorVista() {
         // A redefinir
         return Color.white;
     }
 
+    /**
+     * @return Retorna el color de fons dels elements
+     */
     public static Color getBackgroundColorElement() {
         // A redefinir
         return Color.lightGray;
     }
 
     //potser privat
+    /**
+     * @param imatge nom del fitxer de la imatge
+     * @return retorna la imatge com a ImageIcon
+     */
     public static ImageIcon getImage(String imatge) {
         // descarregar imatge + path + definir nom carpeta
         String path = ".." + File.separator + ".." + File.separator + "data/imatges/" + imatge + ".png";
         return new ImageIcon(path);
     }
 
+    /**
+     * @param name nom del JLabel
+     * @param type tipus de JLabel (title o text)
+     * @return Retorna un JLabel amb el nom i tipus especificats
+     */
     public static JLabel initLabel(String name, String type) {
         JLabel label = new JLabel();
         label.setText(name);
@@ -69,6 +98,10 @@ public class Utils {
         return label;
     }
 
+    /**
+     * @param title títol del JFrame
+     * @return Retorna un JFrame amb el títol especificat
+     */
     public static JFrame initFrame(String title) {
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +114,11 @@ public class Utils {
         return frame;
     }
 
+    /**
+     * @param text text del JButton
+     * @param imatge nom del fitxer de la imatge
+     * @return Retorna un JButton amb el text o imatge especificats
+     */
     public static JButton Button(String text, String imatge) {
         JButton button = new JButton();
         if (text != null) {
@@ -104,6 +142,11 @@ public class Utils {
         return button;
     }
 
+    /**
+     * @param mgr LayoutManager del JPanel
+     * @param preferredSize dimensions del JPanel
+     * @return Retorna un JPanel amb el LayoutManager i les dimensions
+     */
     public static JPanel JPanel(LayoutManager mgr, Dimension preferredSize) {
         JPanel panel = new JPanel();
         if (mgr != null) panel.setLayout(mgr);
@@ -112,12 +155,23 @@ public class Utils {
     }
 
     // Tanca la pantalla actual i mostra la nova pantalla
+    /**
+     * Realitza el canvi de pantalla cridant a CtrlPresentacio
+     * @param vista pantalla actual
+     * @param pantalla nom de la pantalla a la que es vol canviar
+     */
     public static void canviPantalla(Window vista, String pantalla) {
         vista.dispose();
         CtrlPresentacio.getInstance().canviVista(pantalla, null);
     }
 
     // pantalla que necessita algun parametre addicional
+    /**
+     * Realitza el canvi de pantalla cridant a CtrlPresentacio
+     * @param vista pantalla actual
+     * @param pantalla ¿?
+     * @param elementAMostrar ¿?
+     */
     public static void canviPantallaElementMostrar(JFrame vista, String pantalla, String elementAMostrar) {
         vista.dispose();
         if (elementAMostrar != null) {
