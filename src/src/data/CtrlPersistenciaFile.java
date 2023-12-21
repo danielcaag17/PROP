@@ -1,6 +1,7 @@
 package src.data;
 
 import java.io.*;
+import java.util.*;
 import org.json.*;
 
 public class CtrlPersistenciaFile {
@@ -89,7 +90,7 @@ public class CtrlPersistenciaFile {
         fw.close();
     }
 
-    public ArrayList<String> getAll(String tipus) throws IOException {
+    public ArrayList<String> getAll(String type) throws IOException {
         String db_path = base_path;
         if (type.equals("teclats")) db_path += "/" + keyboards_file;
         else if (type.equals("alfabets")) db_path += "/" + alfabets_file;
@@ -99,7 +100,7 @@ public class CtrlPersistenciaFile {
         JSONObject json_db = new JSONObject(db_content);
         ArrayList<String> res = new ArrayList<>();
 
-        for (String key : json_db.keys()) {
+        for (String key : json_db.keySet()) {
             String aux = json_db.getJSONObject(key).getString(key);
             res.add(aux);
         }
