@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +20,7 @@ public class CtrlLlistaAlfabets {
     private JLabel title;
     private JButton afegir, back; 
     private JFrame vista;
-    private JPanel PNorth, PAfegir, PLlista, PCenter, PSouth;
+    private JPanel PNorth, PAfegir, PLlista, PCenter, PSouth, PEast, PWest;
 
     public CtrlLlistaAlfabets() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
@@ -43,7 +44,7 @@ public class CtrlLlistaAlfabets {
         PNorth.add(title);
 
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PAfegir.add(afegir);
+        PAfegir.add(afegir, BorderLayout.CENTER);
 
         PLlista = new JPanel();
         PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
@@ -72,6 +73,7 @@ public class CtrlLlistaAlfabets {
             delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista, "LlistaAlfabets"));
 
             JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
             panel.add(label);
             panel.add(delete);
 
@@ -82,11 +84,15 @@ public class CtrlLlistaAlfabets {
         scrollPane.setBorder(null);     // No se que queda millor
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
+        PCenter.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
         PCenter.add(PAfegir, BorderLayout.NORTH);
         PCenter.add(scrollPane, BorderLayout.CENTER);
 
         PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(back);
+
+        PEast = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));
+        PWest = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6, Utils.getScreenHeight()));
     }
 
     private void addElementsFrame() {
@@ -94,5 +100,7 @@ public class CtrlLlistaAlfabets {
         vista.add(PNorth, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
+        vista.add(PEast, BorderLayout.EAST);
+        vista.add(PWest, BorderLayout.WEST);
     }
 }
