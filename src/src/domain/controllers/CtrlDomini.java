@@ -1,6 +1,8 @@
 package src.domain.controllers;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.json.*;
 import java.util.*;
 
@@ -49,8 +51,13 @@ public class CtrlDomini {
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
         
-        // restoreState(); // Restaura l'estat previ de l'execució si n'hi havia de guardat.
+        
         if (Layouts.isEmpty()) inicialitzarLayoutsBase(); // només si és execució incial
+    }
+
+    public void restore() throws IOException {
+        // Restaura l'estat previ de l'execució si n'hi havia de guardat.
+        restoreState();
     }
 
     /* Funcions de Transacció i de Domini */
@@ -374,7 +381,7 @@ public class CtrlDomini {
      * <li>Pre: </li>
      * <li>Post: el estat de totes les instàncies, d'alfabet, de teclat i de layout està desat a fitxers del directori: <code>data/</code> </li>
      */
-    public void saveState() {
+    public void saveState() throws IOException {
         for (String key : Teclats.keySet()) {
             Teclat t = Teclats.get(key);
             String tRaw = t.saveData(); 
@@ -396,7 +403,7 @@ public class CtrlDomini {
      * <li>Pre: l'aplicació s'acaba d'iniciar </li>
      * <li>Post: l'estat de l'aplicació s'ha resturat de la última vegada desada. </li>
      */
-    private void restoreState() {
+    private void restoreState() throws IOException {
         ArrayList<String> filesTeclats = ctrlPersistFile.getAll("teclats");
         ArrayList<String> filesAlfabets = ctrlPersistFile.getAll("alfabets");
         ArrayList<String> filesLayouts = ctrlPersistFile.getAll("layouts");

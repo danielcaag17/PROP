@@ -6,7 +6,7 @@ import org.json.*;
 
 public class CtrlPersistenciaFile {
 
-    private final String base_path = "../../../data/persistence";
+    private final String base_path = "../../data/persistence";
 
     private final String keyboards_file = "keyboards_db.json";
     private final String alfabets_file = "alfabets_db.json";

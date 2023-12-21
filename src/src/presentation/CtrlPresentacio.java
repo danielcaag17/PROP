@@ -22,6 +22,15 @@ public class CtrlPresentacio {
         Factoria factoriaCtrl = Factoria.getInstance();
         factoriaCtrl.crearControladorDomini();
         cd = factoriaCtrl.getCtrlDomini();
+        try {
+            cd.restore();
+        }
+        catch (Exception e) {
+            System.out.println("Error al restaurar");
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Causa: " + e.getCause());
+            e.getStackTrace();
+        }
         // iot = new IOterminal(this);
         // Inicialització de terminal
         // iot.inicialitzaTerminal();
