@@ -88,7 +88,9 @@ public class CtrlMostrarAlfabet {
                     }                    
                 }
                 @Override
-                public void mouseExited(java.awt.event.MouseEvent e) {}
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    labelInfoAdicional.setVisible(false);
+                }
             });
             label.setBackground(Utils.getBackgroundColorElement());
 
