@@ -175,6 +175,9 @@ public class IOterminal {
         catch(LayoutNoBorrable e) {
             System.out.println(errorOutput + "ERROR: Aquest Layout no es pot esborrar.");
         }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
+        }
         escollir();
     }
 
@@ -205,6 +208,9 @@ public class IOterminal {
         catch(MidaMassaPetita e) {
             System.out.println(errorOutput + "ERROR: Aquest mida és massa petia. Prova amb una mida major a 7.");
         }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
+        }
         escollir();
     }
 
@@ -231,6 +237,9 @@ public class IOterminal {
         }
         catch(AlfabetNoExisteix e) {
             System.out.println(errorOutput + "ERROR: Aquest Alfabet no existeix.");
+        }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
         }
         escollir();
     }
@@ -276,6 +285,9 @@ public class IOterminal {
         catch(FileNotFoundException e) {
             System.out.println(errorOutput + "ERROR: El fitxer "+path+" no s'ha trobat.");
         }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
+        }
         // FALTARÀ INCORPORRAR ELS CATCH DE LES EXCEPCIONS QUE COMPROVEN EL TIPUS I EL PATH DINS D'alfabet.java
         escollir();
     }
@@ -303,6 +315,9 @@ public class IOterminal {
         }
         catch(TeclatNoExisteix e) {
             System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
+        }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
         }
         escollir();
     }
@@ -332,6 +347,9 @@ public class IOterminal {
                 System.out.println(errorOutput + "ERROR: Aquest Teclat no existeix.");
             }
             catch(LletraNoTeclat e) {
+                System.out.println(errorOutput + "ERROR: " + e.getMessage());
+            }
+            catch(Exception e) {
                 System.out.println(errorOutput + "ERROR: " + e.getMessage());
             }
         }
@@ -368,6 +386,9 @@ public class IOterminal {
                     System.out.println(errorOutput + "Les mides de l'Alfabet seleccionat i del Layout han de ser iguals.");
                     break;
             }
+        }
+        catch(Exception e) {
+            System.out.println(errorOutput + "ERROR: " + e.getMessage());
         }
         escollir();
     }

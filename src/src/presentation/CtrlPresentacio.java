@@ -1,5 +1,6 @@
 package src.presentation;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.swing.*;
@@ -89,11 +90,11 @@ public class CtrlPresentacio {
         return cd.toggleStrategy();
     }
 
-    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix {
+    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, IOException {
         cd.crearNouTeclat(nt, na, ge);
     }
 
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat {
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
         return cd.modificarTeclat(nt, canvis);
     }
 
@@ -101,11 +102,11 @@ public class CtrlPresentacio {
         return cd.visualitzarTeclat(nt);
     }
 
-    public void esborrarTeclat(String nt) throws TeclatNoExisteix {
+    public void esborrarTeclat(String nt) throws TeclatNoExisteix, IOException {
         cd.esborrarTeclat(nt);
     }
 
-    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament, IOException {
         cd.afegirAlfabet(na, ta, pf);
     }
 
@@ -113,11 +114,11 @@ public class CtrlPresentacio {
         return cd.visualitzarAlfabet(na);
     }
 
-    public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
+    public void esborrarAlfabet(String na) throws AlfabetNoExisteix, IOException {
         cd.esborrarAlfabet(na);
     }
 
-    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita, IOException {
         cd.afegirLayout(idL);
     }
     
@@ -125,7 +126,7 @@ public class CtrlPresentacio {
         return cd.visualitzarLayout(idL);
     }
 
-    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable, IOException {
         cd.esborrarLayout(idL);
     }
 

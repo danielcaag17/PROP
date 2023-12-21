@@ -100,6 +100,9 @@ public class CtrlAfegirTeclat {
             }
             ctrlPresentacio.Excepcio(vista, e.getTipus(), msg);
         }
+        catch(Exception e) {
+            ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
+        }
         Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
     }
 

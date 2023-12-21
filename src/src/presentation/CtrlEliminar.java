@@ -80,6 +80,9 @@ public class CtrlEliminar {
                 catch (Excepcions e) {
                     cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
                 }
+                catch(Exception e) {
+                    cp.Excepcio(pantalla, "Error: ", e.getMessage());;
+                }
                 break;
             case "Alfabet":
                 try {
@@ -88,6 +91,9 @@ public class CtrlEliminar {
                 catch (Excepcions e) {
                     cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
                 }
+                catch(Exception e) {
+                    cp.Excepcio(pantalla, "Error: ", e.getMessage());;
+                }
                 break;
             case "Layout":
                 try {
@@ -95,6 +101,9 @@ public class CtrlEliminar {
                 }
                 catch (Excepcions e) {
                     cp.Excepcio(pantalla, e.getTipus(), e.getMessage());;
+                }
+                catch(Exception e) {
+                    cp.Excepcio(pantalla, "Error: ", e.getMessage());;
                 }
                 break;
         }

@@ -218,7 +218,7 @@ public class CtrlDomini {
      * @throws AlfabetNoExisteix si no existeix una instància Alfabet amb nom na.
      * @throws MidesDiferents si la mida del Alfabet amb nom na i el Layout amb id idL són diferents. 
      */
-    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix {
+    public void crearNouTeclat(String nt, String na, String ge) throws TeclatJaExisteix, MidesDiferents, AlfabetNoExisteix, IOException {
         if (Teclats.get(nt) != null) throw new TeclatJaExisteix(nt);
         if (Alfabets.get(na) == null) throw new AlfabetNoExisteix(na);
         Alfabet a = Alfabets.get(na);
@@ -235,6 +235,7 @@ public class CtrlDomini {
         Generador.setStrategy(ge);
         t.crearTeclat(); // potser passar strategy?
         Teclats.put(nt, t);
+        ctrlPersistFile.saveState("teclats", t.getNom(), t.saveData());
     }
 
     /**
@@ -247,13 +248,14 @@ public class CtrlDomini {
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat {
+    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         Teclat t = getTeclat(nt);
         for (Character c : canvis.keySet()) {
             t.modificarTeclat(c, canvis.get(c)); 
         }
         Teclats.replace(nt, t);
+        ctrlPersistFile.saveState("teclats", t.getNom(), t.saveData());
         return t.toString(); // Potser no fa falta
     }
 
@@ -283,9 +285,10 @@ public class CtrlDomini {
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public void esborrarTeclat(String nt) throws TeclatNoExisteix {
+    public void esborrarTeclat(String nt) throws TeclatNoExisteix, IOException {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         Teclats.remove(nt);
+        ctrlPersistFile.saveState("teclats", nt, null);
     }
 
     /**
@@ -297,7 +300,7 @@ public class CtrlDomini {
      * @param pf path al fitxer on hi ha guardades les dades.
      * @throws AlfabetJaExisteix si existeix una instància Alfabet amb nom na.
      */
-    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament {
+    public void afegirAlfabet(String na, String ta, String pf) throws AlfabetJaExisteix, FileNotFoundException, FormatDadesNoValid, TipusDadesNoValid, EntradaLlegidaMalament, IOException {
         if (Alfabets.get(na) != null) throw new AlfabetJaExisteix(na);
         Alfabet a;
         switch (ta) {
@@ -312,6 +315,7 @@ public class CtrlDomini {
         }
         a.readInput(pf);
         Alfabets.put(na, a);
+        ctrlPersistFile.saveState("alfabets", a.getNom(), a.saveData());
     }
 
     /**
@@ -333,9 +337,10 @@ public class CtrlDomini {
      * @param na nom del alfabet.
      * @throws AlfabetNoExisteix si no existeix una instància d'alfabet amb nom na.
      */
-    public void esborrarAlfabet(String na) throws AlfabetNoExisteix {
+    public void esborrarAlfabet(String na) throws AlfabetNoExisteix, IOException {
         if(Alfabets.get(na) ==  null) throw new AlfabetNoExisteix(na);
         Alfabets.remove(na);
+        ctrlPersistFile.saveState("alfabets", na, null);
     }
 
     /**
@@ -345,11 +350,12 @@ public class CtrlDomini {
      * @param idL mida del Layout a crear. Funciona com a id.
      * @throws LayoutJaExisteix si existeix una instància Layout amb id idl.
      */
-    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita {
+    public void afegirLayout(Integer idL) throws LayoutJaExisteix, MidaMassaPetita, IOException {
         if (Layouts.get(idL) != null) throw new LayoutJaExisteix(idL.toString());
         if (idL < 1) throw new MidaMassaPetita(idL.toString());
         Layout l = new Layout(idL);
         Layouts.put(idL, l);
+        ctrlPersistFile.saveState("layouts", Integer.toString(idL), l.saveData());
     }
 
     /**
@@ -371,10 +377,11 @@ public class CtrlDomini {
      * @param idL id del Layout
      * @throws LayoutNoExisteix si no existeix una instància de layout amb id idl.
      */
-    public void esborrarLayout(Integer idL) throws LayoutNoExisteix {
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, IOException {
         // no es poden borrar els 4 layouts inicials
         if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
         Layouts.remove(idL);
+        ctrlPersistFile.saveState("layouts", Integer.toString(idL), null);
     }
 
     /**
