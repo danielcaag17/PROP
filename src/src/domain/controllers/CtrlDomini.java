@@ -142,6 +142,10 @@ public class CtrlDomini {
         return s;
     }
 
+    public Map<Character, Double> getCharacters(String na) {
+        return Alfabets.get(na).getCharacter();
+    }
+
     public String[] getNomAlfabets() {
         String[] s = new String[Alfabets.size()];
         int i = 0;

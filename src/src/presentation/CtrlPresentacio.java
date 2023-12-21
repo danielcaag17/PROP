@@ -44,6 +44,10 @@ public class CtrlPresentacio {
         return cd.getListAlfabets();
     }
 
+    public Map<Character, Double> getCharacters(String na) {
+        return cd.getCharacters(na);
+    }
+
     public String[] getNomAlfabets() {
         return cd.getNomAlfabets();
     }
@@ -142,7 +146,7 @@ public class CtrlPresentacio {
                 new CtrlAfegirAlfabet();
                 break;
             case "MostrarAlfabet":
-                new CtrlMostrarAlfabet();
+                new CtrlMostrarAlfabet(elementAMostrar);
                 break;
             case "AfegirLayout":
                 new CtrlAfegirLayout();
