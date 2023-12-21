@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import src.exceptions.EntradaLlegidaMalament;
+import src.exceptions.Excepcions;
+
 public class CtrlMostrarAlfabet {
     private CtrlPresentacio ctrlPresentacio;
     private JLabel title, labelNomAlfabet;
@@ -46,8 +49,12 @@ public class CtrlMostrarAlfabet {
         PNomAlfabet.add(labelNomAlfabet);
         JPanel PAbecedari = new JPanel();
         PAbecedari.setLayout(new BoxLayout(PAbecedari, BoxLayout.Y_AXIS));
+        JPanel PInfoAdicional = Utils.JPanel(new BorderLayout(), null);
         Map<Character, Double> characters = ctrlPresentacio.getCharacters(nomAlfabet);
         for (Character c : characters.keySet()) {
+            JLabel labelInfoAdicional = Utils.initLabel("", "text");
+            labelInfoAdicional.setHorizontalAlignment(JLabel.CENTER);
+            labelInfoAdicional.setVerticalAlignment(JLabel.CENTER);
             String lletra = String.valueOf(c);
             Double freq = characters.get(c) * 100.0;
             String freqString = String.format("%.3f", freq);
@@ -57,19 +64,34 @@ public class CtrlMostrarAlfabet {
             label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             label.addMouseListener(new MouseListener() {
                 @Override
-                public void mouseClicked(java.awt.event.MouseEvent e) {
-                    // Utils.canviPantallaElementMostrar(vista, "MostrarAlfabet", na);
-                }
+                public void mouseClicked(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mouseReleased(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent e) {
-                    // label.
+                    try {
+                        double[] frequenciesCharacter = ctrlPresentacio.getFrequenciesCharacter(nomAlfabet, label.getText());
+                        Character[] abecedari = ctrlPresentacio.getAbecedari(nomAlfabet);
+                        String infoAdicional = "";
+                        for (int i = 0; i < frequenciesCharacter.length; i++) {
+                            String character = String.valueOf(abecedari[i]);
+                            String f = String.format("%.3f", frequenciesCharacter[i] * 100);
+                            if (i + 1 < frequenciesCharacter.length) infoAdicional += character + " -> " + f + "%, ";
+                            else infoAdicional += character + " -> " + f + "%";
+                        }
+                        labelInfoAdicional.setText(infoAdicional);
+                        System.out.println(infoAdicional);
+                    } catch (Excepcions exc) {
+                        ctrlPresentacio.Excepcio(vista, exc.getTipus(), "Hi ha hagut un error");
+                    }                    
                 }
                 @Override
-                public void mouseExited(java.awt.event.MouseEvent e) {}
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    labelInfoAdicional.setVisible(false);
+                    System.out.println("OUT");
+                }
             });
             label.setBackground(Utils.getBackgroundColorElement());
 
@@ -77,6 +99,7 @@ public class CtrlMostrarAlfabet {
             panel.add(label);
 
             PAbecedari.add(panel);
+            PInfoAdicional.add(labelInfoAdicional, BorderLayout.CENTER);
         }
 
         JScrollPane scrollPane = new JScrollPane(PAbecedari);
@@ -85,6 +108,7 @@ public class CtrlMostrarAlfabet {
         PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PNomAlfabet, BorderLayout.NORTH);
         PCenter.add(scrollPane, BorderLayout.CENTER);
+        PCenter.add(PInfoAdicional, BorderLayout.SOUTH);
 
         JButton delete = Utils.Button(null, "delete");
         delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", nomAlfabet, vista, "LlistaAlfabets"));
