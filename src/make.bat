@@ -1,4 +1,4 @@
-javac --release 11 src/domain/classes/*.java 
+javac --release 11 -cp .;../lib/json-20231013.jar src/domain/classes/*.java 
 javac --release 11 -cp .;../lib/json-20231013.jar src/domain/controllers/*.java 
 javac --release 11 -cp .;../lib/junit-4.13.2.jar src/drivers/*.java  
 javac --release 11 src/exceptions/*.java 
