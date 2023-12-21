@@ -17,18 +17,19 @@ public class CtrlMostrarLayout {
     public CtrlMostrarLayout(String idLayout) {
         this.idLayout = idLayout;
         cp = CtrlPresentacio.getInstance();
+       
         init();
         addElementsFrame();
     }
 
     private void init() {
         titol = Utils.initLabel("Mostrar Layout", "title");
-        nomLayout = Utils.initLabel(idLayout, "text");
+        nomLayout = Utils.initLabel("Distribució de les IDs del Layout de mida: " + idLayout, "text");
 
         eliminar = Utils.Button(null, "delete");
         eliminar.addActionListener(e -> cp.elimina("Layout", idLayout, vista, "LlistaLayouts"));
 
-        back = Utils.Button(null, "back");
+        back = Utils.Button(null, "backArrow");
         back.addActionListener(e -> Utils.canviPantalla(vista, "LlistaLayouts"));
 
         try {
@@ -51,6 +52,7 @@ public class CtrlMostrarLayout {
             PLayout.add(PRow);
         }
         /*
+        PLayout = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
                 Integer id = distribucio[i][j];
@@ -69,9 +71,11 @@ public class CtrlMostrarLayout {
         PCenter.add(PLayout, BorderLayout.CENTER);
         PCenter.add(PMida, BorderLayout.NORTH);
 
-        PSouth = Utils.JPanel(new FlowLayout(), null);
-        PSouth.add(eliminar);
-        PSouth.add(back);
+        PSouth = Utils.JPanel(new FlowLayout(), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PSouth.add(eliminar, BorderLayout.CENTER);
+        PSouth.add(back, BorderLayout.CENTER);
+
+        vista = Utils.initFrame("MostrarLayout");
     }
 
     private void addElementsFrame() {
