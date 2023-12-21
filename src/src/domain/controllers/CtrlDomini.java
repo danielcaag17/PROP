@@ -370,6 +370,11 @@ public class CtrlDomini {
         return getLayout(idL).toString();
     }
 
+    public int[][] getDistribucioLayout(Integer idL) throws LayoutNoExisteix {
+        if(Layouts.get(idL)==null) throw new LayoutNoExisteix(idL.toString());
+        return getLayout(idL).getDistribucioFilled();
+    }
+
     /**
      * <li>Pre: el layout amb id idL existeix.</li>
      * <li>Post: el layout amb id idL s'ha esborrat.</li>

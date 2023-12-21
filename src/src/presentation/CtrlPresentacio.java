@@ -46,6 +46,10 @@ public class CtrlPresentacio {
         return cd.getDistribucio(nt);
     }
 
+    public int[][] getDistribucioLayout(Integer idL) throws LayoutNoExisteix {
+        return cd.getDistribucioLayout(idL);
+    }
+
     public String[] getNomTeclats() {
         return cd.getNomTeclats();
     }
