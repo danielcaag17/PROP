@@ -351,12 +351,10 @@ public class CtrlDomini {
      * 
      * @param idL id del Layout
      * @throws LayoutNoExisteix si no existeix una instància de layout amb id idl.
-     * @throws LayoutNoBorrable si id del layout que es vol esborrar pertany als layouts generats per defecte.
      */
-    public void esborrarLayout(Integer idL) throws LayoutNoExisteix, LayoutNoBorrable {
+    public void esborrarLayout(Integer idL) throws LayoutNoExisteix {
         // no es poden borrar els 4 layouts inicials
         if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
-        if (Arrays.binarySearch(midesInicials, idL) >= 0) throw new LayoutNoBorrable(idL.toString());
         Layouts.remove(idL);
     }
 
