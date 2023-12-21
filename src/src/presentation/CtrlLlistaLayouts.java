@@ -14,7 +14,6 @@ public class CtrlLlistaLayouts {
 
     public CtrlLlistaLayouts() {
         cp = CtrlPresentacio.getInstance();
-        vista = Utils.initFrame("LlistaLayouts");
         initElements();
         initPanels();
         linkFrameElements();
@@ -53,14 +52,14 @@ public class CtrlLlistaLayouts {
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent e) {}
                 @Override
-                public void mouseReleased(java.awt.event.MouseEvent e) {
-                    Utils.canviPantallaElementMostrar(vista, "MostrarLayout", Integer.toString(nl));
-                }
+                public void mouseReleased(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent e) {}
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent e) {}
             });
+            label.setBackground(Utils.getBackgroundColorElement());
+
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> cp.elimina("Layout", Integer.toString(nl), vista, "LlistaLayouts"));
 
@@ -70,9 +69,11 @@ public class CtrlLlistaLayouts {
 
             PLlista.add(panel);
         }
+        JScrollPane scrollPane = new JScrollPane(PLlista);
+        scrollPane.setBorder(null);     // No se que queda millor
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
-        PCenter.add(PLlista, BorderLayout.CENTER);
+        PCenter.add(scrollPane, BorderLayout.CENTER);
         PCenter.add(PAfegir, BorderLayout.NORTH);
 
         PSouth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(), Utils.getScreenHeight()/6));
