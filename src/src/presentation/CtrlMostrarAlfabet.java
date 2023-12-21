@@ -50,7 +50,8 @@ public class CtrlMostrarAlfabet {
         for (Character c : characters.keySet()) {
             String lletra = String.valueOf(c);
             Double freq = characters.get(c) * 100.0;
-            lletra += " -> " + freq;
+            String freqString = String.format("%.3f", freq);
+            lletra += " -> " + freqString + "%";
             JLabel label = Utils.initLabel(lletra, "text");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -64,7 +65,9 @@ public class CtrlMostrarAlfabet {
                 @Override
                 public void mouseReleased(java.awt.event.MouseEvent e) {}
                 @Override
-                public void mouseEntered(java.awt.event.MouseEvent e) {}
+                public void mouseEntered(java.awt.event.MouseEvent e) {
+                    // label.
+                }
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent e) {}
             });
