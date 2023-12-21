@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import java.util.Map;
@@ -104,7 +103,6 @@ public class CtrlMostrarAlfabet {
         }
 
         JScrollPane scrollPane = new JScrollPane(PAbecedari);
-        //scrollPane.setBorder(null);     // No se que queda millor
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.add(PNomAlfabet, BorderLayout.NORTH);
