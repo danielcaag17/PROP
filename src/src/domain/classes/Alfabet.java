@@ -220,6 +220,12 @@ public abstract class Alfabet {
         return frequencies;
     }
 
+    public double[] getFrequenciesCharacter(String c) throws EntradaLlegidaMalament {
+        Character character = c.charAt(0);
+        int i = findIndex(character);
+        return frequencies[i];
+    }
+
     /**
      * Pre: 
      * Post: es retorna la freqüència de cada lletra de l'Alfabet

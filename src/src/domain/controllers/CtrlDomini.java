@@ -146,6 +146,14 @@ public class CtrlDomini {
         return Alfabets.get(na).getCharacter();
     }
 
+    public double[] getFrequenciesCharacter(String na, String c) throws EntradaLlegidaMalament {
+        return Alfabets.get(na).getFrequenciesCharacter(c);
+    }
+
+    public Character[] getAbecedari(String na) {
+        return Alfabets.get(na).getAbecedari();
+    }
+
     public String[] getNomAlfabets() {
         String[] s = new String[Alfabets.size()];
         int i = 0;

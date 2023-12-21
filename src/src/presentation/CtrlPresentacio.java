@@ -48,6 +48,14 @@ public class CtrlPresentacio {
         return cd.getCharacters(na);
     }
 
+    public double[] getFrequenciesCharacter(String na, String c) throws EntradaLlegidaMalament {
+        return cd.getFrequenciesCharacter(na, c);
+    }
+
+    public Character[] getAbecedari(String na) {
+        return cd.getAbecedari(na);
+    }
+
     public String[] getNomAlfabets() {
         return cd.getNomAlfabets();
     }
