@@ -212,8 +212,30 @@ public class Teclat {
         return result;
     }
 
+    private static JSONObject mapToJson(Map<Character, Integer> map) {
+        JSONObject json_obj = new JSONObject(map);
+        return json_obj;
+    }
+
+    private static JSONArray matToJson(char[][] matrix) {
+        JSONArray mat_json = new JSONArray();
+        for (int i = 0; i < matrix.length; i++) {
+            JSONArray row = new JSONArray();
+            for (int j = 0; j < matrix[0].length; j++) {
+                row.put(matrix[i][j]);
+            }
+            mat_json.put(row);
+        }
+        return mat_json;
+    }
+    
     public String saveData() {
-        // Guardar dades de Teclat importants. En format per determinar.
-        return "";
+        JSONObject ret = new JSONObject();
+        
+        ret.put("nom", this.nom);
+        ret.put("teclat", mapToJson(this.teclat));
+        ret.put("distribucioCharacters", matToJson(this.distribucioCharacters));
+
+        return ret.toString(4);
     }
  }
