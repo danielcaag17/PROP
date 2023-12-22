@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -60,6 +61,7 @@ public class CtrlAfegirTeclat {
         ImageIcon gifIcon = new ImageIcon(path);
         labelLoading = new JLabel(gifIcon);
         labelLoading.setVisible(false);
+        labelLoading.setPreferredSize(new Dimension(200, 200));
     }
 
     private void initPanels() {
@@ -96,13 +98,13 @@ public class CtrlAfegirTeclat {
     }
 
     private void PreMostrarTeclat() {
+        labelLoading.setVisible(true);
         String alfabet = (String) listAlfabets.getSelectedItem();
         String generador = (String) listGeneradors.getSelectedItem();
         String nomTeclat = textFieldNomTeclat.getText();
         try {
-            labelLoading.setVisible(true);
             ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
-            labelLoading.setVisible(false);
+            
         } catch (Excepcions e) {
             String msg = "";
             switch (e.getTipus()) {
@@ -118,6 +120,7 @@ public class CtrlAfegirTeclat {
         catch(Exception e) {
             ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
         }
+        labelLoading.setVisible(false);
         Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
     }
 
