@@ -52,7 +52,7 @@ public class CtrlMostrarAlfabet {
         JPanel PInfoAdicional = Utils.JPanel(new BorderLayout(), null);
         Map<Character, Double> characters = ctrlPresentacio.getCharacters(nomAlfabet);
         for (Character c : characters.keySet()) {
-            JLabel labelInfoAdicional = Utils.initLabel("a", "text");
+            JLabel labelInfoAdicional = Utils.initLabel("", "text");
             labelInfoAdicional.setHorizontalAlignment(JLabel.CENTER);
             labelInfoAdicional.setVerticalAlignment(JLabel.CENTER);
             String lletra = String.valueOf(c);
