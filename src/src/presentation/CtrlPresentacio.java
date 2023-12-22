@@ -140,7 +140,8 @@ public class CtrlPresentacio {
     }
 
     public Date lastSave() {
-        return cd.lastSave();
+        // return cd.lastSave(); // TODO: Implementar
+        return null;
     }
 
     public void canviVista(String vista, String elementAMostrar) {
@@ -180,6 +181,9 @@ public class CtrlPresentacio {
                 break;
             case "MostrarLayout":
                 new CtrlMostrarLayout(elementAMostrar);
+                break;
+            case "ProvarTeclat":
+                new CtrlProvarTeclat(elementAMostrar);
                 break;
             default:
                 System.out.println("No existeix aquesta pantalla");
