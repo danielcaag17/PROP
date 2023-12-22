@@ -1,4 +1,4 @@
 # Directoris a ignorar temporalment
-data/persistence/
-bin/class/
+data/persistence/*
+bin/class/*
 
