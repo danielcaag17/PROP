@@ -1,7 +1,6 @@
 package src.presentation;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Map;
 
 import javax.swing.*;
@@ -139,9 +138,8 @@ public class CtrlPresentacio {
         cd.saveState();
     }
 
-    public Date lastSave() {
-        // return cd.lastSave(); // TODO: Implementar
-        return null;
+    public String lastSave() {
+        return cd.lastSave();
     }
 
     public void canviVista(String vista, String elementAMostrar) {

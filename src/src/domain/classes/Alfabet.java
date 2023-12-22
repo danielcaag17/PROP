@@ -170,6 +170,7 @@ public abstract class Alfabet {
         }
     }
 
+
     /**
      * Pre: 
      * Post: associa la mida de l'Alfabet amb size
@@ -259,8 +260,38 @@ public abstract class Alfabet {
         return result;
     }
 
+    private static JSONArray matToJson(double[][] matrix) {
+        JSONArray mat_json = new JSONArray();
+        for (int i = 0; i < matrix.length; i++) {
+            JSONArray row = new JSONArray();
+            for (int j = 0; j < matrix[0].length; j++) {
+                row.put(matrix[i][j]);
+            }
+            mat_json.put(row);
+        }
+        return mat_json;
+    }
+    
+    private static JSONArray arrayToJson(Character[] array) {
+        JSONArray json_arr = new JSONArray();
+        for (Character ch : array) json_arr.put(ch.toString());
+        return json_arr;
+    }
+    
+    private static JSONObject mapToJson(Map<Character, Double> map) {
+        JSONObject json_obj = new JSONObject(map);
+        return json_obj;
+    }
+    
     public String saveData() {
-        // Guardar dades de Alfabet importants. En format per determinar.
-        return "";
+        JSONObject ret = new JSONObject();
+        
+        ret.put("nom", this.nom);
+        ret.put("characters", mapToJson(this.characters));
+        ret.put("frequencies", matToJson(this.frequencies));
+        ret.put("size", this.size);
+        ret.put("abecedari", arrayToJson(this.abecedari));
+
+        return ret.toString(4);
     }
 }
