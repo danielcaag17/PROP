@@ -1,4 +1,5 @@
 # Directoris a ignorar temporalment
 data/persistence/*
 bin/class/*
-
+*.class
+*.json
