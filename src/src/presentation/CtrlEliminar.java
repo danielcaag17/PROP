@@ -62,7 +62,8 @@ public class CtrlEliminar {
             apagaPantalla();
         });
         cancelButton.addActionListener(e -> {
-            apagaPantalla();
+            // apagaPantalla();
+            popupEliminarMenu.dispose();
         });
     }
 
