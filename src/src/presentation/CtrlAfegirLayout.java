@@ -47,6 +47,7 @@ public class CtrlAfegirLayout {
     private void confirmar() {
         try {
             cp.afegirLayout(idLayout);
+            System.out.println("Layout mida " + idLayout + " -> creat");
             cp.Excepcio(vista, "Layout afegit", "Layout afegit correctament");
         }
         catch (LayoutJaExisteix e) {
