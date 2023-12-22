@@ -2,6 +2,8 @@ package src.domain.classes;
 
 import java.util.Map;
 
+import org.json.*;
+
 import src.exceptions.LletraNoTeclat;
 
 public class Teclat {
