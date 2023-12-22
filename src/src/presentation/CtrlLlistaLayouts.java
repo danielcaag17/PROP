@@ -41,7 +41,7 @@ public class CtrlLlistaLayouts {
         Integer[] layouts = cp.getNomLayouts();
         for (int i = 0; i < layouts.length; i++) {
             Integer nl = layouts[i];
-            JLabel label = Utils.initLabel("Mida: " + Integer.toString(nl), "text");
+            JLabel label = Utils.initLabel("Mida: " + Integer.toString(nl), "element");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             label.addMouseListener(new MouseListener() {
@@ -63,10 +63,17 @@ public class CtrlLlistaLayouts {
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> cp.elimina("Layout", Integer.toString(nl), vista, "LlistaLayouts"));
 
-            JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            JPanel panel = Utils.JPanel(new BorderLayout(), null);
             panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
-            panel.add(label, BorderLayout.WEST);
-            panel.add(delete, BorderLayout.EAST);
+            
+            JPanel labelPanel = Utils.JPanel(new BorderLayout(), null);
+            labelPanel.add(new JPanel(), BorderLayout.WEST);
+            labelPanel.add(label, BorderLayout.CENTER);
+            JPanel buttonsPanel = Utils.JPanel(new FlowLayout(FlowLayout.CENTER), null);
+            buttonsPanel.add(delete);
+
+            panel.add(labelPanel, BorderLayout.CENTER);
+            panel.add(buttonsPanel, BorderLayout.EAST);
 
             PLlista.add(panel);
         }

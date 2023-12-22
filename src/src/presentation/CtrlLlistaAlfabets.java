@@ -51,7 +51,7 @@ public class CtrlLlistaAlfabets {
         String[] alfabets = ctrlPresentacio.getNomAlfabets();
         for (int i = 0; i < alfabets.length; i++) {
             String na = alfabets[i];
-            JLabel label = Utils.initLabel(na, "text");
+            JLabel label = Utils.initLabel(na, "element");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             label.addMouseListener(new MouseListener() {
@@ -72,10 +72,17 @@ public class CtrlLlistaAlfabets {
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> ctrlPresentacio.elimina("Alfabet", na, vista, "LlistaAlfabets"));
 
-            JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            JPanel panel = Utils.JPanel(new BorderLayout(), null);
             panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
-            panel.add(label);
-            panel.add(delete);
+            
+            JPanel labelPanel = Utils.JPanel(new BorderLayout(), null);
+            labelPanel.add(new JPanel(), BorderLayout.WEST);
+            labelPanel.add(label, BorderLayout.CENTER);
+            JPanel buttonsPanel = Utils.JPanel(new FlowLayout(FlowLayout.CENTER), null);
+            buttonsPanel.add(delete);
+
+            panel.add(labelPanel, BorderLayout.CENTER);
+            panel.add(buttonsPanel, BorderLayout.EAST);
 
             PLlista.add(panel);
         }

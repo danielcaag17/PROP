@@ -51,7 +51,7 @@ public class CtrlLlistaTeclats {
         String[] teclats = ctrlPresentacio.getNomTeclats();
         for (int i = 0; i < teclats.length; i++) {
             String nt = teclats[i];
-            JLabel label = Utils.initLabel(nt, "text");
+            JLabel label = Utils.initLabel(nt, "element");
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             label.addMouseListener(new MouseListener() {
@@ -74,11 +74,18 @@ public class CtrlLlistaTeclats {
             JButton delete = Utils.Button(null, "delete");
             delete.addActionListener(e -> ctrlPresentacio.elimina("Teclat", nt, vista, "LlistaTeclats"));
 
-            JPanel panel = Utils.JPanel(new FlowLayout(), null);
+            JPanel panel = Utils.JPanel(new BorderLayout(), null);
             panel.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));
-            panel.add(label);
-            panel.add(edit);
-            panel.add(delete);
+            
+            JPanel labelPanel = Utils.JPanel(new BorderLayout(), null);
+            labelPanel.add(new JPanel(), BorderLayout.WEST);
+            labelPanel.add(label, BorderLayout.CENTER);
+            JPanel buttonsPanel = Utils.JPanel(new FlowLayout(FlowLayout.CENTER), null);
+            buttonsPanel.add(edit);
+            buttonsPanel.add(delete);
+
+            panel.add(labelPanel, BorderLayout.CENTER);
+            panel.add(buttonsPanel, BorderLayout.EAST);
 
             PLlista.add(panel);
         }
