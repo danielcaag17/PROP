@@ -84,6 +84,7 @@ public class CtrlLlistaTeclats {
         }
 
         JScrollPane scrollPane = new JScrollPane(PLlista);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setBorder(null);     // No se que queda millor
 
         PTítol = new JPanel();
@@ -118,7 +119,12 @@ public class CtrlLlistaTeclats {
 
     private void exit() {
         // Sortir i guardar les dades
-        // ctrlPresentacio.guarda();
+        try {
+            ctrlPresentacio.guarda();
+        } catch (Exception e) {
+            ctrlPresentacio.Excepcio(vista, "Error", "Hi ha hagut un error al guardar les dades. \n"
+                                                        +  "L'últim canvi realitzat és de: " + ctrlPresentacio.lastSave().toString());
+        }
         vista.dispose();
     }
 

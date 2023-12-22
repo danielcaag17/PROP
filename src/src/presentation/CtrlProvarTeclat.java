@@ -1,27 +1,24 @@
 package src.presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import src.exceptions.TeclatNoExisteix;
+import src.exceptions.*;
 
-public class CtrlMostrarTeclat {
+public class CtrlProvarTeclat {
     private CtrlPresentacio ctrlPresentacio;
-    private JLabel títol, nomTeclat;
-    private JButton eliminar, editar, confirmar, provar;
+    private JLabel titol, nomTeclat;
+    private JButton eliminar, editar, confirmar, delLastChar;
+    private JPanel PNorth, PTitol, PSouth, PNom, PCenter, PTeclat, PTextField;
     private JFrame vista;
-    private JPanel PTítol, PSouth, PNom, PCenter, PTeclat;
+    private JTextField testingField;
     private String teclat;
+    private String inputTeclat = "";
     private char[][] distribucio;
 
-    public CtrlMostrarTeclat(String teclat) {
+    
+    public CtrlProvarTeclat(String teclat) {
         this.teclat = teclat;
         ctrlPresentacio = CtrlPresentacio.getInstance();
         init();
@@ -29,7 +26,7 @@ public class CtrlMostrarTeclat {
     }
 
     private void init() {
-        títol = Utils.initLabel("Mostrar Teclat", "title");
+        titol = Utils.initLabel("Provar Teclat", "title");
         nomTeclat = Utils.initLabel(teclat, "text");
 
         eliminar = Utils.Button(null, "delete");
@@ -38,13 +35,24 @@ public class CtrlMostrarTeclat {
         editar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "ModificarTeclat", teclat));
         confirmar = Utils.Button(null, "backArrow");
         confirmar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
-        provar = Utils.Button("Provar", null);
-        provar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "ProvarTeclat", teclat));
+
+        testingField = new JTextField();
+        testingField.setPreferredSize(new Dimension(Utils.getScreenWidth()/2, Utils.getScreenHeight()/10));
+        testingField.setFont(Utils.getFontText());
+        testingField.setHorizontalAlignment(JTextField.CENTER);
+
+        delLastChar = Utils.Button("<----", null);
+        delLastChar.addActionListener(e -> {
+            if (inputTeclat.length() > 0) {
+                inputTeclat = inputTeclat.substring(0, inputTeclat.length() - 1);
+                testingField.setText(inputTeclat);
+            }
+        });
 
         try {
             distribucio = ctrlPresentacio.getDistribucio(teclat);
         } catch (TeclatNoExisteix e) {
-            ctrlPresentacio.Excepcio(vista, e.getTipus(), "Teclat " + teclat + " no exiteix");
+            ctrlPresentacio.Excepcio(vista, e.getTipus(), "Teclat " + teclat + " no existeix");
         }
 
         PTeclat = Utils.JPanel(new GridLayout(distribucio.length, 1), null);
@@ -55,40 +63,50 @@ public class CtrlMostrarTeclat {
                 String id = String.valueOf(distribucio[i][j]);
                 if (!id.equals("-")) {
                     JButton button = Utils.Button(id, null);
+                    button.addActionListener(e -> {
+                        inputTeclat += id;
+                        testingField.setText(inputTeclat);
+                    });
                     PRow.add(button);
                 }
             }
             PTeclat.add(PRow);
         }
 
-        PTítol = Utils.JPanel(new BorderLayout(), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PTítol.add(títol, BorderLayout.CENTER);
-
+        PNorth = Utils.JPanel(new BorderLayout(), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTitol = new JPanel();
+        PTitol.add(titol);
         PNom = new JPanel();
-        PNom.add(nomTeclat, BorderLayout.CENTER);
-        PNom.add(provar, BorderLayout.WEST);
+        PNom.add(nomTeclat);
+
+        PNorth.add(PTitol, BorderLayout.CENTER);
+        PNorth.add(PNom, BorderLayout.SOUTH);
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
-        PCenter.add(PNom, BorderLayout.NORTH);
+        PTextField = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0), null);
+        PTextField.add(testingField, BorderLayout.EAST);
+        PTextField.add(delLastChar, BorderLayout.WEST);
+        PCenter.add(PTextField, BorderLayout.NORTH);
         PCenter.add(PTeclat, BorderLayout.CENTER);
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(confirmar);
+        PSouth.add(editar);
         PSouth.add(eliminar);
 
-        vista = Utils.initFrame("MostrarTeclat");
+        vista = Utils.initFrame("ProvarTeclat");
     }
 
     private int checkSize(char[] row) {
         int size = 0;
         for (int i = 0; i < row.length; i++) {
-            if (row[i] != '-') size++;
+            if (!String.valueOf(row[i]).equals("-")) size++;
         }
         return size;
     }
 
     private void addElementsFrame() {
-        vista.add(PTítol, BorderLayout.NORTH);
+        vista.add(PNorth, BorderLayout.NORTH);
         vista.add(PCenter, BorderLayout.CENTER);
         vista.add(PSouth, BorderLayout.SOUTH);
     }

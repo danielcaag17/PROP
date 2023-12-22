@@ -42,6 +42,19 @@ public class CtrlPreMostrarTeclat {
         } catch (TeclatNoExisteix e) {
             ctrlPresentacio.Excepcio(vista, e.getTipus(), "Teclat " + teclat + " no exiteix");
         }
+        PTeclat = Utils.JPanel(new GridLayout(distribucio.length, 1), null);
+        for (int i = 0; i < distribucio.length; i++) {
+            int size = checkSize(distribucio[i]);
+            JPanel PRow = Utils.JPanel(new GridLayout(1, size), null);
+            for (int j = 0; j < distribucio[i].length; j++) {
+                String id = String.valueOf(distribucio[i][j]);
+                if (!id.equals("-")) {
+                    JButton button = Utils.Button(id, null);
+                    PRow.add(button);
+                }
+            }
+            PTeclat.add(PRow);
+        }/*
         PTeclat = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
         for (int i = 0; i < distribucio.length; i++) {
             for (int j = 0; j < distribucio[i].length; j++) {
@@ -49,7 +62,7 @@ public class CtrlPreMostrarTeclat {
                 if (character.equals("-")) PTeclat.add(Utils.initLabel("", ""));
                 else PTeclat.add(Utils.Button(character, null));
             }
-        }
+        }*/
 
         PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
@@ -66,6 +79,14 @@ public class CtrlPreMostrarTeclat {
         PSouth.add(confirmar);
 
         vista = Utils.initFrame("PreMostrarTeclat");
+    }
+
+    private int checkSize(char[] row) {
+        int size = 0;
+        for (int i = 0; i < row.length; i++) {
+            if (row[i] != '-') size++;
+        }
+        return size;
     }
 
     private void addElementsFrame() {

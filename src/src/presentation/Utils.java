@@ -122,7 +122,7 @@ public class Utils {
     public static JButton Button(String text, String imatge) {
         JButton button = new JButton();
         if (text != null) {
-            button.setPreferredSize(new Dimension(100, 50));
+            button.setPreferredSize(new Dimension(100+text.length()*getFontText().getSize(), 50));
             button.setText(text);
             button.setFont(getFontText());
             button.setFocusable(false);
@@ -133,6 +133,7 @@ public class Utils {
             // A definir quina es la mida del botó
             image = image.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(image);
+            button.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
             button.setIcon(imageIcon);
             button.setCursor(new Cursor(Cursor.HAND_CURSOR));   // Donar sensació al usuari
             button.setContentAreaFilled(false);               // Només es vegi la foto i no el botó

@@ -71,6 +71,8 @@ public class CtrlLlistaLayouts {
             PLlista.add(panel);
         }
         JScrollPane scrollPane = new JScrollPane(PLlista);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBorder(null);     // No se que queda millor
 
         PCenter = Utils.JPanel(new BorderLayout(), null);
         PCenter.setBorder(BorderFactory.createLineBorder(Utils.getBackgroundColorElement(), 2));

@@ -18,7 +18,7 @@ public class Teclat {
         setNom(nom);
     }
 
-    public Teclat(String nom, Layout L, Alfabet A, Generador G, Map<Character, Integer> teclat, char[][] distribucioCharacters) {
+    public Teclat(String nom, Map<Character, Integer> teclat, char[][] distribucioCharacters) {
         setNom(nom);
         setLayout(L);
         setAlfabet(A);

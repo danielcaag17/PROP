@@ -1,6 +1,7 @@
 package src.presentation;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Map;
 
 import javax.swing.*;
@@ -134,8 +135,13 @@ public class CtrlPresentacio {
         cd.esborrarLayout(idL);
     }
 
-    public void guarda() {
+    public void guarda() throws IOException {
+        cd.saveState();
+    }
 
+    public Date lastSave() {
+        // return cd.lastSave(); // TODO: Implementar
+        return null;
     }
 
     public void canviVista(String vista, String elementAMostrar) {
@@ -175,6 +181,9 @@ public class CtrlPresentacio {
                 break;
             case "MostrarLayout":
                 new CtrlMostrarLayout(elementAMostrar);
+                break;
+            case "ProvarTeclat":
+                new CtrlProvarTeclat(elementAMostrar);
                 break;
             default:
                 System.out.println("No existeix aquesta pantalla");
