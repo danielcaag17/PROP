@@ -51,6 +51,15 @@ public class Utils {
     }
 
     /**
+     * 
+     * @return
+     */
+    public static Font getFontElement() {
+        // A definir
+        return new Font("Serif", Font.PLAIN, 24);
+    }
+
+    /**
      * @return Retorna l'altura dels elements de les vistes de llista
      */
     public static int getElementHeight() {
@@ -95,6 +104,7 @@ public class Utils {
         label.setVisible(true);
         if (type.equals("title")) label.setFont(getFontTitle());
         else if (type.equals("text")) label.setFont(getFontText());
+        else if (type.equals("element")) label.setFont(getFontElement());
         return label;
     }
 
