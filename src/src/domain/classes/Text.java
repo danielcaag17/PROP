@@ -19,6 +19,12 @@ public class Text extends Alfabet {
         super(nom);
     }
 
+    public Text(String nom, Map<Character, Double> characters, double[][] frequencies) {
+        setNom(nom);
+        setCharacters(characters);
+        setFrequencies(frequencies);
+    }
+
     /**
      * Pre:
      * Post: es retorna l'Alfabet caculat amb l'entrada doanada

@@ -17,6 +17,12 @@ public class Words extends Alfabet {
     public Words (String nom) {
         super(nom);
     }
+
+    public Words(String nom, Map<Character, Double> characters, double[][] frequencies) {
+        setNom(nom);
+        setCharacters(characters);
+        setFrequencies(frequencies);
+    }
     
     /**
      * Pre:
