@@ -54,15 +54,7 @@ public class CtrlPreMostrarTeclat {
                 }
             }
             PTeclat.add(PRow);
-        }/*
-        PTeclat = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
-        for (int i = 0; i < distribucio.length; i++) {
-            for (int j = 0; j < distribucio[i].length; j++) {
-                String character = String.valueOf(distribucio[i][j]);
-                if (character.equals("-")) PTeclat.add(Utils.initLabel("", ""));
-                else PTeclat.add(Utils.Button(character, null));
-            }
-        }*/
+        }
 
         PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
