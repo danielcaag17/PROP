@@ -111,7 +111,7 @@ public class Utils {
         // frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
         // frame.setIconImage(null);        // Si volem que surti algun logo en la part superior esquerra
-        frame.setResizable(false);
+        frame.setResizable(true);
         return frame;
     }
 
