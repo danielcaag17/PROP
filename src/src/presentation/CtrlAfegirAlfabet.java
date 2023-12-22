@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -105,11 +106,14 @@ public class CtrlAfegirAlfabet {
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             path = file.toString();
             pathSelected = true;
+            String nomFile = fileChooser.getSelectedFile().toString();
+            openFile.setText(nomFile);
         }
         // Desactivar el botó de confirmar
         else {
             pathSelected = false;
             confirmar.setEnabled(false);
+            openFile.setText("Selecciona fitxer");
         }
     }
 
