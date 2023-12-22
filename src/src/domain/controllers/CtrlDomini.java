@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.json.*;
 import java.util.*;
+import java.sql.Date;
 
 //import src.data.*;
 import src.domain.classes.*;
@@ -387,6 +388,10 @@ public class CtrlDomini {
         if (Layouts.get(idL) == null) throw new LayoutNoExisteix(idL.toString());
         Layouts.remove(idL);
         ctrlPersistFile.saveState("layouts", Integer.toString(idL), null);
+    }
+
+    public String lastSave() {
+        return ctrlPersistFile.lastSave();
     }
 
     /**

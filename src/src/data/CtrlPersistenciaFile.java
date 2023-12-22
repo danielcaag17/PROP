@@ -1,8 +1,11 @@
 package src.data;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import org.json.*;
+import java.util.Date;
+import java.time.format.*;
 
 public class CtrlPersistenciaFile {
 
@@ -11,6 +14,10 @@ public class CtrlPersistenciaFile {
     private final String keyboards_file = "keyboards_db.json";
     private final String alfabets_file = "alfabets_db.json";
     private final String layouts_file = "layouts_db.json";
+
+    private Date last_update;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private String date;
 
     // Aquí s'implementa l'extracció de la informació dels diferents JSONs on es guarda tot.
     private static CtrlPersistenciaFile singletonPersistenciaFile;
@@ -23,6 +30,10 @@ public class CtrlPersistenciaFile {
     public static CtrlPersistenciaFile getInstance() {
         if(singletonPersistenciaFile == null) singletonPersistenciaFile = new CtrlPersistenciaFile();
         return singletonPersistenciaFile;
+    }
+
+    public String lastSave() {
+        return date;
     }
 
     private String readFileStr(String filepath) throws IOException {
@@ -87,9 +98,15 @@ public class CtrlPersistenciaFile {
         FileWriter fw = new FileWriter(db_path, false); // flag false permet sobreescriure
         fw.write(json_db.toString(4));
         fw.close();
+
+        last_update = new Date();
+        date = formatter.format(last_update);
     }
 
     public ArrayList<String> getAll(String type) throws IOException {
+        last_update = new Date();
+        date = formatter.format(last_update);
+
         String db_path = base_path;
         if (type.equals("teclats")) db_path += "/" + keyboards_file;
         else if (type.equals("alfabets")) db_path += "/" + alfabets_file;

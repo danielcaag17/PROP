@@ -123,7 +123,7 @@ public class CtrlLlistaTeclats {
             ctrlPresentacio.guarda();
         } catch (Exception e) {
             ctrlPresentacio.Excepcio(vista, "Error", "Hi ha hagut un error al guardar les dades. \n"
-                                                        +  "L'últim canvi realitzat és de: " + ctrlPresentacio.lastSave().toString());
+                                                        +  "L'últim canvi realitzat és de: " + ctrlPresentacio.lastSave());
         }
         vista.dispose();
     }

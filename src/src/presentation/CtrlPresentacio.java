@@ -139,9 +139,8 @@ public class CtrlPresentacio {
         cd.saveState();
     }
 
-    public Date lastSave() {
-        // return cd.lastSave(); // TODO: Implementar
-        return null;
+    public String lastSave() {
+        return cd.lastSave();
     }
 
     public void canviVista(String vista, String elementAMostrar) {
