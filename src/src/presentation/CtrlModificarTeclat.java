@@ -39,7 +39,7 @@ public class CtrlModificarTeclat {
         primera = segona = Character.MIN_VALUE;             // character buit
         buttonPrimer = buttonSegon = null;
 
-        buttonOK = Utils.Button("OK", null);
+        buttonOK = Utils.Button("Afegir canvi", null);
         buttonOK.addActionListener(e -> parellaOK());
 
         buttonHelp = Utils.Button("?", null);
@@ -48,7 +48,7 @@ public class CtrlModificarTeclat {
         cancelar = Utils.Button("Cancelar", null);
         cancelar.addActionListener(e -> cancelar());
 
-        confirmar = Utils.Button(null, "check");
+        confirmar = Utils.Button("Confirmar canvis",null);
         confirmar.addActionListener(e -> confirmar());
     }
 
