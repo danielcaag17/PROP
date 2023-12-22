@@ -20,11 +20,11 @@ public class Teclat {
         setNom(nom);
     }
 
-    public Teclat(String nom, Map<Character, Integer> teclat, char[][] distribucioCharacters) {
+    public Teclat(String nom, Map<Character, Integer> teclat, char[][] distribucioCharacters, Generador ge) {
         setNom(nom);
-        setLayout(new Layout(1));
+        setLayout(new Layout(teclat.size()));
         setAlfabet(new Text("empty"));
-        setGenerador(new Generador("Genetic"));
+        setGenerador(ge);
         setTeclat(teclat);
         setDistribucioCharacters(distribucioCharacters);
     }
@@ -224,7 +224,8 @@ public class Teclat {
         for (int i = 0; i < matrix.length; i++) {
             JSONArray row = new JSONArray();
             for (int j = 0; j < matrix[0].length; j++) {
-                row.put(matrix[i][j]);
+                //row.put(matrix[i][j]);
+                row.put(Character.toString(matrix[i][j]));
             }
             mat_json.put(row);
         }

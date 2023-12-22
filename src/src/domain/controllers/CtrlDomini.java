@@ -50,14 +50,15 @@ public class CtrlDomini {
 
         strategy = "Genetic"; // strategy pot ser {"BranchBound", "Genetic"} // Buscar una altre forma de fer-ho
         Generador = new Generador(strategy);
-        
-        
-        if (Layouts.isEmpty()) inicialitzarLayoutsBase(); // només si és execució incial
     }
 
     public void restore() throws IOException {
         // Restaura l'estat previ de l'execució si n'hi havia de guardat.
         restoreState();
+        if (Layouts.isEmpty()) {
+            inicialitzarLayoutsBase(); // només si és execució incial
+            saveState();
+        }
     }
 
     /* Funcions de Transacció i de Domini */
@@ -426,7 +427,7 @@ public class CtrlDomini {
         for (String file : filesAlfabets) {
             String aRaw = ctrlPersistFile.getObject(file);
             JSONObject obj = new JSONObject(aRaw);
-            String nom = obj.getJSONObject("nom").getString("nom");
+            String nom = obj.getString("nom");
             Map<Character, Double> character = jsonObjToMapCharDoub(obj.getJSONObject("characters"));
             // Character[] abecedari = jsonArrToArray(obj.getJSONArray("abecedari"));
             double[][] frequencies = jsonArrToDoubleMat(obj.getJSONArray("frequencies"));
@@ -437,17 +438,17 @@ public class CtrlDomini {
         for (String file : filesLayouts) {
             String lRaw = ctrlPersistFile.getObject(file);
             JSONObject obj = new JSONObject(lRaw);
-            Integer idL = obj.getJSONObject("mida").getInt("mida");
+            Integer idL = obj.getInt("mida");
             Layout l = new Layout(idL); // Només amb la mida ja es pot crear un Layout, prou ràpid com per no haver de fer còpies.
             Layouts.put(idL, l);
         }
         for (String file : filesTeclats) {
             String tRaw = ctrlPersistFile.getObject(file);
             JSONObject obj = new JSONObject(tRaw);
-            String nom = obj.getJSONObject("nom").getString("nom");
+            String nom = obj.getString("nom");
             Map<Character, Integer> teclat = jsonObjToMapCharInt(obj.getJSONObject("teclat"));
             char[][] distribucioCharacters = jsonArrToCharMat(obj.getJSONArray("distribucioCharacters"));
-            Teclat t = new Teclat(nom, teclat, distribucioCharacters);
+            Teclat t = new Teclat(nom, teclat, distribucioCharacters, Generador);
             Teclats.put(nom, t);
         }
     }

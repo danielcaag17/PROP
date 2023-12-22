@@ -71,7 +71,7 @@ public class CtrlPersistenciaFile {
         // Actualitzar objecte json_db + crear/esborrar el fitxer necessari
         if (content == null) { // Delete mode
             // Borrar fitxer corresponent + entrada a la DB
-            String filepath = base_path + json_db.getJSONObject(id).getString(id);
+            String filepath = base_path + "/" + json_db.getString(id);
             File file = new File(filepath);
             file.delete();
             json_db.remove(id);
@@ -79,7 +79,7 @@ public class CtrlPersistenciaFile {
         else {
             // Si existeix l'entrada a la DB, actualitzar contingut del fitxer
             if (json_db.has(id)) { 
-                String filepath = base_path + json_db.getJSONObject(id).getString(id);
+                String filepath = base_path + "/" + json_db.getString(id);
                 FileWriter fw = new FileWriter(filepath, false); // flag false permet sobreescriure
                 fw.write(content);
                 fw.close();
@@ -88,7 +88,7 @@ public class CtrlPersistenciaFile {
             else {
                 String new_filepath = tg_dir + "/" + id + ".json";
                 json_db.put(id, new_filepath);
-                String filepath = base_path + new_filepath;
+                String filepath = base_path + "/" + new_filepath;
                 FileWriter fw = new FileWriter(filepath, false);
                 fw.write(content);
                 fw.close();
@@ -118,7 +118,7 @@ public class CtrlPersistenciaFile {
         ArrayList<String> res = new ArrayList<>();
 
         for (String key : json_db.keySet()) {
-            String aux = json_db.getJSONObject(key).getString(key);
+            String aux = json_db.getString(key);
             res.add(aux);
         }
         return res;
