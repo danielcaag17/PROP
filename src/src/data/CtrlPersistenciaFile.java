@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import org.json.*;
 import java.util.Date;
-import java.time.format.*;
+import java.text.SimpleDateFormat;
 
 public class CtrlPersistenciaFile {
 
@@ -45,6 +45,7 @@ public class CtrlPersistenciaFile {
             content += line + '\n';
             line = br.readLine();
         }
+        br.close();
         return content;
     }
 
