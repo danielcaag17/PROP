@@ -61,8 +61,8 @@ public class CtrlMostrarTeclat {
             PTeclat.add(PRow);
         }
 
-        PTítol = Utils.JPanel(new BorderLayout(), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PTítol.add(títol, BorderLayout.CENTER);
+        PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
+        PTítol.add(títol);
 
         PNom = new JPanel();
         PNom.add(nomTeclat, BorderLayout.CENTER);
