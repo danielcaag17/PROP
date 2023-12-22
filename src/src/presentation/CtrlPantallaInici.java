@@ -12,10 +12,11 @@ public class CtrlPantallaInici {
     private JLabel títol, membre1, membre2, membre3;
     private JButton start;
     private JFrame vista;
-    private JPanel PTítol, PMembre1, PMembre2, PMembre3, PStart, PCenter, PEast, PWest;
+    private JPanel PTítol, PStart, PCenter, PEast, PWest;
 
     public CtrlPantallaInici() {
         init();
+        initPanels();
         addElementsFrame();
     }
 
@@ -29,16 +30,20 @@ public class CtrlPantallaInici {
         start = Utils.Button("START", null);
         start.addActionListener(e -> Utils.canviPantalla(vista,"LlistaTeclats"));
 
+        vista = Utils.initFrame("PantallaInici");
+    }
+
+    private void initPanels() {
         PTítol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTítol.add(títol);
         
-        PMembre1 = new JPanel();
+        JPanel PMembre1 = new JPanel();
         PMembre1.add(membre1);
 
-        PMembre2 = new JPanel();
+        JPanel PMembre2 = new JPanel();
         PMembre2.add(membre2);
 
-        PMembre3 = new JPanel();
+        JPanel PMembre3 = new JPanel();
         PMembre3.add(membre3);
 
         PStart = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
@@ -51,8 +56,6 @@ public class CtrlPantallaInici {
 
         PEast = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6,Utils.getScreenHeight()));
         PWest = Utils.JPanel(null, new Dimension(Utils.getScreenWidth()/6,Utils.getScreenHeight()));
-
-        vista = Utils.initFrame("PantallaInici");
     }
 
     private void addElementsFrame() {
