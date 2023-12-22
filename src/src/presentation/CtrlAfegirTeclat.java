@@ -3,7 +3,9 @@ package src.presentation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -17,7 +19,7 @@ import src.exceptions.Excepcions;
 
 public class CtrlAfegirTeclat {
     private CtrlPresentacio ctrlPresentacio;
-    private JLabel title, labelIndicaNomTeclat;
+    private JLabel title, labelIndicaNomTeclat, labelLoading;
     private JTextField textFieldNomTeclat;
     private JComboBox<String> listAlfabets, listGeneradors;
     private JButton cancelar, confirmar;
@@ -53,6 +55,11 @@ public class CtrlAfegirTeclat {
         confirmar = Utils.Button("Confirmar", null);
         confirmar.setEnabled(false);
         confirmar.addActionListener(e -> PreMostrarTeclat());
+
+        String path = ".." + File.separator + ".." + File.separator + "data/imatges/loading.gif";
+        ImageIcon gifIcon = new ImageIcon(path);
+        labelLoading = new JLabel(gifIcon);
+        labelLoading.setVisible(false);
     }
 
     private void initPanels() {
@@ -64,11 +71,17 @@ public class CtrlAfegirTeclat {
         PIndicaNomAlfabet.add(labelIndicaNomTeclat);
         PIndicaNomAlfabet.add(textFieldNomTeclat);        
 
-        // FALTA POSAR MILLOR LA UI
-        PCenter = new JPanel();
-        PCenter.add(PIndicaNomAlfabet);
-        PCenter.add(listGeneradors);
-        PCenter.add(listAlfabets);
+        JPanel PAfegir = new JPanel();
+        PAfegir.add(PIndicaNomAlfabet);
+        PAfegir.add(listGeneradors);
+        PAfegir.add(listAlfabets);
+
+        JPanel PCarregant = new JPanel();
+        PCarregant.add(labelLoading);
+
+        PCenter = Utils.JPanel(new BorderLayout(), null);
+        PCenter.add(PAfegir, BorderLayout.NORTH);
+        PCenter.add(PCarregant, BorderLayout.CENTER);
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(cancelar);
@@ -87,7 +100,9 @@ public class CtrlAfegirTeclat {
         String generador = (String) listGeneradors.getSelectedItem();
         String nomTeclat = textFieldNomTeclat.getText();
         try {
+            labelLoading.setVisible(true);
             ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
+            labelLoading.setVisible(false);
         } catch (Excepcions e) {
             String msg = "";
             switch (e.getTipus()) {
