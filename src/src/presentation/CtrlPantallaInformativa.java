@@ -6,10 +6,10 @@ import java.awt.FlowLayout;
 
 import javax.swing.*;
 
-public class PantallaInformativa {
+public class CtrlPantallaInformativa {
     private JDialog dialog;
 
-    public PantallaInformativa(JFrame pantalla, String title, String msg) {        
+    public CtrlPantallaInformativa(JFrame pantalla, String title, String msg) {        
         JLabel label = Utils.initLabel(msg, "text");
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);

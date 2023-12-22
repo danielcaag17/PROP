@@ -201,6 +201,6 @@ public class CtrlPresentacio {
     }
 
     public void Excepcio(JFrame pantalla, String title, String msg) {
-        new PantallaInformativa(pantalla, title, msg);
+        new CtrlPantallaInformativa(pantalla, title, msg);
     }
 }
