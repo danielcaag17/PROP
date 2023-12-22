@@ -244,6 +244,7 @@ public class Genetic implements Strategy {
         
         int bestIndex = obtainSelection(-1)[0];
         ArrayList<Integer> bestSolution = this.Population.get(bestIndex); 
+        System.out.println("Cota: " + bestIndex);
         return bestSolution;
     }
 

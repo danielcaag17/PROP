@@ -350,6 +350,8 @@ public class BranchBound implements Strategy {
         // Progress Bar
         printProgressBar(100);
         
+        System.out.println("Cota Gilmore: " + bestCota);
+
         return bestSolution;
     }
 
