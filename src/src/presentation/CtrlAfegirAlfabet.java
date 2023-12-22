@@ -119,37 +119,36 @@ public class CtrlAfegirAlfabet {
     // Es vol crear un nou alfabet amb les dades indicades per l'usuari
     private void confirmar() {
         nomAlfabet = textFieldNomAlfabet.getText();
-        String[] s = ctrlPresentacio.getListAlfabets();
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] == nomAlfabet) {}// throw new AlfabetJaExisteix();
-        }
-        tipusEntrada = (String) listTipusEntrada.getSelectedItem();
-        try {
-            ctrlPresentacio.afegirAlfabet(nomAlfabet, tipusEntrada, path);
-            System.out.println("Alfabet " + nomAlfabet + " -> creat");
-            ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
-        }
-        catch(Exception e) { // TODO: mirar possibles errors que poden sortir
-            String msg = "";
-            String tipus = "";
-            if (e instanceof FileNotFoundException) {
-                msg = e.getMessage();
-                tipus = "FileNotFoundException";
+        if (nomesEspaisBlanc(nomAlfabet)) ctrlPresentacio.Excepcio(vista, "NomAlfabetNoValid", "No es pot crear un alfabet amb aquest nom");
+        else {
+            tipusEntrada = (String) listTipusEntrada.getSelectedItem();
+            try {
+                ctrlPresentacio.afegirAlfabet(nomAlfabet, tipusEntrada, path);
+                System.out.println("Alfabet " + nomAlfabet + " -> creat");
+                ctrlPresentacio.Excepcio(vista, "AlfabetCreat", "Alfabet " + nomAlfabet + " creat correctament");
             }
-            else if (e instanceof Excepcions) {
-                tipus = ((Excepcions) e).getTipus();
-                switch (((Excepcions) e).getTipus()) {
-                    case "FormatDadesNoValid":
-                        msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
-                        break;
-                    case "EntradaLlegidaMalament":
-                        msg = "Hi ha hagut un error en la lectura de les dades";
-                        break;
-                    default:
-                        msg = e.getMessage();
+            catch(Exception e) {
+                String msg = "";
+                String tipus = "";
+                if (e instanceof FileNotFoundException) {
+                    msg = e.getMessage();
+                    tipus = "FileNotFoundException";
                 }
+                else if (e instanceof Excepcions) {
+                    tipus = ((Excepcions) e).getTipus();
+                    switch (((Excepcions) e).getTipus()) {
+                        case "FormatDadesNoValid":
+                            msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
+                            break;
+                        case "EntradaLlegidaMalament":
+                            msg = "Hi ha hagut un error en la lectura de les dades";
+                            break;
+                        default:
+                            msg = e.getMessage();
+                    }
+                }
+                ctrlPresentacio.Excepcio(vista, tipus, msg);
             }
-            ctrlPresentacio.Excepcio(vista, tipus, msg);
         }
 
         Utils.canviPantalla(vista, "LlistaAlfabets");
@@ -176,5 +175,13 @@ public class CtrlAfegirAlfabet {
                 throw new UnsupportedOperationException("Unimplemented method 'changedUpdate'");
             }
         });
+    }
+
+    private Boolean nomesEspaisBlanc(String nom) {
+        for (int i = 0; i < nom.length(); i++) {
+            char c = nom.charAt(i);
+            if (c != ' ') return false;
+        }
+        return true;
     }
 }

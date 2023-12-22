@@ -101,26 +101,29 @@ public class CtrlAfegirTeclat {
         String alfabet = (String) listAlfabets.getSelectedItem();
         String generador = (String) listGeneradors.getSelectedItem();
         String nomTeclat = textFieldNomTeclat.getText();
-        try {
-            ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
-            
-        } catch (Excepcions e) {
-            String msg = "";
-            switch (e.getTipus()) {
-                case "TeclatJaExisteix": 
-                    msg = "Ja existeix un Teclat amb el nom " + nomTeclat;
-                    break;
-                default:
-                    msg = e.getMessage();
-                    break;
+        if (nomesEspaisBlanc(nomTeclat)) ctrlPresentacio.Excepcio(vista, "NomTeclatNoValid", "No es pot crear un teclat amb aquest nom");
+        else {
+            try {
+                ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
+                
+            } catch (Excepcions e) {
+                String msg = "";
+                switch (e.getTipus()) {
+                    case "TeclatJaExisteix": 
+                        msg = "Ja existeix un Teclat amb el nom " + nomTeclat;
+                        break;
+                    default:
+                        msg = e.getMessage();
+                        break;
+                }
+                ctrlPresentacio.Excepcio(vista, e.getTipus(), msg);
             }
-            ctrlPresentacio.Excepcio(vista, e.getTipus(), msg);
+            catch(Exception e) {
+                ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
+            }
+            labelLoading.setVisible(false);
+            Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
         }
-        catch(Exception e) {
-            ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
-        }
-        labelLoading.setVisible(false);
-        Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
     }
 
     private void afegirDocumentListener() {
@@ -143,5 +146,13 @@ public class CtrlAfegirTeclat {
             }
             
         });  
+    }
+
+    private Boolean nomesEspaisBlanc(String nom) {
+        for (int i = 0; i < nom.length(); i++) {
+            char c = nom.charAt(i);
+            if (c != ' ') return false;
+        }
+        return true;
     }
 }
