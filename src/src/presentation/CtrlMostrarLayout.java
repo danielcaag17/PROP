@@ -51,15 +51,6 @@ public class CtrlMostrarLayout {
             }
             PLayout.add(PRow);
         }
-        /*
-        PLayout = Utils.JPanel(new GridLayout(distribucio.length, distribucio[0].length), null);
-        for (int i = 0; i < distribucio.length; i++) {
-            for (int j = 0; j < distribucio[i].length; j++) {
-                Integer id = distribucio[i][j];
-                if (id == -1) PLayout.add(Utils.initLabel("", ""));
-                else PLayout.add(Utils.Button(Integer.toString(id), null));
-            }
-        }*/
 
         PTitol = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PTitol.add(titol, BorderLayout.CENTER);
