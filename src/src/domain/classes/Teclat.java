@@ -22,9 +22,9 @@ public class Teclat {
 
     public Teclat(String nom, Map<Character, Integer> teclat, char[][] distribucioCharacters) {
         setNom(nom);
-        setLayout(L);
-        setAlfabet(A);
-        setGenerador(G);
+        setLayout(new Layout(1));
+        setAlfabet(new Text("empty"));
+        setGenerador(new Generador("Genetic"));
         setTeclat(teclat);
         setDistribucioCharacters(distribucioCharacters);
     }
