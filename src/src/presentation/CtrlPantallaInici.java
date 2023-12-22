@@ -9,18 +9,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class CtrlPantallaInici {
-    private JLabel títol, membre1, membre2, membre3;
-    private JButton start;
-    private JFrame vista;
-    private JPanel PTítol, PStart, PCenter, PEast, PWest;
+    private JLabel títol, membre1, membre2, membre3;            // Labels amb el títol de la pantalla i el nom dels tres membres de l'equip
+    private JButton start;                                      // Button per començar l'aplicatiu
+    private JFrame vista;                                       // Frame de la vista d'aquesta pantalla
+    private JPanel PTítol, PStart, PCenter, PEast, PWest;       // Panels del Frame que té un BorderLayout (NORTH, SOUTH, CENTER, EAST, WEST)
 
     public CtrlPantallaInici() {
-        init();
-        initPanels();
-        addElementsFrame();
+        initElements();                 // Inicialitzar els elements de la pantalla
+        initPanels();                   // Inicialitzar els panels de la pantalla 
+        addElementsFrame();             // Afegir tots els elements necessaris al Frame principal
     }
 
-    private void init() {
+    private void initElements() {
         títol = Utils.initLabel("PROP", "title");
 
         membre1 = Utils.initLabel("Pau Rambla", "text");
