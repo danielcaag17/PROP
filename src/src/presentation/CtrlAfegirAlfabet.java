@@ -138,7 +138,7 @@ public class CtrlAfegirAlfabet {
                     tipus = ((Excepcions) e).getTipus();
                     switch (((Excepcions) e).getTipus()) {
                         case "FormatDadesNoValid":
-                            msg = "El format de les dades del fitxer "+ path + " no és vàlid amb el tipus d'entrada seleccionat";
+                            msg = e.getMessage();
                             break;
                         case "EntradaLlegidaMalament":
                             msg = "Hi ha hagut un error en la lectura de les dades";
