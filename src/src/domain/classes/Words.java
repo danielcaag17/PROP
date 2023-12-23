@@ -18,6 +18,8 @@ public class Words extends Alfabet {
         super(nom);
     }
 
+    // Pre: no existeix cap Alfabet amb aquest nom
+    // Post: s'ha creat una instància de Text amb nom = nom, characters = characters, frequencies = frequencies i size = characters.size
     public Words(String nom, Map<Character, Double> characters, double[][] frequencies) {
         setNom(nom);
         setCharacters(characters);
