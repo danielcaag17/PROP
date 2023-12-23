@@ -23,6 +23,10 @@ $ cd src/
 $ ./make.sh
 ```
 
+## Execució
+
+Al directori [bin/](bin/) trobem dos fitxers [start.sh](bin/start.sh) i [start.bat](bin/start.bat). Executant aquests fitxers s'executarà el programa. [Veure més informació](bin/README.md)
+
 ## Estructura de directoris
 
 - **[bin/](bin/)**: els binaris (.class) del projecte una vegada compilat.
