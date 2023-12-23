@@ -3,6 +3,10 @@ package src.presentation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -12,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -54,7 +59,35 @@ public class CtrlAfegirTeclat {
 
         confirmar = Utils.Button("Confirmar", null);
         confirmar.setEnabled(false);
-        confirmar.addActionListener(e -> PreMostrarTeclat());
+
+        confirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                confirmar.setEnabled(false);
+                cancelar.setEnabled(false);
+
+                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        PreMostrarTeclat();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        // Re-enable the button when the task is done
+                        confirmar.setEnabled(true);
+                    }
+                };
+
+                worker.addPropertyChangeListener(evt -> {
+                    labelLoading.setVisible(true);
+                    //vista.repaint();
+                });
+
+                worker.execute();
+            }
+        });
 
         String path = ".." + File.separator + ".." + File.separator + "data/imatges/loading.gif";
         ImageIcon gifIcon = new ImageIcon(path);
@@ -97,7 +130,6 @@ public class CtrlAfegirTeclat {
     }
 
     private void PreMostrarTeclat() {
-        labelLoading.setVisible(true);
         String alfabet = (String) listAlfabets.getSelectedItem();
         String generador = (String) listGeneradors.getSelectedItem();
         String nomTeclat = textFieldNomTeclat.getText();
@@ -105,7 +137,8 @@ public class CtrlAfegirTeclat {
         else {
             try {
                 ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
-                
+                Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
+                labelLoading.setVisible(false);
             } catch (Excepcions e) {
                 String msg = "";
                 switch (e.getTipus()) {
@@ -116,13 +149,14 @@ public class CtrlAfegirTeclat {
                         msg = e.getMessage();
                         break;
                 }
+                cancelar.setEnabled(true);
                 ctrlPresentacio.Excepcio(vista, e.getTipus(), msg);
             }
             catch(Exception e) {
+                cancelar.setEnabled(true);
                 ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
             }
-            labelLoading.setVisible(false);
-            Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
+            vista.repaint();
         }
     }
 
