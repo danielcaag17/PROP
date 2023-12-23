@@ -8,6 +8,6 @@ public class LayoutJaExisteix extends Excepcions {
         super("El Layout ja existeix");
     }
     public LayoutJaExisteix(String s) {
-        super("El Layou amb id " + s + " ja existeix.");
+        super("El Layout amb id " + s + " ja existeix.");
     }
 }
