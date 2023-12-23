@@ -18,14 +18,14 @@ import src.exceptions.Excepcions;
 import src.exceptions.TeclatNoExisteix;
 
 public class CtrlModificarTeclat {
-    private CtrlPresentacio ctrlPresentacio;                // instancia unica de ctrlPresentacio
-    private JPanel PNorth, PCenter, PSouth;                 // panels per organitzar el layout de la vista
-    private JButton buttonOK, buttonHelp, cancelar, confirmar;
-    private JFrame vista;                                   // vista on es mostra tota la informació de la pantalla
-    private String teclat;                                  // nom del teclat a modificar
-    private Character primera, segona;                      // primera i segona lletra per a fer una modificació
-    private JButton buttonPrimer, buttonSegon;              // els dos botons seleccionats
-    private ArrayList<Pair<Character, Character>> canvis;
+    private CtrlPresentacio ctrlPresentacio;                    // instancia unica de ctrlPresentacio
+    private JPanel PNorth, PCenter, PSouth;                     // panels per organitzar el layout de la vista
+    private JButton buttonOK, buttonHelp, cancelar, confirmar;  // botons de la pantalla
+    private JFrame vista;                                       // vista on es mostra tota la informació de la pantalla
+    private String teclat;                                      // nom del teclat a modificar
+    private Character primera, segona;                          // primera i segona lletra per a fer una modificació
+    private JButton buttonPrimer, buttonSegon;                  // els dos botons seleccionats per a fer l'intercanvi
+    private ArrayList<Pair<Character, Character>> canvis;       // map que guarda els canvis fets en el teclat
 
     public CtrlModificarTeclat(String elementAMostrar) {
         teclat = elementAMostrar;
@@ -37,7 +37,7 @@ public class CtrlModificarTeclat {
 
     private void initElements() {
         canvis = new ArrayList<Pair<Character, Character>>();
-        primera = segona = Character.MIN_VALUE;             // character buit
+        primera = segona = Character.MIN_VALUE;                 // character buit (' ')
         buttonPrimer = buttonSegon = null;
 
         buttonOK = Utils.Button("Afegir canvi", null);
@@ -83,6 +83,14 @@ public class CtrlModificarTeclat {
         vista.add(PSouth, BorderLayout.SOUTH);
     }
 
+    /**
+     * Pre:
+     * Post: es retorna el nombre de tecles per aquella fila
+     * 
+     * @param row array de char que conté els caràcters d'una fila del teclat
+     * 
+     * @return el nombre de lletres per aquella fila
+     */
     private int checkSize(char[] row) {
         int size = 0;
         for (int i = 0; i < row.length; i++) {
@@ -91,19 +99,27 @@ public class CtrlModificarTeclat {
         return size;
     }
 
+    /**
+     * Pre:
+     * Post: es retorna un panel amb la forma del teclat dessitjat
+     * 
+     * @param teclat nom del teclat a mostrar
+     * 
+     * @return un panel amb la forma del teclat dessitjat
+     */
     private JPanel panelTeclat(String teclat) {
         JPanel panel = new JPanel();
         try {
             char[][] distribucio = ctrlPresentacio.getDistribucio(teclat);
-            panel = Utils.JPanel(new GridLayout(distribucio.length, 1), null);
+            panel = Utils.JPanel(new GridLayout(distribucio.length, 1), null);   // Crear un panel amb gridLayout amb tantes files com el teclat té
             for (int i = 0; i < distribucio.length; i++) {
-                int size = checkSize(distribucio[i]);
-                JPanel PRow = Utils.JPanel(new GridLayout(1, size), null);
+                int size = checkSize(distribucio[i]);                                               // Calcular el nombre de lletres per aquella fila
+                JPanel PRow = Utils.JPanel(new GridLayout(1, size), null);       // Crear un panel amb gridLayout amb tantes columnes com lletres per la fila
                 for (int j = 0; j < distribucio[i].length; j++) {
                     String character = String.valueOf(distribucio[i][j]);
-                    if (! character.equals("-")) {
+                    if (! character.equals("-")) {                                          // Si el caràcter és vàlid
                         JButton button = Utils.Button(character, null);
-                        button.addActionListener(e -> lletraSeleccionada(button));
+                        button.addActionListener(e -> lletraSeleccionada(button));                  // Marcar que s'ha seleccionat la lletra
                         PRow.add(button);
                     }
                 }
@@ -115,37 +131,46 @@ public class CtrlModificarTeclat {
         return panel;
     }
 
+    // Pre: s'ha clicat el botó 'OK'
+    // Post: s'ha afegit al map de canvis les parelles de lletra i s'han intercanviat
     private void parellaOK() {
+        // Dues lletres seleccionades
         if (primera != Character.MIN_VALUE && segona != Character.MIN_VALUE) {
             Pair<Character, Character> parella = new Pair<Character, Character>(primera, segona);
-            canvis.add(parella);
-            ctrlPresentacio.Excepcio(vista, "OK", "Canvi modificat correctament");
-            String aux = buttonPrimer.getText();
+            canvis.add(parella);                                        // Map de tots els canvis fets
+
+            String aux = buttonPrimer.getText();                        // Swap dels botons
             buttonPrimer.setText(buttonSegon.getText());
             buttonSegon.setText(aux);
+            ctrlPresentacio.Excepcio(vista, "OK", "Canvi modificat correctament");
 
-            primera = segona = Character.MIN_VALUE;
+            primera = segona = Character.MIN_VALUE;                     // Retornar les variables a l'estat inicial
             buttonPrimer.setEnabled(true);
             buttonSegon.setEnabled(true);
             buttonPrimer = buttonSegon = null;
         }
+        // Només una lletra seleccionada
         else if (primera != Character.MIN_VALUE && segona == Character.MIN_VALUE) {
             ctrlPresentacio.Excepcio(vista, "FaltaUnaLletra", "Falta seleccionar una lletra més per fer un canvi");
         }
+        // No hi ha cap lletra seleccionada
         else {
             ctrlPresentacio.Excepcio(vista, "FaltaSeleccionarDuesLletres", "Falta seleccionar dues lletres");
         }
     }
 
+    // Mostra pantalla d'ajuda
     private void help() {
         String msg = "Has de seleccionar dues lletres a intercanviar i clicar OK, un cop acabades totes les modificacions → confirmar";
         ctrlPresentacio.Excepcio(vista, "Ajuda", msg);
     }
 
+    // Es cancela la modifiació i es mostra llista teclats
     private void cancelar() {
         Utils.canviPantalla(vista, "LlistaTeclats");
     }
 
+    // Es confirmen tots els canvis fets
     private void confirmar() {
         try {
             ctrlPresentacio.modificarTeclat(teclat, canvis);
@@ -162,18 +187,31 @@ public class CtrlModificarTeclat {
             }
             ctrlPresentacio.Excepcio(vista, tipus, msg);
         }
+        // Retornar a la llista de teclats
         Utils.canviPantalla(vista, "LlistaTeclats");
     }
 
+    /**
+     * Pre:
+     * Post: es marca quina lletra s'ha seleccionat
+     * 
+     * @param button botó (lletra) seleccionat
+     */
     private void lletraSeleccionada(JButton button) {
+        // Una o cap lletra seleccionada
         if (segona == Character.MIN_VALUE) {
+            // Cap lletra seleccionada
             if (primera == Character.MIN_VALUE) primera = button.getText().charAt(0);
+            // Una lletra seleccionada
             else segona = button.getText().charAt(0);
             
             button.setEnabled(false);
+            // Cap lletra seleccionada
             if (buttonPrimer == null) buttonPrimer = button;
+            // Una lletra seleccionada
             else buttonSegon = button;
         }
+        // Ja hi ha dues lletres
         else ctrlPresentacio.Excepcio(vista, "JaDuesLletresSeleccionades", "Ja has seleccionat dues lletres");
     }
 }
