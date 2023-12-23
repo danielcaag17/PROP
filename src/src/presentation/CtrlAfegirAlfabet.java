@@ -42,7 +42,7 @@ public class CtrlAfegirAlfabet {
     }
 
     private void initElements() {
-        title = Utils.initLabel("Crear alfabet", "title");
+        title = Utils.initLabel("Afegir alfabet", "title");
 
         labelIndicaNomAlfabet = Utils.initLabel("Indica el nom de l'alfabet: ", "text");
 

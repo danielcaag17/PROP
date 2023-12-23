@@ -63,7 +63,7 @@ public class CtrlAfegirLayout {
     private void initPanels() {
         PNorth = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PCenter = Utils.JPanel(new FlowLayout(), null);
-        PSouth = Utils.JPanel(new FlowLayout(), null);
+        PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PNorth.add(title, BorderLayout.CENTER);
         PCenter.add(labelIndicaIdLayout, BorderLayout.CENTER);
         PCenter.add(inputIdLayout, BorderLayout.CENTER);
