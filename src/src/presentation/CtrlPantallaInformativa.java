@@ -23,7 +23,7 @@ public class CtrlPantallaInformativa {
         dialog.setLayout(new BorderLayout());
         dialog.add(label, BorderLayout.CENTER);
         dialog.add(POKButton, BorderLayout.SOUTH);
-        dialog.setSize(new Dimension(420,200));
+        dialog.setSize(new Dimension(msg.length()*Utils.getFontText().getSize(),200));
         dialog.setLocationRelativeTo(pantalla);
         dialog.setVisible(true);
         dialog.setResizable(false);
