@@ -6,7 +6,7 @@ Primera entrega de l'assignatura [PROP](https://www.cs.upc.edu/~prop/) de la Fac
 
 L'[enunciat](doc/Enunciat.pdf) del Quadrimestre de tardor de 2023, consisteix en fer un programa capaç de dissenyar un Teclat, a partir d'un alfabet, optimitzant la posició de cada caràcter en el que nosaltres definim com a layout.
 
-La feina feta per cada membre del equip es pot trobar al fitxer [FeinaMembres.txt](FeinaMembres.txt). S'hi ha posat les diferents classes del domini, els drivers i les excepcions implementades per cada membre. És possible que alguna classe estigui repetida, vol dir que dues persones han col·laborat en fer aquesta classe.
+La feina feta per cada membre del equip es pot trobar al fitxer [Relació classes implementades](doc/Relació-classes-implementades.pdf). S'hi ha posat les diferents classes del domini, els drivers i les excepcions implementades per cada membre. És possible que alguna classe estigui repetida, vol dir que dues persones han col·laborat en fer aquesta classe.
 
 ## Compilació
 
