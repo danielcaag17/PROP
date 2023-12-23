@@ -9,7 +9,7 @@ import src.exceptions.*;
 public class CtrlProvarTeclat {
     private CtrlPresentacio ctrlPresentacio;
     private JLabel titol, nomTeclat;
-    private JButton eliminar, editar, confirmar, delLastChar;
+    private JButton eliminar, editar, back, delLastChar;
     private JPanel PNorth, PTitol, PSouth, PNom, PCenter, PTeclat, PTextField;
     private JFrame vista;
     private JTextField testingField;
@@ -33,8 +33,8 @@ public class CtrlProvarTeclat {
         eliminar.addActionListener(e -> ctrlPresentacio.elimina("Teclat", teclat, vista, "LlistaTeclats"));
         editar = Utils.Button(null, "edit");
         editar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "ModificarTeclat", teclat));
-        confirmar = Utils.Button(null, "backArrow");
-        confirmar.addActionListener(e -> Utils.canviPantalla(vista, "LlistaTeclats"));
+        back = Utils.Button(null, "backArrow");
+        back.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "LlistaLayouts", teclat));
 
         testingField = new JTextField();
         testingField.setPreferredSize(new Dimension(Utils.getScreenWidth()/2, Utils.getScreenHeight()/10));
@@ -90,7 +90,7 @@ public class CtrlProvarTeclat {
         PCenter.add(PTeclat, BorderLayout.CENTER);
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.add(confirmar);
+        PSouth.add(back);
         PSouth.add(editar);
         PSouth.add(eliminar);
 
