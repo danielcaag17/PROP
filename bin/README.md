@@ -20,7 +20,7 @@ $ ./start.sh
 
 > _**Note**: Jocs de prova per a la tercera entrega_
 
-Es pot trobar un document amb Jocs d'assaig al directori [doc/](doc/).
+Es pot trobar un document amb Jocs d'assaig al directori [doc/Jocs d'assaig.pdf](../doc/Jocs\ d\'assaig.pdf).
 
 
 ## Informació drivers de la primera entrega
