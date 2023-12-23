@@ -65,6 +65,7 @@ public class Text extends Alfabet {
         File file = new File(path);
         int criteriAcceptacio = 0;                              // Variable que indica fins a quin punt es comproba que el format és vàlid
         try (Scanner myReader = new Scanner(file, "utf-8")) {
+            if (!myReader.hasNextLine()) throw new FormatDadesNoValid(path, "està buit."); // L'entrada és buida
             while (myReader.hasNext()) {
                 String input = myReader.next();
                 if (criteriAcceptacio < 100) {

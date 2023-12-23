@@ -69,6 +69,7 @@ public class Words extends Alfabet {
         HashMap<String, Double> words = new HashMap<>();
         File file = new File(path);
         try (Scanner myReader = new Scanner(file, "utf-8")) {
+            if (!myReader.hasNextLine()) throw new FormatDadesNoValid(path, "està buit."); // L'entrada és buida
             while (myReader.hasNextLine()) {
                 String word = myReader.next();
                 String probabilitatString = myReader.next();
