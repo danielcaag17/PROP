@@ -8,7 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +20,8 @@ public class CtrlLlistaTeclats {
     private JLabel títol;
     private JButton afegir, llistaAlfabets, llistaLayouts, exit; 
     private JFrame vista;
-    private JPanel PTítol, PSouth, PCenter, PAfegir, PLlista, PEast, PWest;
+    private JPanel PTítol, PSouth, PCenter, PAfegir, PEast, PWest;
+    private Box PLlista;
 
     public CtrlLlistaTeclats() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
@@ -46,8 +47,8 @@ public class CtrlLlistaTeclats {
     }
 
     private void initPanels() {
-        PLlista = new JPanel();
-        PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
+        PLlista = Box.createVerticalBox();
+        //PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
         String[] teclats = ctrlPresentacio.getNomTeclats();
         for (int i = 0; i < teclats.length; i++) {
             String nt = teclats[i];
@@ -80,17 +81,19 @@ public class CtrlLlistaTeclats {
             JPanel labelPanel = Utils.JPanel(new BorderLayout(), null);
             labelPanel.add(new JPanel(), BorderLayout.WEST);
             labelPanel.add(label, BorderLayout.CENTER);
-            JPanel buttonsPanel = Utils.JPanel(new FlowLayout(FlowLayout.CENTER), null);
-            buttonsPanel.add(edit);
-            buttonsPanel.add(delete);
+            JPanel buttonsPanel = Utils.JPanel(new BorderLayout(), null);
+            buttonsPanel.add(edit, BorderLayout.WEST);
+            buttonsPanel.add(delete, BorderLayout.CENTER);
 
             panel.add(labelPanel, BorderLayout.CENTER);
             panel.add(buttonsPanel, BorderLayout.EAST);
 
             PLlista.add(panel);
         }
+        JPanel layoutPLlista = Utils.JPanel(new BorderLayout(), null);
+        layoutPLlista.add(PLlista, BorderLayout.CENTER);
 
-        JScrollPane scrollPane = new JScrollPane(PLlista);
+        JScrollPane scrollPane = new JScrollPane(layoutPLlista);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setBorder(null);     // No se que queda millor
 

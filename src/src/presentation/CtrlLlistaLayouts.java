@@ -10,7 +10,8 @@ public class CtrlLlistaLayouts {
     private JFrame vista;
     private JLabel title;
     private JButton afegir, back;
-    private JPanel PNorth, PAfegir, PLlista, PCenter, PSouth, PEast, PWest;
+    private JPanel PNorth, PAfegir, PCenter, PSouth, PEast, PWest;
+    private Box PLlista;
 
     public CtrlLlistaLayouts() {
         cp = CtrlPresentacio.getInstance();
@@ -36,8 +37,8 @@ public class CtrlLlistaLayouts {
         PAfegir = Utils.JPanel(null, new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PAfegir.add(afegir, BorderLayout.CENTER);
 
-        PLlista = new JPanel();
-        PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
+        PLlista = Box.createVerticalBox();
+        // PLlista.setLayout(new BoxLayout(PLlista, BoxLayout.Y_AXIS));    //panel que no es pot instanciar amb Utils
         Integer[] layouts = cp.getNomLayouts();
         for (int i = 0; i < layouts.length; i++) {
             Integer nl = layouts[i];
@@ -69,15 +70,18 @@ public class CtrlLlistaLayouts {
             JPanel labelPanel = Utils.JPanel(new BorderLayout(), null);
             labelPanel.add(new JPanel(), BorderLayout.WEST);
             labelPanel.add(label, BorderLayout.CENTER);
-            JPanel buttonsPanel = Utils.JPanel(new FlowLayout(FlowLayout.CENTER), null);
-            buttonsPanel.add(delete);
+            JPanel buttonsPanel = Utils.JPanel(new BorderLayout(), null);
+            buttonsPanel.add(delete, BorderLayout.CENTER);
 
             panel.add(labelPanel, BorderLayout.CENTER);
             panel.add(buttonsPanel, BorderLayout.EAST);
 
             PLlista.add(panel);
         }
-        JScrollPane scrollPane = new JScrollPane(PLlista);
+        JPanel layoutPLlista = Utils.JPanel(new BorderLayout(), null);
+        layoutPLlista.add(PLlista, BorderLayout.CENTER);
+
+        JScrollPane scrollPane = new JScrollPane(layoutPLlista);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.setBorder(null);     // No se que queda millor
 
