@@ -70,7 +70,7 @@ public class CtrlPreMostrarTeclat {
         PSouth.add(descartar);
         PSouth.add(confirmar);
 
-        vista = Utils.initFrame("PreMostrarTeclat");
+        vista = Utils.initFrame("PrevisualitzarTeclat");
     }
 
     private int checkSize(char[] row) {
