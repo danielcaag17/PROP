@@ -5,6 +5,8 @@ import java.util.*;
 
 import src.exceptions.*;
 
+import src.domain.classes.Pair;
+
 public class IOterminal {
     private CtrlPresentacio ctrlPresentacio;
     private Scanner s;
@@ -325,7 +327,7 @@ public class IOterminal {
     public void modificaTeclat() {
         System.out.println(output + "Quin teclat vols modificar? Indica'n el seu nom:");
         String nom = answerString();
-        Map<Character, Character> canvis = new HashMap<>();
+        ArrayList<Pair<Character, Character>> canvis = new ArrayList<Pair<Character, Character>>();
         System.out.println(output + "Quants canvis vols efectuar? Per cada canvi hauràs d'incloure dues lletres a intercanviar.");
         Integer n = answerInteger();
         if (n >= 1) {
@@ -336,7 +338,8 @@ public class IOterminal {
                 System.out.println(output + "Introdueix la segona lletra del canvi número " + (i+1) + "." );
                 Character lletra2 = answerCharacter();
                 System.out.println(output + "Canvi "+ i+1 + ": " + lletra1 + " -> " + lletra2);
-                canvis.put(lletra1, lletra2); // S'introdueix el canvi
+                Pair<Character, Character> canvi = new Pair<Character, Character>(lletra1, lletra2);
+                canvis.add(canvi); // S'introdueix el canvi
             }
             try {
                 String out = ctrlPresentacio.modificarTeclat(nom, canvis);

@@ -1,11 +1,12 @@
 package src.presentation;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
+import java.util.*;
 
 import javax.swing.*;
 
 import src.domain.controllers.*;
+import src.domain.classes.Pair;
 import src.exceptions.*;
 
 public class CtrlPresentacio {
@@ -98,7 +99,7 @@ public class CtrlPresentacio {
         cd.crearNouTeclat(nt, na, ge);
     }
 
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
+    public String modificarTeclat(String nt, ArrayList<Pair<Character, Character>> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
         return cd.modificarTeclat(nt, canvis);
     }
 

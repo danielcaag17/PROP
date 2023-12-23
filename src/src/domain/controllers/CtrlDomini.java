@@ -249,11 +249,11 @@ public class CtrlDomini {
      * 
      * @throws TeclatNoExisteix si no existeix una insància Teclat amb nom nt.
      */
-    public String modificarTeclat(String nt, Map<Character, Character> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
+    public String modificarTeclat(String nt, ArrayList<Pair<Character,Character>> canvis) throws TeclatNoExisteix, LletraNoTeclat, IOException {
         if (Teclats.get(nt) == null) throw new TeclatNoExisteix(nt);
         Teclat t = getTeclat(nt);
-        for (Character c : canvis.keySet()) {
-            t.modificarTeclat(c, canvis.get(c)); 
+        for (Pair<Character, Character> canvi : canvis) {
+            t.modificarTeclat(canvi.first, canvi.second); 
         }
         Teclats.replace(nt, t);
         ctrlPersistFile.saveState("teclats", t.getNom(), t.saveData());

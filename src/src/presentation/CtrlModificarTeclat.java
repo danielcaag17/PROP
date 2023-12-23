@@ -6,12 +6,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import src.domain.classes.Pair;
 
 import src.exceptions.Excepcions;
 import src.exceptions.TeclatNoExisteix;
@@ -24,7 +25,7 @@ public class CtrlModificarTeclat {
     private String teclat;                                  // nom del teclat a modificar
     private Character primera, segona;                      // primera i segona lletra per a fer una modificació
     private JButton buttonPrimer, buttonSegon;              // els dos botons seleccionats
-    private Map<Character, Character> canvis;
+    private ArrayList<Pair<Character, Character>> canvis;
 
     public CtrlModificarTeclat(String elementAMostrar) {
         teclat = elementAMostrar;
@@ -35,7 +36,7 @@ public class CtrlModificarTeclat {
     }
 
     private void initElements() {
-        canvis = new HashMap<>();
+        canvis = new ArrayList<Pair<Character, Character>>();
         primera = segona = Character.MIN_VALUE;             // character buit
         buttonPrimer = buttonSegon = null;
 
@@ -102,8 +103,7 @@ public class CtrlModificarTeclat {
                     String character = String.valueOf(distribucio[i][j]);
                     if (! character.equals("-")) {
                         JButton button = Utils.Button(character, null);
-                        char c = distribucio[i][j];
-                        button.addActionListener(e -> lletraSeleccionada(c, button));
+                        button.addActionListener(e -> lletraSeleccionada(button));
                         PRow.add(button);
                     }
                 }
@@ -117,7 +117,8 @@ public class CtrlModificarTeclat {
 
     private void parellaOK() {
         if (primera != Character.MIN_VALUE && segona != Character.MIN_VALUE) {
-            canvis.put(primera, segona);
+            Pair<Character, Character> parella = new Pair<Character, Character>(primera, segona);
+            canvis.add(parella);
             ctrlPresentacio.Excepcio(vista, "OK", "Canvi modificat correctament");
             String aux = buttonPrimer.getText();
             buttonPrimer.setText(buttonSegon.getText());
@@ -164,10 +165,10 @@ public class CtrlModificarTeclat {
         Utils.canviPantalla(vista, "LlistaTeclats");
     }
 
-    private void lletraSeleccionada(char c, JButton button) {
+    private void lletraSeleccionada(JButton button) {
         if (segona == Character.MIN_VALUE) {
-            if (primera == Character.MIN_VALUE) primera = c;
-            else segona = c;
+            if (primera == Character.MIN_VALUE) primera = button.getText().charAt(0);
+            else segona = button.getText().charAt(0);
             
             button.setEnabled(false);
             if (buttonPrimer == null) buttonPrimer = button;
