@@ -34,7 +34,7 @@ public class CtrlAfegirTeclat {
     }
 
     private void initElements() {
-        title = Utils.initLabel("Crear teclat", "title");
+        title = Utils.initLabel("Afegir teclat", "title");
 
         labelIndicaNomTeclat = Utils.initLabel("Indica el nom del teclat: ", "text");
         textFieldNomTeclat = new JTextField();
