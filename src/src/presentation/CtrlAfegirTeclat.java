@@ -3,8 +3,7 @@ package src.presentation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -90,10 +89,16 @@ public class CtrlAfegirTeclat {
         });
 
         String path = ".." + File.separator + ".." + File.separator + "data/imatges/loading.gif";
-        ImageIcon gifIcon = new ImageIcon(path);
-        labelLoading = new JLabel(gifIcon);
+        
+        ImageIcon imageIcon = new ImageIcon(path);
+        Image image = imageIcon.getImage();
+        // A definir quina es la mida del botó
+        // image = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        labelLoading = new JLabel(imageIcon);
         labelLoading.setVisible(false);
-        labelLoading.setPreferredSize(new Dimension(200, 200));
+        labelLoading.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
+        
     }
 
     private void initPanels() {
@@ -140,6 +145,7 @@ public class CtrlAfegirTeclat {
                 Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
                 labelLoading.setVisible(false);
             } catch (Excepcions e) {
+                labelLoading.setVisible(false);
                 String msg = "";
                 switch (e.getTipus()) {
                     case "TeclatJaExisteix": 
