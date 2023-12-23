@@ -51,7 +51,7 @@ public class CtrlAfegirLayout {
             cp.Excepcio(vista, "Layout afegit", "Layout afegit correctament");
         }
         catch (LayoutJaExisteix e) {
-            cp.Excepcio(vista, "Error: " + e.getTipus(), e.getMessage());
+            cp.Excepcio(vista, e.getTipus(), e.getMessage());
         }
         catch (Exception e) {
             // Excepcions que no passaran gairebé mai
