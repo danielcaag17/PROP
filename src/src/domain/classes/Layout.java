@@ -15,7 +15,7 @@ public class Layout {
     /** Indica per cada id les seves coordenades al layout */
     private List<Pair<Integer, Integer>> coordenades;
     /** Indica la distribució de les tecles, a cada parell de coordenades (i,j) se li assigna un id */
-    private int[][] distribucio; // he pensat a cada posició guardar quina és la id que li pertoca per poder trobar-la a partir de les pos
+    private int[][] distribucio;
 
     private int ncol;
     private int nfil = 3; // 3 files a la matriu distribució ens dóna una relació 3:1 per a totes les mides entre 12 i 48.
@@ -244,7 +244,7 @@ public class Layout {
         String s = "";
         for(int i = 0; i < nfil; i++) {
             for(int j = 0; j < ncol; j++) {
-                if (distribucio[i][j] == -1) s+="--"; // COMPROVAR QUE AIXO FUNCIONA -- VEURE ON MÉS ES POT APLICAR
+                if (distribucio[i][j] == -1) s+="--";
                 else {
                     if (distribucio[i][j] < 10) s+='0';
                     s += distribucio[i][j];
