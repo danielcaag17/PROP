@@ -1,3 +1,5 @@
+{::options parse_block_html="true" /}
+
 ## Directori bin
 
 En aquest directori es on es guarden els fitxers compilats. Dins de [class/](class/) Es pot trobar la mateixa estructura de fitxers que al directori [src/](../src/) amb els executables de cada classe del codi.
@@ -18,18 +20,26 @@ $ ./start.sh
 
 ## Jocs de prova
 
-> **[!NOTE]** Jocs de prova per a la tercera entrega
+<div class="panel panel-info">
+    **Note**
+    {: .panel-heading}
+    <div class="panel-body">Jocs de prova per a la tercera entrega</div>
+</div>
 
 Es pot trobar un document amb Jocs d'assaig al directori [doc/](doc/).
 
 
 ## Informació drivers de la primera entrega
 
-> **[!Warning]**
-> Informació de la primera entrega, es possible que ja no funcioni <br>
-
-> **[!NOTE]**
-> Es poden trobar drivers i altres documents d'execució de la primera entrega al directori [bin/1aEntrega](bin/1aEntrega)
+<div class="panel panel-warning">**Warning**{: .panel-heading}
+    <div class="panel-body">Informació de la primera entrega, es possible que ja no funcioni.</div>
+</div>
+<br>
+<div class="panel panel-info">
+    **Note**
+    {: .panel-heading}
+    <div class="panel-body">Es poden trobar drivers i altres documents d'execució de la primera entrega al directori [bin/1aEntrega](bin/1aEntrega)</div>
+</div>
 
 
 Per executar 
