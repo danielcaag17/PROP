@@ -14,7 +14,6 @@ public class CtrlProvarTeclat {
     private JFrame vista;
     private JTextField testingField;
     private String teclat;
-    private String inputTeclat = "";
     private char[][] distribucio;
 
     
@@ -43,7 +42,8 @@ public class CtrlProvarTeclat {
 
         delLastChar = Utils.Button("<----", null);
         delLastChar.addActionListener(e -> {
-            if (inputTeclat.length() > 0) {
+            if (testingField.getText().length() > 0) {
+                String inputTeclat = testingField.getText();
                 inputTeclat = inputTeclat.substring(0, inputTeclat.length() - 1);
                 testingField.setText(inputTeclat);
             }
@@ -64,6 +64,7 @@ public class CtrlProvarTeclat {
                 if (!id.equals("-")) {
                     JButton button = Utils.Button(id, null);
                     button.addActionListener(e -> {
+                        String inputTeclat = testingField.getText();
                         inputTeclat += id;
                         testingField.setText(inputTeclat);
                     });
