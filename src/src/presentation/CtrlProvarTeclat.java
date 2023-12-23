@@ -40,7 +40,7 @@ public class CtrlProvarTeclat {
         testingField.setFont(Utils.getFontText());
         testingField.setHorizontalAlignment(JTextField.CENTER);
 
-        delLastChar = Utils.Button("<----", null);
+        delLastChar = Utils.Button("⌫", null);
         delLastChar.addActionListener(e -> {
             if (testingField.getText().length() > 0) {
                 String inputTeclat = testingField.getText();

@@ -137,7 +137,7 @@ public class CtrlModificarTeclat {
     }
 
     private void help() {
-        String msg = "Has de seleccionar dues lletres a intercanviar i clicar OK, un cop acabades totes les modificacions -> confirmar";
+        String msg = "Has de seleccionar dues lletres a intercanviar i clicar OK, un cop acabades totes les modificacions → confirmar";
         ctrlPresentacio.Excepcio(vista, "Ajuda", msg);
     }
 

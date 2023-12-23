@@ -71,8 +71,8 @@ public class CtrlMostrarAlfabet {
                         String character = String.valueOf(abecedari[i]);
                         String f = String.format("%.3f", frequenciesCharacter[i] * 100);
                         String text = "";
-                        if (i + 1 < frequenciesCharacter.length) text += character + " -> " + f + "%, ";
-                        else text += character + " -> " + f + "%";
+                        if (i + 1 < frequenciesCharacter.length) text += character + " → " + f + "%, ";
+                        else text += character + " → " + f + "%";
 
                         JLabel label = Utils.initLabel(text, "text");
                         PCenterDialog.add(label);
