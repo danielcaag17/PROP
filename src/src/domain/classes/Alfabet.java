@@ -26,12 +26,22 @@ public abstract class Alfabet {
         setSize(0);
     }
 
+    // Pre: no existeix cap Alfabet amb aquest nom
+    // Post: s'ha creat una instància de Text amb nom = nom, characters = characters, frequencies = frequencies i size = characters.size
     public Alfabet(String nom, Map<Character, Double> characters, double[][] frequencies) {
         setNom(nom);
         setCharacters(characters);
         setFrequencies(frequencies);
     }
 
+    /**
+     * Pre:
+     * Post: es retorna l'Alfabet caculat amb l'entrada doanada
+     * 
+     * @param path string que indica on està l'entrada que defineix l'Alfabet
+     * 
+     * @return l'Alfabet resultat de l'entrada donada
+     */
     protected abstract void read(String path) throws FormatDadesNoValid, FileNotFoundException, EntradaLlegidaMalament;
 
     /**
