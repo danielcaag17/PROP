@@ -29,6 +29,7 @@ public class CtrlAfegirTeclat {
     private JButton cancelar, confirmar;
     private JFrame vista;
     private JPanel PTítol, PSouth, PCenter;
+    private SwingWorker<Void, Void> worker;
 
     public CtrlAfegirTeclat() {
         ctrlPresentacio = CtrlPresentacio.getInstance();
@@ -64,8 +65,9 @@ public class CtrlAfegirTeclat {
             public void actionPerformed(ActionEvent e) {
                 confirmar.setEnabled(false);
                 cancelar.setEnabled(false);
+                labelLoading.setVisible(true);
 
-                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                worker = new SwingWorker<Void, Void>() {
                     @Override
                     protected Void doInBackground() throws Exception {
                         PreMostrarTeclat();
@@ -76,14 +78,17 @@ public class CtrlAfegirTeclat {
                     protected void done() {
                         // Re-enable the button when the task is done
                         confirmar.setEnabled(true);
+                        labelLoading.setVisible(false);
+                        cancelar.setEnabled(true);
+                        vista.repaint();
                     }
                 };
-
+                /*
                 worker.addPropertyChangeListener(evt -> {
-                    labelLoading.setVisible(true);
+                    labelLoading.setVisible(true); 
                     //vista.repaint();
                 });
-
+                */
                 worker.execute();
             }
         });
@@ -143,9 +148,7 @@ public class CtrlAfegirTeclat {
             try {
                 ctrlPresentacio.crearNouTeclat(nomTeclat, alfabet, generador);
                 Utils.canviPantallaElementMostrar(vista, "PreMostrarTeclat", nomTeclat);
-                labelLoading.setVisible(false);
             } catch (Excepcions e) {
-                labelLoading.setVisible(false);
                 String msg = "";
                 switch (e.getTipus()) {
                     case "TeclatJaExisteix": 
@@ -156,13 +159,16 @@ public class CtrlAfegirTeclat {
                         break;
                 }
                 cancelar.setEnabled(true);
+                labelLoading.setVisible(false);
+                vista.repaint();
                 ctrlPresentacio.Excepcio(vista, e.getTipus(), msg);
             }
             catch(Exception e) {
                 cancelar.setEnabled(true);
+                labelLoading.setVisible(false);
+                vista.repaint();
                 ctrlPresentacio.Excepcio(vista, "Error: ", e.getMessage());;
             }
-            vista.repaint();
         }
     }
 
