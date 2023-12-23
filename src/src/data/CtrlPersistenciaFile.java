@@ -8,8 +8,10 @@ import java.util.Date;
 
 public class CtrlPersistenciaFile {
 
-    private final String base_path = "../../data/persistence";
+    private final String base_path = "../../data/persistence"; // Direccio on es guarden les dades
 
+    // Fitxers que conte els noms dels teclats, layouts i alfabets, juntament  amb les direccions
+    // dels fixters on es guarda el contingut dels mateixos.
     private final String keyboards_file = "keyboards_db.json";
     private final String alfabets_file = "alfabets_db.json";
     private final String layouts_file = "layouts_db.json";
@@ -21,10 +23,7 @@ public class CtrlPersistenciaFile {
     // Aquí s'implementa l'extracció de la informació dels diferents JSONs on es guarda tot.
     private static CtrlPersistenciaFile singletonPersistenciaFile;
 
-
-    private CtrlPersistenciaFile() {
-
-    }
+    private CtrlPersistenciaFile() {}
 
     public static CtrlPersistenciaFile getInstance() {
         if(singletonPersistenciaFile == null) singletonPersistenciaFile = new CtrlPersistenciaFile();
@@ -35,6 +34,9 @@ public class CtrlPersistenciaFile {
         return date;
     }
 
+    /**
+     *  Llegeix el fitxer filepath, retorna el seu contingut en forma de String.
+     */
     private String readFileStr(String filepath) throws IOException {
         FileReader fr = new FileReader(filepath);
         BufferedReader br = new BufferedReader(fr);
@@ -48,6 +50,14 @@ public class CtrlPersistenciaFile {
         return content;
     }
 
+    /**
+     *  Modifica l'estat d'un element de tipus 'type', que pot ser "teclats", "alfabets" o "layouts".
+     *  En el cas que content sigui NULL, esborra l'element 'id' del tipus 'type' de l'emmagatzematge.
+     *  En el cas que content sigui diferent de NUll:
+     *      - Si ja existeix un fixter corresponent a id i type, actualitza el contingut amb el que
+     *        rep al parametre 'content'.
+     *      - Si no existeix el fitxer, el crea amb el contingut de 'content' dintre.
+     */
     public void saveState(String type, String id, String content) throws IOException {
         String db_path = base_path;
         String tg_dir = "";
@@ -103,6 +113,9 @@ public class CtrlPersistenciaFile {
         date = formatter.format(last_update);
     }
 
+    /**
+     *  Retorna un ArrayList amb les direccions de tots els elements emmagatzemats del tipus 'type'.
+     */
     public ArrayList<String> getAll(String type) throws IOException {
         last_update = new Date();
         date = formatter.format(last_update);
@@ -123,6 +136,10 @@ public class CtrlPersistenciaFile {
         return res;
     }
 
+    /**
+     *  Retorna el contingut del fitxer 'filename' en forma de string, on 'filename' es una de les
+     *  direccions dels fixters emmagatzemades en layouts_db, keyboards_db o alfabets_db.
+     */
     public String getObject(String filename) throws IOException {
         String filepath = base_path + '/' + filename;
         return readFileStr(filepath);
