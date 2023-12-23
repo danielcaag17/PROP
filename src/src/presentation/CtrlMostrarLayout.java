@@ -63,8 +63,8 @@ public class CtrlMostrarLayout {
         PCenter.add(PMida, BorderLayout.NORTH);
 
         PSouth = Utils.JPanel(new FlowLayout(), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
-        PSouth.add(eliminar, BorderLayout.CENTER);
         PSouth.add(back, BorderLayout.CENTER);
+        PSouth.add(eliminar, BorderLayout.CENTER);
 
         vista = Utils.initFrame("MostrarLayout");
     }
