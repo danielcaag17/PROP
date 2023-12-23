@@ -174,6 +174,6 @@ public class CtrlModificarTeclat {
             if (buttonPrimer == null) buttonPrimer = button;
             else buttonSegon = button;
         }
-        else ctrlPresentacio.Excepcio(vista, "JaDuesLletresSeleccionades", "Ja has seleccioant dues lletres");
+        else ctrlPresentacio.Excepcio(vista, "JaDuesLletresSeleccionades", "Ja has seleccionat dues lletres");
     }
 }
