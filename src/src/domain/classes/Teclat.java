@@ -20,6 +20,8 @@ public class Teclat {
         setNom(nom);
     }
 
+    // Pre: no existeix cap Teclat amb aquest nom
+    // Post: s'ha creat una instància de Teclat amb nom = nom, distribucioCharacters = distribucioCharacters, G = ge, L = layout de la mida del teclat, A = alfabet buit
     public Teclat(String nom, Map<Character, Integer> teclat, char[][] distribucioCharacters, Generador ge) {
         setNom(nom);
         setLayout(new Layout(teclat.size()));
@@ -48,9 +50,7 @@ public class Teclat {
      * Pre: A existeix, L existeix, G exiteix
      * Post: s'ha creat la matriu que representa el Teclat
      */
-    public void crearTeclat () {                // si es vol fer Genetica s'haura de passar algun paràmetre mes !!!
-        // teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getAbecedari(), A.getCharacter());
-
+    public void crearTeclat () {
         // Passar el paràmetres necessaris per a que el Generador pugui generar el teclat   
         teclat = G.generarTeclat(A.getFrequencies(), L.getDistancies(), A.getCharacter());
         omplirDistribucio();                        // Omplir la matriu del Teclat amb la lletra que toca a cada id
@@ -105,27 +105,50 @@ public class Teclat {
         distribucioCharacters[bPos.first][bPos.second] = b;
     }
 
+    /**
+     * Pre: 
+     * Post: associa el nom que identifica el Teclat amb nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    /**
+     * Pre: 
+     * Post: associa el Layout del Teclat amb L
+     */
     private void setLayout(Layout L) {
         this.L = L;
     }
 
+    /**
+     * Pre: 
+     * Post: associa l'Alfabet del Teclat amb A
+     */
     private void setAlfabet(Alfabet A) {
         this.A = A;
     }
 
+    /**
+     * Pre: 
+     * Post: associa el Generador del Teclat amb G
+     */
     private void setGenerador(Generador G) {
         this.G = G;
     }
 
-
+    /**
+     * Pre: 
+     * Post: associa el teclat (la relació caràcter id) del Teclat amb teclat
+     */
     private void setTeclat(Map<Character, Integer> teclat) {
         this.teclat = teclat;
     }
 
+    /**
+     * Pre: 
+     * Post: associa la distribucioCharacters del Teclat amb distribucioCharacters passat com a paràmetre
+     */
     private void setDistribucioCharacters(char[][] distribucioCharacters) {
         this.distribucioCharacters = distribucioCharacters;
     }
