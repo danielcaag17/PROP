@@ -27,7 +27,7 @@ $ ./make.sh
 
 - **[bin/](bin/)**: els binaris (.class) del projecte una vegada compilat.
 
-- **[data/](data/)**: les dades de la capa de persistència.
+- **[data/](data/)**: les dades de la capa de persistència i altres fitxers necessaris com imatges per la GUI.
 
 - **[doc/](doc/)**: la diferent documentació del Projecte. - e.g.: Casos d'ús, Diagrama de Classes, etc.
 
