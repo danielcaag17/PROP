@@ -74,6 +74,7 @@ public class CtrlMostrarTeclat {
 
         PSouth = Utils.JPanel(new FlowLayout(FlowLayout.CENTER, 50, 10), new Dimension(Utils.getScreenWidth(),Utils.getScreenHeight()/6));
         PSouth.add(confirmar);
+        PSouth.add(editar);
         PSouth.add(eliminar);
 
         vista = Utils.initFrame("MostrarTeclat");
