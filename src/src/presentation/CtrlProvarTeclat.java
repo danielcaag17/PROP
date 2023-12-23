@@ -34,7 +34,7 @@ public class CtrlProvarTeclat {
         editar = Utils.Button(null, "edit");
         editar.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "ModificarTeclat", teclat));
         back = Utils.Button(null, "backArrow");
-        back.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "LlistaLayouts", teclat));
+        back.addActionListener(e -> Utils.canviPantallaElementMostrar(vista, "MostrarTeclat", teclat));
 
         testingField = new JTextField();
         testingField.setPreferredSize(new Dimension(Utils.getScreenWidth()/2, Utils.getScreenHeight()/10));
